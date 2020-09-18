@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.TIPOPRODUCTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Index</h2>
+<hr />
+<p>
+    @Html.ActionLink("Nuevo Tipo Producto", "Create")
+</p>
+<hr />
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.IDTIPOPRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.DESCTIPOPRODUCTO)
+        </th>
+
+    </tr>
+    @foreach (var tipoprod in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => tipoprod.IDTIPOPRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(x => tipoprod.DESCTIPOPRODUCTO)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = tipoprod.IDTIPOPRODUCTO, @class = "btn btn-primary" }) |
+                @Html.ActionLink("Ver Detalles", "Detail", new { id = tipoprod.IDTIPOPRODUCTO, @class = "btn btn-info" }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = tipoprod.IDTIPOPRODUCTO, @class = "btn btn-danger" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+

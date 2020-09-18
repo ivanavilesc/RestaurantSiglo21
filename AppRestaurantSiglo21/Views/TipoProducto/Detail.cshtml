@@ -1,0 +1,29 @@
+﻿@model AppRestaurantSiglo21.Models.TIPOPRODUCTO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Consultar detalles de Tipo de Producto</h2>
+
+<div>
+    <h4>Tipo de Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCTIPOPRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCTIPOPRODUCTO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDTIPOPRODUCTO }) |
+    @Html.ActionLink("Volver a la Lista", "Index")
+</p>
+
+

@@ -1,0 +1,41 @@
+﻿@model AppRestaurantSiglo21.Models.TIPOPRODUCTO
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <h4>Tipo Producto</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.IDTIPOPRODUCTO, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.IDTIPOPRODUCTO, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IDTIPOPRODUCTO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.DESCTIPOPRODUCTO, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.DESCTIPOPRODUCTO, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.DESCTIPOPRODUCTO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}
