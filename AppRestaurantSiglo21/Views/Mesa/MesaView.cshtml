@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.MESA>
+@{
+    ViewBag.Title = "MesaView";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>MesaView</h2>
+
+<p>
+    @Html.ActionLink("Create New","create")
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDMESA)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDMESA)
+                @Html.DisplayFor(modelItem => item.ESTADOMESA)
+                @Html.DisplayFor(modelItem => item.CAPACIDAD)
+                @Html.DisplayFor(modelItem => item.DESCMESA)
+                @Html.DisplayFor(modelItem => item.RESERVA)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDMESA }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDMESA }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDMESA })
+            </td>
+        </tr>
+    }
+
+</table>
