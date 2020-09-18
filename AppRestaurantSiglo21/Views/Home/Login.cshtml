@@ -1,0 +1,104 @@
+﻿@model AppRestaurantSiglo21.Models.USUARIO
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @{
+        ViewBag.Title = "Login";
+    }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>UserDashBoard</title>
+</head>
+
+<body style="background-color:#34ebb7">
+    <div class="container">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <div class="row justify-content-center" style="height: 400px">
+                <div class="col-lg">
+
+                </div>
+                <div class="col-lg-6 align-self-center">
+                    <div class="card">
+                        <div class="card-header">
+                            Autenticación del Sistema
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ingrese su usuario y contraseña para iniciar</h5>
+                            <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @if (@ViewBag.Message != null)
+                            {
+                                <div style="border: 1px solid red">
+                                    @ViewBag.Message
+                                </div>
+                            }
+                            <table>
+                                <tr>
+                                    <td>Usuario</td>
+                                    <td>@Html.TextBoxFor(a => a.IDUSUARIO,new {@class="form-control"})</td>
+                                    <td>@Html.ValidationMessageFor(a => a.IDUSUARIO)</td>
+                                </tr>
+                                <tr>
+                                    <td>Contraseña</td>
+                                    <td>@Html.PasswordFor(a => a.PASSWORD, new {@class="form-control"})</td>
+                                    <td>@Html.ValidationMessageFor(a => a.PASSWORD)</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+
+                                        <button type="submit" class="btn btn-outline-dark">Iniciar sesión</button>
+                                        
+                                        <!-- <input type="submit" value="Login" /> -->
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg">
+
+                </div>
+            </div>
+        }
+
+        @if (TempData["Message"] != null)
+        {
+        <div class="row justify-content-center">
+            <div class="col-lg">
+            </div>
+            
+            <div class="col-lg-6 align-self-center">
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["Message"]
+                    </div>
+            </div>
+                
+            <div class="col-lg">
+            </div>            
+        </div>
+
+        }
+
+
+    </div>
+</body>
+
+</html>
+<!--
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
+    -->

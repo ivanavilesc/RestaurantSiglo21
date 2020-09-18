@@ -1,0 +1,58 @@
+﻿@model AppRestaurantSiglo21.Models.USUARIO
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @{
+        <!-- Layout = null; -->
+        ViewBag.Title = "UserDashBoard";
+    }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>UserDashBoard</title>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Autenticación del Sistema
+            </div>
+            <div class="card-body">
+
+                <fieldset>
+                    <legend>Autenticación del Sistema </legend>
+
+                    @if (Session["UserName"] != null)
+                    {<text>
+                            BIENVENIDO @Session["UserName"].ToString() </text>
+                }
+                </fieldset>
+            </div>
+        </div>
+
+        <div id="wrapper" style="text-align: center">
+            <div id="centro" style="display: inline-block;">Hola mundo !</div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+
+<!--
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserDashBoard</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
+-->
