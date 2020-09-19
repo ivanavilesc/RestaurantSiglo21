@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<AppRestaurantSiglo21.Models.MESA>
+
+@{
+    ViewBag.Title = "IndexMesa";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+    }
+
+    <h2>Index</h2>
+    <hr />
+    <p>
+        @Html.ActionLink("Nueva mesa", "CreateMesa")
+    </p>
+    <hr />
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.IDMESA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.DESCMESA)
+            </th>
+
+        </tr>
+        @foreach (var mesa in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => mesa.IDMESA)
+            </td>
+            <td>
+                @Html.DisplayFor(x => mesa.DESCMESA)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "EditMesa", new { id = mesa.IDMESA, @class = "btn btn-primary" }) |
+                @Html.ActionLink("Ver Detalles", "DetailMesa", new { id = mesa.IDMESA, @class = "btn btn-info" }) |
+                @Html.ActionLink("Eliminar", "DeleteMesa", new { id = mesa.IDMESA, @class = "btn btn-danger" })
+            </td>
+
+        </tr>
+        }
+
+    </table>
+
+
+

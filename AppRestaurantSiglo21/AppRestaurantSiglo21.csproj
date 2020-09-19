@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -289,6 +290,12 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\UserDashBoard.cshtml" />
+    <Content Include="Views\Mesa\IndexMesa.cshtml" />
+    <Content Include="Views\Mesa\CreateMesa.cshtml" />
+    <Content Include="Views\Mesa\EditMesa.cshtml" />
+    <Content Include="Views\Mesa\DetailMesa.cshtml" />
+    <Content Include="Views\Mesa\DeleteMesa.cshtml" />
+    <Content Include="Views\Mesa\testError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

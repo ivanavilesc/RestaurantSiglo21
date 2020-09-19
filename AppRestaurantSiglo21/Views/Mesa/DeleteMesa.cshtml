@@ -1,0 +1,32 @@
+﻿@model AppRestaurantSiglo21.Models.MESA
+
+@{
+    ViewBag.Title = "DeleteMesa";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Eliminar un Registro</h2>
+
+<h3>Estás seguro que deseas eliminar esto ?</h3>
+<div>
+    <h4>Mesa !</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCMESA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCMESA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "IndexMesa")
+        </div>
+    }
+</div>
