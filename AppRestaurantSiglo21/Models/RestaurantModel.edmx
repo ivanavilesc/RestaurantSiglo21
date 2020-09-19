@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Restaurant.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Restaurant.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BANCOMOVIMIENTO">
           <Key>
             <PropertyRef Name="IDMOVIMIENTOBANCARIO" />
@@ -195,6 +195,16 @@
           <Property Name="RUT" Type="number" Precision="38" Scale="0" />
           <Property Name="MONTO" Type="number" Precision="38" Scale="0" />
           <Property Name="IDMEDIOPAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENULISTA">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="M_P_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="CONTROLLER_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTION_NAME" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="MESA">
           <Key>
@@ -955,6 +965,7 @@
           <EntitySet Name="INSUMOSTOCK" EntityType="Self.INSUMOSTOCK" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MEDIOPAGO" EntityType="Self.MEDIOPAGO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MEDIOPAGOTX" EntityType="Self.MEDIOPAGOTX" Schema="RESTAURANT" store:Type="Tables" />
+          <EntitySet Name="MENULISTA" EntityType="Self.MENULISTA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANT" store:Type="Tables" />
@@ -1161,8 +1172,7 @@
             <End Role="USUARIOROL" EntitySet="USUARIOROL" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Restaurant" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2378,7 +2388,18 @@
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
+          <EntitySet Name="MENULISTA" EntityType="Restaurant.MENULISTA" />
         </EntityContainer>
+        <EntityType Name="MENULISTA">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="M_P_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTROLLER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2802,6 +2823,17 @@
               <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="MENULISTA">
+            <EntityTypeMapping TypeName="Restaurant.MENULISTA">
+              <MappingFragment StoreEntitySet="MENULISTA">
+                <ScalarProperty Name="ACTION_NAME" ColumnName="ACTION_NAME" />
+                <ScalarProperty Name="CONTROLLER_NAME" ColumnName="CONTROLLER_NAME" />
+                <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
+                <ScalarProperty Name="M_P_ID" ColumnName="M_P_ID" />
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

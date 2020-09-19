@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AppRestaurantSiglo21.Models;
@@ -10,10 +13,27 @@ namespace AppRestaurantSiglo21.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+        private RestaurantEntities db = new RestaurantEntities();
+
         public ActionResult Index()
         {
             return View();
         }
+
+        public ActionResult GetMenuList()
+        {
+            try
+            {
+                var result = db.MENULISTA.ToList();
+                return View("Menu", result);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message.ToString();
+                return Content(error);
+            }
+        }
+
 
         public ActionResult Login()
         {

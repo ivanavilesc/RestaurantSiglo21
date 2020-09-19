@@ -1212,5 +1212,16 @@
       <End Role="INSUMO" EntitySet="INSUMO" />
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
     </AssociationSet>
+    <EntitySet Name="MENULISTA" EntityType="Restaurant.MENULISTA" />
   </EntityContainer>
+  <EntityType Name="MENULISTA">
+    <Key>
+      <PropertyRef Name="M_ID" />
+    </Key>
+    <Property Name="M_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="M_P_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="M_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CONTROLLER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ACTION_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

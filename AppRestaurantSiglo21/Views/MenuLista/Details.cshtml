@@ -1,0 +1,51 @@
+﻿@model AppRestaurantSiglo21.Models.MENULISTA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MENULISTA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.M_P_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.M_P_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.M_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.M_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTROLLER_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTROLLER_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTION_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACTION_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.M_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

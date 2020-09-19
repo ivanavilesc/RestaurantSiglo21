@@ -15,22 +15,18 @@ namespace AppRestaurantSiglo21.Models
 using System;
     using System.Collections.Generic;
     
-public partial class MEDIOPAGOTX
+public partial class MENULISTA
 {
 
-    public decimal IDMEDIOPAGOTX { get; set; }
+    public decimal M_ID { get; set; }
 
-    public string DESCMEDIOPAGO { get; set; }
+    public Nullable<decimal> M_P_ID { get; set; }
 
-    public Nullable<decimal> RUT { get; set; }
+    public string M_NAME { get; set; }
 
-    public Nullable<decimal> MONTO { get; set; }
+    public string CONTROLLER_NAME { get; set; }
 
-    public decimal IDMEDIOPAGO { get; set; }
-
-
-
-    public virtual MEDIOPAGO MEDIOPAGO { get; set; }
+    public string ACTION_NAME { get; set; }
 
 }
 
