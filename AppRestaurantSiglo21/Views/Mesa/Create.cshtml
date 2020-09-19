@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "CreateMesa";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
@@ -28,6 +28,20 @@
         <div class="col-md-10">
             @Html.TextBoxFor(x => x.DESCMESA, new { @class = "form-control" })
             @Html.ValidationMessageFor(x => x.DESCMESA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        <div class="form-group">
+        @Html.LabelFor(x => x.IDLOCAL, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.IDLOCAL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IDLOCAL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+            <div class="form-group">
+        @Html.LabelFor(x => x.IDESTADOMESA, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.IDESTADOMESA, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IDESTADOMESA, "", new { @class = "text-danger" })
         </div>
     </div>
 

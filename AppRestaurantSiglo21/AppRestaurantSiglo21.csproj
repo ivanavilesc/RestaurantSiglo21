@@ -290,12 +290,11 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\UserDashBoard.cshtml" />
-    <Content Include="Views\Mesa\IndexMesa.cshtml" />
-    <Content Include="Views\Mesa\CreateMesa.cshtml" />
-    <Content Include="Views\Mesa\EditMesa.cshtml" />
-    <Content Include="Views\Mesa\DetailMesa.cshtml" />
-    <Content Include="Views\Mesa\DeleteMesa.cshtml" />
-    <Content Include="Views\Mesa\testError.cshtml" />
+    <Content Include="Views\Mesa\Index.cshtml" />
+    <Content Include="Views\Mesa\Create.cshtml" />
+    <Content Include="Views\Mesa\Edit.cshtml" />
+    <Content Include="Views\Mesa\Detail.cshtml" />
+    <Content Include="Views\Mesa\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

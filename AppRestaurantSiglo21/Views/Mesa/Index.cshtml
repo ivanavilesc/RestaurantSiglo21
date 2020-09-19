@@ -2,14 +2,14 @@
 @model IEnumerable<AppRestaurantSiglo21.Models.MESA>
 
 @{
-    ViewBag.Title = "IndexMesa";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Principal.cshtml";
     }
 
     <h2>Index</h2>
     <hr />
     <p>
-        @Html.ActionLink("Nueva mesa", "CreateMesa")
+        @Html.ActionLink("Nueva mesa", "Create")
     </p>
     <hr />
 
@@ -35,9 +35,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("Editar", "EditMesa", new { id = mesa.IDMESA, @class = "btn btn-primary" }) |
-                @Html.ActionLink("Ver Detalles", "DetailMesa", new { id = mesa.IDMESA, @class = "btn btn-info" }) |
-                @Html.ActionLink("Eliminar", "DeleteMesa", new { id = mesa.IDMESA, @class = "btn btn-danger" })
+                @Html.ActionLink("Editar", "Edit", new { id = mesa.IDMESA, @class = "btn btn-primary" }) |
+                @Html.ActionLink("Ver Detalles", "Detail", new { id = mesa.IDMESA, @class = "btn btn-info" }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = mesa.IDMESA, @class = "btn btn-danger" })
             </td>
 
         </tr>
