@@ -92,6 +92,7 @@
         <AssociationConnector Association="Restaurant.USUARIOROL_ROL_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Restaurant.USUARIOROL_USUARIO_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Restaurant.RELATION_90" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Restaurant.MENULISTA" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
