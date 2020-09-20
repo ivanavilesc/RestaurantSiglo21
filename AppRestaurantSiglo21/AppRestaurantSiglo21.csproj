@@ -145,6 +145,8 @@
     <Compile Include="Controllers\MantenerClienteController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+	    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\MenuListaController.cs" />
     <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,6 +218,9 @@
     <Compile Include="Models\MEDIOPAGOTX.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+	<Compile Include="Models\MENULISTA.cs">
+      <DependentUpon>RestaurantModel.tt</DependentUpon>
+    </Compile>									   
     <Compile Include="Models\MESA.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -305,7 +310,16 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Principal.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+	    <Content Include="Views\Home\Login.cshtml" />											 
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+	<Content Include="Views\Home\UserDashBoard.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Menu\Computer_Action.cshtml" />
+    <Content Include="Views\MenuLista\Create.cshtml" />
+	<Content Include="Views\MenuLista\Delete.cshtml" />
+	<Content Include="Views\MenuLista\Details.cshtml" />
+    <Content Include="Views\MenuLista\Edit.cshtml" />
+    <Content Include="Views\MenuLista\Index.cshtml" />
     <Content Include="Views\Disponibilidad\Index.cshtml" />
     <Content Include="Views\Disponibilidad\Create.cshtml" />
     <Content Include="Views\Disponibilidad\Edit.cshtml" />
