@@ -133,9 +133,13 @@ C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\EntityFramework.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\EntityFramework.SqlServer.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Microsoft.Web.Infrastructure.dll
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Newtonsoft.Json.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Oracle.ManagedDataAccess.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Net.Http.Formatting.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Helpers.dll
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Http.dll
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Http.WebHost.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Mvc.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Razor.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Webpages.Deployment.dll
@@ -143,6 +147,10 @@ C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Webpages.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Webpages.Razor.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\EntityFramework.xml
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\EntityFramework.SqlServer.xml
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\Newtonsoft.Json.xml
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Net.Http.Formatting.xml
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Http.xml
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Http.WebHost.xml
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Razor.xml
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Webpages.xml
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\System.Web.Webpages.Deployment.xml
@@ -156,8 +164,8 @@ C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\es\System.Web.Webpages.
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\es\System.Web.Webpages.Razor.resources.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\es\System.Web.Helpers.resources.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\es\System.Web.Mvc.resources.dll
-C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.csprojAssemblyReference.cache
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.csproj.CoreCompileInputs.cache
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.csproj.CopyComplete
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.pdb
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.csprojAssemblyReference.cache
