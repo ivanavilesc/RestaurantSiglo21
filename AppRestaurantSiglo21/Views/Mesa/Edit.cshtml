@@ -1,5 +1,5 @@
 ﻿@model AppRestaurantSiglo21.Models.MESA
-<!--//AQUI ARRIBA SE LE INDICA A LA VISTA QUE USE DEL MODELO EL TIPO DE PRODUCTO SI RECIBE DATOS-->
+<!--//AQUI ARRIBA SE LE INDICA A LA VISTA QUE USE DEL MODELO LA TABLA MESA SI RECIBE DATOS-->
 
 @{
     ViewBag.Title = "Edit";
@@ -7,65 +7,73 @@
 }
 
 <h2>Editar mesa</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-<div class="form-horizontal">
-    <h4>Editar Mesa</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!-- ES SOLO UN VALIDADOR DE TEXTO -->
-    @Html.HiddenFor(model => model.IDMESA) <!-- ENVÍO COMO ATRIBUTO OCULTO EL VALOR DEL REGISTRO ID QUE TIENE LA FILA DE LA TABLA QUE SE VA A EDITAR -->
-    @Html.HiddenFor(model => model.IDLOCAL)
-    @Html.HiddenFor(model => model.IDESTADOMESA)
+    <div class="form-horizontal">
+        <h4>Editar Mesa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!-- ES SOLO UN VALIDADOR DE TEXTO -->
+        <!-- ENVÍO COMO ATRIBUTO OCULTO EL VALOR CORRESPONDIENTE A LAS PK Y FK -->
+        @Html.HiddenFor(model => model.IDMESA)
+        @Html.HiddenFor(model => model.IDLOCAL)
+        @Html.HiddenFor(model => model.IDESTADOMESA)
 
-    <div class="form-group">
+        <div class="form-group">
 
-        <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESTIPOPRODUCTO -->
-        @Html.LabelFor(model => model.DESCMESA, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DESCMESA, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DESCMESA, "", new { @class = "text-danger" })
+            <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESCMESA -->
+            @Html.LabelFor(model => model.DESCMESA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DESCMESA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DESCMESA, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-
-    <div class="form-group">
-
-        <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESTIPOPRODUCTO -->
-        @Html.LabelFor(model => model.IDMESA, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.IDMESA, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IDMESA, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO CAPACIDAD -->
+            @Html.LabelFor(model => model.CAPACIDAD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CAPACIDAD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CAPACIDAD, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.IDESTADOMESA, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <p>Seleccione el estado de la mesa</p>
+            <form action="/Edit.cshtml">
+                <label for="Estado">Elija un estado:</label>
+                <select id=model.IDESTADOMESA name="IDESTADOMESA">
+                    <option value="0">Vacía</option>
+                    <option value="1">Ocupada</option>
+                    @Html.ValidationMessageFor(model => model.IDESTADOMESA, "", new { @class = "text-danger" })
 
-        <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESTIPOPRODUCTO -->
-        @Html.LabelFor(model => model.IDLOCAL, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.IDLOCAL, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IDLOCAL, "", new { @class = "text-danger" })
+                </select>
+
+
+
+                @*@Html.EditorFor(model => model.IDESTADOMESA, new { htmlAttributes = new { @id = "IDESTADOMESA", @class = "form-control" } })*@
+                @Html.ValueFor(model => model.IDESTADOMESA)
+                @*@Html.EditorFor(model => model.IDESTADOMESA, new { htmlAttributes = new { @class = "form-control" } })*@
+                @*@Html.ValidationMessageFor(model => model.IDESTADOMESA, "", new { @class = "text-danger" })*@
+
+                @*@Html.DropDownListFor(model => model.IDESTADOMESA, (List<SelectListItem>)ViewBag.MESA, "selecciona la mesa", new { @id = "iddropdownlist", @class = "form-control" })
+                    @Html.EditorFor(model => model.IDESTADOMESA, new { htmlAttributes = new { @id = "IDESTADOMESA", @class = "form-control" } })*@
+
+            </form>
+
+
+
         </div>
-    </div>
 
-    <div class="form-group">
 
-        <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESTIPOPRODUCTO -->
-        @Html.LabelFor(model => model.IDESTADOMESA, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.IDESTADOMESA, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IDESTADOMESA, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <!-- UN FORM-GROUP PARA PONER EL BOTON SUBMIT -->
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar cambios" class="btn btn-default" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <!-- UN FORM-GROUP PARA PONER EL BOTON SUBMIT -->
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar cambios" class="btn btn-default" />
-        </div>
     </div>
-</div>
 } <!--AQUI TERMINA EL FORM QUE ENVÍA POR METODO POST-->
 
 <div>

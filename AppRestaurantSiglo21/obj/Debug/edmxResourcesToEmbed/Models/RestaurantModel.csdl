@@ -239,7 +239,7 @@
     <Key>
       <PropertyRef Name="IDMESA" />
     </Key>
-    <Property Name="IDMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMESA" Type="Decimal" Nullable="false" />
     <Property Name="DESCMESA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="CAPACIDAD" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="IDLOCAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />

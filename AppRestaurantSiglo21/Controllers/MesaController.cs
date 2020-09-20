@@ -35,6 +35,7 @@ namespace AppRestaurantSiglo21.Controllers
         {
             if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
             {
+                //objMesa.IDMESA = 0;
                 db.MESA.Add(objMesa); //SE INSTANCIA EL MAPEO DEL ENTITYFRAMEWORK PARA LA TABLA TIPOPRODUCTO, Y CON EL METODO ADD, SE LE PASA EL OBJETO
                 db.SaveChanges();
                 return RedirectToAction("Index"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
@@ -112,5 +113,7 @@ namespace AppRestaurantSiglo21.Controllers
             db.SaveChanges(); //GUARDA CAMBIOS DE LA ELIMINACIÓN
             return RedirectToAction("Index");  //REDIRIGE A LA VISTA DE LISTADO
         }
+
+       
     }
 }

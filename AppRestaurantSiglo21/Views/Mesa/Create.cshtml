@@ -15,13 +15,13 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(x => x.IDMESA, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(x => x.IDMESA, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.IDMESA, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(x => x.IDMESA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.IDMESA, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.IDMESA, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
         @Html.LabelFor(x => x.DESCMESA, new { @class = "control-label col-md-2" })
@@ -30,18 +30,25 @@
             @Html.ValidationMessageFor(x => x.DESCMESA, "", new { @class = "text-danger" })
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(x => x.IDLOCAL, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(x => x.IDLOCAL, new { @class = "form-control" })
             @Html.ValidationMessageFor(x => x.IDLOCAL, "", new { @class = "text-danger" })
         </div>
     </div>
-            <div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(x => x.IDESTADOMESA, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(x => x.IDESTADOMESA, new { @class = "form-control" })
             @Html.ValidationMessageFor(x => x.IDESTADOMESA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.CAPACIDAD, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.CAPACIDAD, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.CAPACIDAD, "", new { @class = "text-danger" })
         </div>
     </div>
 

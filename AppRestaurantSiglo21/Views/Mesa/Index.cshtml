@@ -22,6 +22,12 @@
             <th>
                 @Html.DisplayNameFor(x => x.DESCMESA)
             </th>
+            <th>
+                @Html.DisplayNameFor(x => x.CAPACIDAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.IDESTADOMESA)
+            </th>
 
         </tr>
         @foreach (var mesa in Model)
@@ -32,6 +38,12 @@
             </td>
             <td>
                 @Html.DisplayFor(x => mesa.DESCMESA)
+            </td>
+            <td>
+                @Html.DisplayFor(x => mesa.CAPACIDAD)
+            </td>
+            <td>
+                @Html.DisplayFor(x => mesa.IDESTADOMESA)
             </td>
 
             <td>
