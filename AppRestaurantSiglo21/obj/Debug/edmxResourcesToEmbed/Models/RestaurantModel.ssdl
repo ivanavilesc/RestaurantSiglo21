@@ -46,6 +46,12 @@
     <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="FECHAINGRESO" Type="date" />
     <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
+    <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
+    <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
+    <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
+    <Property Name="FONO" Type="varchar2" MaxLength="15" />
+    <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="COMPRA">
     <Key>
@@ -915,6 +921,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_REGISTRARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_RUT" Type="number" Mode="In" />
+    <Parameter Name="PE_NOMB" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_APEP" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_APEM" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_DIRE" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_FONO" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_EMAIL" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_IDCLI" Type="number" Mode="In" />
+  </Function>
   <EntityContainer Name="RestaurantStoreContainer">
     <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />

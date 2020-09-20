@@ -51,6 +51,12 @@
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FECHAINGRESO" Type="date" />
           <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
+          <Property Name="FONO" Type="varchar2" MaxLength="15" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -920,6 +926,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_REGISTRARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_RUT" Type="number" Mode="In" />
+          <Parameter Name="PE_NOMB" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_APEP" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_APEM" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_DIRE" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_FONO" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_IDCLI" Type="number" Mode="In" />
+        </Function>
         <EntityContainer Name="RestaurantStoreContainer">
           <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
@@ -1209,6 +1225,12 @@
           <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
           <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
           <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -2361,6 +2383,16 @@
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
+          <FunctionImport Name="SP_REGISTRARCLIENTE">
+            <Parameter Name="PE_RUT" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_NOMB" Mode="In" Type="String" />
+            <Parameter Name="PE_APEP" Mode="In" Type="String" />
+            <Parameter Name="PE_APEM" Mode="In" Type="String" />
+            <Parameter Name="PE_DIRE" Mode="In" Type="String" />
+            <Parameter Name="PE_FONO" Mode="In" Type="String" />
+            <Parameter Name="PE_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="PE_IDCLI" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -2414,6 +2446,12 @@
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="Restaurant.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="FONO" ColumnName="FONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
                 <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
                 <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />
@@ -2785,6 +2823,7 @@
               <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SP_REGISTRARCLIENTE" FunctionName="Restaurant.Store.SP_REGISTRARCLIENTE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
