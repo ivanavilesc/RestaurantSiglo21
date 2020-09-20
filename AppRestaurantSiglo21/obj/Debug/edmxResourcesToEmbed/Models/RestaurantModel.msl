@@ -47,6 +47,12 @@
     <EntitySetMapping Name="CLIENTE">
       <EntityTypeMapping TypeName="Restaurant.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FONO" ColumnName="FONO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+          <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
           <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
           <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />
@@ -418,16 +424,6 @@
         <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="MENULISTA">
-      <EntityTypeMapping TypeName="Restaurant.MENULISTA">
-        <MappingFragment StoreEntitySet="MENULISTA">
-          <ScalarProperty Name="ACTION_NAME" ColumnName="ACTION_NAME" />
-          <ScalarProperty Name="CONTROLLER_NAME" ColumnName="CONTROLLER_NAME" />
-          <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
-          <ScalarProperty Name="M_P_ID" ColumnName="M_P_ID" />
-          <ScalarProperty Name="M_ID" ColumnName="M_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_REGISTRARCLIENTE" FunctionName="Restaurant.Store.SP_REGISTRARCLIENTE" />
   </EntityContainerMapping>
 </Mapping>
