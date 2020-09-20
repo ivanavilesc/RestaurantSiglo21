@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.INSUMO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+<div class="container">
+
+    <h4>Listado de Insumo</h4>
+  
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(x => x.IDINSUMO)
+                </th>*@
+            <th>
+                Insumo
+                @*@Html.DisplayNameFor(x => x.DESCINSUMO)*@
+            </th>
+            <th>
+                Precio Insumo
+                @*@Html.DisplayNameFor(x => x.PRECIOINSUMO)*@
+            </th>
+        </tr>
+        @foreach (var ins in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(x => ins.IDINSUMO)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(x => ins.DESCINSUMO)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => ins.PRECIOINSUMO)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = ins.IDINSUMO, @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Ver Detalles", "Detail", new { id = ins.IDINSUMO, @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = ins.IDINSUMO, @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        @Html.ActionLink("Crear nuevo insumo", "Create")
+    </p>
+</div>
