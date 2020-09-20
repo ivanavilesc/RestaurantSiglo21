@@ -435,18 +435,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CLIENTE_PERSONA_FK">
-    <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PERSONA">
-        <PropertyRef Name="RUT" />
-      </Principal>
-      <Dependent Role="CLIENTE">
-        <PropertyRef Name="RUTPERSONA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="COMPRA_PEDIDO_FK">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
@@ -990,10 +978,6 @@
     <AssociationSet Name="CAJAOPERACION_USUARIO_FK" Association="Self.CAJAOPERACION_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
-    </AssociationSet>
-    <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
-      <End Role="PERSONA" EntitySet="PERSONA" />
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Restaurant.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Restaurant.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BANCOMOVIMIENTO">
           <Key>
             <PropertyRef Name="IDMOVIMIENTOBANCARIO" />
@@ -437,18 +437,6 @@
             </Principal>
             <Dependent Role="CAJAOPERACION">
               <PropertyRef Name="IDUSUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CLIENTE_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="RUT" />
-            </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="RUTPERSONA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -996,10 +984,6 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
           </AssociationSet>
-          <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
           <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="COMPRA" EntitySet="COMPRA" />
@@ -1161,8 +1145,7 @@
             <End Role="USUARIOROL" EntitySet="USUARIOROL" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Restaurant" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
