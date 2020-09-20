@@ -197,16 +197,6 @@
     <Property Name="MONTO" Type="number" Precision="38" Scale="0" />
     <Property Name="IDMEDIOPAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
-  <EntityType Name="MENULISTA">
-    <Key>
-      <PropertyRef Name="M_ID" />
-    </Key>
-    <Property Name="M_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="M_P_ID" Type="number" Precision="38" Scale="0" />
-    <Property Name="M_NAME" Type="varchar2" MaxLength="50" />
-    <Property Name="CONTROLLER_NAME" Type="varchar2" MaxLength="50" />
-    <Property Name="ACTION_NAME" Type="varchar2" MaxLength="50" />
-  </EntityType>
   <EntityType Name="MESA">
     <Key>
       <PropertyRef Name="IDMESA" />
@@ -964,7 +954,6 @@
     <EntitySet Name="INSUMOSTOCK" EntityType="Self.INSUMOSTOCK" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="MEDIOPAGO" EntityType="Self.MEDIOPAGO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="MEDIOPAGOTX" EntityType="Self.MEDIOPAGOTX" Schema="RESTAURANT" store:Type="Tables" />
-    <EntitySet Name="MENULISTA" EntityType="Self.MENULISTA" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANT" store:Type="Tables" />
