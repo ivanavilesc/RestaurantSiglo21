@@ -51,12 +51,6 @@
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FECHAINGRESO" Type="date" />
           <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
-          <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
-          <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
-          <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
-          <Property Name="FONO" Type="varchar2" MaxLength="15" />
-          <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -201,6 +195,16 @@
           <Property Name="RUT" Type="number" Precision="38" Scale="0" />
           <Property Name="MONTO" Type="number" Precision="38" Scale="0" />
           <Property Name="IDMEDIOPAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENULISTA">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="M_P_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="CONTROLLER_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTION_NAME" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="MESA">
           <Key>
@@ -443,6 +447,18 @@
             </Principal>
             <Dependent Role="CAJAOPERACION">
               <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENTE_PERSONA_FK">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="RUTPERSONA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -926,16 +942,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SP_REGISTRARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
-          <Parameter Name="PE_RUT" Type="number" Mode="In" />
-          <Parameter Name="PE_NOMB" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_APEP" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_APEM" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_DIRE" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_FONO" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_EMAIL" Type="varchar2" Mode="In" />
-          <Parameter Name="PE_IDCLI" Type="number" Mode="In" />
-        </Function>
         <EntityContainer Name="RestaurantStoreContainer">
           <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
@@ -959,6 +965,7 @@
           <EntitySet Name="INSUMOSTOCK" EntityType="Self.INSUMOSTOCK" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MEDIOPAGO" EntityType="Self.MEDIOPAGO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MEDIOPAGOTX" EntityType="Self.MEDIOPAGOTX" Schema="RESTAURANT" store:Type="Tables" />
+          <EntitySet Name="MENULISTA" EntityType="Self.MENULISTA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANT" store:Type="Tables" />
@@ -999,6 +1006,10 @@
           <AssociationSet Name="CAJAOPERACION_USUARIO_FK" Association="Self.CAJAOPERACION_USUARIO_FK">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
           </AssociationSet>
           <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
@@ -1225,12 +1236,6 @@
           <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
           <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
           <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -1410,7 +1415,7 @@
           <Key>
             <PropertyRef Name="IDMESA" />
           </Key>
-          <Property Name="IDMESA" Type="Decimal" Nullable="false" />
+          <Property Name="IDMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DESCMESA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="CAPACIDAD" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="IDLOCAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -2383,17 +2388,18 @@
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
-          <FunctionImport Name="SP_REGISTRARCLIENTE">
-            <Parameter Name="PE_RUT" Mode="In" Type="Decimal" />
-            <Parameter Name="PE_NOMB" Mode="In" Type="String" />
-            <Parameter Name="PE_APEP" Mode="In" Type="String" />
-            <Parameter Name="PE_APEM" Mode="In" Type="String" />
-            <Parameter Name="PE_DIRE" Mode="In" Type="String" />
-            <Parameter Name="PE_FONO" Mode="In" Type="String" />
-            <Parameter Name="PE_EMAIL" Mode="In" Type="String" />
-            <Parameter Name="PE_IDCLI" Mode="In" Type="Decimal" />
-          </FunctionImport>
+          <EntitySet Name="MENULISTA" EntityType="Restaurant.MENULISTA" />
         </EntityContainer>
+        <EntityType Name="MENULISTA">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="M_P_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTROLLER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2446,12 +2452,6 @@
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="Restaurant.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="FONO" ColumnName="FONO" />
-                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
-                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
-                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
                 <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
                 <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />
@@ -2823,7 +2823,17 @@
               <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SP_REGISTRARCLIENTE" FunctionName="Restaurant.Store.SP_REGISTRARCLIENTE" />
+          <EntitySetMapping Name="MENULISTA">
+            <EntityTypeMapping TypeName="Restaurant.MENULISTA">
+              <MappingFragment StoreEntitySet="MENULISTA">
+                <ScalarProperty Name="ACTION_NAME" ColumnName="ACTION_NAME" />
+                <ScalarProperty Name="CONTROLLER_NAME" ColumnName="CONTROLLER_NAME" />
+                <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
+                <ScalarProperty Name="M_P_ID" ColumnName="M_P_ID" />
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -46,12 +46,6 @@
     <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="FECHAINGRESO" Type="date" />
     <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
-    <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
-    <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
-    <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
-    <Property Name="FONO" Type="varchar2" MaxLength="15" />
-    <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="COMPRA">
     <Key>
@@ -448,6 +442,18 @@
       </Principal>
       <Dependent Role="CAJAOPERACION">
         <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CLIENTE_PERSONA_FK">
+    <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERSONA">
+        <PropertyRef Name="RUT" />
+      </Principal>
+      <Dependent Role="CLIENTE">
+        <PropertyRef Name="RUTPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -931,16 +937,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="SP_REGISTRARCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
-    <Parameter Name="PE_RUT" Type="number" Mode="In" />
-    <Parameter Name="PE_NOMB" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_APEP" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_APEM" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_DIRE" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_FONO" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_EMAIL" Type="varchar2" Mode="In" />
-    <Parameter Name="PE_IDCLI" Type="number" Mode="In" />
-  </Function>
   <EntityContainer Name="RestaurantStoreContainer">
     <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
@@ -1005,6 +1001,10 @@
     <AssociationSet Name="CAJAOPERACION_USUARIO_FK" Association="Self.CAJAOPERACION_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
+    </AssociationSet>
+    <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
+      <End Role="PERSONA" EntitySet="PERSONA" />
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

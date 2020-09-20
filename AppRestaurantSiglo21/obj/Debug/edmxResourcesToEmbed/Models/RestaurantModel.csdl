@@ -60,12 +60,6 @@
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
     <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
-    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="COMPRA">
     <Key>
@@ -245,7 +239,7 @@
     <Key>
       <PropertyRef Name="IDMESA" />
     </Key>
-    <Property Name="IDMESA" Type="Decimal" Nullable="false" />
+    <Property Name="IDMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCMESA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="CAPACIDAD" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="IDLOCAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -1218,15 +1212,16 @@
       <End Role="INSUMO" EntitySet="INSUMO" />
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
     </AssociationSet>
-    <FunctionImport Name="SP_REGISTRARCLIENTE">
-      <Parameter Name="PE_RUT" Mode="In" Type="Decimal" />
-      <Parameter Name="PE_NOMB" Mode="In" Type="String" />
-      <Parameter Name="PE_APEP" Mode="In" Type="String" />
-      <Parameter Name="PE_APEM" Mode="In" Type="String" />
-      <Parameter Name="PE_DIRE" Mode="In" Type="String" />
-      <Parameter Name="PE_FONO" Mode="In" Type="String" />
-      <Parameter Name="PE_EMAIL" Mode="In" Type="String" />
-      <Parameter Name="PE_IDCLI" Mode="In" Type="Decimal" />
-    </FunctionImport>
+    <EntitySet Name="MENULISTA" EntityType="Restaurant.MENULISTA" />
   </EntityContainer>
+  <EntityType Name="MENULISTA">
+    <Key>
+      <PropertyRef Name="M_ID" />
+    </Key>
+    <Property Name="M_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="M_P_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="M_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CONTROLLER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ACTION_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>
