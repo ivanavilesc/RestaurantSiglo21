@@ -140,11 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+	   <Compile Include="Controllers\DisponibilidadController.cs" />															 
     <Compile Include="Controllers\HomeController.cs" />
 	    <Compile Include="Controllers\MantenerClienteController.cs" />
 	<Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\InsumosController.cs" />
+	  <Compile Include="Controllers\TipoProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -303,6 +305,17 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Principal.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TipoProducto\Index.cshtml" />
+    <Content Include="Views\TipoProducto\Create.cshtml" />
+    <Content Include="Views\TipoProducto\Edit.cshtml" />
+    <Content Include="Views\TipoProducto\Detail.cshtml" />
+    <Content Include="Views\TipoProducto\Delete.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Disponibilidad\Index.cshtml" />
+    <Content Include="Views\Disponibilidad\Create.cshtml" />
+    <Content Include="Views\Disponibilidad\Edit.cshtml" />
+    <Content Include="Views\Disponibilidad\Detail.cshtml" />
+    <Content Include="Views\Disponibilidad\Delete.cshtml" />														 
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Insumos\Index.cshtml" />
     <Content Include="Views\Insumos\Create.cshtml" />
