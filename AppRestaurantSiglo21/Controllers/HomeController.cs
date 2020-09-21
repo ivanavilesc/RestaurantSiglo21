@@ -17,7 +17,14 @@ namespace AppRestaurantSiglo21.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         public ActionResult GetMenuList()
@@ -48,15 +55,27 @@ namespace AppRestaurantSiglo21.Controllers
             {
                 using (RestaurantEntities db = new RestaurantEntities())
                 {
-                    var obj = db.USUARIO.Where(a => a.IDUSUARIO.Equals(objUsuario.IDUSUARIO) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
+                    var obj = db.USUARIO.Where(a => a.UID.Equals(objUsuario.UID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
                     //if (obj != null)
                     if (obj.Count() > 0)
                     {
                         //Session["UserID"] = obj.IDUSUARIO.ToString();
                         //Session["UserName"] = obj.USUARIO1.ToString();
-                        Session["UserID"] = obj.FirstOrDefault().IDUSUARIO;
-                        Session["UserName"] = obj.FirstOrDefault().USUARIO1;
-                        return RedirectToAction("UserDashBoard");
+                        Session["UserID"] = obj.FirstOrDefault().UID;
+                        Session["UserName"] = obj.FirstOrDefault().UID;
+                        Session["Rol"] = obj.FirstOrDefault().ROL;
+                        if (obj.FirstOrDefault().ROL.Equals("Administrador"))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (obj.FirstOrDefault().ROL.Equals("Garzon"))
+                        {
+                            Session["Layout"] = "~/Views/Home/Garzon.cshtml";
+                            return RedirectToAction("Garzon");
+                        }
+                        
+                        //return RedirectToAction("UserDashBoard");
                     }
                 }
             }
@@ -76,5 +95,34 @@ namespace AppRestaurantSiglo21.Controllers
             }
         }
 
+        public ActionResult Administrador()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Garzon()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
 }

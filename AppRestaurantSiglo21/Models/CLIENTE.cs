@@ -14,8 +14,9 @@ namespace AppRestaurantSiglo21.Models
 
 using System;
     using System.Collections.Generic;
-    
-public partial class CLIENTE
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class CLIENTE
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,11 +32,25 @@ public partial class CLIENTE
     }
 
 
-    public decimal IDCLIENTE { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0}")]
+        public decimal IDCLIENTE { get; set; }
 
     public Nullable<System.DateTime> FECHAINGRESO { get; set; }
 
-    public decimal RUTPERSONA { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0}")]
+        public decimal RUTPERSONA { get; set; }
+
+    public string NOMBRE { get; set; }
+
+    public string APELLIDOPATERNO { get; set; }
+
+    public string APELLIDOMATERNO { get; set; }
+
+    public string DIRECCION { get; set; }
+
+    public string FONO { get; set; }
+
+    public string EMAIL { get; set; }
 
 
 

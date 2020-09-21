@@ -1,0 +1,44 @@
+﻿@model AppRestaurantSiglo21.Models.INSUMO
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+
+<div class="container">
+    <div>
+        <h4>INSUMO</h4>
+      
+        <dl class="dl-horizontal">
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.IDINSUMO)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IDINSUMO)
+                </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DESCINSUMO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DESCINSUMO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PRECIOINSUMO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRECIOINSUMO)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IDINSUMO }) |
+        @Html.ActionLink("Regresa a la lista", "Index")
+    </p>
+</div>

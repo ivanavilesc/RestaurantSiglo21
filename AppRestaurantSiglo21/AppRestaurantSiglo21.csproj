@@ -127,9 +127,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\DisponibilidadController.cs" />
+    <Compile Include="Controllers\DisponibilidadMesaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenuListaController.cs" />
+    <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +306,32 @@
     <Content Include="Views\MenuLista\Details.cshtml" />
     <Content Include="Views\MenuLista\Edit.cshtml" />
     <Content Include="Views\MenuLista\Index.cshtml" />
+    <Content Include="Views\Cliente\Create.cshtml" />
+    <Content Include="Views\Cliente\Delete.cshtml" />
+    <Content Include="Views\Cliente\Detail.cshtml" />
+    <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Disponibilidad\Create.cshtml" />
+    <Content Include="Views\Disponibilidad\Delete.cshtml" />
+    <Content Include="Views\Disponibilidad\Detail.cshtml" />
+    <Content Include="Views\Disponibilidad\Edit.cshtml" />
+    <Content Include="Views\Disponibilidad\Index.cshtml" />
+    <Content Include="Views\Insumos\Create.cshtml" />
+    <Content Include="Views\Insumos\Delete.cshtml" />
+    <Content Include="Views\Insumos\Detail.cshtml" />
+    <Content Include="Views\Insumos\Edit.cshtml" />
+    <Content Include="Views\Insumos\Index.cshtml" />
+    <Content Include="Views\Mesa\Create.cshtml" />
+    <Content Include="Views\Mesa\Delete.cshtml" />
+    <Content Include="Views\Mesa\Detail.cshtml" />
+    <Content Include="Views\Mesa\Edit.cshtml" />
+    <Content Include="Views\Mesa\Index.cshtml" />
+    <Content Include="Views\Home\Administrador.cshtml" />
+    <Content Include="Views\Home\Garzon.cshtml" />
+    <Content Include="Views\DisponibilidadMesa\Index.cshtml" />
+    <Content Include="Views\DisponibilidadMesa\Edit.cshtml" />
+    <Content Include="Views\Shared\_PrincipalAdmin.cshtml" />
+    <Content Include="Views\Shared\_PrincipalGarzon.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

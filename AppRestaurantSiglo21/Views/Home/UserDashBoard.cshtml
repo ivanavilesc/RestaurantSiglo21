@@ -23,17 +23,22 @@
 
                 <fieldset>
                     <legend>Autenticación del Sistema </legend>
-
                     @if (Session["UserName"] != null)
                     {<text>
                             BIENVENIDO @Session["UserName"].ToString() </text>
+                        <hr />
+                    <text>
+                        ROL: @Session["Rol"].ToString()
+                    </text>
                 }
+
+
                 </fieldset>
             </div>
         </div>
 
         <div id="wrapper" style="text-align: center">
-            <div id="centro" style="display: inline-block;">Hola mundo !</div>
+            <div id="centro" style="display: inline-block;">@Html.ActionLink("Ir al menú","Administrador" )</div>
         </div>
 
     </div>

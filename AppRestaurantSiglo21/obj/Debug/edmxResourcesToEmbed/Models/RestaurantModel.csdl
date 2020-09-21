@@ -60,6 +60,12 @@
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
     <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="COMPRA">
     <Key>
@@ -435,7 +441,7 @@
       <PropertyRef Name="IDUSUARIO" />
     </Key>
     <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="USUARIO1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="PASSWORD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="FECHAINGRESO" Type="DateTime" />
     <Property Name="RUTPERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -445,6 +451,7 @@
     <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_USUARIO_FK" FromRole="USUARIO" ToRole="PEDIDO" />
     <NavigationProperty Name="PERSONA" Relationship="Self.USUARIO_PERSONA_FK" FromRole="USUARIO" ToRole="PERSONA" />
     <NavigationProperty Name="USUARIOROL" Relationship="Self.USUARIOROL_USUARIO_FK" FromRole="USUARIO" ToRole="USUARIOROL" />
+    <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="USUARIOROL">
     <Key>

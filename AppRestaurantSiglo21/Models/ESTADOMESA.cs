@@ -14,8 +14,9 @@ namespace AppRestaurantSiglo21.Models
 
 using System;
     using System.Collections.Generic;
-    
-public partial class ESTADOMESA
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class ESTADOMESA
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +28,8 @@ public partial class ESTADOMESA
     }
 
 
-    public decimal IDESTADOMESA { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0}")]
+        public decimal IDESTADOMESA { get; set; }
 
     public string DESCESTADOMESA { get; set; }
 

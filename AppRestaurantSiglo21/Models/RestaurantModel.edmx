@@ -51,6 +51,12 @@
           <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FECHAINGRESO" Type="date" />
           <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
+          <Property Name="FONO" Type="varchar2" MaxLength="15" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -376,10 +382,11 @@
             <PropertyRef Name="IDUSUARIO" />
           </Key>
           <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="USUARIO" Type="varchar2" MaxLength="20" />
+          <Property Name="UID" Type="varchar2" MaxLength="20" />
           <Property Name="PASSWORD" Type="varchar2" MaxLength="10" />
           <Property Name="FECHAINGRESO" Type="date" />
           <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROL" Type="varchar2" MaxLength="20" />
         </EntityType>
         <EntityType Name="USUARIOROL">
           <Key>
@@ -447,18 +454,6 @@
             </Principal>
             <Dependent Role="CAJAOPERACION">
               <PropertyRef Name="IDUSUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CLIENTE_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="RUT" />
-            </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="RUTPERSONA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1007,10 +1002,6 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
           </AssociationSet>
-          <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
           <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="COMPRA" EntitySet="COMPRA" />
@@ -1236,6 +1227,12 @@
           <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
           <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
           <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COMPRA">
           <Key>
@@ -1611,7 +1608,7 @@
             <PropertyRef Name="IDUSUARIO" />
           </Key>
           <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="USUARIO1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PASSWORD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="FECHAINGRESO" Type="DateTime" />
           <Property Name="RUTPERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -1621,6 +1618,7 @@
           <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_USUARIO_FK" FromRole="USUARIO" ToRole="PEDIDO" />
           <NavigationProperty Name="PERSONA" Relationship="Self.USUARIO_PERSONA_FK" FromRole="USUARIO" ToRole="PERSONA" />
           <NavigationProperty Name="USUARIOROL" Relationship="Self.USUARIOROL_USUARIO_FK" FromRole="USUARIO" ToRole="USUARIOROL" />
+          <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />          
         </EntityType>
         <EntityType Name="USUARIOROL">
           <Key>
@@ -2452,6 +2450,12 @@
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="Restaurant.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="FONO" ColumnName="FONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
                 <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
                 <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />
@@ -2797,8 +2801,9 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="Restaurant.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-                <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
                 <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />

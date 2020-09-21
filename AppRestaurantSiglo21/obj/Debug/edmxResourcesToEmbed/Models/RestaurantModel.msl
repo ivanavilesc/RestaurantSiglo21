@@ -47,6 +47,12 @@
     <EntitySetMapping Name="CLIENTE">
       <EntityTypeMapping TypeName="Restaurant.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FONO" ColumnName="FONO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+          <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="IDCLIENTE" ColumnName="IDCLIENTE" />
           <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
           <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />
@@ -392,8 +398,9 @@
     <EntitySetMapping Name="USUARIO">
       <EntityTypeMapping TypeName="Restaurant.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="ROL" ColumnName="ROL" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
           <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-          <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
           <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="FECHAINGRESO" ColumnName="FECHAINGRESO" />
           <ScalarProperty Name="RUTPERSONA" ColumnName="RUTPERSONA" />

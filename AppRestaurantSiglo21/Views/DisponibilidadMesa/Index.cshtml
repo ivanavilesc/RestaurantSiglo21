@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<AppRestaurantSiglo21.Models.MESA>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PrincipalGarzon.cshtml";
+}
+<h2>Informe Disponibilidad de Mesas</h2>
+
+<div class="container">
+    @foreach (var mesa in Model)
+    {
+
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+                Mesa : @Html.DisplayFor(x => mesa.IDMESA)
+            </div>
+            <div class="card-body">
+                
+                <p>CAPACIDAD: @Html.DisplayFor(x => mesa.CAPACIDAD)</p>
+                <p>DESCRIPCION: @Html.DisplayFor(x => mesa.DESCMESA)</p>
+                <p>DISPONIBILIDAD @Html.DisplayFor(x => mesa.IDESTADOMESA)</p>                
+                <p> @Html.ActionLink("Editar", "Edit", new { id = mesa.IDMESA, @class = "btn btn-primary btn-large" })</p>
+                
+            </div>
+        </div>
+    }
+</div>
+
+
+

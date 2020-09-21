@@ -46,6 +46,12 @@
     <Property Name="IDCLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="FECHAINGRESO" Type="date" />
     <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
+    <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="50" />
+    <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="50" />
+    <Property Name="DIRECCION" Type="varchar2" MaxLength="50" />
+    <Property Name="FONO" Type="varchar2" MaxLength="15" />
+    <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
   </EntityType>
   <EntityType Name="COMPRA">
     <Key>
@@ -371,10 +377,11 @@
       <PropertyRef Name="IDUSUARIO" />
     </Key>
     <Property Name="IDUSUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="USUARIO" Type="varchar2" MaxLength="20" />
+    <Property Name="UID" Type="varchar2" MaxLength="20" />
     <Property Name="PASSWORD" Type="varchar2" MaxLength="10" />
     <Property Name="FECHAINGRESO" Type="date" />
     <Property Name="RUTPERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ROL" Type="varchar2" MaxLength="20" />
   </EntityType>
   <EntityType Name="USUARIOROL">
     <Key>
@@ -442,18 +449,6 @@
       </Principal>
       <Dependent Role="CAJAOPERACION">
         <PropertyRef Name="IDUSUARIO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CLIENTE_PERSONA_FK">
-    <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PERSONA">
-        <PropertyRef Name="RUT" />
-      </Principal>
-      <Dependent Role="CLIENTE">
-        <PropertyRef Name="RUTPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1001,10 +996,6 @@
     <AssociationSet Name="CAJAOPERACION_USUARIO_FK" Association="Self.CAJAOPERACION_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
-    </AssociationSet>
-    <AssociationSet Name="CLIENTE_PERSONA_FK" Association="Self.CLIENTE_PERSONA_FK">
-      <End Role="PERSONA" EntitySet="PERSONA" />
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

@@ -1,0 +1,40 @@
+﻿@model AppRestaurantSiglo21.Models.MESA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+
+<h2>Consultar detalles de mesa</h2>
+
+<div>
+    <h4>Mesa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCMESA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCMESA)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ESTADOMESA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAPACIDAD)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CAPACIDAD)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ESTADOMESA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDMESA }) |
+    @Html.ActionLink("Volver a la Lista", "Index")
+</p>

@@ -14,8 +14,9 @@ namespace AppRestaurantSiglo21.Models
 
 using System;
     using System.Collections.Generic;
-    
-public partial class INSUMO
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class INSUMO
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,11 +34,14 @@ public partial class INSUMO
     }
 
 
-    public decimal IDINSUMO { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0}")]
+        public decimal IDINSUMO { get; set; }
 
     public string DESCINSUMO { get; set; }
 
-    public Nullable<decimal> PRECIOINSUMO { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0}")]
+        public Nullable<decimal> PRECIOINSUMO { get; set; }
 
 
 
