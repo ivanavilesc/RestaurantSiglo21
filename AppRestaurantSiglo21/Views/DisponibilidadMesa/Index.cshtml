@@ -4,9 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_PrincipalGarzon.cshtml";
 }
-<h2>Informe Disponibilidad de Mesas</h2>
+<h3></h3>
 
 <div class="container">
+    <div class="card">
+        <div class="card-body">
+            Disponibilidad de Mesas
+        </div>
+    </div>
+    <hr />
     @foreach (var mesa in Model)
     {
 
@@ -15,12 +21,12 @@
                 Mesa : @Html.DisplayFor(x => mesa.IDMESA)
             </div>
             <div class="card-body">
-                
+
                 <p>CAPACIDAD: @Html.DisplayFor(x => mesa.CAPACIDAD)</p>
                 <p>DESCRIPCION: @Html.DisplayFor(x => mesa.DESCMESA)</p>
-                <p>DISPONIBILIDAD @Html.DisplayFor(x => mesa.IDESTADOMESA)</p>                
-                <p> @Html.ActionLink("Editar", "Edit", new { id = mesa.IDMESA, @class = "btn btn-primary btn-large" })</p>
-                
+                <p>DISPONIBILIDAD @Html.DisplayFor(x => mesa.IDESTADOMESA)</p>               
+                <p>@Html.ActionLink("Editar", "Edit", new { id = mesa.IDMESA }, new { @class = "btn btn-warning btn-sm" })</p>                
+
             </div>
         </div>
     }

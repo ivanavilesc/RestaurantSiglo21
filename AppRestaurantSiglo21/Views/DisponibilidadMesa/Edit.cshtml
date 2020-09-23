@@ -4,9 +4,10 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_PrincipalGarzon.cshtml";
 }
-<h2>Editar estado mesa</h2>
+<h2></h2>
 @using (Html.BeginForm())
 {
+<div class="container">
     <div class="form-horizontal">
         <h4>Editar estado Mesa</h4>
         <hr />
@@ -14,6 +15,7 @@
         <!-- ENVÍO COMO ATRIBUTO OCULTO EL VALOR CORRESPONDIENTE A LAS PK Y FK -->
         @Html.HiddenFor(model => model.IDMESA)
         @Html.HiddenFor(model => model.IDLOCAL)
+        @Html.HiddenFor(model => model.CAPACIDAD)
         <div class="form-group">
             <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESCMESA -->
             @Html.LabelFor(model => model.DESCMESA, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -27,16 +29,16 @@
             <div class="col-md-10">
                 @{
                     var listado = new List<SelectListItem>(){
-                            new SelectListItem(){
-                                Text = "Disponible",
-                                Value = "1"
-                            },
-                            new SelectListItem(){
+                                    new SelectListItem(){
+                                        Text = "Disponible",
+                                        Value = "1"
+                                    },
+                                    new SelectListItem(){
 
-                                Text = "No Disponible",
-                                Value = "0"
-                            }
-                         };
+                                        Text = "No Disponible",
+                                        Value = "0"
+                                    }
+                                 };
                 }
                 @Html.DropDownListFor(model => model.IDESTADOMESA, listado)
             </div>
@@ -48,10 +50,13 @@
             </div>
         </div>
     </div>
-} <!--AQUI TERMINA EL FORM QUE ENVÍA POR METODO POST-->
-<div>
-    @Html.ActionLink("Volver a la Lista", "Index")
+    <hr />
+    <div>
+        @Html.ActionLink("Volver a la Lista", "Index")
+    </div>
 </div>
+} <!--AQUI TERMINA EL FORM QUE ENVÍA POR METODO POST-->
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
