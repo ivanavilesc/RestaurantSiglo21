@@ -31,10 +31,11 @@
                     <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
                     @*<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />*@
                     <img id="profile-img" class="profile-img-card" src="~/Content/Img/login2.png" />
-                    <p id="profile-name" class="profile-name-card">Autenticación</p>
+                    <p id="profile-name" class="profile-name-card">Iniciar Sesión</p>
                     <form class="form-signin">
                         <span id="reauth-email" class="reauth-email"></span>
-                        @Html.TextBoxFor(a => a.USERID, new { @class = "form-control", @required = "required", placeholder = "Nombre de usuario" })
+                        <p>@Html.TextBoxFor(a => a.USERID, new { @class = "form-control", @required = "required", placeholder = "Nombre de usuario" })</p>
+                    <br />
                         @Html.PasswordFor(a => a.PASSWORD, new { @class = "form-control", @required = "required", placeholder = "Contraseña" })
                         @*<input type="text" id="userid" class="form-control" placeholder="Nombre de usuario" required autofocus>
                     <input type="password" id="password" class="form-control" placeholder="Contraseña" required>*@
@@ -44,7 +45,7 @@
                                 <input type="checkbox" value="remember-me"> Guardar credenciales
                             </label>*@
                         </div>
-                        <button class="btn btn-info btn-lg btn-block btn-signin" type="submit">Iniciar sesión</button>
+                        <button class="btn btn-info btn-lg btn-block btn-signin" type="submit">Ingresar</button>
                     </form><!-- /form -->
                     @*<a href="#" class="forgot-password">
                     Forgot the password?
