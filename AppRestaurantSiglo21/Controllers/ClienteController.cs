@@ -45,7 +45,7 @@ namespace AppRestaurantSiglo21.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDCLIENTE == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDPERSONA == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
 
             if (objCliente == null)
             {
@@ -74,7 +74,7 @@ namespace AppRestaurantSiglo21.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDCLIENTE == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDPERSONA == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
             if (objCliente == null)
             {
                 return HttpNotFound();
@@ -90,7 +90,7 @@ namespace AppRestaurantSiglo21.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDCLIENTE == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDPERSONA == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
             if (objCliente == null)
             {
                 return HttpNotFound();
@@ -100,7 +100,7 @@ namespace AppRestaurantSiglo21.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDCLIENTE == id);  //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+            var objCliente = db.CLIENTE.SingleOrDefault(t => t.IDPERSONA == id);  //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
             db.CLIENTE.Remove(objCliente ?? throw new InvalidOperationException()); //REMUEVE EL REGISTRO DE LA BD DADO QUE EN LA LINEA ANTERIOR LO ENCONTRÓ
             db.SaveChanges(); //GUARDA CAMBIOS DE LA ELIMINACIÓN
             return RedirectToAction("Index");  //REDIRIGE A LA VISTA DE LISTADO

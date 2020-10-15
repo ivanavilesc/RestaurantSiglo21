@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
-   // try { Layout = @Session["Layout"].ToString(); } catch{ Layout = "~/Views/Shared/_Principal.cshtml"; }
-    
+    // try { Layout = @Session["Layout"].ToString(); } catch{ Layout = "~/Views/Shared/_Principal.cshtml"; }
+
 }
 
 <h2>Listado de Clientes</h2>
@@ -52,33 +52,33 @@
                     @Html.DisplayFor(modelItem => item.IDCLIENTE)
                 </th>*@
             <td>
-                @Html.DisplayFor(modelItem => item.FECHAINGRESO)
+                @Html.DisplayFor(modelItem => item.PERSONA.FECHAINGRESO)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE)
+                @Html.DisplayFor(modelItem => item.PERSONA.NOMBRE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.APELLIDOPATERNO)
+                @Html.DisplayFor(modelItem => item.PERSONA.APELLIDOPATERNO)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.APELLIDOMATERNO)
+                @Html.DisplayFor(modelItem => item.PERSONA.APELLIDOMATERNO)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RUTPERSONA)
+                @Html.DisplayFor(modelItem => item.PERSONA.RUT)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DIRECCION)
+                @Html.DisplayFor(modelItem => item.PERSONA.DIRECCION)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FONO)
+                @Html.DisplayFor(modelItem => item.PERSONA.FONO)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EMAIL)
+                @Html.DisplayFor(modelItem => item.PERSONA.EMAIL)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDCLIENTE }) |
-                @Html.ActionLink("Detail", "Detail", new { id = item.IDCLIENTE }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDCLIENTE })
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDPERSONA }) |
+                @Html.ActionLink("Detail", "Detail", new { id = item.IDPERSONA }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDPERSONA })
             </td>
         </tr>
     }

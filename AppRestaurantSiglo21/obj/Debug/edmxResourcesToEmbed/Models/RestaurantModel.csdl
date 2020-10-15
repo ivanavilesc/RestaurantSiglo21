@@ -1,38 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Restaurant" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="BANCOMOVIMIENTO">
+<Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ALERTASTOCK">
     <Key>
-      <PropertyRef Name="IDMOVIMIENTOBANCARIO" />
+      <PropertyRef Name="IDALERTA" />
     </Key>
-    <Property Name="IDMOVIMIENTOBANCARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FECHAMOVBANCARIO" Type="DateTime" />
-    <Property Name="MONTO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDENTIDADBANCARIA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDEGRESO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDINGRESO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDTIPOCUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="INGRESO" Relationship="Self.BANCOMOV_INGRESO_FK" FromRole="BANCOMOVIMIENTO" ToRole="INGRESO" />
-    <NavigationProperty Name="EGRESO" Relationship="Self.BANCOMOVIMIENTO_EGRESO_FK" FromRole="BANCOMOVIMIENTO" ToRole="EGRESO" />
-    <NavigationProperty Name="ENTIDADBANCARIA" Relationship="Self.ENTIDADBANCARIA_FK" FromRole="BANCOMOVIMIENTO" ToRole="ENTIDADBANCARIA" />
-    <NavigationProperty Name="TIPOMOVBANCO" Relationship="Self.TIPOMOVBANCO_FK" FromRole="BANCOMOVIMIENTO" ToRole="TIPOMOVBANCO" />
+    <Property Name="IDALERTA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCALERTA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="BODEGAMOVIMIENTO">
     <Key>
       <PropertyRef Name="IDMOVBODEGA" />
     </Key>
-    <Property Name="IDMOVBODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMOVBODEGA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAMOVIMIENTO" Type="DateTime" />
     <Property Name="VALORPRODUCTO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDTIPOMOVIMIENTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDINSUMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDTIPOMOVBDGA" Type="Int16" Nullable="false" />
+    <Property Name="PESO" Type="Int32" />
+    <Property Name="IDINSUMO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TIPOMOVBODEGA" Relationship="Self.BGAMOV_TIPOMOVBODEGA_FK" FromRole="BODEGAMOVIMIENTO" ToRole="TIPOMOVBODEGA" />
     <NavigationProperty Name="INSUMO" Relationship="Self.BODEGAMOVIMIENTO_INSUMO_FK" FromRole="BODEGAMOVIMIENTO" ToRole="INSUMO" />
-    <NavigationProperty Name="TIPOMOVBODEGA" Relationship="Self.TIPOMOVBODEGA_FK" FromRole="BODEGAMOVIMIENTO" ToRole="TIPOMOVBODEGA" />
   </EntityType>
   <EntityType Name="CAJAESTADO">
     <Key>
       <PropertyRef Name="IDCAJAESTADO" />
     </Key>
-    <Property Name="IDCAJAESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDCAJAESTADO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCCAJAESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CAJAOPERACION" Relationship="Self.CAJAOPERACION_CAJAESTADO_FK" FromRole="CAJAESTADO" ToRole="CAJAOPERACION" />
   </EntityType>
@@ -40,74 +32,65 @@
     <Key>
       <PropertyRef Name="IDCAJAOPERACION" />
     </Key>
-    <Property Name="IDCAJAOPERACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDCAJAOPERACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAAPERTURA" Type="DateTime" />
-    <Property Name="MONTOAPERTURA" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDCAJAESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MONTOAPERTURA" Type="Int32" />
+    <Property Name="IDCAJAESTADO" Type="Byte" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CAJAESTADO" Relationship="Self.CAJAOPERACION_CAJAESTADO_FK" FromRole="CAJAOPERACION" ToRole="CAJAESTADO" />
     <NavigationProperty Name="USUARIO" Relationship="Self.CAJAOPERACION_USUARIO_FK" FromRole="CAJAOPERACION" ToRole="USUARIO" />
     <NavigationProperty Name="INGRESO" Relationship="Self.INGRESO_CAJAOPERACION_FK" FromRole="CAJAOPERACION" ToRole="INGRESO" />
   </EntityType>
   <EntityType Name="CLIENTE">
     <Key>
-      <PropertyRef Name="IDCLIENTE" />
+      <PropertyRef Name="IDPERSONA" />
     </Key>
-    <Property Name="IDCLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FECHAINGRESO" Type="DateTime" />
-    <Property Name="RUTPERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PERSONA" Relationship="Self.CLIENTE_PERSONA_FK" FromRole="CLIENTE" ToRole="PERSONA" />
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
-    <NavigationProperty Name="PERSONA1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="CLIENTE" ToRole="PERSONA" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
-    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="COMPRA">
-    <Key>
-      <PropertyRef Name="IDCOMPRA" />
-    </Key>
-    <Property Name="IDCOMPRA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FECHACOMPRA" Type="DateTime" />
-    <Property Name="IDPEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="PEDIDO" Relationship="Self.COMPRA_PEDIDO_FK" FromRole="COMPRA" ToRole="PEDIDO" />
-    <NavigationProperty Name="USUARIO" Relationship="Self.COMPRA_USUARIO_FK" FromRole="COMPRA" ToRole="USUARIO" />
-    <NavigationProperty Name="EGRESO" Relationship="Self.EGRESO_COMPRA_FK" FromRole="COMPRA" ToRole="EGRESO" />
   </EntityType>
   <EntityType Name="DETALLEORDEN">
     <Key>
       <PropertyRef Name="IDDETALLEORDEN" />
     </Key>
-    <Property Name="IDDETALLEORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CANTIDAD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="ESTADOORDEN" Relationship="Self.DETALLEORDEN_ESTADOORDEN_FK" FromRole="DETALLEORDEN" ToRole="ESTADOORDEN" />
+    <Property Name="IDDETALLEORDEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CANTIDAD" Type="Int16" />
+    <Property Name="IDORDEN" Type="Int32" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ORDEN" Relationship="Self.DETALLEORDEN_ORDEN_FK" FromRole="DETALLEORDEN" ToRole="ORDEN" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.DETALLEORDEN_PRODUCTO_FK" FromRole="DETALLEORDEN" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="DETPEDIDOINS">
+    <Key>
+      <PropertyRef Name="IDPEDIDOINSUMO" />
+    </Key>
+    <Property Name="IDPEDIDOINSUMO" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CANTINSUMO" Type="Int32" />
+    <Property Name="FECHAPEDIDO" Type="DateTime" />
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" />
+    <Property Name="IDINSUMO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="INSUMO" Relationship="Self.DETPEDIDOINS_INSUMO_FK" FromRole="DETPEDIDOINS" ToRole="INSUMO" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.DETPEDIDOINS_PEDIDO_FK" FromRole="DETPEDIDOINS" ToRole="PEDIDO" />
   </EntityType>
   <EntityType Name="DOCTPAGOTIPO">
     <Key>
       <PropertyRef Name="IDDOCTPAGOTIPO" />
     </Key>
-    <Property Name="IDDOCTPAGOTIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCDOCTPAGOTIPO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IDDOCTPAGOTIPO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCDOCTPAGOTIPO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_DOCTPAGOTIPO_FK" FromRole="DOCTPAGOTIPO" ToRole="DOCUMENTOPAGO" />
   </EntityType>
   <EntityType Name="DOCUMENTOPAGO">
     <Key>
-      <PropertyRef Name="IDDOCUMENTOPAGO" />
+      <PropertyRef Name="IDDOCTOPAGO" />
     </Key>
-    <Property Name="IDDOCUMENTOPAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDCLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDDOCTOPAGO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDORDEN" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDDOCTPAGOTIPO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDMEDIOPAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <Property Name="IDDOCTPAGOTIPO" Type="Byte" Nullable="false" />
+    <Property Name="IDMEDIOPAGO" Type="Byte" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="DOCUMENTOPAGO" ToRole="CLIENTE" />
     <NavigationProperty Name="DOCTPAGOTIPO" Relationship="Self.DOCUMENTOPAGO_DOCTPAGOTIPO_FK" FromRole="DOCUMENTOPAGO" ToRole="DOCTPAGOTIPO" />
     <NavigationProperty Name="MEDIOPAGO" Relationship="Self.DOCUMENTOPAGO_MEDIOPAGO_FK" FromRole="DOCUMENTOPAGO" ToRole="MEDIOPAGO" />
@@ -116,65 +99,73 @@
     <Key>
       <PropertyRef Name="IDEGRESO" />
     </Key>
-    <Property Name="IDEGRESO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="MONTO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="DESCMOVIMIENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="IDEGRESO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MONTO" Type="Int32" />
+    <Property Name="DESCMOVIMIENTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="FECHAMOVIMIENTO" Type="DateTime" />
-    <Property Name="IDCOMPRA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.BANCOMOVIMIENTO_EGRESO_FK" FromRole="EGRESO" ToRole="BANCOMOVIMIENTO" />
-    <NavigationProperty Name="COMPRA" Relationship="Self.EGRESO_COMPRA_FK" FromRole="EGRESO" ToRole="COMPRA" />
+    <Property Name="IDCOMPRA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.COMOV_EGRESO_FK" FromRole="EGRESO" ToRole="BANCOMOVIMIENTO" />
+    <NavigationProperty Name="PAGOPEDIDO" Relationship="Self.EGRESO_PAGOPEDIDO_FK" FromRole="EGRESO" ToRole="PAGOPEDIDO" />
   </EntityType>
   <EntityType Name="EMPLEADOTURNO">
     <Key>
       <PropertyRef Name="IDEMPTURNO" />
     </Key>
-    <Property Name="IDEMPTURNO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDEMPTURNO" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHATURNO" Type="DateTime" />
     <Property Name="HORADESDE" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="HORAHASTA" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
     <NavigationProperty Name="USUARIO" Relationship="Self.EMPLEADOTURNO_USUARIO_FK" FromRole="EMPLEADOTURNO" ToRole="USUARIO" />
     <NavigationProperty Name="ORDEN" Relationship="Self.ORDEN_EMPLEADOTURNO_FK" FromRole="EMPLEADOTURNO" ToRole="ORDEN" />
   </EntityType>
   <EntityType Name="ENTIDADBANCARIA">
     <Key>
-      <PropertyRef Name="IDENTIDADBANCARIA" />
+      <PropertyRef Name="IDENTBANCARIA" />
     </Key>
-    <Property Name="IDENTIDADBANCARIA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDENTBANCARIA" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCBANCO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IDTIPOCUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.ENTIDADBANCARIA_FK" FromRole="ENTIDADBANCARIA" ToRole="BANCOMOVIMIENTO" />
+    <Property Name="IDTIPOCUENTA" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.BCOMOV_ENTIDADBANCARIA_FK" FromRole="ENTIDADBANCARIA" ToRole="BANCOMOVIMIENTO" />
     <NavigationProperty Name="TIPOCUENTA" Relationship="Self.ENTIDADBANCARIA_TIPOCUENTA_FK" FromRole="ENTIDADBANCARIA" ToRole="TIPOCUENTA" />
   </EntityType>
   <EntityType Name="ESTADOMESA">
     <Key>
       <PropertyRef Name="IDESTADOMESA" />
     </Key>
-    <Property Name="IDESTADOMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADOMESA" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCESTADOMESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="MESA" Relationship="Self.MESA_ESTADOMESA_FK" FromRole="ESTADOMESA" ToRole="MESA" />
   </EntityType>
   <EntityType Name="ESTADOORDEN">
     <Key>
-      <PropertyRef Name="IDESTADO" />
+      <PropertyRef Name="IDESTADOORD" />
     </Key>
-    <Property Name="IDESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADOORD" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCESTORDEN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DETALLEORDEN" Relationship="Self.DETALLEORDEN_ESTADOORDEN_FK" FromRole="ESTADOORDEN" ToRole="DETALLEORDEN" />
+    <NavigationProperty Name="ORDEN" Relationship="Self.ORDEN_ESTADOORDEN_FK" FromRole="ESTADOORDEN" ToRole="ORDEN" />
   </EntityType>
   <EntityType Name="ESTADOPRODUCTO">
     <Key>
-      <PropertyRef Name="IDESTADOPRODUCTO" />
+      <PropertyRef Name="IDESTPRODUCTO" />
     </Key>
-    <Property Name="IDESTADOPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCESTADOPRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PRODUCTO" Relationship="Self.ESTADOPRODUCTO_FK" FromRole="ESTADOPRODUCTO" ToRole="PRODUCTO" />
+    <Property Name="IDESTPRODUCTO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCESTPRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_ESTADOPRODUCTO_FK" FromRole="ESTADOPRODUCTO" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="ESTADOPROVEEDOR">
+    <Key>
+      <PropertyRef Name="IDESTPROVEEDOR" />
+    </Key>
+    <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCESTPRO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="ESTADOPROVEEDOR" ToRole="PROVEEDOR" />
   </EntityType>
   <EntityType Name="ESTADORESERVA">
     <Key>
       <PropertyRef Name="IDESTADORESRVA" />
     </Key>
-    <Property Name="IDESTADORESRVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDESTADORESRVA" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCESTRESERVA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_ESTADORESERVA_FK" FromRole="ESTADORESERVA" ToRole="RESERVA" />
   </EntityType>
@@ -182,7 +173,7 @@
     <Key>
       <PropertyRef Name="IDFUNCIONALIDAD" />
     </Key>
-    <Property Name="IDFUNCIONALIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDFUNCIONALIDAD" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FECHAMODIFICACION" Type="DateTime" />
     <NavigationProperty Name="PERMISOS" Relationship="Self.PERMISOS_FUNCIONALIDAD_FK" FromRole="FUNCIONALIDAD" ToRole="PERMISOS" />
@@ -191,41 +182,41 @@
     <Key>
       <PropertyRef Name="IDINGRESO" />
     </Key>
-    <Property Name="IDINGRESO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="MONTO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MONTO" Type="Int32" />
     <Property Name="DESCINGRESO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="FECHAMOVIMIENTO" Type="DateTime" />
-    <Property Name="IDCAJAOPERACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.BANCOMOV_INGRESO_FK" FromRole="INGRESO" ToRole="BANCOMOVIMIENTO" />
+    <Property Name="IDCAJAOPERACION" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CAJAOPERACION" Relationship="Self.INGRESO_CAJAOPERACION_FK" FromRole="INGRESO" ToRole="CAJAOPERACION" />
+    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.BCOMOV_INGRESO_FK" FromRole="INGRESO" ToRole="BANCOMOVIMIENTO" />
   </EntityType>
   <EntityType Name="INSUMO">
     <Key>
       <PropertyRef Name="IDINSUMO" />
     </Key>
-    <Property Name="IDINSUMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDINSUMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCINSUMO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="PRECIOINSUMO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="PRECIOINSUMO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.BODEGAMOVIMIENTO_INSUMO_FK" FromRole="INSUMO" ToRole="BODEGAMOVIMIENTO" />
+    <NavigationProperty Name="DETPEDIDOINS" Relationship="Self.DETPEDIDOINS_INSUMO_FK" FromRole="INSUMO" ToRole="DETPEDIDOINS" />
     <NavigationProperty Name="INSUMOSTOCK" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMO" ToRole="INSUMOSTOCK" />
-    <NavigationProperty Name="PEDIDOINSUMO" Relationship="Self.PEDIDOINSUMO_INSUMO_FK" FromRole="INSUMO" ToRole="PEDIDOINSUMO" />
-    <NavigationProperty Name="PROVEEDOR" Relationship="Self.RELATION_90" FromRole="INSUMO" ToRole="PROVEEDOR" />
   </EntityType>
   <EntityType Name="INSUMOSTOCK">
     <Key>
-      <PropertyRef Name="IDPRODUCTOENBODEGA" />
+      <PropertyRef Name="IDINSUMOSTOCK" />
     </Key>
-    <Property Name="IDPRODUCTOENBODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="STOCKACTUAL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="STOCKMINIMO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDINSUMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDINSUMOSTOCK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STOCKACTUAL" Type="Int16" />
+    <Property Name="STOCKMINIMO" Type="Int16" />
+    <Property Name="IDINSUMO" Type="Int32" Nullable="false" />
+    <Property Name="PESO" Type="Int32" />
     <NavigationProperty Name="INSUMO" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMOSTOCK" ToRole="INSUMO" />
   </EntityType>
   <EntityType Name="MEDIOPAGO">
     <Key>
       <PropertyRef Name="IDMEDIOPAGO" />
     </Key>
-    <Property Name="IDMEDIOPAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMEDIOPAGO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCMEDIOPAGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_MEDIOPAGO_FK" FromRole="MEDIOPAGO" ToRole="DOCUMENTOPAGO" />
     <NavigationProperty Name="MEDIOPAGOTX" Relationship="Self.MEDIOPAGOTX_MEDIOPAGO_FK" FromRole="MEDIOPAGO" ToRole="MEDIOPAGOTX" />
@@ -234,22 +225,23 @@
     <Key>
       <PropertyRef Name="IDMEDIOPAGOTX" />
     </Key>
-    <Property Name="IDMEDIOPAGOTX" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMEDIOPAGOTX" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RUT" Type="Int32" />
+    <Property Name="DVCLIENTETX" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="DESCMEDIOPAGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="RUT" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="MONTO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDMEDIOPAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMEDIOPAGO" Type="Byte" Nullable="false" />
     <NavigationProperty Name="MEDIOPAGO" Relationship="Self.MEDIOPAGOTX_MEDIOPAGO_FK" FromRole="MEDIOPAGOTX" ToRole="MEDIOPAGO" />
   </EntityType>
   <EntityType Name="MESA">
     <Key>
       <PropertyRef Name="IDMESA" />
     </Key>
-    <Property Name="IDMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDMESA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCMESA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="CAPACIDAD" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDLOCAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDESTADOMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CAPACIDAD" Type="Byte" />
+    <Property Name="IDESTADOMESA" Type="Byte" Nullable="false" />
+    <Property Name="IDLOCAL" Type="Byte" Nullable="false" />
     <NavigationProperty Name="ESTADOMESA" Relationship="Self.MESA_ESTADOMESA_FK" FromRole="MESA" ToRole="ESTADOMESA" />
     <NavigationProperty Name="RESTAURANT" Relationship="Self.MESA_RESTAURANT_FK" FromRole="MESA" ToRole="RESTAURANT" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_MESA_FK" FromRole="MESA" ToRole="RESERVA" />
@@ -258,54 +250,57 @@
     <Key>
       <PropertyRef Name="IDORDEN" />
     </Key>
-    <Property Name="IDORDEN" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDORDEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAORDEN" Type="DateTime" />
-    <Property Name="IDEMPTURNO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDRESRVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDRESRVA" Type="Int32" Nullable="false" />
+    <Property Name="IDESTADO" Type="Byte" Nullable="false" />
+    <Property Name="IDEMPTURNO" Type="Int16" Nullable="false" />
     <NavigationProperty Name="DETALLEORDEN" Relationship="Self.DETALLEORDEN_ORDEN_FK" FromRole="ORDEN" ToRole="DETALLEORDEN" />
     <NavigationProperty Name="EMPLEADOTURNO" Relationship="Self.ORDEN_EMPLEADOTURNO_FK" FromRole="ORDEN" ToRole="EMPLEADOTURNO" />
+    <NavigationProperty Name="ESTADOORDEN" Relationship="Self.ORDEN_ESTADOORDEN_FK" FromRole="ORDEN" ToRole="ESTADOORDEN" />
     <NavigationProperty Name="RESERVA" Relationship="Self.ORDEN_RESERVA_FK" FromRole="ORDEN" ToRole="RESERVA" />
+  </EntityType>
+  <EntityType Name="PAGOPEDIDO">
+    <Key>
+      <PropertyRef Name="IDCOMPRA" />
+    </Key>
+    <Property Name="IDCOMPRA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHACOMPRA" Type="DateTime" />
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EGRESO" Relationship="Self.EGRESO_PAGOPEDIDO_FK" FromRole="PAGOPEDIDO" ToRole="EGRESO" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.PAGOPEDIDO_PEDIDO_FK" FromRole="PAGOPEDIDO" ToRole="PEDIDO" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.PAGOPEDIDO_USUARIO_FK" FromRole="PAGOPEDIDO" ToRole="USUARIO" />
   </EntityType>
   <EntityType Name="PEDIDO">
     <Key>
       <PropertyRef Name="IDPEDIDO" />
     </Key>
-    <Property Name="IDPEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="FECHAPEDIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDPROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="COMPRA" Relationship="Self.COMPRA_PEDIDO_FK" FromRole="PEDIDO" ToRole="COMPRA" />
-    <NavigationProperty Name="PROVEEDOR" Relationship="Self.PEDIDO_PROVEEDOR_FK" FromRole="PEDIDO" ToRole="PROVEEDOR" />
-    <NavigationProperty Name="USUARIO" Relationship="Self.PEDIDO_USUARIO_FK" FromRole="PEDIDO" ToRole="USUARIO" />
-    <NavigationProperty Name="PEDIDOINSUMO" Relationship="Self.PEDIDOINSUMO_PEDIDO_FK" FromRole="PEDIDO" ToRole="PEDIDOINSUMO" />
-  </EntityType>
-  <EntityType Name="PEDIDOINSUMO">
-    <Key>
-      <PropertyRef Name="IDPEDIDOINSUMO" />
-    </Key>
-    <Property Name="IDPEDIDOINSUMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAPEDIDO" Type="DateTime" />
-    <Property Name="IDPEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDINSUMO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="INSUMO" Relationship="Self.PEDIDOINSUMO_INSUMO_FK" FromRole="PEDIDOINSUMO" ToRole="INSUMO" />
-    <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDOINSUMO_PEDIDO_FK" FromRole="PEDIDOINSUMO" ToRole="PEDIDO" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DETPEDIDOINS" Relationship="Self.DETPEDIDOINS_PEDIDO_FK" FromRole="PEDIDO" ToRole="DETPEDIDOINS" />
+    <NavigationProperty Name="PAGOPEDIDO" Relationship="Self.PAGOPEDIDO_PEDIDO_FK" FromRole="PEDIDO" ToRole="PAGOPEDIDO" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.PEDIDO_USUARIO_FK" FromRole="PEDIDO" ToRole="USUARIO" />
   </EntityType>
   <EntityType Name="PERMISOS">
     <Key>
       <PropertyRef Name="IDPERMISO" />
     </Key>
-    <Property Name="IDPERMISO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERMISO" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAMODIFICACION" Type="DateTime" />
-    <Property Name="IDROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDFUNCIONALIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDROL" Type="Int32" Nullable="false" />
+    <Property Name="IDFUNCIONALIDAD" Type="Int16" Nullable="false" />
     <NavigationProperty Name="FUNCIONALIDAD" Relationship="Self.PERMISOS_FUNCIONALIDAD_FK" FromRole="PERMISOS" ToRole="FUNCIONALIDAD" />
     <NavigationProperty Name="ROL" Relationship="Self.PERMISOS_ROL_FK" FromRole="PERMISOS" ToRole="ROL" />
   </EntityType>
   <EntityType Name="PERSONA">
     <Key>
-      <PropertyRef Name="RUT" />
+      <PropertyRef Name="IDPERSONA" />
     </Key>
-    <Property Name="RUT" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RUT" Type="Int32" Nullable="false" />
+    <Property Name="DV" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -313,66 +308,67 @@
     <Property Name="FONO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="FECHAINGRESO" Type="DateTime" />
     <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IDCLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.CLIENTE_PERSONA_FK" FromRole="PERSONA" ToRole="CLIENTE" />
-    <NavigationProperty Name="CLIENTE1" Relationship="Self.PERSONA_CLIENTE_FK" FromRole="PERSONA" ToRole="CLIENTE" />
     <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_PERSONA_FK" FromRole="PERSONA" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="PRODPREPARACION">
+    <Key>
+      <PropertyRef Name="IDPRODPREPAR" />
+    </Key>
+    <Property Name="IDPRODPREPAR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIEMPOPREPARACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="IDTIPOPREP" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="TIPOPREPARACION" Relationship="Self.PRODPREP_TIPOPREPARACION_FK" FromRole="PRODPREPARACION" ToRole="TIPOPREPARACION" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_FK" FromRole="PRODPREPARACION" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="PRODUCTO">
     <Key>
       <PropertyRef Name="IDPRODUCTO" />
     </Key>
-    <Property Name="IDPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCPRODUCTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="PRECIOPRODUCTO" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDRECPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDPRODPREPARACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDESTADOPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDTIPOPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="ESTADOPRODUCTO" Relationship="Self.ESTADOPRODUCTO_FK" FromRole="PRODUCTO" ToRole="ESTADOPRODUCTO" />
-    <NavigationProperty Name="TIPOPRODUCTO" Relationship="Self.PRODTIPOPRODUCTO_FK" FromRole="PRODUCTO" ToRole="TIPOPRODUCTO" />
-    <NavigationProperty Name="PRODUCTOPREPARACION" Relationship="Self.PRODUCTOPREPARACION_FK" FromRole="PRODUCTO" ToRole="PRODUCTOPREPARACION" />
-    <NavigationProperty Name="RECETAPRODUCTO" Relationship="Self.RECETAPRODUCTO_FK" FromRole="PRODUCTO" ToRole="RECETAPRODUCTO" />
-  </EntityType>
-  <EntityType Name="PRODUCTOPREPARACION">
-    <Key>
-      <PropertyRef Name="IDPRODPREPARACION" />
-    </Key>
-    <Property Name="IDPRODPREPARACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DETALLERECETA" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Name="TIEMPOPREPARACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTOPREPARACION_FK" FromRole="PRODUCTOPREPARACION" ToRole="PRODUCTO" />
-    <NavigationProperty Name="TIPOPREPARACION" Relationship="Self.TIPOPREPARACION_FK" FromRole="PRODUCTOPREPARACION" ToRole="TIPOPREPARACION" />
+    <Property Name="IDESTPRODUCTO" Type="Byte" Nullable="false" />
+    <Property Name="IDTIPOPRODUCTO" Type="Byte" Nullable="false" />
+    <Property Name="IDRECPRODUCTO" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="DETALLEORDEN" Relationship="Self.DETALLEORDEN_PRODUCTO_FK" FromRole="PRODUCTO" ToRole="DETALLEORDEN" />
+    <NavigationProperty Name="ESTADOPRODUCTO" Relationship="Self.PRODUCTO_ESTADOPRODUCTO_FK" FromRole="PRODUCTO" ToRole="ESTADOPRODUCTO" />
+    <NavigationProperty Name="PRODPREPARACION" Relationship="Self.PRODUCTO_FK" FromRole="PRODUCTO" ToRole="PRODPREPARACION" />
+    <NavigationProperty Name="RECETAPRODUCTO" Relationship="Self.PRODUCTO_RECETAPRODUCTO_FK" FromRole="PRODUCTO" ToRole="RECETAPRODUCTO" />
+    <NavigationProperty Name="TIPOPRODUCTO" Relationship="Self.PRODUCTO_TIPOPRODUCTO_FK" FromRole="PRODUCTO" ToRole="TIPOPRODUCTO" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
       <PropertyRef Name="IDPROVEEDOR" />
     </Key>
-    <Property Name="IDPROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="RUTPROVEEDOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPROVEEDOR" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RUTPROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="DVPROVEEDOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="NOMPROV" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_PROVEEDOR_FK" FromRole="PROVEEDOR" ToRole="PEDIDO" />
-    <NavigationProperty Name="INSUMO" Relationship="Self.RELATION_90" FromRole="PROVEEDOR" ToRole="INSUMO" />
+    <Property Name="FONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="ESTADOPROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="PROVEEDOR" ToRole="ESTADOPROVEEDOR" />
   </EntityType>
   <EntityType Name="RECETAPRODUCTO">
     <Key>
       <PropertyRef Name="IDRECPRODUCTO" />
     </Key>
-    <Property Name="IDRECPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DETALLERECETA" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PRODUCTO" Relationship="Self.RECETAPRODUCTO_FK" FromRole="RECETAPRODUCTO" ToRole="PRODUCTO" />
+    <Property Name="IDRECPRODUCTO" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="INGREDIENTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="ELABORACION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_RECETAPRODUCTO_FK" FromRole="RECETAPRODUCTO" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="RESERVA">
     <Key>
       <PropertyRef Name="IDRESRVA" />
     </Key>
-    <Property Name="IDRESRVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDRESRVA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHARESERVA" Type="DateTime" />
-    <Property Name="CANTIDADCLIENTE" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="IDESTADORESRVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDCLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="CANTIDADCLIENTE" Type="Int16" />
+    <Property Name="IDESTADORESRVA" Type="Byte" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <Property Name="IDMESA" Type="Int16" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="RESERVA" ToRole="CLIENTE" />
     <NavigationProperty Name="ESTADORESERVA" Relationship="Self.RESERVA_ESTADORESERVA_FK" FromRole="RESERVA" ToRole="ESTADORESERVA" />
     <NavigationProperty Name="MESA" Relationship="Self.RESERVA_MESA_FK" FromRole="RESERVA" ToRole="MESA" />
@@ -382,7 +378,7 @@
     <Key>
       <PropertyRef Name="IDLOCAL" />
     </Key>
-    <Property Name="IDLOCAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDLOCAL" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DIRECCIONLOCAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="MESA" Relationship="Self.MESA_RESTAURANT_FK" FromRole="RESTAURANT" ToRole="MESA" />
   </EntityType>
@@ -390,9 +386,9 @@
     <Key>
       <PropertyRef Name="IDROL" />
     </Key>
-    <Property Name="IDROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCRIPCION_ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FECHAMODIFICACION" Type="DateTime" />
+    <Property Name="IDROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCIONROL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FECHACREACION" Type="DateTime" />
     <NavigationProperty Name="PERMISOS" Relationship="Self.PERMISOS_ROL_FK" FromRole="ROL" ToRole="PERMISOS" />
     <NavigationProperty Name="USUARIOROL" Relationship="Self.USUARIOROL_ROL_FK" FromRole="ROL" ToRole="USUARIOROL" />
   </EntityType>
@@ -400,115 +396,92 @@
     <Key>
       <PropertyRef Name="IDTIPOCUENTA" />
     </Key>
-    <Property Name="IDTIPOCUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDTIPOCUENTA" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCTIPOCUENTA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ENTIDADBANCARIA" Relationship="Self.ENTIDADBANCARIA_TIPOCUENTA_FK" FromRole="TIPOCUENTA" ToRole="ENTIDADBANCARIA" />
   </EntityType>
   <EntityType Name="TIPOMOVBANCO">
     <Key>
-      <PropertyRef Name="IDTIPOCUENTA" />
+      <PropertyRef Name="IDTIPOMOVBCO" />
     </Key>
-    <Property Name="IDTIPOCUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCTIPOCUENTA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.TIPOMOVBANCO_FK" FromRole="TIPOMOVBANCO" ToRole="BANCOMOVIMIENTO" />
+    <Property Name="IDTIPOMOVBCO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCTIPOMOVBCO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BANCOMOVIMIENTO" Relationship="Self.BCOMOV_TIPOMOVBANCO_FK" FromRole="TIPOMOVBANCO" ToRole="BANCOMOVIMIENTO" />
   </EntityType>
   <EntityType Name="TIPOMOVBODEGA">
     <Key>
-      <PropertyRef Name="IDTIPOMOVIMIENTO" />
+      <PropertyRef Name="IDTIPOMOVBDGA" />
     </Key>
-    <Property Name="IDTIPOMOVIMIENTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCTIPOMOVIMIENTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.TIPOMOVBODEGA_FK" FromRole="TIPOMOVBODEGA" ToRole="BODEGAMOVIMIENTO" />
+    <Property Name="IDTIPOMOVBDGA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCTIPOMOVBODEGA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.BGAMOV_TIPOMOVBODEGA_FK" FromRole="TIPOMOVBODEGA" ToRole="BODEGAMOVIMIENTO" />
   </EntityType>
   <EntityType Name="TIPOPREPARACION">
     <Key>
-      <PropertyRef Name="IDESTADO" />
+      <PropertyRef Name="IDTIPOPREP" />
     </Key>
-    <Property Name="IDESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DESCESTORDEN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PRODUCTOPREPARACION" Relationship="Self.TIPOPREPARACION_FK" FromRole="TIPOPREPARACION" ToRole="PRODUCTOPREPARACION" />
+    <Property Name="IDTIPOPREP" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCTIPPREP" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODPREPARACION" Relationship="Self.PRODPREP_TIPOPREPARACION_FK" FromRole="TIPOPREPARACION" ToRole="PRODPREPARACION" />
   </EntityType>
   <EntityType Name="TIPOPRODUCTO">
     <Key>
       <PropertyRef Name="IDTIPOPRODUCTO" />
     </Key>
-    <Property Name="IDTIPOPRODUCTO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDTIPOPRODUCTO" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCTIPOPRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODTIPOPRODUCTO_FK" FromRole="TIPOPRODUCTO" ToRole="PRODUCTO" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_TIPOPRODUCTO_FK" FromRole="TIPOPRODUCTO" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
-      <PropertyRef Name="IDUSUARIO" />
+      <PropertyRef Name="IDPERSONA" />
     </Key>
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="UID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="PASSWORD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="FECHAINGRESO" Type="DateTime" />
-    <Property Name="RUTPERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <Property Name="USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="CAJAOPERACION" Relationship="Self.CAJAOPERACION_USUARIO_FK" FromRole="USUARIO" ToRole="CAJAOPERACION" />
-    <NavigationProperty Name="COMPRA" Relationship="Self.COMPRA_USUARIO_FK" FromRole="USUARIO" ToRole="COMPRA" />
     <NavigationProperty Name="EMPLEADOTURNO" Relationship="Self.EMPLEADOTURNO_USUARIO_FK" FromRole="USUARIO" ToRole="EMPLEADOTURNO" />
+    <NavigationProperty Name="PAGOPEDIDO" Relationship="Self.PAGOPEDIDO_USUARIO_FK" FromRole="USUARIO" ToRole="PAGOPEDIDO" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_USUARIO_FK" FromRole="USUARIO" ToRole="PEDIDO" />
     <NavigationProperty Name="PERSONA" Relationship="Self.USUARIO_PERSONA_FK" FromRole="USUARIO" ToRole="PERSONA" />
     <NavigationProperty Name="USUARIOROL" Relationship="Self.USUARIOROL_USUARIO_FK" FromRole="USUARIO" ToRole="USUARIOROL" />
-    <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="USUARIOROL">
     <Key>
       <PropertyRef Name="IDUSUARIOROL" />
     </Key>
-    <Property Name="IDUSUARIOROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDUSUARIOROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHAMODIFICACION" Type="DateTime" />
-    <Property Name="ROL_IDROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDUSUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDROL" Type="Int32" Nullable="false" />
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ROL" Relationship="Self.USUARIOROL_ROL_FK" FromRole="USUARIOROL" ToRole="ROL" />
     <NavigationProperty Name="USUARIO" Relationship="Self.USUARIOROL_USUARIO_FK" FromRole="USUARIOROL" ToRole="USUARIO" />
   </EntityType>
-  <Association Name="BANCOMOV_INGRESO_FK">
-    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+  <EntityType Name="BANCOMOVIMIENTO">
+    <Key>
+      <PropertyRef Name="IDBCOMOV" />
+      <PropertyRef Name="IDTIPOMOVBCO" />
+      <PropertyRef Name="IDENTBANCARIA" />
+    </Key>
+    <Property Name="IDBCOMOV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTIPOMOVBCO" Type="Byte" Nullable="false" />
+    <Property Name="IDENTBANCARIA" Type="Byte" Nullable="false" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDEGRESO" Type="Int32" />
+    <NavigationProperty Name="EGRESO" Relationship="Self.COMOV_EGRESO_FK" FromRole="BANCOMOVIMIENTO" ToRole="EGRESO" />
+    <NavigationProperty Name="ENTIDADBANCARIA" Relationship="Self.BCOMOV_ENTIDADBANCARIA_FK" FromRole="BANCOMOVIMIENTO" ToRole="ENTIDADBANCARIA" />
+    <NavigationProperty Name="INGRESO" Relationship="Self.BCOMOV_INGRESO_FK" FromRole="BANCOMOVIMIENTO" ToRole="INGRESO" />
+    <NavigationProperty Name="TIPOMOVBANCO" Relationship="Self.BCOMOV_TIPOMOVBANCO_FK" FromRole="BANCOMOVIMIENTO" ToRole="TIPOMOVBANCO" />
+  </EntityType>
+  <Association Name="BGAMOV_TIPOMOVBODEGA_FK">
+    <End Role="TIPOMOVBODEGA" Type="Self.TIPOMOVBODEGA" Multiplicity="1" />
+    <End Role="BODEGAMOVIMIENTO" Type="Self.BODEGAMOVIMIENTO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="INGRESO">
-        <PropertyRef Name="IDINGRESO" />
+      <Principal Role="TIPOMOVBODEGA">
+        <PropertyRef Name="IDTIPOMOVBDGA" />
       </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDINGRESO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="BANCOMOVIMIENTO_EGRESO_FK">
-    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EGRESO">
-        <PropertyRef Name="IDEGRESO" />
-      </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDEGRESO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ENTIDADBANCARIA_FK">
-    <End Role="ENTIDADBANCARIA" Type="Self.ENTIDADBANCARIA" Multiplicity="1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ENTIDADBANCARIA">
-        <PropertyRef Name="IDENTIDADBANCARIA" />
-      </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDENTIDADBANCARIA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TIPOMOVBANCO_FK">
-    <End Role="TIPOMOVBANCO" Type="Self.TIPOMOVBANCO" Multiplicity="1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TIPOMOVBANCO">
-        <PropertyRef Name="IDTIPOCUENTA" />
-      </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDTIPOCUENTA" />
+      <Dependent Role="BODEGAMOVIMIENTO">
+        <PropertyRef Name="IDTIPOMOVBDGA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -521,18 +494,6 @@
       </Principal>
       <Dependent Role="BODEGAMOVIMIENTO">
         <PropertyRef Name="IDINSUMO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TIPOMOVBODEGA_FK">
-    <End Role="TIPOMOVBODEGA" Type="Self.TIPOMOVBODEGA" Multiplicity="1" />
-    <End Role="BODEGAMOVIMIENTO" Type="Self.BODEGAMOVIMIENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TIPOMOVBODEGA">
-        <PropertyRef Name="IDTIPOMOVIMIENTO" />
-      </Principal>
-      <Dependent Role="BODEGAMOVIMIENTO">
-        <PropertyRef Name="IDTIPOMOVIMIENTO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -553,10 +514,10 @@
     <End Role="CAJAOPERACION" Type="Self.CAJAOPERACION" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="CAJAOPERACION">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -574,13 +535,13 @@
   </Association>
   <Association Name="CLIENTE_PERSONA_FK">
     <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PERSONA">
-        <PropertyRef Name="RUT" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="CLIENTE">
-        <PropertyRef Name="RUTPERSONA" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -589,22 +550,10 @@
     <End Role="DOCUMENTOPAGO" Type="Self.DOCUMENTOPAGO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
-        <PropertyRef Name="IDCLIENTE" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="DOCUMENTOPAGO">
-        <PropertyRef Name="IDCLIENTE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PERSONA_CLIENTE_FK">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-    <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CLIENTE">
-        <PropertyRef Name="IDCLIENTE" />
-      </Principal>
-      <Dependent Role="PERSONA">
-        <PropertyRef Name="IDCLIENTE" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -613,58 +562,10 @@
     <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
-        <PropertyRef Name="IDCLIENTE" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="RESERVA">
-        <PropertyRef Name="IDCLIENTE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="COMPRA_PEDIDO_FK">
-    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
-    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PEDIDO">
-        <PropertyRef Name="IDPEDIDO" />
-      </Principal>
-      <Dependent Role="COMPRA">
-        <PropertyRef Name="IDPEDIDO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="COMPRA_USUARIO_FK">
-    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
-    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="USUARIO">
-        <PropertyRef Name="IDUSUARIO" />
-      </Principal>
-      <Dependent Role="COMPRA">
-        <PropertyRef Name="IDUSUARIO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EGRESO_COMPRA_FK">
-    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="1" />
-    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="COMPRA">
-        <PropertyRef Name="IDCOMPRA" />
-      </Principal>
-      <Dependent Role="EGRESO">
-        <PropertyRef Name="IDCOMPRA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="DETALLEORDEN_ESTADOORDEN_FK">
-    <End Role="ESTADOORDEN" Type="Self.ESTADOORDEN" Multiplicity="1" />
-    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ESTADOORDEN">
-        <PropertyRef Name="IDESTADO" />
-      </Principal>
-      <Dependent Role="DETALLEORDEN">
-        <PropertyRef Name="IDESTADO" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -677,6 +578,42 @@
       </Principal>
       <Dependent Role="DETALLEORDEN">
         <PropertyRef Name="IDORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DETALLEORDEN_PRODUCTO_FK">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DETPEDIDOINS_INSUMO_FK">
+    <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
+    <End Role="DETPEDIDOINS" Type="Self.DETPEDIDOINS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INSUMO">
+        <PropertyRef Name="IDINSUMO" />
+      </Principal>
+      <Dependent Role="DETPEDIDOINS">
+        <PropertyRef Name="IDINSUMO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DETPEDIDOINS_PEDIDO_FK">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="DETPEDIDOINS" Type="Self.DETPEDIDOINS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="DETPEDIDOINS">
+        <PropertyRef Name="IDPEDIDO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -704,15 +641,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="COMOV_EGRESO_FK">
+    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="0..1" />
+    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EGRESO">
+        <PropertyRef Name="IDEGRESO" />
+      </Principal>
+      <Dependent Role="BANCOMOVIMIENTO">
+        <PropertyRef Name="IDEGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EGRESO_PAGOPEDIDO_FK">
+    <End Role="PAGOPEDIDO" Type="Self.PAGOPEDIDO" Multiplicity="1" />
+    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAGOPEDIDO">
+        <PropertyRef Name="IDCOMPRA" />
+      </Principal>
+      <Dependent Role="EGRESO">
+        <PropertyRef Name="IDCOMPRA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="EMPLEADOTURNO_USUARIO_FK">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="EMPLEADOTURNO" Type="Self.EMPLEADOTURNO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="EMPLEADOTURNO">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -725,6 +686,18 @@
       </Principal>
       <Dependent Role="ORDEN">
         <PropertyRef Name="IDEMPTURNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BCOMOV_ENTIDADBANCARIA_FK">
+    <End Role="ENTIDADBANCARIA" Type="Self.ENTIDADBANCARIA" Multiplicity="1" />
+    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENTIDADBANCARIA">
+        <PropertyRef Name="IDENTBANCARIA" />
+      </Principal>
+      <Dependent Role="BANCOMOVIMIENTO">
+        <PropertyRef Name="IDENTBANCARIA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -752,15 +725,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ESTADOPRODUCTO_FK">
+  <Association Name="ORDEN_ESTADOORDEN_FK">
+    <End Role="ESTADOORDEN" Type="Self.ESTADOORDEN" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOORDEN">
+        <PropertyRef Name="IDESTADOORD" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="IDESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PRODUCTO_ESTADOPRODUCTO_FK">
     <End Role="ESTADOPRODUCTO" Type="Self.ESTADOPRODUCTO" Multiplicity="1" />
     <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTADOPRODUCTO">
-        <PropertyRef Name="IDESTADOPRODUCTO" />
+        <PropertyRef Name="IDESTPRODUCTO" />
       </Principal>
       <Dependent Role="PRODUCTO">
-        <PropertyRef Name="IDESTADOPRODUCTO" />
+        <PropertyRef Name="IDESTPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROVEEDOR_ESTADOPROVEEDOR_FK">
+    <End Role="ESTADOPROVEEDOR" Type="Self.ESTADOPROVEEDOR" Multiplicity="1" />
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOPROVEEDOR">
+        <PropertyRef Name="IDESTPROVEEDOR" />
+      </Principal>
+      <Dependent Role="PROVEEDOR">
+        <PropertyRef Name="IDESTPROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -788,6 +785,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="BCOMOV_INGRESO_FK">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Principal>
+      <Dependent Role="BANCOMOVIMIENTO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="INSUMOSTOCK_INSUMO_FK">
     <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
     <End Role="INSUMOSTOCK" Type="Self.INSUMOSTOCK" Multiplicity="*" />
@@ -796,18 +805,6 @@
         <PropertyRef Name="IDINSUMO" />
       </Principal>
       <Dependent Role="INSUMOSTOCK">
-        <PropertyRef Name="IDINSUMO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PEDIDOINSUMO_INSUMO_FK">
-    <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
-    <End Role="PEDIDOINSUMO" Type="Self.PEDIDOINSUMO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="INSUMO">
-        <PropertyRef Name="IDINSUMO" />
-      </Principal>
-      <Dependent Role="PEDIDOINSUMO">
         <PropertyRef Name="IDINSUMO" />
       </Dependent>
     </ReferentialConstraint>
@@ -860,15 +857,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PEDIDO_PROVEEDOR_FK">
-    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
-    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+  <Association Name="PAGOPEDIDO_PEDIDO_FK">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="PAGOPEDIDO" Type="Self.PAGOPEDIDO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PROVEEDOR">
-        <PropertyRef Name="IDPROVEEDOR" />
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
       </Principal>
-      <Dependent Role="PEDIDO">
-        <PropertyRef Name="IDPROVEEDOR" />
+      <Dependent Role="PAGOPEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PAGOPEDIDO_USUARIO_FK">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="PAGOPEDIDO" Type="Self.PAGOPEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="IDPERSONA" />
+      </Principal>
+      <Dependent Role="PAGOPEDIDO">
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -877,22 +886,10 @@
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="PEDIDO">
-        <PropertyRef Name="IDUSUARIO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PEDIDOINSUMO_PEDIDO_FK">
-    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
-    <End Role="PEDIDOINSUMO" Type="Self.PEDIDOINSUMO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PEDIDO">
-        <PropertyRef Name="IDPEDIDO" />
-      </Principal>
-      <Dependent Role="PEDIDOINSUMO">
-        <PropertyRef Name="IDPEDIDO" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -910,41 +907,41 @@
   </Association>
   <Association Name="USUARIO_PERSONA_FK">
     <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PERSONA">
-        <PropertyRef Name="RUT" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="USUARIO">
-        <PropertyRef Name="RUTPERSONA" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PRODTIPOPRODUCTO_FK">
-    <End Role="TIPOPRODUCTO" Type="Self.TIPOPRODUCTO" Multiplicity="1" />
-    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+  <Association Name="PRODPREP_TIPOPREPARACION_FK">
+    <End Role="TIPOPREPARACION" Type="Self.TIPOPREPARACION" Multiplicity="1" />
+    <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TIPOPRODUCTO">
-        <PropertyRef Name="IDTIPOPRODUCTO" />
+      <Principal Role="TIPOPREPARACION">
+        <PropertyRef Name="IDTIPOPREP" />
       </Principal>
-      <Dependent Role="PRODUCTO">
-        <PropertyRef Name="IDTIPOPRODUCTO" />
+      <Dependent Role="PRODPREPARACION">
+        <PropertyRef Name="IDTIPOPREP" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PRODUCTOPREPARACION_FK">
-    <End Role="PRODUCTOPREPARACION" Type="Self.PRODUCTOPREPARACION" Multiplicity="1" />
-    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+  <Association Name="PRODUCTO_FK">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PRODUCTOPREPARACION">
-        <PropertyRef Name="IDPRODPREPARACION" />
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
       </Principal>
-      <Dependent Role="PRODUCTO">
-        <PropertyRef Name="IDPRODPREPARACION" />
+      <Dependent Role="PRODPREPARACION">
+        <PropertyRef Name="IDPRODUCTO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RECETAPRODUCTO_FK">
+  <Association Name="PRODUCTO_RECETAPRODUCTO_FK">
     <End Role="RECETAPRODUCTO" Type="Self.RECETAPRODUCTO" Multiplicity="1" />
     <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -956,15 +953,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TIPOPREPARACION_FK">
-    <End Role="TIPOPREPARACION" Type="Self.TIPOPREPARACION" Multiplicity="1" />
-    <End Role="PRODUCTOPREPARACION" Type="Self.PRODUCTOPREPARACION" Multiplicity="*" />
+  <Association Name="PRODUCTO_TIPOPRODUCTO_FK">
+    <End Role="TIPOPRODUCTO" Type="Self.TIPOPRODUCTO" Multiplicity="1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TIPOPREPARACION">
-        <PropertyRef Name="IDESTADO" />
+      <Principal Role="TIPOPRODUCTO">
+        <PropertyRef Name="IDTIPOPRODUCTO" />
       </Principal>
-      <Dependent Role="PRODUCTOPREPARACION">
-        <PropertyRef Name="IDESTADO" />
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="IDTIPOPRODUCTO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -976,7 +973,19 @@
         <PropertyRef Name="IDROL" />
       </Principal>
       <Dependent Role="USUARIOROL">
-        <PropertyRef Name="ROL_IDROL" />
+        <PropertyRef Name="IDROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BCOMOV_TIPOMOVBANCO_FK">
+    <End Role="TIPOMOVBANCO" Type="Self.TIPOMOVBANCO" Multiplicity="1" />
+    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOMOVBANCO">
+        <PropertyRef Name="IDTIPOMOVBCO" />
+      </Principal>
+      <Dependent Role="BANCOMOVIMIENTO">
+        <PropertyRef Name="IDTIPOMOVBCO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -985,25 +994,21 @@
     <End Role="USUARIOROL" Type="Self.USUARIOROL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Principal>
       <Dependent Role="USUARIOROL">
-        <PropertyRef Name="IDUSUARIO" />
+        <PropertyRef Name="IDPERSONA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RELATION_90">
-    <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="*" />
-    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="RestaurantEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" />
+    <EntitySet Name="ALERTASTOCK" EntityType="Self.ALERTASTOCK" />
     <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" />
     <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" />
     <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" />
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
-    <EntitySet Name="COMPRA" EntityType="Self.COMPRA" />
     <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" />
+    <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" />
     <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" />
     <EntitySet Name="DOCUMENTOPAGO" EntityType="Self.DOCUMENTOPAGO" />
     <EntitySet Name="EGRESO" EntityType="Self.EGRESO" />
@@ -1012,6 +1017,7 @@
     <EntitySet Name="ESTADOMESA" EntityType="Self.ESTADOMESA" />
     <EntitySet Name="ESTADOORDEN" EntityType="Self.ESTADOORDEN" />
     <EntitySet Name="ESTADOPRODUCTO" EntityType="Self.ESTADOPRODUCTO" />
+    <EntitySet Name="ESTADOPROVEEDOR" EntityType="Self.ESTADOPROVEEDOR" />
     <EntitySet Name="ESTADORESERVA" EntityType="Self.ESTADORESERVA" />
     <EntitySet Name="FUNCIONALIDAD" EntityType="Self.FUNCIONALIDAD" />
     <EntitySet Name="INGRESO" EntityType="Self.INGRESO" />
@@ -1021,12 +1027,12 @@
     <EntitySet Name="MEDIOPAGOTX" EntityType="Self.MEDIOPAGOTX" />
     <EntitySet Name="MESA" EntityType="Self.MESA" />
     <EntitySet Name="ORDEN" EntityType="Self.ORDEN" />
+    <EntitySet Name="PAGOPEDIDO" EntityType="Self.PAGOPEDIDO" />
     <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
-    <EntitySet Name="PEDIDOINSUMO" EntityType="Self.PEDIDOINSUMO" />
     <EntitySet Name="PERMISOS" EntityType="Self.PERMISOS" />
     <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+    <EntitySet Name="PRODPREPARACION" EntityType="Self.PRODPREPARACION" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
-    <EntitySet Name="PRODUCTOPREPARACION" EntityType="Self.PRODUCTOPREPARACION" />
     <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
     <EntitySet Name="RECETAPRODUCTO" EntityType="Self.RECETAPRODUCTO" />
     <EntitySet Name="RESERVA" EntityType="Self.RESERVA" />
@@ -1039,28 +1045,13 @@
     <EntitySet Name="TIPOPRODUCTO" EntityType="Self.TIPOPRODUCTO" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
     <EntitySet Name="USUARIOROL" EntityType="Self.USUARIOROL" />
-    <AssociationSet Name="BANCOMOV_INGRESO_FK" Association="Self.BANCOMOV_INGRESO_FK">
-      <End Role="INGRESO" EntitySet="INGRESO" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="BANCOMOVIMIENTO_EGRESO_FK" Association="Self.BANCOMOVIMIENTO_EGRESO_FK">
-      <End Role="EGRESO" EntitySet="EGRESO" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="ENTIDADBANCARIA_FK" Association="Self.ENTIDADBANCARIA_FK">
-      <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="TIPOMOVBANCO_FK" Association="Self.TIPOMOVBANCO_FK">
-      <End Role="TIPOMOVBANCO" EntitySet="TIPOMOVBANCO" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
+    <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" />
+    <AssociationSet Name="BGAMOV_TIPOMOVBODEGA_FK" Association="Self.BGAMOV_TIPOMOVBODEGA_FK">
+      <End Role="TIPOMOVBODEGA" EntitySet="TIPOMOVBODEGA" />
+      <End Role="BODEGAMOVIMIENTO" EntitySet="BODEGAMOVIMIENTO" />
     </AssociationSet>
     <AssociationSet Name="BODEGAMOVIMIENTO_INSUMO_FK" Association="Self.BODEGAMOVIMIENTO_INSUMO_FK">
       <End Role="INSUMO" EntitySet="INSUMO" />
-      <End Role="BODEGAMOVIMIENTO" EntitySet="BODEGAMOVIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="TIPOMOVBODEGA_FK" Association="Self.TIPOMOVBODEGA_FK">
-      <End Role="TIPOMOVBODEGA" EntitySet="TIPOMOVBODEGA" />
       <End Role="BODEGAMOVIMIENTO" EntitySet="BODEGAMOVIMIENTO" />
     </AssociationSet>
     <AssociationSet Name="CAJAOPERACION_CAJAESTADO_FK" Association="Self.CAJAOPERACION_CAJAESTADO_FK">
@@ -1083,33 +1074,25 @@
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
     </AssociationSet>
-    <AssociationSet Name="PERSONA_CLIENTE_FK" Association="Self.PERSONA_CLIENTE_FK">
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
-      <End Role="PERSONA" EntitySet="PERSONA" />
-    </AssociationSet>
     <AssociationSet Name="RESERVA_CLIENTE_FK" Association="Self.RESERVA_CLIENTE_FK">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="RESERVA" EntitySet="RESERVA" />
     </AssociationSet>
-    <AssociationSet Name="COMPRA_PEDIDO_FK" Association="Self.COMPRA_PEDIDO_FK">
-      <End Role="PEDIDO" EntitySet="PEDIDO" />
-      <End Role="COMPRA" EntitySet="COMPRA" />
-    </AssociationSet>
-    <AssociationSet Name="COMPRA_USUARIO_FK" Association="Self.COMPRA_USUARIO_FK">
-      <End Role="USUARIO" EntitySet="USUARIO" />
-      <End Role="COMPRA" EntitySet="COMPRA" />
-    </AssociationSet>
-    <AssociationSet Name="EGRESO_COMPRA_FK" Association="Self.EGRESO_COMPRA_FK">
-      <End Role="COMPRA" EntitySet="COMPRA" />
-      <End Role="EGRESO" EntitySet="EGRESO" />
-    </AssociationSet>
-    <AssociationSet Name="DETALLEORDEN_ESTADOORDEN_FK" Association="Self.DETALLEORDEN_ESTADOORDEN_FK">
-      <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
-      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
-    </AssociationSet>
     <AssociationSet Name="DETALLEORDEN_ORDEN_FK" Association="Self.DETALLEORDEN_ORDEN_FK">
       <End Role="ORDEN" EntitySet="ORDEN" />
       <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="DETALLEORDEN_PRODUCTO_FK" Association="Self.DETALLEORDEN_PRODUCTO_FK">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="DETPEDIDOINS_INSUMO_FK" Association="Self.DETPEDIDOINS_INSUMO_FK">
+      <End Role="INSUMO" EntitySet="INSUMO" />
+      <End Role="DETPEDIDOINS" EntitySet="DETPEDIDOINS" />
+    </AssociationSet>
+    <AssociationSet Name="DETPEDIDOINS_PEDIDO_FK" Association="Self.DETPEDIDOINS_PEDIDO_FK">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="DETPEDIDOINS" EntitySet="DETPEDIDOINS" />
     </AssociationSet>
     <AssociationSet Name="DOCUMENTOPAGO_DOCTPAGOTIPO_FK" Association="Self.DOCUMENTOPAGO_DOCTPAGOTIPO_FK">
       <End Role="DOCTPAGOTIPO" EntitySet="DOCTPAGOTIPO" />
@@ -1119,6 +1102,14 @@
       <End Role="MEDIOPAGO" EntitySet="MEDIOPAGO" />
       <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
     </AssociationSet>
+    <AssociationSet Name="COMOV_EGRESO_FK" Association="Self.COMOV_EGRESO_FK">
+      <End Role="EGRESO" EntitySet="EGRESO" />
+      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
+    </AssociationSet>
+    <AssociationSet Name="EGRESO_PAGOPEDIDO_FK" Association="Self.EGRESO_PAGOPEDIDO_FK">
+      <End Role="PAGOPEDIDO" EntitySet="PAGOPEDIDO" />
+      <End Role="EGRESO" EntitySet="EGRESO" />
+    </AssociationSet>
     <AssociationSet Name="EMPLEADOTURNO_USUARIO_FK" Association="Self.EMPLEADOTURNO_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="EMPLEADOTURNO" EntitySet="EMPLEADOTURNO" />
@@ -1126,6 +1117,10 @@
     <AssociationSet Name="ORDEN_EMPLEADOTURNO_FK" Association="Self.ORDEN_EMPLEADOTURNO_FK">
       <End Role="EMPLEADOTURNO" EntitySet="EMPLEADOTURNO" />
       <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="BCOMOV_ENTIDADBANCARIA_FK" Association="Self.BCOMOV_ENTIDADBANCARIA_FK">
+      <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
+      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
     </AssociationSet>
     <AssociationSet Name="ENTIDADBANCARIA_TIPOCUENTA_FK" Association="Self.ENTIDADBANCARIA_TIPOCUENTA_FK">
       <End Role="TIPOCUENTA" EntitySet="TIPOCUENTA" />
@@ -1135,9 +1130,17 @@
       <End Role="ESTADOMESA" EntitySet="ESTADOMESA" />
       <End Role="MESA" EntitySet="MESA" />
     </AssociationSet>
-    <AssociationSet Name="ESTADOPRODUCTO_FK" Association="Self.ESTADOPRODUCTO_FK">
+    <AssociationSet Name="ORDEN_ESTADOORDEN_FK" Association="Self.ORDEN_ESTADOORDEN_FK">
+      <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="PRODUCTO_ESTADOPRODUCTO_FK" Association="Self.PRODUCTO_ESTADOPRODUCTO_FK">
       <End Role="ESTADOPRODUCTO" EntitySet="ESTADOPRODUCTO" />
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="PROVEEDOR_ESTADOPROVEEDOR_FK" Association="Self.PROVEEDOR_ESTADOPROVEEDOR_FK">
+      <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
     </AssociationSet>
     <AssociationSet Name="RESERVA_ESTADORESERVA_FK" Association="Self.RESERVA_ESTADORESERVA_FK">
       <End Role="ESTADORESERVA" EntitySet="ESTADORESERVA" />
@@ -1147,13 +1150,13 @@
       <End Role="FUNCIONALIDAD" EntitySet="FUNCIONALIDAD" />
       <End Role="PERMISOS" EntitySet="PERMISOS" />
     </AssociationSet>
+    <AssociationSet Name="BCOMOV_INGRESO_FK" Association="Self.BCOMOV_INGRESO_FK">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
+    </AssociationSet>
     <AssociationSet Name="INSUMOSTOCK_INSUMO_FK" Association="Self.INSUMOSTOCK_INSUMO_FK">
       <End Role="INSUMO" EntitySet="INSUMO" />
       <End Role="INSUMOSTOCK" EntitySet="INSUMOSTOCK" />
-    </AssociationSet>
-    <AssociationSet Name="PEDIDOINSUMO_INSUMO_FK" Association="Self.PEDIDOINSUMO_INSUMO_FK">
-      <End Role="INSUMO" EntitySet="INSUMO" />
-      <End Role="PEDIDOINSUMO" EntitySet="PEDIDOINSUMO" />
     </AssociationSet>
     <AssociationSet Name="MEDIOPAGOTX_MEDIOPAGO_FK" Association="Self.MEDIOPAGOTX_MEDIOPAGO_FK">
       <End Role="MEDIOPAGO" EntitySet="MEDIOPAGO" />
@@ -1171,17 +1174,17 @@
       <End Role="RESERVA" EntitySet="RESERVA" />
       <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
-    <AssociationSet Name="PEDIDO_PROVEEDOR_FK" Association="Self.PEDIDO_PROVEEDOR_FK">
-      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+    <AssociationSet Name="PAGOPEDIDO_PEDIDO_FK" Association="Self.PAGOPEDIDO_PEDIDO_FK">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="PAGOPEDIDO" EntitySet="PAGOPEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="PAGOPEDIDO_USUARIO_FK" Association="Self.PAGOPEDIDO_USUARIO_FK">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PAGOPEDIDO" EntitySet="PAGOPEDIDO" />
     </AssociationSet>
     <AssociationSet Name="PEDIDO_USUARIO_FK" Association="Self.PEDIDO_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
-    </AssociationSet>
-    <AssociationSet Name="PEDIDOINSUMO_PEDIDO_FK" Association="Self.PEDIDOINSUMO_PEDIDO_FK">
-      <End Role="PEDIDO" EntitySet="PEDIDO" />
-      <End Role="PEDIDOINSUMO" EntitySet="PEDIDOINSUMO" />
     </AssociationSet>
     <AssociationSet Name="PERMISOS_ROL_FK" Association="Self.PERMISOS_ROL_FK">
       <End Role="ROL" EntitySet="ROL" />
@@ -1191,44 +1194,33 @@
       <End Role="PERSONA" EntitySet="PERSONA" />
       <End Role="USUARIO" EntitySet="USUARIO" />
     </AssociationSet>
-    <AssociationSet Name="PRODTIPOPRODUCTO_FK" Association="Self.PRODTIPOPRODUCTO_FK">
-      <End Role="TIPOPRODUCTO" EntitySet="TIPOPRODUCTO" />
-      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    <AssociationSet Name="PRODPREP_TIPOPREPARACION_FK" Association="Self.PRODPREP_TIPOPREPARACION_FK">
+      <End Role="TIPOPREPARACION" EntitySet="TIPOPREPARACION" />
+      <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
     </AssociationSet>
-    <AssociationSet Name="PRODUCTOPREPARACION_FK" Association="Self.PRODUCTOPREPARACION_FK">
-      <End Role="PRODUCTOPREPARACION" EntitySet="PRODUCTOPREPARACION" />
+    <AssociationSet Name="PRODUCTO_FK" Association="Self.PRODUCTO_FK">
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
     </AssociationSet>
-    <AssociationSet Name="RECETAPRODUCTO_FK" Association="Self.RECETAPRODUCTO_FK">
+    <AssociationSet Name="PRODUCTO_RECETAPRODUCTO_FK" Association="Self.PRODUCTO_RECETAPRODUCTO_FK">
       <End Role="RECETAPRODUCTO" EntitySet="RECETAPRODUCTO" />
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
     </AssociationSet>
-    <AssociationSet Name="TIPOPREPARACION_FK" Association="Self.TIPOPREPARACION_FK">
-      <End Role="TIPOPREPARACION" EntitySet="TIPOPREPARACION" />
-      <End Role="PRODUCTOPREPARACION" EntitySet="PRODUCTOPREPARACION" />
+    <AssociationSet Name="PRODUCTO_TIPOPRODUCTO_FK" Association="Self.PRODUCTO_TIPOPRODUCTO_FK">
+      <End Role="TIPOPRODUCTO" EntitySet="TIPOPRODUCTO" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
     </AssociationSet>
     <AssociationSet Name="USUARIOROL_ROL_FK" Association="Self.USUARIOROL_ROL_FK">
       <End Role="ROL" EntitySet="ROL" />
       <End Role="USUARIOROL" EntitySet="USUARIOROL" />
     </AssociationSet>
+    <AssociationSet Name="BCOMOV_TIPOMOVBANCO_FK" Association="Self.BCOMOV_TIPOMOVBANCO_FK">
+      <End Role="TIPOMOVBANCO" EntitySet="TIPOMOVBANCO" />
+      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
+    </AssociationSet>
     <AssociationSet Name="USUARIOROL_USUARIO_FK" Association="Self.USUARIOROL_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="USUARIOROL" EntitySet="USUARIOROL" />
     </AssociationSet>
-    <AssociationSet Name="RELATION_90" Association="Self.RELATION_90">
-      <End Role="INSUMO" EntitySet="INSUMO" />
-      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
-    </AssociationSet>
-    <EntitySet Name="MENULISTA" EntityType="Restaurant.MENULISTA" />
   </EntityContainer>
-  <EntityType Name="MENULISTA">
-    <Key>
-      <PropertyRef Name="M_ID" />
-    </Key>
-    <Property Name="M_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-    <Property Name="M_P_ID" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="M_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CONTROLLER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ACTION_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
 </Schema>

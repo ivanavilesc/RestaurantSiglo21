@@ -4,37 +4,49 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
 }
+<div class="container">
 
-<h2>Listado de Disponibilidad</h2>
 
-<p>
-    @Html.ActionLink("Crear Registro", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            ID de Mesa
-        </th>
-        <th>
-            Estado de Mesa
-        </th>
-        <th></th>
-    </tr>
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Disponibilidad</h4>
+        </div>
+    </div>
+    <br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDESTADOMESA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCESTADOMESA)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDESTADOMESA }) |
-            @Html.ActionLink("Detail", "Detail", new { id = item.IDESTADOMESA }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IDESTADOMESA })
-        </td>
-    </tr>
-}
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Nro de Mesa
+            </th>
+            <th>
+                Estado de Mesa
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDESTADOMESA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCESTADOMESA)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IDESTADOMESA }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = item.IDESTADOMESA }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDESTADOMESA }, new { @class = "btn btn-danger" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
