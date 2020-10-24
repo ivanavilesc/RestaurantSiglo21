@@ -21,7 +21,7 @@ namespace AppRestaurantSiglo21.Models
         }
     
         public byte IDTIPOPREP { get; set; }
-        public string DESCTIPPREP { get; set; }
+        public string DESCTIPOPREP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODPREPARACION> PRODPREPARACION { get; set; }

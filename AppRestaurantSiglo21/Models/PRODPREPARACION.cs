@@ -19,7 +19,7 @@ namespace AppRestaurantSiglo21.Models
         public int IDPRODUCTO { get; set; }
         public byte IDTIPOPREP { get; set; }
     
-        public virtual TIPOPREPARACION TIPOPREPARACION { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
+        public virtual TIPOPREPARACION TIPOPREPARACION { get; set; }
     }
 }

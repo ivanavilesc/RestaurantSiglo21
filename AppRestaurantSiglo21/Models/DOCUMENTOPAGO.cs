@@ -20,6 +20,7 @@ namespace AppRestaurantSiglo21.Models
         public int IDPERSONA { get; set; }
         public byte IDDOCTPAGOTIPO { get; set; }
         public byte IDMEDIOPAGO { get; set; }
+        public Nullable<int> PROPINA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual DOCTPAGOTIPO DOCTPAGOTIPO { get; set; }

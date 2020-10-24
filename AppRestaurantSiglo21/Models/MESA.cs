@@ -17,7 +17,7 @@ namespace AppRestaurantSiglo21.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MESA()
         {
-            this.RESERVA = new HashSet<RESERVA>();
+            this.ORDEN = new HashSet<ORDEN>();
         }
     
         public short IDMESA { get; set; }
@@ -29,6 +29,6 @@ namespace AppRestaurantSiglo21.Models
         public virtual ESTADOMESA ESTADOMESA { get; set; }
         public virtual RESTAURANT RESTAURANT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVA> RESERVA { get; set; }
+        public virtual ICollection<ORDEN> ORDEN { get; set; }
     }
 }

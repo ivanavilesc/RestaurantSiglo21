@@ -25,11 +25,9 @@ namespace AppRestaurantSiglo21.Models
         public Nullable<short> CANTIDADCLIENTE { get; set; }
         public byte IDESTADORESRVA { get; set; }
         public int IDPERSONA { get; set; }
-        public short IDMESA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ESTADORESERVA ESTADORESERVA { get; set; }
-        public virtual MESA MESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN> ORDEN { get; set; }
     }

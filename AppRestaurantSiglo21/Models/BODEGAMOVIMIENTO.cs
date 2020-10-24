@@ -21,7 +21,7 @@ namespace AppRestaurantSiglo21.Models
         public Nullable<int> PESO { get; set; }
         public int IDINSUMO { get; set; }
     
-        public virtual TIPOMOVBODEGA TIPOMOVBODEGA { get; set; }
         public virtual INSUMO INSUMO { get; set; }
+        public virtual TIPOMOVBODEGA TIPOMOVBODEGA { get; set; }
     }
 }

@@ -25,11 +25,13 @@ namespace AppRestaurantSiglo21.Models
         public int IDRESRVA { get; set; }
         public byte IDESTADO { get; set; }
         public short IDEMPTURNO { get; set; }
+        public short IDMESA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLEORDEN> DETALLEORDEN { get; set; }
         public virtual EMPLEADOTURNO EMPLEADOTURNO { get; set; }
         public virtual ESTADOORDEN ESTADOORDEN { get; set; }
+        public virtual MESA MESA { get; set; }
         public virtual RESERVA RESERVA { get; set; }
     }
 }

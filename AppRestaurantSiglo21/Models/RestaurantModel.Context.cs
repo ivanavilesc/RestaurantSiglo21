@@ -12,6 +12,8 @@ namespace AppRestaurantSiglo21.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RestaurantEntities : DbContext
     {
@@ -26,6 +28,7 @@ namespace AppRestaurantSiglo21.Models
         }
     
         public virtual DbSet<ALERTASTOCK> ALERTASTOCK { get; set; }
+        public virtual DbSet<BANCOMOVIMIENTO> BANCOMOVIMIENTO { get; set; }
         public virtual DbSet<BODEGAMOVIMIENTO> BODEGAMOVIMIENTO { get; set; }
         public virtual DbSet<CAJAESTADO> CAJAESTADO { get; set; }
         public virtual DbSet<CAJAOPERACION> CAJAOPERACION { get; set; }
@@ -68,6 +71,23 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<TIPOPRODUCTO> TIPOPRODUCTO { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIOROL> USUARIOROL { get; set; }
-        public virtual DbSet<BANCOMOVIMIENTO> BANCOMOVIMIENTO { get; set; }
+    
+        public virtual int SP_LISTARPRODUCTO(Nullable<decimal> pE_IDPRODUCTO)
+        {
+            var pE_IDPRODUCTOParameter = pE_IDPRODUCTO.HasValue ?
+                new ObjectParameter("PE_IDPRODUCTO", pE_IDPRODUCTO) :
+                new ObjectParameter("PE_IDPRODUCTO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_LISTARPRODUCTO", pE_IDPRODUCTOParameter);
+        }
+    
+        public virtual int FN_LISTAPRODUCTOS(Nullable<decimal> pE_IDPRODUCTO)
+        {
+            var pE_IDPRODUCTOParameter = pE_IDPRODUCTO.HasValue ?
+                new ObjectParameter("PE_IDPRODUCTO", pE_IDPRODUCTO) :
+                new ObjectParameter("PE_IDPRODUCTO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FN_LISTAPRODUCTOS", pE_IDPRODUCTOParameter);
+        }
     }
 }

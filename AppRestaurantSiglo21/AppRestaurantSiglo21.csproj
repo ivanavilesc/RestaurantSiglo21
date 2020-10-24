@@ -160,6 +160,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumoController.cs" />
     <Compile Include="Controllers\MesaController.cs" />
+    <Compile Include="Controllers\PagoOrdenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +195,7 @@
     <Compile Include="Models\DOCUMENTOPAGO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LlenarDropDownList.cs" />
     <Compile Include="Models\EGRESO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -311,6 +313,8 @@
     <Compile Include="Models\USUARIOROL.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VistaDetOrdenes.cs" />
+    <Compile Include="Models\VistaOrdenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -359,7 +363,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -400,9 +406,14 @@
     <Content Include="Views\Mesa\Edit.cshtml" />
     <Content Include="Views\Home\Login2.cshtml" />
     <Content Include="Views\Shared\_PrincipalGarzon.cshtml" />
+    <Content Include="Views\PagoOrden\Pagar.cshtml" />
+    <Content Include="Views\PagoOrden\ConsultaOrden.cshtml" />
+    <Content Include="Views\PagoOrden\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Biblioteca\" />
+    <Folder Include="Views\Producto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

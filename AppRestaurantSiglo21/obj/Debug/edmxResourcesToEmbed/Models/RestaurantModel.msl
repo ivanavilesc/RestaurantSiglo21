@@ -9,6 +9,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BANCOMOVIMIENTO">
+      <EntityTypeMapping TypeName="RestaurantModel.BANCOMOVIMIENTO">
+        <MappingFragment StoreEntitySet="BANCOMOVIMIENTO">
+          <ScalarProperty Name="IDBCOMOV" ColumnName="IDBCOMOV" />
+          <ScalarProperty Name="MONTOMOV" ColumnName="MONTOMOV" />
+          <ScalarProperty Name="NUMCUENTA" ColumnName="NUMCUENTA" />
+          <ScalarProperty Name="IDTIPOMOVBCO" ColumnName="IDTIPOMOVBCO" />
+          <ScalarProperty Name="IDENTBANCARIA" ColumnName="IDENTBANCARIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BODEGAMOVIMIENTO">
       <EntityTypeMapping TypeName="RestaurantModel.BODEGAMOVIMIENTO">
         <MappingFragment StoreEntitySet="BODEGAMOVIMIENTO">
@@ -33,8 +44,9 @@
       <EntityTypeMapping TypeName="RestaurantModel.CAJAOPERACION">
         <MappingFragment StoreEntitySet="CAJAOPERACION">
           <ScalarProperty Name="IDCAJAOPERACION" ColumnName="IDCAJAOPERACION" />
-          <ScalarProperty Name="FECHAAPERTURA" ColumnName="FECHAAPERTURA" />
           <ScalarProperty Name="MONTOAPERTURA" ColumnName="MONTOAPERTURA" />
+          <ScalarProperty Name="FECHAINICIOCAJA" ColumnName="FECHAINICIOCAJA" />
+          <ScalarProperty Name="FECHACIERRECAJA" ColumnName="FECHACIERRECAJA" />
           <ScalarProperty Name="IDCAJAESTADO" ColumnName="IDCAJAESTADO" />
           <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
         </MappingFragment>
@@ -54,6 +66,7 @@
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
           <ScalarProperty Name="IDORDEN" ColumnName="IDORDEN" />
           <ScalarProperty Name="IDPRODUCTO" ColumnName="IDPRODUCTO" />
+          <ScalarProperty Name="PRECIOPROD" ColumnName="PRECIOPROD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -85,6 +98,7 @@
           <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
           <ScalarProperty Name="IDDOCTPAGOTIPO" ColumnName="IDDOCTPAGOTIPO" />
           <ScalarProperty Name="IDMEDIOPAGO" ColumnName="IDMEDIOPAGO" />
+          <ScalarProperty Name="PROPINA" ColumnName="PROPINA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,7 +109,6 @@
           <ScalarProperty Name="MONTO" ColumnName="MONTO" />
           <ScalarProperty Name="DESCMOVIMIENTO" ColumnName="DESCMOVIMIENTO" />
           <ScalarProperty Name="FECHAMOVIMIENTO" ColumnName="FECHAMOVIMIENTO" />
-          <ScalarProperty Name="IDCOMPRA" ColumnName="IDCOMPRA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -130,7 +143,7 @@
     <EntitySetMapping Name="ESTADOORDEN">
       <EntityTypeMapping TypeName="RestaurantModel.ESTADOORDEN">
         <MappingFragment StoreEntitySet="ESTADOORDEN">
-          <ScalarProperty Name="IDESTADOORD" ColumnName="IDESTADOORD" />
+          <ScalarProperty Name="IDESTADO" ColumnName="IDESTADO" />
           <ScalarProperty Name="DESCESTORDEN" ColumnName="DESCESTORDEN" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -175,7 +188,6 @@
           <ScalarProperty Name="MONTO" ColumnName="MONTO" />
           <ScalarProperty Name="DESCINGRESO" ColumnName="DESCINGRESO" />
           <ScalarProperty Name="FECHAMOVIMIENTO" ColumnName="FECHAMOVIMIENTO" />
-          <ScalarProperty Name="IDCAJAOPERACION" ColumnName="IDCAJAOPERACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -238,6 +250,7 @@
           <ScalarProperty Name="IDRESRVA" ColumnName="IDRESRVA" />
           <ScalarProperty Name="IDESTADO" ColumnName="IDESTADO" />
           <ScalarProperty Name="IDEMPTURNO" ColumnName="IDEMPTURNO" />
+          <ScalarProperty Name="IDMESA" ColumnName="IDMESA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -337,7 +350,6 @@
           <ScalarProperty Name="CANTIDADCLIENTE" ColumnName="CANTIDADCLIENTE" />
           <ScalarProperty Name="IDESTADORESRVA" ColumnName="IDESTADORESRVA" />
           <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
-          <ScalarProperty Name="IDMESA" ColumnName="IDMESA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -386,7 +398,7 @@
       <EntityTypeMapping TypeName="RestaurantModel.TIPOPREPARACION">
         <MappingFragment StoreEntitySet="TIPOPREPARACION">
           <ScalarProperty Name="IDTIPOPREP" ColumnName="IDTIPOPREP" />
-          <ScalarProperty Name="DESCTIPPREP" ColumnName="DESCTIPPREP" />
+          <ScalarProperty Name="DESCTIPOPREP" ColumnName="DESCTIPOPREP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -417,16 +429,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BANCOMOVIMIENTO">
-      <EntityTypeMapping TypeName="RestaurantModel.BANCOMOVIMIENTO">
-        <MappingFragment StoreEntitySet="BANCOMOVIMIENTO">
-          <ScalarProperty Name="IDBCOMOV" ColumnName="IDBCOMOV" />
-          <ScalarProperty Name="IDTIPOMOVBCO" ColumnName="IDTIPOMOVBCO" />
-          <ScalarProperty Name="IDENTBANCARIA" ColumnName="IDENTBANCARIA" />
-          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
-          <ScalarProperty Name="IDEGRESO" ColumnName="IDEGRESO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_LISTARPRODUCTO" FunctionName="RestaurantModel.Store.SP_LISTARPRODUCTO" />
+    <FunctionImportMapping FunctionImportName="FN_LISTAPRODUCTOS" FunctionName="RestaurantModel.Store.FN_LISTAPRODUCTOS" />
   </EntityContainerMapping>
 </Mapping>

@@ -17,7 +17,10 @@ namespace AppRestaurantSiglo21.Controllers
         public ActionResult Index()
         {
             var cliente = db.CLIENTE.ToList();
+
+            
             return View(cliente);
+                
         }
 
 

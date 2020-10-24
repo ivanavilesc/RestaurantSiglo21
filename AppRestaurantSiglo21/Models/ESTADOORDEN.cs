@@ -20,7 +20,7 @@ namespace AppRestaurantSiglo21.Models
             this.ORDEN = new HashSet<ORDEN>();
         }
     
-        public byte IDESTADOORD { get; set; }
+        public byte IDESTADO { get; set; }
         public string DESCESTORDEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
