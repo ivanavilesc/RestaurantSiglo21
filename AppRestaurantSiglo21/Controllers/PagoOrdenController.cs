@@ -28,28 +28,35 @@ namespace AppRestaurantSiglo21.Controllers
         //    return View();
 
         //}
+
+        public ActionResult ConsultaOrden()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult ConsultaOrden(int? nrorden)
         {
+            int orden = 1;
             var ordenes = (from o in db.ORDEN
                            join m in db.MESA
                            on o.IDMESA equals m.IDMESA
                            join e in db.ESTADOORDEN
                            on o.IDESTADO equals e.IDESTADO
 
-                           where o.IDORDEN == 1
+                           where o.IDORDEN == orden
 
                            select new VistaOrdenes
                            {
                                IdOrden1 = o.IDORDEN,
+                               IDMesa1 = o.IDMESA,
                                FechaOrden1 = o.FECHAORDEN,
+                               IDRESRVA1 = 0,
                                IntEstadoOrden1 = o.IDESTADO,
                                DescEstadoOrden1 = e.DESCESTORDEN,
-                               IDMesa1 = o.IDMESA,
-                               Mesa1 = m.DESCMESA,
-
-                               Reserva1 = 0,
                                IDEmpleado1 = 1,
-                               Empleado1 = ""
+                               Empleado1 = "Juanito",
+                               DescMesa1 = m.DESCMESA
                            });
             int s = 0;
             return View(ordenes.ToList());
