@@ -89,5 +89,35 @@ namespace AppRestaurantSiglo21.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FN_LISTAPRODUCTOS", pE_IDPRODUCTOParameter);
         }
+    
+        public virtual int SP_GRABARPAGOORDEN(Nullable<decimal> pE_IDORDEN, Nullable<decimal> pE_PROPINA, Nullable<decimal> pE_TIPOPAGO, Nullable<decimal> pE_MEDIOPAGO)
+        {
+            var pE_IDORDENParameter = pE_IDORDEN.HasValue ?
+                new ObjectParameter("PE_IDORDEN", pE_IDORDEN) :
+                new ObjectParameter("PE_IDORDEN", typeof(decimal));
+    
+            var pE_PROPINAParameter = pE_PROPINA.HasValue ?
+                new ObjectParameter("PE_PROPINA", pE_PROPINA) :
+                new ObjectParameter("PE_PROPINA", typeof(decimal));
+    
+            var pE_TIPOPAGOParameter = pE_TIPOPAGO.HasValue ?
+                new ObjectParameter("PE_TIPOPAGO", pE_TIPOPAGO) :
+                new ObjectParameter("PE_TIPOPAGO", typeof(decimal));
+    
+            var pE_MEDIOPAGOParameter = pE_MEDIOPAGO.HasValue ?
+                new ObjectParameter("PE_MEDIOPAGO", pE_MEDIOPAGO) :
+                new ObjectParameter("PE_MEDIOPAGO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GRABARPAGOORDEN", pE_IDORDENParameter, pE_PROPINAParameter, pE_TIPOPAGOParameter, pE_MEDIOPAGOParameter);
+        }
+    
+        public virtual int SP_CONSULTADOCPAGO(string pE_FECHA)
+        {
+            var pE_FECHAParameter = pE_FECHA != null ?
+                new ObjectParameter("PE_FECHA", pE_FECHA) :
+                new ObjectParameter("PE_FECHA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CONSULTADOCPAGO", pE_FECHAParameter);
+        }
     }
 }

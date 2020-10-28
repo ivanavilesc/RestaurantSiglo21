@@ -864,8 +864,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FN_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" ReturnType="varchar2">
+    <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+    <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+    <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+    <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
+  </Function>
   <Function Name="FN_LISTAPRODUCTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
     <Parameter Name="PE_IDPRODUCTO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_CONSULTADOCPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHA" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+    <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+    <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+    <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
   </Function>
   <Function Name="SP_LISTARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
     <Parameter Name="PE_IDPRODUCTO" Type="number" Mode="In" />

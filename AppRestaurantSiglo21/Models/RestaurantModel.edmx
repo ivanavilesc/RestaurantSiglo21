@@ -869,8 +869,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FN_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" ReturnType="varchar2">
+          <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+          <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+          <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+          <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
+        </Function>
         <Function Name="FN_LISTAPRODUCTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
           <Parameter Name="PE_IDPRODUCTO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CONSULTADOCPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHA" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+          <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+          <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+          <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_LISTARPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
           <Parameter Name="PE_IDPRODUCTO" Type="number" Mode="In" />
@@ -2238,7 +2253,16 @@
           <Parameter Name="PE_IDPRODUCTO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="FN_LISTAPRODUCTOS">
-            <Parameter Name="PE_IDPRODUCTO" Mode="In" Type="Decimal" />
+          <Parameter Name="PE_IDPRODUCTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GRABARPAGOORDEN">
+            <Parameter Name="PE_IDORDEN" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_PROPINA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_TIPOPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_MEDIOPAGO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CONSULTADOCPAGO">
+            <Parameter Name="PE_FECHA" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -2677,6 +2701,8 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_LISTARPRODUCTO" FunctionName="RestaurantModel.Store.SP_LISTARPRODUCTO" />
           <FunctionImportMapping FunctionImportName="FN_LISTAPRODUCTOS" FunctionName="RestaurantModel.Store.FN_LISTAPRODUCTOS" />
+          <FunctionImportMapping FunctionImportName="SP_GRABARPAGOORDEN" FunctionName="RestaurantModel.Store.SP_GRABARPAGOORDEN" />
+          <FunctionImportMapping FunctionImportName="SP_CONSULTADOCPAGO" FunctionName="RestaurantModel.Store.SP_CONSULTADOCPAGO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

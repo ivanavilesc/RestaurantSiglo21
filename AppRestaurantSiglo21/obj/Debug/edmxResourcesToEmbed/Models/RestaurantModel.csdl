@@ -1155,5 +1155,14 @@
     <FunctionImport Name="FN_LISTAPRODUCTOS">
       <Parameter Name="PE_IDPRODUCTO" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="SP_GRABARPAGOORDEN">
+      <Parameter Name="PE_IDORDEN" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_PROPINA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_TIPOPAGO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_MEDIOPAGO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CONSULTADOCPAGO">
+      <Parameter Name="PE_FECHA" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

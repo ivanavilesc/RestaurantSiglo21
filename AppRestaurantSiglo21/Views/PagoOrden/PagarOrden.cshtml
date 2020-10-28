@@ -1,0 +1,62 @@
+﻿@model AppRestaurantSiglo21.Models.VistaDetOrdenes
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Modulo de Pago</h4>
+        </div>
+    </div>
+    <br />
+
+
+    <hr />
+
+    
+    <form  method="post">
+        <div class="form-horizontal">
+
+            <div class="sm:flex w-full">
+
+                <div class="col-md-10">
+                    Numero Orden        : <strong>@Html.DisplayFor(model => model.IdOrden1)</strong>
+                </div>
+
+                <div class="col-md-10">
+                    Total a Pagar       : <strong>@ViewBag.TotalPrice</strong>
+                </div>
+
+                <div class="sm:flex w-full">
+                    Propina             :  <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="propina" id="propina" placeholder="Propina">
+                </div>
+
+                <div class="col-md-10">
+                    Tipo Pago           : @Html.DropDownListFor(model => model.ComboboxMedioPago1, new SelectList(ViewBag.ComboBoxMP, "IdMedioPago1", "DescMedioPago1"))
+                </div>
+
+                <div class="col-md-10">
+                    Medio Pago          : @Html.DropDownListFor(model => model.Combobox1, new SelectList(ViewBag.ComboBox, "Id1", "Descripcion1"))
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <br />
+            <br />
+            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+        </div>
+    
+    </form>
+    </div>

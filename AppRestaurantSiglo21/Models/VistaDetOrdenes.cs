@@ -15,6 +15,7 @@ namespace AppRestaurantSiglo21.Models
         private int? Cantidad;
         private int Total;
         private LlenarDropDownList Combobox;
+        private LlenarDropDownListMedioPago ComboboxMedioPago;
 
         public int? IdOrden1 { get => IdOrden; set => IdOrden = value; }
         public int IdDetalleOrden1 { get => IdDetalleOrden; set => IdDetalleOrden = value; }
@@ -24,5 +25,6 @@ namespace AppRestaurantSiglo21.Models
         public int? PrecioProducto1 { get => PrecioProducto; set => PrecioProducto = value; }
         public int Total1 { get => Total; set => Total = value; }
         public LlenarDropDownList Combobox1 { get => Combobox; set => Combobox = value; }
+        public LlenarDropDownListMedioPago ComboboxMedioPago1 { get => ComboboxMedioPago; set => ComboboxMedioPago = value; }
     }
 }

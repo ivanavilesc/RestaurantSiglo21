@@ -406,9 +406,10 @@
     <Content Include="Views\Mesa\Edit.cshtml" />
     <Content Include="Views\Home\Login2.cshtml" />
     <Content Include="Views\Shared\_PrincipalGarzon.cshtml" />
-    <Content Include="Views\PagoOrden\Pagar.cshtml" />
+    <Content Include="Views\PagoOrden\ValidarOrden.cshtml" />
     <Content Include="Views\PagoOrden\ConsultaOrden.cshtml" />
     <Content Include="Views\PagoOrden\Index.cshtml" />
+    <Content Include="Views\PagoOrden\PagarOrden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
