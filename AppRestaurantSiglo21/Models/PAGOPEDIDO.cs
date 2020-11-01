@@ -14,19 +14,11 @@ namespace AppRestaurantSiglo21.Models
     
     public partial class PAGOPEDIDO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PAGOPEDIDO()
-        {
-            this.EGRESO = new HashSet<EGRESO>();
-        }
-    
         public int IDCOMPRA { get; set; }
         public Nullable<System.DateTime> FECHACOMPRA { get; set; }
         public int IDPEDIDO { get; set; }
         public int IDPERSONA { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EGRESO> EGRESO { get; set; }
         public virtual PEDIDO PEDIDO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
     }

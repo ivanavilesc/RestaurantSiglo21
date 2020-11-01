@@ -1,0 +1,16 @@
+﻿body {
+    background-image: url('../images/RestSiglo21Logo.png');
+    height: auto;
+
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+bg-contact3 {
+    /*background-image: url(w3css.gif);*/
+    background-image: url('../images/RestSiglo21Logo.png');
+    background-repeat: repeat;
+}

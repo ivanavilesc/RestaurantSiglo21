@@ -20,7 +20,7 @@ namespace AppRestaurantSiglo21.Models
             this.RESERVA = new HashSet<RESERVA>();
         }
     
-        public byte IDESTADORESRVA { get; set; }
+        public byte IDESTADORESERVA { get; set; }
         public string DESCESTRESERVA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

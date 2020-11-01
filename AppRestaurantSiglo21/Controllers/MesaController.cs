@@ -35,6 +35,10 @@ namespace AppRestaurantSiglo21.Controllers
         {
             if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
             {
+
+                CLIENTE objCliente = new CLIENTE();
+                RESERVA objReserva = new RESERVA();
+
                 //objMesa.IDMESA = 0;
                 db.MESA.Add(objMesa); //SE INSTANCIA EL MAPEO DEL ENTITYFRAMEWORK PARA LA TABLA TIPOPRODUCTO, Y CON EL METODO ADD, SE LE PASA EL OBJETO
                 db.SaveChanges();

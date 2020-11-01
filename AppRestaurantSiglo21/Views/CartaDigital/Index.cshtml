@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PRODUCTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Carta Digital</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Plato de Fondo", "DetailPlato", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Bebestible", "DetailBebestible", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ensaladas", "DetailEnsaladas", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <img src="@Url.Content("~/Images/CartaDigital.jpg")" width="1110px" height="600px" alt="imgf" />   
+</div>

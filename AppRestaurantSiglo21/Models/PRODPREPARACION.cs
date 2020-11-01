@@ -14,12 +14,21 @@ namespace AppRestaurantSiglo21.Models
     
     public partial class PRODPREPARACION
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PRODPREPARACION()
+        {
+            this.INGREDIENTE = new HashSet<INGREDIENTE>();
+        }
+    
         public int IDPRODPREPAR { get; set; }
         public decimal TIEMPOPREPARACION { get; set; }
-        public int IDPRODUCTO { get; set; }
+        public Nullable<int> IDPRODUCTO { get; set; }
         public byte IDTIPOPREP { get; set; }
+        public Nullable<short> DIFICULTAD { get; set; }
     
-        public virtual TIPOPREPARACION TIPOPREPARACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INGREDIENTE> INGREDIENTE { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
+        public virtual TIPOPREPARACION TIPOPREPARACION { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+﻿<Window x:Class="restaurantSigloXXI.Formularios.Ingresos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restaurantSigloXXI.Formularios"
+        mc:Ignorable="d"
+        Title="Ingresos" Height="450" Width="1025.4">
+    <Grid>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="41,333,0,0" VerticalAlignment="Top" Width="75" Click="BtnAgregar_Click"/>
+        <Button x:Name="btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="562,373,0,0" VerticalAlignment="Top" Width="75" Click="BtnSalir_Click"/>
+        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="146,373,0,0" VerticalAlignment="Top" Width="75" Click="BtnLimpiar_Click"/>
+        <ComboBox x:Name="cbxTipoIngreso" HorizontalAlignment="Left" Margin="129,38,0,0" VerticalAlignment="Top" Width="197" RenderTransformOrigin="-0.017,-0.727" Loaded="CbxTipoIngreso_Loaded"/>
+        <Label x:Name="lblTipoIngreso" Content="Tipo Ingreso" HorizontalAlignment="Left" Margin="41,34,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="146,333,0,0" VerticalAlignment="Top" Width="75" Click="BtnActualizar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="251,333,0,0" VerticalAlignment="Top" Width="75" Click="BtnEliminar_Click"/>
+        <Label x:Name="lblIdIngreso" Content="ID Ingreso" HorizontalAlignment="Left" Margin="41,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblMontoIngreso" Content="Monto Ingreso" HorizontalAlignment="Left" Margin="41,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescIngreso" Content="Descripción" HorizontalAlignment="Left" Margin="41,186,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblFechaMovimiento" Content="Fecha Movimiento" HorizontalAlignment="Left" Margin="41,232,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtIdIngreso" HorizontalAlignment="Left" Height="23" Margin="173,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMontoIngreso" HorizontalAlignment="Left" Height="23" Margin="173,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtDescIngreso" HorizontalAlignment="Left" Height="23" Margin="173,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="191,234,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgvIngresos" HorizontalAlignment="Left" Height="315" Margin="381,38,0,0" VerticalAlignment="Top" Width="569"
+                  CanUserAddRows="False" CanUserReorderColumns="False"
+                  EnableRowVirtualization="false" EnableColumnVirtualization="false"
+                  ColumnWidth="*" Loaded="DgvIngresos_Loaded"
+                  
+                  />
+
+    </Grid>
+</Window>

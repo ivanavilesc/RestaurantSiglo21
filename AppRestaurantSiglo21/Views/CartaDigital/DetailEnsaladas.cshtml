@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PRODUCTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Carta Digital</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Plato de Fondo", "DetailPlato", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Bebestible", "DetailBebestible", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ensaladas", "DetailEnsaladas", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Ensaladas
+            </th>
+            <th>
+                Contiene
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Acción
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="~/Images/ensaldatomate.jpg" alt="" height=100 width=100 />
+                @Html.DisplayFor(modelItem => item.DESCPRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RECETAPRODUCTO.INGREDIENTE)
+            </td>
+            <td>
+                @String.Format("{0:C}", item.PRECIOPRODUCTO)
+            </td>
+            <td>
+                @Html.ActionLink("Agregar", "AgregarCarrito", "Carrito", new { id = item.IDPRODUCTO }, new { @class = "btn btn-info" })
+            </td>
+
+        </tr>
+        }
+
+    </table>
+</div>
+

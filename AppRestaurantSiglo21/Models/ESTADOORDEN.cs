@@ -17,12 +17,15 @@ namespace AppRestaurantSiglo21.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ESTADOORDEN()
         {
+            this.DETALLEORDEN = new HashSet<DETALLEORDEN>();
             this.ORDEN = new HashSet<ORDEN>();
         }
     
-        public byte IDESTADOORD { get; set; }
+        public byte IDESTADO { get; set; }
         public string DESCESTORDEN { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLEORDEN> DETALLEORDEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN> ORDEN { get; set; }
     }

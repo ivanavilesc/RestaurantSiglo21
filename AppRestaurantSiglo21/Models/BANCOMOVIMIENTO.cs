@@ -15,14 +15,12 @@ namespace AppRestaurantSiglo21.Models
     public partial class BANCOMOVIMIENTO
     {
         public int IDBCOMOV { get; set; }
-        public byte IDTIPOMOVBCO { get; set; }
-        public byte IDENTBANCARIA { get; set; }
-        public Nullable<int> IDINGRESO { get; set; }
-        public Nullable<int> IDEGRESO { get; set; }
+        public Nullable<int> MONTOMOV { get; set; }
+        public Nullable<int> NUMCUENTA { get; set; }
+        public Nullable<byte> IDTIPOMOVBCO { get; set; }
+        public Nullable<byte> IDENTBANCARIA { get; set; }
     
-        public virtual EGRESO EGRESO { get; set; }
         public virtual ENTIDADBANCARIA ENTIDADBANCARIA { get; set; }
-        public virtual INGRESO INGRESO { get; set; }
         public virtual TIPOMOVBANCO TIPOMOVBANCO { get; set; }
     }
 }

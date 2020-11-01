@@ -1,0 +1,82 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ordenes para Retiro en Cocina</h2>
+<hr />
+
+@*<h1><span class="badge badge-secondary" id="notification"></span></h1>*@
+<div class="container" id="notification"></div>
+@*<div class="toast" id="notification" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+        <div class="toast-header">
+            <svg class="rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+                 focusable="false" role="img">
+                <rect fill="#007aff" width="100%" height="100%" />
+            </svg>
+            <strong class="mr-auto">Bootstrap</strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            See? Just like this.
+        </div>
+    </div>*@
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js" integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw==" crossorigin="anonymous"></script>*@
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <!--Link to the automatically generated SignalR hub script -->
+    <script type="text/javascript">
+
+    </script>
+
+
+    <script src="signalr/hubs"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var notificationhub = $.connection.notificationHub;
+            notificationhub.client.displayMessage = function (message) {
+                //alert(message);
+
+                var div1 = '<div class="alert alert-success alert-dismissible fade show" role="alert" id="notification">' +
+                    '<strong><h2>ATENCIÓN !!!</h2></strong>' + message +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '</div>';
+
+                var $div = $(div1);
+                $('#notification').append($div);
+                //$('#notification').html(message);
+
+                //###### TOAST ###########
+                //$('.toast').toast({
+                //    message: message,
+                //    type: 'success',
+                //    displayTime: 3000,
+                //    maxWidth: 500,
+                //    height: 'auto',
+                //    animation: { show: { type: 'fade', duration: 400, from: 0, to: 1 }, hide: { type: 'fade', duration: 400, to: 0 } },
+                //    position: { my: 'center bottom', at: 'center bottom', of: window }
+                //});
+                //$('#notification').toast('show')
+
+                //###### TOAST ###########
+                //$("#toast").toast("show");
+                //$('#notification').toast('show');
+
+            };
+            $.connection.hub.start();
+        });
+
+    </script>
+
+

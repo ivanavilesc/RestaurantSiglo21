@@ -20,21 +20,15 @@ namespace AppRestaurantSiglo21.Controllers
                                 on o.IDORDEN equals d.IDORDEN
                                 join p in db.PRODUCTO
                                 on d.IDPRODUCTO equals p.IDPRODUCTO
-                                join m in db.MESA
-                                on o.idmesa equals m.IDMESA
-                                join e in db.ESTADOORDEN
-                                on o.idestadomesa equals e.IDESTADOORD
 
-                                where o.idestadoorden == 1
+                                where o.IDORDEN == orden
 
                                 select new OrdenViewModel
                                 {
-                                    NroOrden = o.idorden,
-                                    DescEstOrden = e.descestorden,
-                                    DescMesa = m.descmesa,
-                                    DescProducto = p.descproducto,
-                                    CantProducto = d.cantidad
-
+                                    NroOrden = o.IDORDEN,
+                                    CantProducto = d.CANTIDAD,
+                                    DescProducto = p.DESCPRODUCTO,
+                                    PrecioProducto = p.PRECIOPRODUCTO
                                 });
 
 

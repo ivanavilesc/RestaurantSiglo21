@@ -1,0 +1,172 @@
+﻿@model AppRestaurantSiglo21.Models.ESTADOMESA
+@{
+    ViewBag.Title = "Reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.ico" />
+    <link href="~/Content/css/Reservas.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <!--===============================================================================================-->
+</head>
+
+
+<div class="bg-contact3">
+    
+    @if (ViewBag.Error != null)
+    {<h2> @ViewBag.Error </h2>}
+
+    <div class="container-contact3">
+        <div class="wrap-contact3">
+            <form class="contact3-form validate-form" method="post" action="SendEmail">
+                <span class="contact3-form-title">
+                    Reserva una mesa
+                </span>
+                <label for="nombrecliente">Rut</label>
+                <div class="row">
+
+                    <div class="form-group wrap-input3 col-lg-9">
+                        <input type="text" class="form-control" id="rutcliente" name="rutcliente" placeholder="solo digitos">
+                    </div>
+                    <div class="form-group wrap-input3 col-lg-3 ">
+                        <input type="text" class="form-control" id="dvcliente" name="dvcliente" placeholder="dv">
+                    </div>
+                </div>
+                <div class="form-group wrap-input3">
+                    <label for="nombrecliente">Nombre</label>
+                    <input type="text" class="form-control" id="nombrecliente" name="nombrecliente" placeholder="ingresa tu nombre">
+                </div>
+
+                <div class="form-group wrap-input3">
+                    <label for="receiver">Correo electrónico</label>
+                    <input type="email" class="form-control" id="receiver" name="receiver" placeholder="tucuenta@correo.com">
+                </div>
+
+                <div class="form-group wrap-input3">
+                    <label for="fonocliente">Tel. Móvil</label>
+                    <input type="text" class="form-control" id="fonocliente" name="fonocliente" placeholder="ingresa tu número de celular">
+                </div>
+
+                @*<div class="wrap-input3 validate-input" data-validate="Tu nombre es requerido">
+            <input class="input3" type="text" name="name" placeholder="Nombre">
+            <span class="focus-input3"></span>
+        </div>
+
+        <div class="wrap-input3 validate-input" data-validate="El formato de tu email no es valido: ex@abc.com">
+            <input class="input3" type="text" name="receiver" placeholder="Correo electrónico">
+            <span class="focus-input3"></span>
+        </div>*@
+
+                <div class="form wrap-input3">
+                    Fecha de la reserva: <input type="text" id="fechareserva" name="fechareserva" class="form-control" style="width: 300px;" data-provide="datepicker" placeholder="para cuando quieres tu reserva ? ">
+                </div>
+
+                @*<div class="wrap-input3 input3-select">
+            <div>
+                <select class="selection-2" name="service">
+                    <option>Needed Services</option>
+                    <option>eCommerce Bussiness</option>
+                    <option>UI/UX Design</option>
+                    <option>Online Services</option>
+                </select>
+            </div>
+            <span class="focus-input3"></span>
+        </div>
+
+        <div class="wrap-input3 input3-select">
+            <div>
+                <select class="selection-2" name="budget">
+                    <option>Budget</option>
+                    <option>1500 $</option>
+                    <option>2000 $</option>
+                    <option>3000 $</option>
+                </select>
+            </div>
+            <span class="focus-input3"></span>
+        </div>*@
+
+                <select class="wrap-input3 custom-select" id="cantidadpx" name="cantidadpx">
+                    <option selected>Cantidad de Personas</option>
+                    <option value="1">1 persona</option>
+                    <option value="2">2 personas</option>
+                    <option value="4">4 personas</option>
+                    <option value="8">8 personas</option>
+                </select>
+
+                <div class="wrap-input3 validate-input" data-validate="Debes ingresar un comentario">
+                    <textarea class="form-control" id="message" name="message" placeholder="Indicaciones para tu reserva" rows="3"></textarea>
+                    <span class="focus-input3"></span>
+                </div>
+                <div class="form-group wrap-input3">
+                    <input class="form-control" type="text" id="subject" name="subject" value="Restaurant Siglo XXI - Confirmación de Reserva" hidden readonly />
+                    <div class="container-contact3-form-btn">
+                        <button class="contact3-form-btn">
+                            Solicitar reserva
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js" integrity="sha512-5pjEAV8mgR98bRTcqwZ3An0MYSOleV04mwwYj2yw+7PBhFVf/0KcE+NEox0XrFiU5+x5t5qidmo5MgBkDD9hEw==" crossorigin="anonymous" charset="UTF-8"></script>
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>*@
+
+<script type="text/javascript">
+    $.fn.datepicker.dates['en'] = {
+        days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+        daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+        daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        today: "Hoy",
+        clear: "Clear",
+        format: "dd/mm/yy",
+        titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+        weekStart: 1,
+        autoclose: true
+    };
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
+            language: 'es'
+        });
+
+    });
+</script>
+
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+@*<script src="~/Content/vendor/select2/select2.min.js"></script>
+    <script>
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+    </script>*@
+<!--===============================================================================================-->
+@*<script src="~/Content/js/main.js"></script>*@
+
+
+
+
+

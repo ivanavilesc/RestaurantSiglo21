@@ -1,0 +1,75 @@
+﻿@model AppRestaurantSiglo21.Models.RESERVA
+@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/css/BuscarReserva.css" rel="stylesheet" />
+<div class="container">
+
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Reserva de Mesas</h4>
+        </div>
+    </div>
+    <br />
+    <div class="alert alert-info" role="alert">
+        <strong>Bienvenido !</strong> Consulta aquí la reserva realizada.
+    </div>
+
+    <form action="" method="post">
+        <div class="row">
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <input class="form-control my-0 py-1 col-4"  type="number" id="nroReserva" name="nroReserva" placeholder="Numero de reserva" aria-label="Search" required>
+                &nbsp;<button type="submit" class="btn btn-info">Buscar</button>
+                <div class="input-group-append">
+                    <span class="input-group-text red lighten-3" id="basic-text1">
+                        <i class="fas fa-search text-grey"
+                           aria-hidden="true">Nro de Reserva</i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br />
+    @if (Model != null)
+    {
+    <div>
+        <h4>Resultados de búsqueda</h4>
+        <hr />
+
+        <table class="table table-striped">
+
+            <tbody>
+                <tr>
+                    <td> Numero reserva</td>
+                    <td>@Html.DisplayFor(model => model.IDRESERVA)</td>
+                </tr>
+                <tr>
+                    <td> Fecha de la reserva</td>
+                    <td>@Html.DisplayFor(model => model.FECHARESERVA)</td>
+                </tr>
+                <tr>
+                    <td> Cantidad Personas</td>
+                    <td>@Html.DisplayFor(model => model.CANTIDADCLIENTE)</td>
+                </tr>
+                <tr>
+                    <td>RUT Cliente</td>
+                    <td>@Html.DisplayFor(model => model.CLIENTE.PERSONA.RUT)-@Html.DisplayFor(model => model.CLIENTE.PERSONA.DV)</td>
+                </tr>
+                <tr>
+                    <td> Nombre Cliente</td>
+                    <td>@Html.DisplayFor(model => model.CLIENTE.PERSONA.NOMBRE) @Html.DisplayFor(model => model.CLIENTE.PERSONA.APELLIDOPATERNO)</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <p>
+
+            @Html.ActionLink("Escoger mesa", "Index", "SeleccionaMesa", new { id = Model.IDRESERVA, cantclientes = Model.CANTIDADCLIENTE }, new { @class = "btn btn-primary" })
+            @*@Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })*@
+        </p>
+    </div>
+    }
+    
+</div>

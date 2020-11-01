@@ -1,0 +1,7 @@
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\bin\Debug\CapaAccesoDatos.dll
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\bin\Debug\CapaAccesoDatos.pdb
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\obj\Debug\CapaAccesoDatos.csproj.CoreCompileInputs.cache
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\obj\Debug\CapaAccesoDatos.csproj.CopyComplete
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\obj\Debug\CapaAccesoDatos.dll
+C:\Users\Victor\source\repos\restaurantSigloXXI\CapaAccesoDatos\obj\Debug\CapaAccesoDatos.pdb

@@ -22,7 +22,7 @@ namespace AppRestaurantSiglo21.Models
     
         public short IDFUNCIONALIDAD { get; set; }
         public string DESCRIPCION { get; set; }
-        public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
+        public string RUTAURI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PERMISOS> PERMISOS { get; set; }

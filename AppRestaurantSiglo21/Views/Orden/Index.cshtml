@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<AppRestaurantSiglo21.Models.OrdenViewModel>
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.OrdenViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Principal.cshtml";
@@ -10,7 +9,7 @@
 
     <div class="card text-center">
         <div class="card-body">
-            <h4>Listado de Ordenes en la cocina</h4>
+            <h4>Detalle de Orden</h4>
         </div>
     </div>
     <br />
@@ -24,41 +23,36 @@
                 Nro de Orden
             </th>
             <th>
-                Estado Orden
-            </th>
-            <th>
-                Mesa
-            </th>
-            <th>
-                Platillo
-            </th>
-            <th>
                 Cantidad
+            </th>
+            <th>
+                Plato
+            </th>
+            <th>
+                Precio
             </th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroOrden)
+            </td>
 
-                    @Html.DisplayFor(modelItem => item.NroOrden)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescProducto)
+            </td>
+            <td>
+                @*@String.Format("{0:C}", item.PrecioProducto)*@
+                @Html.DisplayFor(modelItem => item.PrecioProducto)
+            </td>
+           
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescEstOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescMesa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescProducto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CantProducto)
-                </td>
-
-            </tr>
+        </tr>
         }
 
     </table>

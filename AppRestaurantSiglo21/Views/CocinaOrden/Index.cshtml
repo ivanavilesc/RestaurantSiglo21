@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<AppRestaurantSiglo21.Models.CocinaOrdenViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Ordenes en la cocina</h4>
+        </div>
+    </div>
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nro de Orden</th>
+                <th>Estado Orden</th>
+                <th>Mesa</th>
+                <th>Platillo</th>
+                <th>Cantidad</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => item.NroOrden)</td>
+                    <td> @Html.DisplayFor(modelItem => item.DescEstOrden)</td>
+                    <td> @Html.DisplayFor(modelItem => item.DescMesa) </td>
+                    <td> @Html.DisplayFor(modelItem => item.DescProducto)</td>
+                    <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
+                    <td>
+                        <div class="dropdown open">
+                            <button class="btn btn-secondary dropdown-toggle"
+                                    type="button" id="dropdEstOrden" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                Modificar Estado
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item"> @Html.ActionLink("Avanzar Estado", "avanzarOrden", new { id = item.NroOrden })</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item">@Html.ActionLink("Retroceder Estado", "Edit", new { id = item.NroOrden })</a>
+                                <a class="dropdown-item"> @Html.ActionLink("Cancelar Orden", "Edit", new { id = item.NroOrden })</a>
+                            </div>
+                        </div>
+                    </td>
+                    @*<td> @Html.ActionLink("Modificar Estado", "Edit", new { id = item.NroOrden }) |</td>*@
+                </tr>
+            </tbody>
+        }
+    </table>
+    @Html.ActionLink("Volver atrás", "DetailPlato", "CartaDigital", null, new { @class = "btn btn-secondary" })
+
+</div>
+

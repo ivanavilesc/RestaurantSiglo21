@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7D44DA70-7940-40A1-AE9D-D1F8806F8E97}</ProjectGuid>
+    <ProjectGuid>{9484E6A5-6CAD-41EE-AEF2-6907E30C1A41}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>false</Use64BitIISExpress>
+    <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -35,7 +35,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>MixedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -154,14 +153,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
+    <Compile Include="Controllers\CartaDigitalController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CocinaOrdenController.cs" />
     <Compile Include="Controllers\DisponibilidadController.cs" />
     <Compile Include="Controllers\DisponibilidadMesaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumoController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\MenuListaController.cs" />
     <Compile Include="Controllers\MesaController.cs" />
+    <Compile Include="Controllers\NotificacionOrdenController.cs" />
     <Compile Include="Controllers\OrdenController.cs" />
-    <Compile Include="Controllers\OrdenViewModel.cs" />
+    <Compile Include="Controllers\ReservasController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\SeleccionaMesaController.cs" />
+    <Compile Include="Controllers\TableroPedidosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,7 +189,12 @@
     <Compile Include="Models\CAJAOPERACION.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarritoItem.cs" />
     <Compile Include="Models\CLIENTE.cs">
+      <DependentUpon>RestaurantModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CocinaOrdenViewModel.cs" />
+    <Compile Include="Models\COLACOCINA.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DETALLEORDEN.cs">
@@ -223,6 +236,9 @@
     <Compile Include="Models\FUNCIONALIDAD.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\INGREDIENTE.cs">
+      <DependentUpon>RestaurantModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\INGRESO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -244,6 +260,7 @@
     <Compile Include="Models\ORDEN.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenViewModel.cs" />
     <Compile Include="Models\PAGOPEDIDO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -321,14 +338,59 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\BienvenidaReserva.css" />
+    <Content Include="Content\css\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\css\BuscarReserva.css" />
+    <Content Include="Content\css\ButtonTest.css" />
+    <Content Include="Content\css\CancelarReserva.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\Reservas.css" />
+    <Content Include="Content\css\SeleccionMesa.css" />
+    <Content Include="Content\css\util.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Content\Images\bg-01.jpg" />
+    <Content Include="Content\Images\icons\favicon.ico" />
+    <Content Include="Content\Images\img-01.png" />
+    <Content Include="Content\Images\restaurantReserva.jpg" />
+    <Content Include="Content\Images\RestSiglo21Logo.png" />
     <Content Include="Content\Img\login1.png" />
     <Content Include="Content\Img\login2.png" />
+    <Content Include="Content\js\bootstrap-datepicker.es.min.js" />
+    <Content Include="Content\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\main.js" />
     <Content Include="Content\Scripts\Login2.js" />
     <Content Include="Content\Styles\Login2.css" />
+    <Content Include="Content\vendor\animate\animate.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.js" />
+    <Content Include="Content\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="Content\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="Content\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Content\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Content\vendor\select2\select2.css" />
+    <Content Include="Content\vendor\select2\select2.js" />
+    <Content Include="Content\vendor\select2\select2.min.css" />
+    <Content Include="Content\vendor\select2\select2.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\restaurant_orig.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\CartaDigital.jpg" />
+    <Content Include="Images\Cocacola_Lata.jpg" />
+    <Content Include="Images\ensaldatomate.jpg" />
+    <Content Include="Images\PasteldePapas.jpg" />
     <Content Include="Models\RestaurantModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RestaurantModel.edmx</DependentUpon>
@@ -348,6 +410,63 @@
     <Content Include="Models\RestaurantModel.edmx.diagram">
       <DependentUpon>RestaurantModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Content\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="Content\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -372,23 +491,29 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Principal.cshtml" />
-    <Content Include="Views\Mesa\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Administrador.cshtml" />
     <Content Include="Views\Home\Garzon.cshtml" />
-    <Content Include="Views\Shared\_PrincipalAdmin.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Login2.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\UserDashBoard.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Shared\_Principal.cshtml" />
+    <Content Include="Views\Shared\_PrincipalAdmin.cshtml" />
+    <Content Include="Views\Shared\_PrincipalGarzon.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Delete.cshtml" />
     <Content Include="Views\Cliente\Detail.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
-    <Content Include="Views\Disponibilidad\Index.cshtml" />
+    <Content Include="Views\CocinaOrden\Index.cshtml" />
     <Content Include="Views\Disponibilidad\Create.cshtml" />
     <Content Include="Views\Disponibilidad\Delete.cshtml" />
     <Content Include="Views\Disponibilidad\Detail.cshtml" />
     <Content Include="Views\Disponibilidad\Edit.cshtml" />
+    <Content Include="Views\Disponibilidad\Index.cshtml" />
     <Content Include="Views\DisponibilidadMesa\Edit.cshtml" />
     <Content Include="Views\DisponibilidadMesa\Index.cshtml" />
     <Content Include="Views\Insumo\Create.cshtml" />
@@ -396,16 +521,39 @@
     <Content Include="Views\Insumo\Detail.cshtml" />
     <Content Include="Views\Insumo\Edit.cshtml" />
     <Content Include="Views\Insumo\Index.cshtml" />
+    <Content Include="Views\MenuLista\Create.cshtml" />
+    <Content Include="Views\MenuLista\Delete.cshtml" />
+    <Content Include="Views\MenuLista\Details.cshtml" />
+    <Content Include="Views\MenuLista\Edit.cshtml" />
+    <Content Include="Views\MenuLista\Index.cshtml" />
     <Content Include="Views\Mesa\Create.cshtml" />
     <Content Include="Views\Mesa\Delete.cshtml" />
     <Content Include="Views\Mesa\Detail.cshtml" />
     <Content Include="Views\Mesa\Edit.cshtml" />
-    <Content Include="Views\Home\Login2.cshtml" />
-    <Content Include="Views\Shared\_PrincipalGarzon.cshtml" />
+    <Content Include="Views\Mesa\Index.cshtml" />
     <Content Include="Views\Orden\Index.cshtml" />
+    <Content Include="Views\Reservas\Bienvenida.cshtml" />
+    <Content Include="Views\Reservas\Index.cshtml" />
+    <Content Include="Views\Reservas\MailSendOK.cshtml" />
+    <Content Include="Views\Reservas\Reserva.cshtml" />
+    <Content Include="Views\Reservas\SendMail.cshtml" />
+    <Content Include="Views\SeleccionaMesa\ButtonTest.cshtml" />
+    <Content Include="Views\SeleccionaMesa\Index.cshtml" />
+    <Content Include="Views\Reservas\CancelarReserva.cshtml" />
+    <Content Include="Views\Carrito\AgregarCarrito.cshtml" />
+    <Content Include="Views\CartaDigital\DetailBebestible.cshtml" />
+    <Content Include="Views\CartaDigital\DetailEnsaladas.cshtml" />
+    <Content Include="Views\CartaDigital\DetailPlato.cshtml" />
+    <Content Include="Views\CartaDigital\Index.cshtml" />
+    <Content Include="Views\NotificacionOrden\Index.cshtml" />
+    <Content Include="Views\TableroPedidos\ActualizaPedido.cshtml" />
+    <Content Include="Views\TableroPedidos\Index.cshtml" />
+    <Content Include="Views\Security\Login.cshtml" />
+    <Content Include="Views\Reservas\EliminarReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -439,9 +587,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>57074</DevelopmentServerPort>
+          <DevelopmentServerPort>62192</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57074/</IISUrl>
+          <IISUrl>http://localhost:62192/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

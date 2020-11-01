@@ -1,0 +1,33 @@
+﻿<Window x:Class="restaurantSigloXXI.Bienvenido"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restaurantSigloXXI"
+        mc:Ignorable="d"
+        Title="Bienvenido" Height="450" Width="800">
+    <Grid>
+        <Menu x:Name="MenuPrincipal" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="792" IsMainMenu="True">
+            <MenuItem x:Name="Finanzas" Header="_Finanzas">
+                <MenuItem x:Name="Ingresos" Header="_Ingresos" IsCheckable="False" Click="formIngresos"/>
+                <MenuItem x:Name="Egresos" Header="_Egresos" IsCheckable="False" Click="formEgresos"/>
+                <MenuItem x:Name="_MovimientosCuenta" Header="_Movimientos cuenta" IsCheckable="False" Click="formMovimientosCuenta"/>
+            </MenuItem>
+            <MenuItem x:Name="Caja" Header="_Caja">
+                <MenuItem x:Name="PagoConsumo" Header="_Pago consumo" IsCheckable="False" Click="formPagoConsumo"/>
+                <MenuItem Header="_Apertura caja" IsCheckable="False"/>
+                <MenuItem x:Name="CierreCaja" Header="_Cierre caja" IsCheckable="False" Click="formCierreCaja" />
+            </MenuItem>
+            <MenuItem x:Name="Proveedores"  Header="_Proveedores">
+                <MenuItem Header="_Pago proveedores" IsCheckable="False"/>
+            </MenuItem>
+            <MenuItem x:Name="Salir"  Header="_Salir">
+                <MenuItem Header="_Salir" IsCheckable="False" Click="MenuItem_Click"/>
+            </MenuItem>
+            
+        </Menu>
+        <Label x:Name="lblBienvenido" Content="Bienvenido" HorizontalAlignment="Left" Margin="338,159,0,0" Width="114" FontSize="20" FontFamily="Bradley Hand ITC" IsEnabled="False" VerticalAlignment="Top"/>
+        <Label x:Name="lblBienvenido_Copy" Content="Módulo Finanzas Restaurant Siglo XXI" HorizontalAlignment="Left" Margin="207,199,0,0" Width="369" FontSize="20" FontFamily="Bradley Hand ITC" IsEnabled="False" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

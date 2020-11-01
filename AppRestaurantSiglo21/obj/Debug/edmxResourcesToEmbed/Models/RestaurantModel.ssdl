@@ -7,19 +7,15 @@
     <Property Name="IDALERTA" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DESCALERTA" Type="varchar2" MaxLength="150" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="BANCOMOVIMIENTO">
     <Key>
       <PropertyRef Name="IDBCOMOV" />
-      <PropertyRef Name="IDTIPOMOVBCO" />
-      <PropertyRef Name="IDENTBANCARIA" />
     </Key>
     <Property Name="IDBCOMOV" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IDTIPOMOVBCO" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDENTBANCARIA" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDINGRESO" Type="number" Precision="10" Scale="0" />
-    <Property Name="IDEGRESO" Type="number" Precision="10" Scale="0" />
+    <Property Name="MONTOMOV" Type="number" Precision="10" Scale="0" />
+    <Property Name="NUMCUENTA" Type="number" Precision="10" Scale="0" />
+    <Property Name="IDTIPOMOVBCO" Type="number" Precision="2" Scale="0" />
+    <Property Name="IDENTBANCARIA" Type="number" Precision="2" Scale="0" />
   </EntityType>
   <EntityType Name="BODEGAMOVIMIENTO">
     <Key>
@@ -44,16 +40,32 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       <PropertyRef Name="IDCAJAOPERACION" />
     </Key>
     <Property Name="IDCAJAOPERACION" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FECHAAPERTURA" Type="date" />
-    <Property Name="MONTOAPERTURA" Type="number" Precision="10" Scale="0" />
+    <Property Name="MONTOOPERACION" Type="number" Precision="10" Scale="0" />
+    <Property Name="FECHAINICIOCAJA" Type="date" />
+    <Property Name="FECHACIERRECAJA" Type="date" />
     <Property Name="IDCAJAESTADO" Type="number" Precision="2" Scale="0" Nullable="false" />
     <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="OBSERVACION" Type="varchar2" MaxLength="300" />
   </EntityType>
   <EntityType Name="CLIENTE">
     <Key>
       <PropertyRef Name="IDPERSONA" />
     </Key>
     <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COLACOCINA">
+    <Key>
+      <PropertyRef Name="IDCOLACOCINA" />
+    </Key>
+    <Property Name="IDCOLACOCINA" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HORACREACION" Type="date" />
+    <Property Name="HORAACTUAL" Type="date" />
+    <Property Name="HORAENTREGA" Type="date" />
+    <Property Name="NROPEDIDO" Type="number" Precision="6" Scale="0" />
+    <Property Name="ESTADOPEDIDO" Type="number" Precision="2" Scale="0" />
+    <Property Name="CANTIDAD" Type="number" Precision="6" Scale="0" />
+    <Property Name="DIFICULTADPREP" Type="number" Precision="4" Scale="0" />
+    <Property Name="TIEMPOPREP" Type="number" Precision="4" Scale="0" />
   </EntityType>
   <EntityType Name="DETALLEORDEN">
     <Key>
@@ -63,6 +75,9 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="CANTIDAD" Type="number" Precision="4" Scale="0" />
     <Property Name="IDORDEN" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="IDPRODUCTO" Type="number" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="PRECIOPROD" Type="number" Precision="6" Scale="0" />
+    <Property Name="IDESTADO" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="HORADETORD" Type="date" />
   </EntityType>
   <EntityType Name="DETPEDIDOINS">
     <Key>
@@ -88,9 +103,10 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="IDDOCTOPAGO" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDORDEN" Type="number" Precision="38" Scale="0" />
     <Property Name="TOTAL" Type="number" Precision="38" Scale="0" />
-    <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="IDDOCTPAGOTIPO" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDMEDIOPAGO" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" />
+    <Property Name="IDDOCTPAGOTIPO" Type="number" Precision="2" Scale="0" />
+    <Property Name="IDMEDIOPAGO" Type="number" Precision="2" Scale="0" />
+    <Property Name="PROPINA" Type="number" Precision="10" Scale="0" />
   </EntityType>
   <EntityType Name="EGRESO">
     <Key>
@@ -100,7 +116,6 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="MONTO" Type="number" Precision="10" Scale="0" />
     <Property Name="DESCMOVIMIENTO" Type="varchar2" MaxLength="100" />
     <Property Name="FECHAMOVIMIENTO" Type="date" />
-    <Property Name="IDCOMPRA" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="EMPLEADOTURNO">
     <Key>
@@ -129,9 +144,9 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
   </EntityType>
   <EntityType Name="ESTADOORDEN">
     <Key>
-      <PropertyRef Name="IDESTADOORD" />
+      <PropertyRef Name="IDESTADO" />
     </Key>
-    <Property Name="IDESTADOORD" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDESTADO" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DESCESTORDEN" Type="varchar2" MaxLength="30" />
   </EntityType>
   <EntityType Name="ESTADOPRODUCTO">
@@ -150,9 +165,9 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
   </EntityType>
   <EntityType Name="ESTADORESERVA">
     <Key>
-      <PropertyRef Name="IDESTADORESRVA" />
+      <PropertyRef Name="IDESTADORESERVA" />
     </Key>
-    <Property Name="IDESTADORESRVA" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDESTADORESERVA" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DESCESTRESERVA" Type="varchar2" MaxLength="30" />
   </EntityType>
   <EntityType Name="FUNCIONALIDAD">
@@ -160,8 +175,20 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       <PropertyRef Name="IDFUNCIONALIDAD" />
     </Key>
     <Property Name="IDFUNCIONALIDAD" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" />
-    <Property Name="FECHAMODIFICACION" Type="date" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="250" />
+    <Property Name="RUTAURI" Type="varchar2" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="INGREDIENTE">
+    <Key>
+      <PropertyRef Name="IDINGREDIENTE" />
+    </Key>
+    <Property Name="IDINGREDIENTE" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCINGREDIENTE" Type="nvarchar2" MaxLength="250" />
+    <Property Name="CADUCIDAD" Type="number" Precision="4" Scale="0" />
+    <Property Name="STOCK" Type="number" Precision="4" Scale="0" />
+    <Property Name="MEDIDA" Type="nvarchar2" MaxLength="50" />
+    <Property Name="PORCMERMA" Type="number" Precision="4" Scale="3" />
+    <Property Name="PRODPREPARACION_IDPRODPREPAR" Type="number" Precision="6" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="INGRESO">
     <Key>
@@ -171,7 +198,6 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="MONTO" Type="number" Precision="10" Scale="0" />
     <Property Name="DESCINGRESO" Type="varchar2" MaxLength="250" />
     <Property Name="FECHAMOVIMIENTO" Type="date" />
-    <Property Name="IDCAJAOPERACION" Type="number" Precision="6" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="INSUMO">
     <Key>
@@ -207,7 +233,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="DVCLIENTETX" Type="varchar2" MaxLength="1" />
     <Property Name="DESCMEDIOPAGO" Type="varchar2" MaxLength="30" />
     <Property Name="MONTO" Type="number" Precision="38" Scale="0" />
-    <Property Name="IDMEDIOPAGO" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="IDMEDIOPAGO" Type="number" Precision="2" Scale="0" />
   </EntityType>
   <EntityType Name="MESA">
     <Key>
@@ -225,9 +251,10 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </Key>
     <Property Name="IDORDEN" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FECHAORDEN" Type="date" />
-    <Property Name="IDRESRVA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="IDRESERVA" Type="number" Precision="10" Scale="0" />
     <Property Name="IDESTADO" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDEMPTURNO" Type="number" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="IDEMPTURNO" Type="number" Precision="4" Scale="0" />
+    <Property Name="IDMESA" Type="number" Precision="4" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PAGOPEDIDO">
     <Key>
@@ -276,8 +303,9 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </Key>
     <Property Name="IDPRODPREPAR" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TIEMPOPREPARACION" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="IDPRODUCTO" Type="number" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="number" Precision="6" Scale="0" />
     <Property Name="IDTIPOPREP" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="DIFICULTAD" Type="number" Precision="4" Scale="0" />
   </EntityType>
   <EntityType Name="PRODUCTO">
     <Key>
@@ -288,7 +316,8 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="PRECIOPRODUCTO" Type="number" Precision="38" Scale="0" />
     <Property Name="IDESTPRODUCTO" Type="number" Precision="2" Scale="0" Nullable="false" />
     <Property Name="IDTIPOPRODUCTO" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDRECPRODUCTO" Type="number" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="IDRECPRODUCTO" Type="number" Precision="4" Scale="0" />
+    <Property Name="FOTO" Type="nvarchar2" MaxLength="1000" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -311,14 +340,15 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
   </EntityType>
   <EntityType Name="RESERVA">
     <Key>
-      <PropertyRef Name="IDRESRVA" />
+      <PropertyRef Name="IDRESERVA" />
     </Key>
-    <Property Name="IDRESRVA" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDRESERVA" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FECHARESERVA" Type="date" />
     <Property Name="CANTIDADCLIENTE" Type="number" Precision="4" Scale="0" />
-    <Property Name="IDESTADORESRVA" Type="number" Precision="2" Scale="0" Nullable="false" />
-    <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="IDMESA" Type="number" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="IDESTADORESERVA" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" />
+    <Property Name="MSGRESERVA" Type="nvarchar2" MaxLength="250" />
+    <Property Name="HORARESERVA" Type="nvarchar2" MaxLength="10" />
   </EntityType>
   <EntityType Name="RESTAURANT">
     <Key>
@@ -361,7 +391,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       <PropertyRef Name="IDTIPOPREP" />
     </Key>
     <Property Name="IDTIPOPREP" Type="number" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DESCTIPPREP" Type="varchar2" MaxLength="30" />
+    <Property Name="DESCTIPOPREP" Type="varchar2" MaxLength="30" />
   </EntityType>
   <EntityType Name="TIPOPRODUCTO">
     <Key>
@@ -388,7 +418,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
   <Association Name="BCOMOV_ENTIDADBANCARIA_FK">
-    <End Role="ENTIDADBANCARIA" Type="Self.ENTIDADBANCARIA" Multiplicity="1" />
+    <End Role="ENTIDADBANCARIA" Type="Self.ENTIDADBANCARIA" Multiplicity="0..1" />
     <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ENTIDADBANCARIA">
@@ -399,20 +429,8 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BCOMOV_INGRESO_FK">
-    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="INGRESO">
-        <PropertyRef Name="IDINGRESO" />
-      </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDINGRESO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="BCOMOV_TIPOMOVBANCO_FK">
-    <End Role="TIPOMOVBANCO" Type="Self.TIPOMOVBANCO" Multiplicity="1" />
+    <End Role="TIPOMOVBANCO" Type="Self.TIPOMOVBANCO" Multiplicity="0..1" />
     <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TIPOMOVBANCO">
@@ -435,7 +453,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BODEGAMOVIMIENTO_INSUMO_FK">
+  <Association Name="BODEGAMOV_INSUMO_FK">
     <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
     <End Role="BODEGAMOVIMIENTO" Type="Self.BODEGAMOVIMIENTO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -483,15 +501,15 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="COMOV_EGRESO_FK">
-    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="0..1" />
-    <End Role="BANCOMOVIMIENTO" Type="Self.BANCOMOVIMIENTO" Multiplicity="*" />
+  <Association Name="DETALLEORDEN_ESTADOORDEN_FK">
+    <End Role="ESTADOORDEN" Type="Self.ESTADOORDEN" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="EGRESO">
-        <PropertyRef Name="IDEGRESO" />
+      <Principal Role="ESTADOORDEN">
+        <PropertyRef Name="IDESTADO" />
       </Principal>
-      <Dependent Role="BANCOMOVIMIENTO">
-        <PropertyRef Name="IDEGRESO" />
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDESTADO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -543,8 +561,20 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="DOCPAGO_MEDIOPAGO_FK">
+    <End Role="MEDIOPAGO" Type="Self.MEDIOPAGO" Multiplicity="0..1" />
+    <End Role="DOCUMENTOPAGO" Type="Self.DOCUMENTOPAGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDIOPAGO">
+        <PropertyRef Name="IDMEDIOPAGO" />
+      </Principal>
+      <Dependent Role="DOCUMENTOPAGO">
+        <PropertyRef Name="IDMEDIOPAGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="DOCUMENTOPAGO_CLIENTE_FK">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
     <End Role="DOCUMENTOPAGO" Type="Self.DOCUMENTOPAGO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
@@ -556,7 +586,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </ReferentialConstraint>
   </Association>
   <Association Name="DOCUMENTOPAGO_DOCTPAGOTIPO_FK">
-    <End Role="DOCTPAGOTIPO" Type="Self.DOCTPAGOTIPO" Multiplicity="1" />
+    <End Role="DOCTPAGOTIPO" Type="Self.DOCTPAGOTIPO" Multiplicity="0..1" />
     <End Role="DOCUMENTOPAGO" Type="Self.DOCUMENTOPAGO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DOCTPAGOTIPO">
@@ -564,30 +594,6 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Principal>
       <Dependent Role="DOCUMENTOPAGO">
         <PropertyRef Name="IDDOCTPAGOTIPO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="DOCUMENTOPAGO_MEDIOPAGO_FK">
-    <End Role="MEDIOPAGO" Type="Self.MEDIOPAGO" Multiplicity="1" />
-    <End Role="DOCUMENTOPAGO" Type="Self.DOCUMENTOPAGO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MEDIOPAGO">
-        <PropertyRef Name="IDMEDIOPAGO" />
-      </Principal>
-      <Dependent Role="DOCUMENTOPAGO">
-        <PropertyRef Name="IDMEDIOPAGO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EGRESO_PAGOPEDIDO_FK">
-    <End Role="PAGOPEDIDO" Type="Self.PAGOPEDIDO" Multiplicity="1" />
-    <End Role="EGRESO" Type="Self.EGRESO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PAGOPEDIDO">
-        <PropertyRef Name="IDCOMPRA" />
-      </Principal>
-      <Dependent Role="EGRESO">
-        <PropertyRef Name="IDCOMPRA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -615,15 +621,15 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="INGRESO_CAJAOPERACION_FK">
-    <End Role="CAJAOPERACION" Type="Self.CAJAOPERACION" Multiplicity="1" />
-    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="*" />
+  <Association Name="INGREDIENTE_PRODPREPARACION_FK">
+    <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="1" />
+    <End Role="INGREDIENTE" Type="Self.INGREDIENTE" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CAJAOPERACION">
-        <PropertyRef Name="IDCAJAOPERACION" />
+      <Principal Role="PRODPREPARACION">
+        <PropertyRef Name="IDPRODPREPAR" />
       </Principal>
-      <Dependent Role="INGRESO">
-        <PropertyRef Name="IDCAJAOPERACION" />
+      <Dependent Role="INGREDIENTE">
+        <PropertyRef Name="PRODPREPARACION_IDPRODPREPAR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -640,7 +646,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </ReferentialConstraint>
   </Association>
   <Association Name="MEDIOPAGOTX_MEDIOPAGO_FK">
-    <End Role="MEDIOPAGO" Type="Self.MEDIOPAGO" Multiplicity="1" />
+    <End Role="MEDIOPAGO" Type="Self.MEDIOPAGO" Multiplicity="0..1" />
     <End Role="MEDIOPAGOTX" Type="Self.MEDIOPAGOTX" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MEDIOPAGO">
@@ -676,7 +682,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </ReferentialConstraint>
   </Association>
   <Association Name="ORDEN_EMPLEADOTURNO_FK">
-    <End Role="EMPLEADOTURNO" Type="Self.EMPLEADOTURNO" Multiplicity="1" />
+    <End Role="EMPLEADOTURNO" Type="Self.EMPLEADOTURNO" Multiplicity="0..1" />
     <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EMPLEADOTURNO">
@@ -692,22 +698,34 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTADOORDEN">
-        <PropertyRef Name="IDESTADOORD" />
+        <PropertyRef Name="IDESTADO" />
       </Principal>
       <Dependent Role="ORDEN">
         <PropertyRef Name="IDESTADO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ORDEN_MESA_FK">
+    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+    <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MESA">
+        <PropertyRef Name="IDMESA" />
+      </Principal>
+      <Dependent Role="ORDEN">
+        <PropertyRef Name="IDMESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ORDEN_RESERVA_FK">
-    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="0..1" />
     <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RESERVA">
-        <PropertyRef Name="IDRESRVA" />
+        <PropertyRef Name="IDRESERVA" />
       </Principal>
       <Dependent Role="ORDEN">
-        <PropertyRef Name="IDRESRVA" />
+        <PropertyRef Name="IDRESERVA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -771,6 +789,18 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PRODPREP_PRODUCTO_FK">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="PRODPREPARACION">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="PRODPREP_TIPOPREPARACION_FK">
     <End Role="TIPOPREPARACION" Type="Self.TIPOPREPARACION" Multiplicity="1" />
     <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
@@ -795,20 +825,8 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PRODUCTO_FK">
-    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
-    <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PRODUCTO">
-        <PropertyRef Name="IDPRODUCTO" />
-      </Principal>
-      <Dependent Role="PRODPREPARACION">
-        <PropertyRef Name="IDPRODUCTO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="PRODUCTO_RECETAPRODUCTO_FK">
-    <End Role="RECETAPRODUCTO" Type="Self.RECETAPRODUCTO" Multiplicity="1" />
+    <End Role="RECETAPRODUCTO" Type="Self.RECETAPRODUCTO" Multiplicity="0..1" />
     <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RECETAPRODUCTO">
@@ -844,7 +862,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     </ReferentialConstraint>
   </Association>
   <Association Name="RESERVA_CLIENTE_FK">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
     <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
@@ -860,22 +878,10 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTADORESERVA">
-        <PropertyRef Name="IDESTADORESRVA" />
+        <PropertyRef Name="IDESTADORESERVA" />
       </Principal>
       <Dependent Role="RESERVA">
-        <PropertyRef Name="IDESTADORESRVA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RESERVA_MESA_FK">
-    <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
-    <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MESA">
-        <PropertyRef Name="IDMESA" />
-      </Principal>
-      <Dependent Role="RESERVA">
-        <PropertyRef Name="IDMESA" />
+        <PropertyRef Name="IDESTADORESERVA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -917,10 +923,12 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
   </Association>
   <EntityContainer Name="RestaurantModelStoreContainer">
     <EntitySet Name="ALERTASTOCK" EntityType="Self.ALERTASTOCK" Schema="RESTAURANT" store:Type="Tables" />
+    <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="BODEGAMOVIMIENTO" EntityType="Self.BODEGAMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="RESTAURANT" store:Type="Tables" />
+    <EntitySet Name="COLACOCINA" EntityType="Self.COLACOCINA" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" Schema="RESTAURANT" store:Type="Tables" />
@@ -934,6 +942,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <EntitySet Name="ESTADOPROVEEDOR" EntityType="Self.ESTADOPROVEEDOR" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="ESTADORESERVA" EntityType="Self.ESTADORESERVA" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="FUNCIONALIDAD" EntityType="Self.FUNCIONALIDAD" Schema="RESTAURANT" store:Type="Tables" />
+    <EntitySet Name="INGREDIENTE" EntityType="Self.INGREDIENTE" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="INGRESO" EntityType="Self.INGRESO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="INSUMO" EntityType="Self.INSUMO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="INSUMOSTOCK" EntityType="Self.INSUMOSTOCK" Schema="RESTAURANT" store:Type="Tables" />
@@ -959,21 +968,8 @@ advertencia 6002: La tabla o vista 'RESTAURANT.BANCOMOVIMIENTO' no tiene definid
     <EntitySet Name="TIPOPRODUCTO" EntityType="Self.TIPOPRODUCTO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="USUARIOROL" EntityType="Self.USUARIOROL" Schema="RESTAURANT" store:Type="Tables" />
-    <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" store:Type="Tables" store:Schema="RESTAURANT">
-      <DefiningQuery>SELECT 
-"BANCOMOVIMIENTO"."IDBCOMOV" AS "IDBCOMOV", 
-"BANCOMOVIMIENTO"."IDTIPOMOVBCO" AS "IDTIPOMOVBCO", 
-"BANCOMOVIMIENTO"."IDENTBANCARIA" AS "IDENTBANCARIA", 
-"BANCOMOVIMIENTO"."IDINGRESO" AS "IDINGRESO", 
-"BANCOMOVIMIENTO"."IDEGRESO" AS "IDEGRESO"
-FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="BCOMOV_ENTIDADBANCARIA_FK" Association="Self.BCOMOV_ENTIDADBANCARIA_FK">
       <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="BCOMOV_INGRESO_FK" Association="Self.BCOMOV_INGRESO_FK">
-      <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
     </AssociationSet>
     <AssociationSet Name="BCOMOV_TIPOMOVBANCO_FK" Association="Self.BCOMOV_TIPOMOVBANCO_FK">
@@ -984,7 +980,7 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
       <End Role="TIPOMOVBODEGA" EntitySet="TIPOMOVBODEGA" />
       <End Role="BODEGAMOVIMIENTO" EntitySet="BODEGAMOVIMIENTO" />
     </AssociationSet>
-    <AssociationSet Name="BODEGAMOVIMIENTO_INSUMO_FK" Association="Self.BODEGAMOVIMIENTO_INSUMO_FK">
+    <AssociationSet Name="BODEGAMOV_INSUMO_FK" Association="Self.BODEGAMOV_INSUMO_FK">
       <End Role="INSUMO" EntitySet="INSUMO" />
       <End Role="BODEGAMOVIMIENTO" EntitySet="BODEGAMOVIMIENTO" />
     </AssociationSet>
@@ -1000,9 +996,9 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
       <End Role="PERSONA" EntitySet="PERSONA" />
       <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
-    <AssociationSet Name="COMOV_EGRESO_FK" Association="Self.COMOV_EGRESO_FK">
-      <End Role="EGRESO" EntitySet="EGRESO" />
-      <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
+    <AssociationSet Name="DETALLEORDEN_ESTADOORDEN_FK" Association="Self.DETALLEORDEN_ESTADOORDEN_FK">
+      <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
     </AssociationSet>
     <AssociationSet Name="DETALLEORDEN_ORDEN_FK" Association="Self.DETALLEORDEN_ORDEN_FK">
       <End Role="ORDEN" EntitySet="ORDEN" />
@@ -1020,6 +1016,10 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="DETPEDIDOINS" EntitySet="DETPEDIDOINS" />
     </AssociationSet>
+    <AssociationSet Name="DOCPAGO_MEDIOPAGO_FK" Association="Self.DOCPAGO_MEDIOPAGO_FK">
+      <End Role="MEDIOPAGO" EntitySet="MEDIOPAGO" />
+      <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
+    </AssociationSet>
     <AssociationSet Name="DOCUMENTOPAGO_CLIENTE_FK" Association="Self.DOCUMENTOPAGO_CLIENTE_FK">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
@@ -1027,14 +1027,6 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
     <AssociationSet Name="DOCUMENTOPAGO_DOCTPAGOTIPO_FK" Association="Self.DOCUMENTOPAGO_DOCTPAGOTIPO_FK">
       <End Role="DOCTPAGOTIPO" EntitySet="DOCTPAGOTIPO" />
       <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
-    </AssociationSet>
-    <AssociationSet Name="DOCUMENTOPAGO_MEDIOPAGO_FK" Association="Self.DOCUMENTOPAGO_MEDIOPAGO_FK">
-      <End Role="MEDIOPAGO" EntitySet="MEDIOPAGO" />
-      <End Role="DOCUMENTOPAGO" EntitySet="DOCUMENTOPAGO" />
-    </AssociationSet>
-    <AssociationSet Name="EGRESO_PAGOPEDIDO_FK" Association="Self.EGRESO_PAGOPEDIDO_FK">
-      <End Role="PAGOPEDIDO" EntitySet="PAGOPEDIDO" />
-      <End Role="EGRESO" EntitySet="EGRESO" />
     </AssociationSet>
     <AssociationSet Name="EMPLEADOTURNO_USUARIO_FK" Association="Self.EMPLEADOTURNO_USUARIO_FK">
       <End Role="USUARIO" EntitySet="USUARIO" />
@@ -1044,9 +1036,9 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
       <End Role="TIPOCUENTA" EntitySet="TIPOCUENTA" />
       <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
     </AssociationSet>
-    <AssociationSet Name="INGRESO_CAJAOPERACION_FK" Association="Self.INGRESO_CAJAOPERACION_FK">
-      <End Role="CAJAOPERACION" EntitySet="CAJAOPERACION" />
-      <End Role="INGRESO" EntitySet="INGRESO" />
+    <AssociationSet Name="INGREDIENTE_PRODPREPARACION_FK" Association="Self.INGREDIENTE_PRODPREPARACION_FK">
+      <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
+      <End Role="INGREDIENTE" EntitySet="INGREDIENTE" />
     </AssociationSet>
     <AssociationSet Name="INSUMOSTOCK_INSUMO_FK" Association="Self.INSUMOSTOCK_INSUMO_FK">
       <End Role="INSUMO" EntitySet="INSUMO" />
@@ -1070,6 +1062,10 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
     </AssociationSet>
     <AssociationSet Name="ORDEN_ESTADOORDEN_FK" Association="Self.ORDEN_ESTADOORDEN_FK">
       <End Role="ESTADOORDEN" EntitySet="ESTADOORDEN" />
+      <End Role="ORDEN" EntitySet="ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="ORDEN_MESA_FK" Association="Self.ORDEN_MESA_FK">
+      <End Role="MESA" EntitySet="MESA" />
       <End Role="ORDEN" EntitySet="ORDEN" />
     </AssociationSet>
     <AssociationSet Name="ORDEN_RESERVA_FK" Association="Self.ORDEN_RESERVA_FK">
@@ -1096,6 +1092,10 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
       <End Role="ROL" EntitySet="ROL" />
       <End Role="PERMISOS" EntitySet="PERMISOS" />
     </AssociationSet>
+    <AssociationSet Name="PRODPREP_PRODUCTO_FK" Association="Self.PRODPREP_PRODUCTO_FK">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
+    </AssociationSet>
     <AssociationSet Name="PRODPREP_TIPOPREPARACION_FK" Association="Self.PRODPREP_TIPOPREPARACION_FK">
       <End Role="TIPOPREPARACION" EntitySet="TIPOPREPARACION" />
       <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
@@ -1103,10 +1103,6 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
     <AssociationSet Name="PRODUCTO_ESTADOPRODUCTO_FK" Association="Self.PRODUCTO_ESTADOPRODUCTO_FK">
       <End Role="ESTADOPRODUCTO" EntitySet="ESTADOPRODUCTO" />
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-    </AssociationSet>
-    <AssociationSet Name="PRODUCTO_FK" Association="Self.PRODUCTO_FK">
-      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-      <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
     </AssociationSet>
     <AssociationSet Name="PRODUCTO_RECETAPRODUCTO_FK" Association="Self.PRODUCTO_RECETAPRODUCTO_FK">
       <End Role="RECETAPRODUCTO" EntitySet="RECETAPRODUCTO" />
@@ -1126,10 +1122,6 @@ FROM "RESTAURANT"."BANCOMOVIMIENTO" "BANCOMOVIMIENTO"</DefiningQuery>
     </AssociationSet>
     <AssociationSet Name="RESERVA_ESTADORESERVA_FK" Association="Self.RESERVA_ESTADORESERVA_FK">
       <End Role="ESTADORESERVA" EntitySet="ESTADORESERVA" />
-      <End Role="RESERVA" EntitySet="RESERVA" />
-    </AssociationSet>
-    <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
-      <End Role="MESA" EntitySet="MESA" />
       <End Role="RESERVA" EntitySet="RESERVA" />
     </AssociationSet>
     <AssociationSet Name="USUARIO_PERSONA_FK" Association="Self.USUARIO_PERSONA_FK">
