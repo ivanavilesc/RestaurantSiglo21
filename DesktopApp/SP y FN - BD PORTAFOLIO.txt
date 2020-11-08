@@ -1,0 +1,291 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------FUNCION QUE LISTA LOS EGRESOS DE LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION FN_LISTAEGRESOS RETURN SYS_REFCURSOR IS 
+    L_CURSOR SYS_REFCURSOR;
+BEGIN
+    OPEN L_CURSOR FOR SELECT IDEGRESO, MONTO, DESCMOVIMIENTO, FECHAMOVIMIENTO FROM EGRESO order by IDEGRESO ASC ;
+    RETURN L_CURSOR;
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------PROCEDIMIENTO ALMACENADO QUE INSERTA UN EGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_INSERTAREGRESO (PE_monto NUMBER, PE_descmovimiento VARCHAR2, PE_fecha DATE)
+AS
+    BEGIN
+    INSERT INTO EGRESO (MONTO, DESCMOVIMIENTO, FECHAMOVIMIENTO) 
+    VALUES (PE_monto, PE_descmovimiento, PE_fecha);
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------PROCEDIMIENTO ALMACENADO QUE ACTUALIZA UN EGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_ACTUALIZAREGRESO (PE_IDEGRESO in NUMBER, PE_MONTO in NUMBER, PE_DESCMOVIMIENTO in VARCHAR2, PE_FECHAMOVIMIENTO in DATE) 
+AS
+    V_IDEGRESO NUMBER := PE_IDEGRESO;
+    V_MONTO NUMBER := PE_MONTO;
+    V_DESCMOVIMIENTO VARCHAR2(100) := PE_DESCMOVIMIENTO;
+    V_FECHAMOVIMIENTO DATE := PE_FECHAMOVIMIENTO;
+BEGIN
+    UPDATE EGRESO SET MONTO = V_MONTO, DESCMOVIMIENTO = V_DESCMOVIMIENTO, FECHAMOVIMIENTO = V_FECHAMOVIMIENTO WHERE IDEGRESO = V_IDEGRESO;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        NULL;
+    WHEN OTHERS THEN
+        RAISE;
+END SP_ACTUALIZAREGRESO;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------PROCEDIMIENTO ALMACENADO QUE ELIMINA UN EGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_ELIMINAREGRESO (PE_IDEGRESO in NUMBER)
+AS
+    V_IDEGRESO NUMBER := PE_IDEGRESO;
+    BEGIN
+        DELETE FROM EGRESO WHERE IDEGRESO = V_IDEGRESO;
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------FUNCION QUE LISTA LOS INGRESOS DE LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION FN_LISTAINGRESOS RETURN SYS_REFCURSOR IS 
+    L_CURSOR SYS_REFCURSOR;
+BEGIN
+    OPEN L_CURSOR FOR SELECT IDINGRESO, MONTO, DESCINGRESO, FECHAMOVIMIENTO FROM INGRESO order by IDINGRESO ASC;
+    RETURN L_CURSOR;
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------PROCEDIMIENTO ALMACENADO QUE INSERTA UN INGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_INSERTARINGRESO (PE_MONTO NUMBER, PE_DESCINGRESO VARCHAR2, PE_FECHA DATE)
+AS
+    BEGIN
+    INSERT INTO INGRESO (MONTO, DESCINGRESO, FECHAMOVIMIENTO) 
+    VALUES (PE_MONTO, PE_DESCINGRESO, PE_FECHA);
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------PROCEDIMIENTO ALMACENADO QUE ACTUALIZA UN INGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_ACTUALIZARINGRESO (PE_IDINGRESO in NUMBER, PE_MONTO in NUMBER, PE_DESCINGRESO in VARCHAR2, PE_FECHAMOVIMIENTO in DATE) 
+AS
+    V_IDINGRESO NUMBER := PE_IDINGRESO;
+    V_MONTO NUMBER := PE_MONTO;
+    V_DESCINGRESO VARCHAR2(100) := PE_DESCINGRESO;
+    V_FECHAMOVIMIENTO DATE := PE_FECHAMOVIMIENTO;
+BEGIN
+    UPDATE INGRESO SET MONTO = V_MONTO, DESCINGRESO = V_DESCINGRESO, FECHAMOVIMIENTO = V_FECHAMOVIMIENTO WHERE IDINGRESO = V_IDINGRESO;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        NULL;
+    WHEN OTHERS THEN
+        RAISE;
+END SP_ACTUALIZARINGRESO;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------PROCEDIMIENTO ALMACENADO QUE ELIMINA UN INGRESO EN LA BASE DE DATOS--------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE SP_ELIMINARINGRESO (PE_IDINGRESO in NUMBER)
+AS
+    V_IDINGRESO NUMBER := PE_IDINGRESO;
+    BEGIN
+        DELETE FROM INGRESO WHERE IDINGRESO = V_IDINGRESO;
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--HAY QUE PROBAR ESTE PROCEDIMIENTO -- YA ESTÁ CARGADO EN MI BD.
+
+CREATE OR REPLACE PROCEDURE SP_INSERTAREGRESOCOMPLETO (
+PE_MONTO in NUMBER, 				/*EGRESO Y BANCOMOVIMIENTO*/
+PE_DESCMOVIMIENTO in VARCHAR2, 		/*EGRESO*/
+PE_FECHAMOVIMIENTO in DATE,			/*EGRESO*/
+PE_NUMCUENTA in NUMBER, 			/*BANCOMOVIMIENTO*/
+PE_IDTIPOMOVBCO in NUMBER, 			/*BANCOMOVIMIENTO*/
+PE_IDENTBANCARIA in NUMBER, 		/*BANCOMOVIMIENTO Y ENTIDADBANCARIA*/
+PE_DESCBANCO in VARCHAR2,			/*ENTIDADBANCARIA*/
+PE_IDTIPOCUENTA in NUMBER 			/*ENTIDADBANCARIA*/
+)
+AS
+	V_MONTO NUMBER := PE_MONTO;
+    V_DESCMOVIMIENTO VARCHAR2(100) := PE_DESCMOVIMIENTO;
+    V_FECHAMOVIMIENTO DATE := PE_FECHAMOVIMIENTO;
+    V_NUMCUENTA NUMBER := PE_NUMCUENTA;
+    V_IDTIPOMOVBCO  NUMBER := PE_IDTIPOMOVBCO;
+    V_IDENTBANCARIA NUMBER := PE_IDENTBANCARIA;
+    V_DESCBANCO VARCHAR2(50) := PE_DESCBANCO;
+	V_IDTIPOCUENTA NUMBER := PE_IDTIPOCUENTA;
+		BEGIN
+			INSERT INTO ENTIDADBANCARIA (DESCBANCO, IDTIPOCUENTA) VALUES (V_DESCBANCO, V_IDTIPOCUENTA);
+			INSERT INTO EGRESO (MONTO, DESCMOVIMIENTO, FECHAMOVIMIENTO) VALUES (V_MONTO, V_DESCMOVIMIENTO, V_FECHAMOVIMIENTO);
+			INSERT INTO BANCOMOVIMIENTO (MONTOMOV, NUMCUENTA, IDTIPOMOVBCO, IDENTBANCARIA) VALUES (V_MONTO, V_NUMCUENTA, PE_IDTIPOMOVBCO, PE_IDENTBANCARIA);
+END;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION FN_LISTAORDEN RETURN SYS_REFCURSOR IS 
+    L_CURSOR SYS_REFCURSOR;
+BEGIN
+    OPEN L_CURSOR FOR 
+	
+SELECT  a.fechaorden, a.idresrva, b.descestorden, a.idempturno, a.idmesa, 
+(SELECT  sum(b.precioprod * b.cantidad) FROM detalleorden b WHERE b.idorden = 1) total
+FROM orden a join estadoorden b 
+on (a.idestado = b.idestado)
+WHERE a.idorden = 1;
+	
+    RETURN L_CURSOR;
+END;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION FN_LISTAPAGOSEFECTIVO RETURN SYS_REFCURSOR IS 
+    L_CURSOR SYS_REFCURSOR;
+BEGIN
+    OPEN L_CURSOR FOR 
+    
+    SELECT a.idorden ID_ORDEN, a.iddetalleorden ID_DETALLE, a.cantidad CANTIDAD,  a.idproducto ID_PRODUCTO,
+    (SELECT b.descproducto FROM producto b WHERE b.idproducto = a.idproducto) DescProducto, a.precioprod, (a.cantidad * a.precioprod) TotalPagar
+FROM detalleorden a;
+    
+    RETURN L_CURSOR;
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+create or replace procedure  SP_GrabarPagoOrden (PE_idOrden IN NUMBER, PE_propina in NUMBER, PE_tipopago in NUMBER, PE_mediopago in NUMBER) AS
+
+
+v_respuesta VARCHAR2(500);
+v_fechaorden    DATE; 
+v_idresrva      NUMBER(10,0);     
+v_idestado      NUMBER(2,0); 
+v_idpersona    NUMBER(4,0);  
+v_idmesa        NUMBER(4,0);
+v_existe        NUMBER(4,0);
+v_TotaAPagar    NUMBER(8,0);
+
+
+BEGIN
+    SELECT COUNT(1) into v_existe FROM orden WHERE idorden = PE_idOrden AND IDESTADO NOT IN (3,6);
+    IF (v_existe = 0) THEN
+        v_respuesta := 'Orden no existe';
+        dbms_output.put_line('Orden no existe');
+    END IF;
+    
+    BEGIN
+
+        SELECT COUNT(1) into v_existe FROM orden WHERE idorden = PE_idOrden AND IDESTADO NOT IN (3,6);
+        IF (v_existe = 0) THEN
+            v_respuesta := 'Orden no existe';
+            dbms_output.put_line('Orden no existe');
+        END IF;
+        EXCEPTION WHEN OTHERS THEN
+                v_respuesta := 'Error al recuperar orden';
+                dbms_output.put_line('Error al recuperar orden');  
+    END;
+    
+    BEGIN
+
+        SELECT  a.fechaorden, a.idresrva, a.idestado, r.idpersona, a.idmesa, 
+                (SELECT  sum(b.precioprod * b.cantidad) FROM detalleorden b WHERE b.idorden = a.idorden)
+        INTO  v_fechaorden, v_idresrva, v_idestado, v_idpersona, v_idmesa, v_TotaAPagar
+        FROM orden a
+        LEFT JOIN reserva r on r.idresrva = a.idresrva
+
+        WHERE a.idorden = PE_idOrden;     
+
+       EXCEPTION WHEN OTHERS THEN
+            v_respuesta := 'Error al recuperar orden';
+            dbms_output.put_line('Error al recuperar orden');  
+    END;
+    
+    BEGIN    
+
+        INSERT INTO documentopago (
+            idorden,
+            total,
+            IDPERSONA,
+            iddoctpagotipo,
+            idmediopago,
+            propina
+        ) VALUES (
+            PE_idOrden      ,
+            v_TotaAPagar    ,
+            v_idpersona    ,
+            PE_tipopago     ,
+            PE_mediopago    ,
+            PE_propina
+        );
+
+        EXCEPTION WHEN OTHERS THEN
+            ROLLBACK;
+            v_respuesta := 'Error al grabar pago';
+            dbms_output.put_line('Orden no existe');            
+    END;
+    
+    BEGIN
+
+        UPDATE orden set IDESTADO = 6 where idorden = PE_idOrden;
+
+        EXCEPTION WHEN OTHERS THEN
+            ROLLBACK;
+            v_respuesta := 'Error al actualizar estado de la reserva';
+            dbms_output.put_line('Error al actualizar estado de la reserva: ' || sqlerrm);            
+    END;
+    
+    BEGIN
+        UPDATE reserva set IDESTADORESRVA = 4 where IDRESRVA = v_idresrva;
+
+        EXCEPTION WHEN OTHERS THEN
+            ROLLBACK;
+            v_respuesta := 'Error al actualizar estado de la reserva';
+            dbms_output.put_line('Error al actualizar estado de la reserva');            
+    END;
+
+    BEGIN
+
+        UPDATE MESA set IDESTADOMESA = 1 where IDMESA = v_idestado;
+
+        EXCEPTION WHEN OTHERS THEN
+            ROLLBACK;
+            v_respuesta := 'Error al actualizar estado de la mesa';
+            dbms_output.put_line('Error al actualizar estado de la mesa');
+    END;
+
+    commit;
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

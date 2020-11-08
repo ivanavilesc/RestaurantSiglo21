@@ -58,7 +58,8 @@ namespace AppRestaurantSiglo21.Controllers
                 using (RestaurantEntities db = new RestaurantEntities())
                 {
                     var upperUID = objUsuario.USERID.ToUpper();
-                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
+                    var resultPwd = new SecurityController().encrypt(objUsuario.PASSWORD);
+                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(resultPwd)).ToList();
                     //if (obj != null)
                     if (obj.Count() > 0)
                     {
@@ -85,7 +86,27 @@ namespace AppRestaurantSiglo21.Controllers
                             Session["Layout"] = "~/Views/Home/Garzon.cshtml";
                             return RedirectToAction("Garzon");
                         }
-
+                        if (idrol.Equals(3))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(4))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(5))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(6))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        
                         //return RedirectToAction("UserDashBoard");
                     }
                 }
@@ -111,8 +132,11 @@ namespace AppRestaurantSiglo21.Controllers
                 using (RestaurantEntities db = new RestaurantEntities())
                 {
                     var upperUID = objUsuario.USERID.ToUpper();
-                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
+                    var resultPwd = new SecurityController().encrypt(objUsuario.PASSWORD);
+                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(resultPwd)).ToList();
+                    //var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
                     //if (obj != null)
+                    int y = 1;
                     if (obj.Count() > 0)
                     {
                         //Session["UserID"] = obj.IDUSUARIO.ToString();
@@ -137,6 +161,26 @@ namespace AppRestaurantSiglo21.Controllers
                         {
                             Session["Layout"] = "~/Views/Home/Garzon.cshtml";
                             return RedirectToAction("Garzon");
+                        }
+                        if (idrol.Equals(3))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(4))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(5))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
+                        }
+                        if (idrol.Equals(6))
+                        {
+                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            return RedirectToAction("Administrador");
                         }
 
                         //return RedirectToAction("UserDashBoard");
@@ -189,6 +233,11 @@ namespace AppRestaurantSiglo21.Controllers
         {
             Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public ActionResult NewMenu()
+        {
+            return View();
         }
 
 

@@ -26,7 +26,8 @@ namespace AppRestaurantSiglo21.Models
         public Nullable<decimal> PRECIOPRODUCTO { get; set; }
         public byte IDESTPRODUCTO { get; set; }
         public byte IDTIPOPRODUCTO { get; set; }
-        public short IDRECPRODUCTO { get; set; }
+        public Nullable<short> IDRECPRODUCTO { get; set; }
+        public string FOTO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLEORDEN> DETALLEORDEN { get; set; }

@@ -19,7 +19,7 @@ namespace AppRestaurantSiglo21.Models
         public string DVCLIENTETX { get; set; }
         public string DESCMEDIOPAGO { get; set; }
         public Nullable<decimal> MONTO { get; set; }
-        public byte IDMEDIOPAGO { get; set; }
+        public Nullable<byte> IDMEDIOPAGO { get; set; }
     
         public virtual MEDIOPAGO MEDIOPAGO { get; set; }
     }

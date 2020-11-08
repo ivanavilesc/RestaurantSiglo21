@@ -1,0 +1,86 @@
+﻿@model AppRestaurantSiglo21.Models.ESTADOMESA
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Editar Disponibilidad</h4>
+        </div>
+    </div>
+    <br />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Estado de Mesas</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDESTADOMESA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDESTADOMESA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IDESTADOMESA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DESCESTADOMESA, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @{
+                    var listado = new List<SelectListItem>(){
+
+                                                        new SelectListItem(){
+
+                                                            Text = "HABILITADA",
+                                                            Value = "HABILITADA"
+                                                        },
+
+                                                        new SelectListItem(){
+
+                                                            Text = "DESHABILITADA",
+                                                            Value = "DESHABILITADA",
+                                                        }
+                                                    };
+                }
+                @*<label for="model => model.DESCESTADOMESA">Descripción estado</label>
+                <select class="form-control" id="@Model.DESCESTADOMESA.ToString()">
+                    @foreach (var item in listado)
+                    {
+                        <option>@item.Value</option>
+
+                    }
+                </select>*@
+                @Html.DropDownListFor(model => model.DESCESTADOMESA, listado)
+                @*@Html.EditorFor(model => model.DESCESTADOMESA, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.DESCESTADOMESA, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+    </div>
+    }
+
+ 
+</div>

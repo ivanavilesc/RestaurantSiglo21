@@ -1,0 +1,150 @@
+﻿@model AppRestaurantSiglo21.Models.USUARIO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Crear un nuevo usuario</h4>
+        </div>
+    </div>
+    <br />
+
+    @*@using (Html.BeginForm())*@
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Nuevo usuario</h4>
+        <hr />
+        @if (@Session["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @Session["ErrorMessage"]
+            </div>
+            Session.Remove("ErrorMessage");
+        }
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group ">
+            <div class="col-10">
+                <label for="rutUsuario">RUT</label>
+                <input type="text" required class="form-control" id="rutUsuario" name="rutUsuario" placeholder="8 dígitos mas guión, ej: 99999999-9">
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-10">
+                <label for="NOMBRE">Nombre</label>
+                <input type="text" required class="form-control" id="NOMBRE" name="NOMBRE" placeholder="ingresa tu nombre">
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-10">
+                <label for="APELLIDOPATERNO">Apellido</label>
+                <input type="text" required class="form-control" id="APELLIDOPATERNO" name="APELLIDOPATERNO" placeholder="ingresa tu apellido paterno">
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            RUT Usuario
+            <div class="col-md-10">
+                @Html.EditorFor(rutUsuario, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessage("rutUsuario", "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.USERID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.USERID, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.USERID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-10">
+                <label for="PASSWORD">Contraseña</label>
+                <input type="password" class="form-control" id="PASSWORD" name="PASSWORD" placeholder="Utiliza una contraseña segura !!!">
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-10">
+                <label for="CONFPASSWORD">Repite tu Contraseña</label>
+                <input type="password" class="form-control" id="CONFPASSWORD" name="CONFPASSWORD" placeholder="Utiliza una contraseña segura !!!">
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+            </div>
+            <p>Repita contraseña</p>
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+            </div>
+
+        </div>*@
+
+        <div class="form-group">
+            <label for="rutUsuario">Selecciona un ROL</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ListaRoles", ViewData["LISTAROLES"] as SelectList, "Rol Asignado", new { @class = "form-control required", @name = "Id", @id = "ListaRoles" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
+                    <button onclick="ansValidation(event)" type="button" class="btn btn-lg btn-primary btn-block">Guardar</button>
+
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <br />
+        <br />
+        <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+    </div>
+    }
+
+
+</div>
+<script>
+    function ansValidation(ev) {
+        ev.preventDefault
+        // there is no input named name
+        //var nameValue = document.getElementById("name").value
+        var nameValue = "test";
+        var rutValue = document.getElementById("rutUsuario").value
+        var passValue = document.getElementById("PASSWORD").value
+        var confpassValue = document.getElementById("CONFPASSWORD").value
+        // the typeof operator returns a string.
+        if (typeof nameValue !== "string") {
+            window.alert("Please re-enter your name")
+            // we use strict validation ( !== ) because it's a good practice.
+        } else if (rutValue === "") {
+            event.preventDefault();
+            window.alert("No ingresaste el RUT, este cambpo es obligatorio !")
+        } else if (passValue !== confpassValue) {
+            event.preventDefault();
+            window.alert("Las contraseñas ingresadas no coinciden, intenta nuevamente !")
+        } else {
+            let form = document.getElementById('createForm');
+            form.submit()
+            
+        }
+    }
+</script>

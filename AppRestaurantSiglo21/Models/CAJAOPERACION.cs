@@ -14,21 +14,15 @@ namespace AppRestaurantSiglo21.Models
     
     public partial class CAJAOPERACION
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CAJAOPERACION()
-        {
-            this.INGRESO = new HashSet<INGRESO>();
-        }
-    
         public int IDCAJAOPERACION { get; set; }
-        public Nullable<System.DateTime> FECHAAPERTURA { get; set; }
-        public Nullable<int> MONTOAPERTURA { get; set; }
+        public Nullable<int> MONTOOPERACION { get; set; }
+        public Nullable<System.DateTime> FECHAINICIOCAJA { get; set; }
+        public Nullable<System.DateTime> FECHACIERRECAJA { get; set; }
         public byte IDCAJAESTADO { get; set; }
         public int IDPERSONA { get; set; }
+        public string OBSERVACION { get; set; }
     
         public virtual CAJAESTADO CAJAESTADO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INGRESO> INGRESO { get; set; }
     }
 }

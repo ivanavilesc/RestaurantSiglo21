@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Bienvenida";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+<link href="~/Content/css/BienvenidaReserva.css" rel="stylesheet" />
+<div id="titulo" style="text-align: center">
+    <h2>Bienvenido a Restaurant Siglo XXI</h2>
+</div>
+<div>
+    <ul>
+        <li id="left-container" onclick=""><a href="/Reservas/Index">Tengo una reserva</a></li>
+        <li id="right-container"><a href="/SeleccionaMesa/SeleccionAndMapa">No tengo reserva</a></li>
+    </ul>
+
+</div>
+<script type="text/javascript">
+    function atencionDirecta(id) {
+        $.ajax({
+            url: '/SeleccionaMesa/SeleccionAndMapa',
+            data: { id: id }
+        }).done(function () {
+            alert('A seleccionar Mesa !');
+        });
+    }
+
+    function confirmaReserva(id) {
+        $.ajax({
+            url: '/Reservas/Index',
+            data: { id: id }
+        }).done(function () {
+            alert('A confirmar la reserva !');
+        });
+    }
+</script>

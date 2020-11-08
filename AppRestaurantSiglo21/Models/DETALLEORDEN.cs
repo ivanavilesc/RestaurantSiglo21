@@ -18,7 +18,11 @@ namespace AppRestaurantSiglo21.Models
         public Nullable<short> CANTIDAD { get; set; }
         public int IDORDEN { get; set; }
         public int IDPRODUCTO { get; set; }
+        public Nullable<int> PRECIOPROD { get; set; }
+        public byte IDESTADO { get; set; }
+        public Nullable<System.DateTime> HORADETORD { get; set; }
     
+        public virtual ESTADOORDEN ESTADOORDEN { get; set; }
         public virtual ORDEN ORDEN { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
     }

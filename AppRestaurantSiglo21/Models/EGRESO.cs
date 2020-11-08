@@ -14,20 +14,9 @@ namespace AppRestaurantSiglo21.Models
     
     public partial class EGRESO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EGRESO()
-        {
-            this.BANCOMOVIMIENTO = new HashSet<BANCOMOVIMIENTO>();
-        }
-    
         public int IDEGRESO { get; set; }
         public Nullable<int> MONTO { get; set; }
         public string DESCMOVIMIENTO { get; set; }
         public Nullable<System.DateTime> FECHAMOVIMIENTO { get; set; }
-        public int IDCOMPRA { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BANCOMOVIMIENTO> BANCOMOVIMIENTO { get; set; }
-        public virtual PAGOPEDIDO PAGOPEDIDO { get; set; }
     }
 }

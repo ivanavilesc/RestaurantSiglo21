@@ -1,0 +1,35 @@
+﻿<Window x:Class="restaurantSigloXXI.Formularios.PagoConsumo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restaurantSigloXXI.Formularios"
+        mc:Ignorable="d"
+        Title="Pago Consumo" Height="750" Width="1349.978" HorizontalAlignment="Center" VerticalAlignment="Center" WindowState="Maximized">
+    <Grid Margin="0,0,2,0">
+        <Label x:Name="lblIdPago" Content="ID Pago" HorizontalAlignment="Left" Margin="92,102,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtIdPago" HorizontalAlignment="Left" Height="23" Margin="248,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="325,161,0,0" VerticalAlignment="Top" Width="75" Click="BtnLimpiar_Click"/>
+        <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="189,161,0,0" VerticalAlignment="Top" Width="75" Click="BtnBuscar_Click"/>
+        <DataGrid x:Name="dgvDetalleOrden" HorizontalAlignment="Left" Height="100" Margin="558,81,0,0" VerticalAlignment="Top" Width="640"
+                  CanUserAddRows="False" CanUserReorderColumns="False"
+                  EnableRowVirtualization="false" EnableColumnVirtualization="false" ColumnWidth="*" Loaded="DgvDetalleOrden_Loaded"
+                  
+                  />
+        <GroupBox x:Name="gpbDetalleOrden" Header="Detalle Orden a Pagar" HorizontalAlignment="Left" Height="255" Margin="517,50,0,0" VerticalAlignment="Top" Width="761"/>
+        <TextBox x:Name="txtTotalPago" HorizontalAlignment="Left" Height="23" Margin="1078,256,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" />
+        <Label x:Name="lblTotalPago" Content="Total a pagar ordenes en efectivo" HorizontalAlignment="Left" Margin="835,252,0,0" VerticalAlignment="Top" Width="203"/>
+        <Label x:Name="lblPagoTotal" Content="Pago total" HorizontalAlignment="Left" Margin="960,405,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPopina" Content="Propina" HorizontalAlignment="Left" Margin="960,457,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPagoTotal" HorizontalAlignment="Left" Height="23" Margin="1078,405,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPropina" HorizontalAlignment="Left" Height="23" Margin="1078,460,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblVuelto" Content="Vuelto" HorizontalAlignment="Left" Margin="960,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="5.255,1.007"/>
+        <TextBox x:Name="txtVuelto" HorizontalAlignment="Left" Height="23" Margin="1078,508,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Button x:Name="btnPagar" Content="Pagar" HorizontalAlignment="Left" Margin="704,408,0,0" VerticalAlignment="Top" Width="75" Click="BtnPagar_Click"/>
+        <Button x:Name="btnLimpiarPago" Content="Limpiar" HorizontalAlignment="Left" Margin="704,457,0,0" VerticalAlignment="Top" Width="75" Click="BtnLimpiarPago_Click"/>
+        <Button x:Name="btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="704,508,0,0" VerticalAlignment="Top" Width="75" Click="BtnSalir_Click"/>
+        <GroupBox x:Name="gpbPagoConsumo" Header="Pago de consumo" HorizontalAlignment="Left" Height="213" Margin="758,371,0,0" VerticalAlignment="Top" Width="520"/>
+
+
+    </Grid>
+</Window>

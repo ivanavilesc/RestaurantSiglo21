@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tablero de Pedidos</h2>
+<hr />
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mesa</th>
+                <th scope="col">Pedido</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>4</td>
+                <td>Pollo con Papas Fritas</td>
+                <td>
+                    @Html.ActionLink("Notificar Plato Disponible", "ActualizaPedido", "TableroPedidos", new { mesa = "Mesa: 4", plato = "Pollo con Papas Fritas", estado = "Disponible" }, htmlAttributes: new { @class = "btn btn-outline-success" })
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>6</td>
+                <td>Bife a lo pobre</td>                
+                <td>@Html.ActionLink("Notificar Plato Disponible", "ActualizaPedido", "TableroPedidos", new { mesa = "Mesa: 6", plato = "Bife a lo pobre", estado = "Disponible" }, htmlAttributes: new { @class = "btn btn-outline-success" })</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>1</td>
+                <td>Prietas con papas cocinas</td>
+                <td>@Html.ActionLink("Notificar Plato Disponible", "ActualizaPedido", "TableroPedidos", new { mesa = "Mesa: 1", plato = "Prietas con papas cocidas", estado = "Disponible" }, htmlAttributes: new { @class = "btn btn-outline-success" })</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>8</td>
+                <td>Promo 2 Completo Italiano XL</td>
+                <td>@Html.ActionLink("Notificar Plato Disponible", "ActualizaPedido", "TableroPedidos", new { mesa = "Mesa: 8", plato = "Promo 2 Completo Italiano XL", estado = "Disponible" }, htmlAttributes: new { @class = "btn btn-outline-success" })</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

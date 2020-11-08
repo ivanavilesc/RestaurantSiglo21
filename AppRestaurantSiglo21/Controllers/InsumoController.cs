@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AppRestaurantSiglo21.Models;
+using Newtonsoft.Json;
 
 namespace AppRestaurantSiglo21.Controllers
 {
@@ -104,5 +106,21 @@ namespace AppRestaurantSiglo21.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GetData(int customerID, string fname = "")
+        {
+            // Initialization.  
+            JsonResult result = new JsonResult();
+            DataTable data = new DataTable();  
+ 
+            // Load Data.  
+         
+            // Filter data with input query parameters.  
+              
+            // Prepare Ajax JSON Data Result.  
+            result = this.Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);  
+
+            // Return info.  
+            return result;
+        }
     }
 }

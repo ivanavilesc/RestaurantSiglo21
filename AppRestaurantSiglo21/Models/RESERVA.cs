@@ -20,16 +20,16 @@ namespace AppRestaurantSiglo21.Models
             this.ORDEN = new HashSet<ORDEN>();
         }
     
-        public int IDRESRVA { get; set; }
+        public int IDRESERVA { get; set; }
         public Nullable<System.DateTime> FECHARESERVA { get; set; }
         public Nullable<short> CANTIDADCLIENTE { get; set; }
-        public byte IDESTADORESRVA { get; set; }
-        public int IDPERSONA { get; set; }
-        public short IDMESA { get; set; }
+        public byte IDESTADORESERVA { get; set; }
+        public Nullable<int> IDPERSONA { get; set; }
+        public string MSGRESERVA { get; set; }
+        public string HORARESERVA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ESTADORESERVA ESTADORESERVA { get; set; }
-        public virtual MESA MESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN> ORDEN { get; set; }
     }

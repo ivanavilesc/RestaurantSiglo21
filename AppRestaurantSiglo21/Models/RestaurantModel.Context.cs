@@ -26,10 +26,12 @@ namespace AppRestaurantSiglo21.Models
         }
     
         public virtual DbSet<ALERTASTOCK> ALERTASTOCK { get; set; }
+        public virtual DbSet<BANCOMOVIMIENTO> BANCOMOVIMIENTO { get; set; }
         public virtual DbSet<BODEGAMOVIMIENTO> BODEGAMOVIMIENTO { get; set; }
         public virtual DbSet<CAJAESTADO> CAJAESTADO { get; set; }
         public virtual DbSet<CAJAOPERACION> CAJAOPERACION { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
+        public virtual DbSet<COLACOCINA> COLACOCINA { get; set; }
         public virtual DbSet<DETALLEORDEN> DETALLEORDEN { get; set; }
         public virtual DbSet<DETPEDIDOINS> DETPEDIDOINS { get; set; }
         public virtual DbSet<DOCTPAGOTIPO> DOCTPAGOTIPO { get; set; }
@@ -43,6 +45,7 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<ESTADOPROVEEDOR> ESTADOPROVEEDOR { get; set; }
         public virtual DbSet<ESTADORESERVA> ESTADORESERVA { get; set; }
         public virtual DbSet<FUNCIONALIDAD> FUNCIONALIDAD { get; set; }
+        public virtual DbSet<INGREDIENTE> INGREDIENTE { get; set; }
         public virtual DbSet<INGRESO> INGRESO { get; set; }
         public virtual DbSet<INSUMO> INSUMO { get; set; }
         public virtual DbSet<INSUMOSTOCK> INSUMOSTOCK { get; set; }
@@ -68,6 +71,5 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<TIPOPRODUCTO> TIPOPRODUCTO { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIOROL> USUARIOROL { get; set; }
-        public virtual DbSet<BANCOMOVIMIENTO> BANCOMOVIMIENTO { get; set; }
     }
 }

@@ -17,9 +17,10 @@ namespace AppRestaurantSiglo21.Models
         public byte IDDOCTOPAGO { get; set; }
         public Nullable<decimal> IDORDEN { get; set; }
         public Nullable<decimal> TOTAL { get; set; }
-        public int IDPERSONA { get; set; }
-        public byte IDDOCTPAGOTIPO { get; set; }
-        public byte IDMEDIOPAGO { get; set; }
+        public Nullable<int> IDPERSONA { get; set; }
+        public Nullable<byte> IDDOCTPAGOTIPO { get; set; }
+        public Nullable<byte> IDMEDIOPAGO { get; set; }
+        public Nullable<int> PROPINA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual DOCTPAGOTIPO DOCTPAGOTIPO { get; set; }
