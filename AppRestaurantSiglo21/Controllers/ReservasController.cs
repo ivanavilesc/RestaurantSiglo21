@@ -85,6 +85,7 @@ namespace AppRestaurantSiglo21.Controllers
                             //llenará la reserva con el ID de la BD
                             
                             objReserva.IDPERSONA = personaDB.CLIENTE.IDPERSONA;
+                            objReserva.CLIENTE = personaDB.CLIENTE;
                             int t = 0;
                         }
                         // Si el cliente no existe, pero la PERSONA SI, llenará un objeto PERSONA primero y luego le pasará el ID a Cliente

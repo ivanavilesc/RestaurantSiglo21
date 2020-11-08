@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CartaDigitalController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CocinaOrdenController.cs" />
+    <Compile Include="Controllers\ColaCocinaController.cs" />
     <Compile Include="Controllers\DisponibilidadController.cs" />
     <Compile Include="Controllers\DisponibilidadMesaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Models\RESTAURANT.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RestaurantContext.cs" />
     <Compile Include="Models\RestaurantModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -611,6 +613,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ColaCocina\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>

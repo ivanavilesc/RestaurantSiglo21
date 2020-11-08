@@ -12,7 +12,9 @@ namespace AppRestaurantSiglo21.Models
         public short? CantProducto { get; set; }
         public string DescProducto { get; set; }
         public decimal? PrecioProducto { get; set; }
-
+        public decimal TiempoPreparacion { get; set; }
+        public short Dificultad { get; set; }
        
+
     }
 }
