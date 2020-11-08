@@ -35,18 +35,7 @@
                     <td> @Html.DisplayFor(modelItem => item.DescProducto)</td>
                     <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
                     <td>
-                        <div class="dropdown open">
-                            <button class="btn btn-secondary dropdown-toggle"
-                                    type="button" id="dropdEstOrden" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                Modificar Estado
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item"> @Html.ActionLink("Avanzar Orden", "AvanzarOrden", new { id = item.NroOrden })</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"> @Html.ActionLink("Cancelar Orden", "Edit", new { id = item.NroOrden })</a>
-                            </div>
-                        </div>
+                        @Html.ActionLink("Avanzar Estado", "AvanzaOrden", new { id = item.NroOrden }, new { @class = "btn btn-warning" }) 
                     </td>
                     @*<td> @Html.ActionLink("Modificar Estado", "Edit", new { id = item.NroOrden }) |</td>*@
                 </tr>

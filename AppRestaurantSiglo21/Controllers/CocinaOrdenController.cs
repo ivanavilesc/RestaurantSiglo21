@@ -128,5 +128,70 @@ namespace AppRestaurantSiglo21.Controllers
 
             return View(objOrden); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
         }
+
+
+
+        public ActionResult AvanzaOrden(int? id) //SE TRAE ID DEL REGISTRO POR PARAMETRO
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var objDetOrden = db.DETALLEORDEN.SingleOrDefault(t => t.IDDETALLEORDEN == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA  ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+
+            if (objDetOrden == null)
+            {
+                return HttpNotFound();
+            }
+            return View(objDetOrden); //RETORNA EL OBJETO EN CASO QUE HAYA ENCONTRADO UNA COINCIDENCIA
+        }
+        public ActionResult AvanzaOrden(DETALLEORDEN objDetOrden) //RECIBE EL OBJETO POR PARAMETROS 
+        {
+            if (objDetOrden.IDESTADO==1)
+            {
+                objDetOrden.IDESTADO = 4;
+                db.Entry(objDetOrden).State = EntityState.Modified; //SI VIENE CON CAMBIOS, SE QUEDARÁ CON LOS CAMBIOS REALIZADOS
+                db.SaveChanges(); //CONSOLIDA EN LA BASE
+                return RedirectToAction("Index"); //REDIRIGE A LA VISTA DE LISTADO
+            }
+            if (objDetOrden.IDESTADO == 4)
+            {
+                objDetOrden.IDESTADO = 5;
+                db.Entry(objDetOrden).State = EntityState.Modified; //SI VIENE CON CAMBIOS, SE QUEDARÁ CON LOS CAMBIOS REALIZADOS
+                db.SaveChanges(); //CONSOLIDA EN LA BASE
+                return RedirectToAction("Index"); //REDIRIGE A LA VISTA DE LISTADO
+            }
+
+            return View(objDetOrden); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+        }
+
+
+        public ActionResult EditaOrden(int? id) //SE TRAE ID DEL REGISTRO POR PARAMETRO
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var objDetOrden = db.DETALLEORDEN.SingleOrDefault(t => t.IDDETALLEORDEN == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA  ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+
+            if (objDetOrden == null)
+            {
+                return HttpNotFound();
+            }
+            return View(objDetOrden); //RETORNA EL OBJETO EN CASO QUE HAYA ENCONTRADO UNA COINCIDENCIA
+        }
+        public ActionResult EditaOrden(DETALLEORDEN objDetOrden) //RECIBE EL OBJETO POR PARAMETROS 
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(objDetOrden).State = EntityState.Modified; //SI VIENE CON CAMBIOS, SE QUEDARÁ CON LOS CAMBIOS REALIZADOS
+                db.SaveChanges(); //CONSOLIDA EN LA BASE
+                return RedirectToAction("Index"); //REDIRIGE A LA VISTA DE LISTADO
+            }
+
+            return View(objDetOrden); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+        }
     }
 }
