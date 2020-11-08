@@ -25,20 +25,23 @@ namespace AppRestaurantSiglo21.Controllers
                                 join m in db.MESA
                                 on o.IDMESA equals m.IDMESA
                                 join e in db.ESTADOORDEN
-                                on o.IDESTADO equals e.IDESTADO
+                                on d.IDESTADO equals e.IDESTADO
 
-                                where o.IDESTADO == 1
+                                where d.IDESTADO == 1
+                                || d.IDESTADO == 4
+                               || d.IDESTADO == 5
 
-                                orderby o.IDMESA descending
+                                orderby d.IDDETALLEORDEN descending
 
                                 select new CocinaOrdenViewModel
                                 {
-                                    NroOrden = o.IDORDEN,
+                                    NroOrden = d.IDDETALLEORDEN,
                                     DescEstOrden = e.DESCESTORDEN,
                                     DescMesa = m.DESCMESA,
                                     DescProducto = p.DESCPRODUCTO,
-                                    CantProducto = d.CANTIDAD
-                                });
+                                    CantProducto = d.CANTIDAD,
+                                    DetEstOrden =d.IDESTADO
+    });
 
 
 
@@ -47,49 +50,50 @@ namespace AppRestaurantSiglo21.Controllers
             return View(detalleorden.ToList());
 
         }
-        public ActionResult Index2()
+        //public ActionResult Index2()
+        //{
+        //    int orden = 7;
+
+        //    var detalleorden = (from o in db.ORDEN
+        //                        join d in db.DETALLEORDEN
+        //                        on o.IDORDEN equals d.IDORDEN
+        //                        join p in db.PRODUCTO
+        //                        on d.IDPRODUCTO equals p.IDPRODUCTO
+        //                        join m in db.MESA
+        //                        on o.IDMESA equals m.IDMESA
+        //                        join e in db.ESTADOORDEN
+        //                        on o.IDESTADO equals e.IDESTADO
+
+        //                        where o.IDESTADO == 1
+        //                        || o.IDESTADO == 2
+        //                        || o.IDESTADO == 3
+        //                        || o.IDESTADO == 4
+        //                        || o.IDESTADO == 5
+        //                        orderby o.IDESTADO descending
+
+        //                        select new CocinaOrdenViewModel
+        //                        {
+        //                            NroOrden = o.IDORDEN,
+        //                            DescEstOrden = o.ESTADOORDEN.DESCESTORDEN,
+        //                            DescMesa = m.DESCMESA,
+        //                            DescProducto = p.DESCPRODUCTO,
+        //                            CantProducto = d.CANTIDAD
+        //                        });
+
+
+
+        //    int x = 0;
+
+        //    return View(detalleorden.ToList());
+
+        //}
+
+        public void AvanzarOrden(int? NroOrden)
         {
-            int orden = 7;
+            var objDetOrden = db.DETALLEORDEN.FirstOrDefault(t => t.IDDETALLEORDEN == NroOrden);
 
-            var detalleorden = (from o in db.ORDEN
-                                join d in db.DETALLEORDEN
-                                on o.IDORDEN equals d.IDORDEN
-                                join p in db.PRODUCTO
-                                on d.IDPRODUCTO equals p.IDPRODUCTO
-                                join m in db.MESA
-                                on o.IDMESA equals m.IDMESA
-                                join e in db.ESTADOORDEN
-                                on o.IDESTADO equals e.IDESTADO
-
-                                where o.IDESTADO == 1
-                                || o.IDESTADO == 2
-                                || o.IDESTADO == 3
-                                || o.IDESTADO == 4
-                                || o.IDESTADO == 5
-                                orderby o.IDESTADO descending
-
-                                select new CocinaOrdenViewModel
-                                {
-                                    NroOrden = o.IDORDEN,
-                                    DescEstOrden = o.ESTADOORDEN.DESCESTORDEN,
-                                    DescMesa = m.DESCMESA,
-                                    DescProducto = p.DESCPRODUCTO,
-                                    CantProducto = d.CANTIDAD
-                                });
-
-
-
-            int x = 0;
-
-            return View(detalleorden.ToList());
-
-        }
-
-        public void avanzarOrden(int? NroOrden)
-        {
-            var objDetOrden = db.DETALLEORDEN.FirstOrDefault(t => t.ESTADOORDEN.IDESTADO == NroOrden);
-
-            objDetOrden.IDESTADO = (objDetOrden.IDESTADO++);
+            objDetOrden.IDESTADO = (objDetOrden.IDESTADO);
+           
 
             int x = 0;
 

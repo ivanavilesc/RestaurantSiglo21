@@ -1,0 +1,53 @@
+﻿@model AppRestaurantSiglo21.Models.RECETAPRODUCTO
+<!--//AQUI ARRIBA SE LE INDICA A LA VISTA QUE USE DEL MODELO LA TABLA RECETAPRODUCTO SI RECIBE DATOS-->
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+}
+
+<h2>Editar recetaproducto</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Editar Mesa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!-- ES SOLO UN VALIDADOR DE TEXTO -->
+        <!-- ENVÍO COMO ATRIBUTO OCULTO EL VALOR CORRESPONDIENTE A LAS PK Y FK -->
+        @Html.HiddenFor(model => model.IDRECPRODUCTO)
+
+        <div class="form-group">
+
+            <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO DESCRECETAPRODUCTO -->
+            @Html.LabelFor(model => model.INGREDIENTE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.INGREDIENTE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.INGREDIENTE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- EN ESTE FORM-GROUP ESTÁ EL LABEL, TEXTBOX Y MENSAJE DE VALIDACIÓN DEL CAMPO CAPACIDAD -->
+            @Html.LabelFor(model => model.ELABORACION, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ELABORACION, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ELABORACION, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- UN FORM-GROUP PARA PONER EL BOTON SUBMIT -->
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar cambios" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+} <!--AQUI TERMINA EL FORM QUE ENVÍA POR METODO POST-->
+
+<div>
+    @Html.ActionLink("Volver a la Lista", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

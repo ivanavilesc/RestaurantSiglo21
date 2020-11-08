@@ -13,5 +13,6 @@ namespace AppRestaurantSiglo21.Models
         public string DescMesa { get; set; }
         public string DescProducto { get; set; }
         public short? CantProducto { get; set; }
+        public int DetEstOrden { get; set; }
     }
 }

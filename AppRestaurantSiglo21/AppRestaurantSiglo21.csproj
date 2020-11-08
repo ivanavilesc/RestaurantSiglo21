@@ -166,6 +166,7 @@
     <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Controllers\NotificacionOrdenController.cs" />
     <Compile Include="Controllers\OrdenController.cs" />
+    <Compile Include="Controllers\RecetaProductoController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SeleccionaMesaController.cs" />
@@ -550,6 +551,11 @@
     <Content Include="Views\TableroPedidos\Index.cshtml" />
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Reservas\EliminarReserva.cshtml" />
+    <Content Include="Views\RecetaProducto\Index.cshtml" />
+    <Content Include="Views\RecetaProducto\Create.cshtml" />
+    <Content Include="Views\RecetaProducto\Edit.cshtml" />
+    <Content Include="Views\RecetaProducto\Detail.cshtml" />
+    <Content Include="Views\RecetaProducto\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

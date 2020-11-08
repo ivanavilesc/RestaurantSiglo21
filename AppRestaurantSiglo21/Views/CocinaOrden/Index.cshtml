@@ -42,9 +42,8 @@
                                 Modificar Estado
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item"> @Html.ActionLink("Avanzar Estado", "avanzarOrden", new { id = item.NroOrden })</a>
+                                <a class="dropdown-item"> @Html.ActionLink("Avanzar Orden", "AvanzarOrden", new { id = item.NroOrden })</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item">@Html.ActionLink("Retroceder Estado", "Edit", new { id = item.NroOrden })</a>
                                 <a class="dropdown-item"> @Html.ActionLink("Cancelar Orden", "Edit", new { id = item.NroOrden })</a>
                             </div>
                         </div>
@@ -54,7 +53,5 @@
             </tbody>
         }
     </table>
-    @Html.ActionLink("Volver atrás", "DetailPlato", "CartaDigital", null, new { @class = "btn btn-secondary" })
-
 </div>
 
