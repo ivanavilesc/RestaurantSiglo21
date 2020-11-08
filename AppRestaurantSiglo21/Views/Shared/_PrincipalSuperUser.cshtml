@@ -13,7 +13,7 @@
     <title>Ingreso Garzón</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <a class="navbar-brand" href="#">@Session["Rol"].ToString()</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,23 +24,37 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Mesas disponibles
+                        Seguridad - Cuentas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/SeleccionaMesa/SeleccionAndMapa">Disponibilidad Mesas</a>
+                        <a class="dropdown-item" href="/Usuarios">Mantenedor cuentas usuario</a>
+                        <a class="dropdown-item" href="/Cliente">Mantenedor clientes</a>
+                        <a class="dropdown-item" href="/Disponibilidad">Mantenedor disponibilidad</a>
+                        <a class="dropdown-item" href="/DisponibilidadMesa">Mantenedor disponibilidad mesas</a>
+                        <a class="dropdown-item" href="/Insumo">Mantenedor insumos</a>
 
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Notificaciones
+                        Carta Digital
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/NotificacionOrden">Revisar notificaciones</a>
-
+                        <a class="dropdown-item" href="/CartaDigital">Revisar Carta</a>
+                        <a class="dropdown-item" href="/Carrito">Revisar Carrito</a>
                     </div>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sitio Web
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Landing">Sitio Publico</a>
+                        <a class="dropdown-item" href="/Reservas/Reserva">Reservar mesa</a>
+                        <a class="dropdown-item" href="/Reservas/Bienvenida">Vista Totem Bienvenida</a>
+                        <a class="dropdown-item" href="/SeleccionaMesa/SeleccionAndMapa">Vista Seleccion Mesa</a>
+                    </div>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="/Home/Logout">
                 <text style="color:black">

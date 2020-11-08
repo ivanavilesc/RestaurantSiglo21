@@ -159,9 +159,10 @@ namespace AppRestaurantSiglo21.Controllers
                         }
                         if (idrol.Equals(2))
                         {
-                            Session["Layout"] = "~/Views/Home/Garzon.cshtml";
-                            return RedirectToAction("Garzon");
+                            Session["Layout"] = "~/Views/Home/SuperUser.cshtml";
+                            return RedirectToAction("SuperUser");
                         }
+                        
                         if (idrol.Equals(3))
                         {
                             Session["Layout"] = "~/Views/Home/Administrador.cshtml";
@@ -169,8 +170,8 @@ namespace AppRestaurantSiglo21.Controllers
                         }
                         if (idrol.Equals(4))
                         {
-                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
-                            return RedirectToAction("Administrador");
+                            Session["Layout"] = "~/Views/Home/Garzon.cshtml";
+                            return RedirectToAction("Garzon");
                         }
                         if (idrol.Equals(5))
                         {
@@ -218,6 +219,18 @@ namespace AppRestaurantSiglo21.Controllers
         }
 
         public ActionResult Garzon()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult SuperUser()
         {
             if (Session["UserID"] != null)
             {
