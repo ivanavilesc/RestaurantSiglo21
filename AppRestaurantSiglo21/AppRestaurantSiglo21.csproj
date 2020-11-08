@@ -603,9 +603,9 @@
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Landing\Index.cshtml" />
     <Content Include="Views\Mesa\CambioEstado.cshtml" />
-    <Content Include="Views\Shared\_PrincipalChef.cshtml" />
+    <Content Include="Views\Shared\_PrincipalCocina.cshtml" />
     <Content Include="Views\Shared\_PrincipalCliente.cshtml" />
-    <Content Include="Views\Shared\_PrincipalInvitado.cshtml" />
+    <Content Include="Views\Shared\_PrincipalBodega.cshtml" />
     <Content Include="Views\Shared\_PrincipalSuperUser.cshtml" />
     <Content Include="Views\Home\SuperUser.cshtml" />
   </ItemGroup>

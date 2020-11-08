@@ -2,7 +2,7 @@
 @model IEnumerable<AppRestaurantSiglo21.Models.MESA>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_PrincipalGarzon.cshtml";
+    Layout = Session["Layout"].ToString();
 }
 <h3></h3>
 
