@@ -6,9 +6,20 @@
 }
 <div class="container">
 
-    <h4>Listado de Insumo</h4>
-  
-    <table class="table">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Insumos</h4>
+        </div>
+    </div>
+    <br />
+
+
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
         <tr>
             @*<th>
                     @Html.DisplayNameFor(x => x.IDINSUMO)
@@ -35,14 +46,11 @@
                     @Html.DisplayFor(x => ins.PRECIOINSUMO)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = ins.IDINSUMO, @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Ver Detalles", "Detail", new { id = ins.IDINSUMO, @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = ins.IDINSUMO, @class = "btn btn-danger" })
+                    @Html.ActionLink("Editar", "Edit", new { id = ins.IDINSUMO }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = ins.IDINSUMO }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = ins.IDINSUMO }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
     </table>
-    <p>
-        @Html.ActionLink("Crear nuevo insumo", "Create")
-    </p>
 </div>

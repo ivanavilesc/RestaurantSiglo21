@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Validar Pago Efectivo</h4>
+        </div>
+    </div>
+    <br />
+
+    
+    @if (@ViewBag.MensajeOk != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    <form  method="post">
+
+
+        <div class="form-horizontal">
+
+
+            <div class="sm:flex w-full">
+
+                <button type="submit" class="btn btn-primary">Validar Pago</button>
+                <a>@ViewBag.msgTotalApagar</a>
+
+                @if (ViewBag.message != null)
+                {
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            alert("@ViewBag.message");
+                            window.location.assign('/PagoOrden/Index') 
+                            };
+                    </script>
+
+                }
+            </div>
+        </div>
+
+    </form>
+
+
+</div>

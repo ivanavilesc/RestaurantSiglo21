@@ -53,20 +53,6 @@
     </Key>
     <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
-  <EntityType Name="COLACOCINA">
-    <Key>
-      <PropertyRef Name="IDCOLACOCINA" />
-    </Key>
-    <Property Name="IDCOLACOCINA" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="HORACREACION" Type="date" />
-    <Property Name="HORAACTUAL" Type="date" />
-    <Property Name="HORAENTREGA" Type="date" />
-    <Property Name="NROPEDIDO" Type="number" Precision="6" Scale="0" />
-    <Property Name="ESTADOPEDIDO" Type="number" Precision="2" Scale="0" />
-    <Property Name="CANTIDAD" Type="number" Precision="6" Scale="0" />
-    <Property Name="DIFICULTADPREP" Type="number" Precision="4" Scale="0" />
-    <Property Name="TIEMPOPREP" Type="number" Precision="4" Scale="0" />
-  </EntityType>
   <EntityType Name="DETALLEORDEN">
     <Key>
       <PropertyRef Name="IDDETALLEORDEN" />
@@ -921,6 +907,88 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FN_LISTAEGRESOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+  <Function Name="FN_LISTAINGRESOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+  <Function Name="SP_ACTSTOCKMINIMO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDINSUMOSTOCK" Type="number" Mode="In" />
+    <Parameter Name="PE_STOCKMINIMO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ACTUALIZAREGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDEGRESO" Type="number" Mode="In" />
+    <Parameter Name="PE_MONTO" Type="number" Mode="In" />
+    <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_FECHAMOVIMIENTO" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_ACTUALIZARINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDINGRESO" Type="number" Mode="In" />
+    <Parameter Name="PE_MONTO" Type="number" Mode="In" />
+    <Parameter Name="PE_DESCINGRESO" Type="varchar2" Mode="In" />
+    <Parameter Name="PE_FECHAMOVIMIENTO" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_DETALLEGANANCIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHAINICIO" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHAFIN" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINAREGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDEGRESO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_ELIMINARINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDINGRESO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+    <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+    <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+    <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTAEGRESOBCOMOV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_MONTOMOV" Type="number" Mode="In" />
+    <Parameter Name="PE_NUMCUENTA" Type="number" Mode="In" />
+    <Parameter Name="PE_IDTIPOMOVBCO" Type="number" Mode="In" />
+    <Parameter Name="PE_IDENTBANCARIA" Type="number" Mode="In" />
+    <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTAINGRESOBCOMOV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_MONTOMOV" Type="number" Mode="In" />
+    <Parameter Name="PE_NUMCUENTA" Type="number" Mode="In" />
+    <Parameter Name="PE_IDTIPOMOVBCO" Type="number" Mode="In" />
+    <Parameter Name="PE_IDENTBANCARIA" Type="number" Mode="In" />
+    <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTARARQUEO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_MONTOOPERACION" Type="number" Mode="In" />
+    <Parameter Name="PE_FECHACIERRE" Type="date" Mode="In" />
+    <Parameter Name="PE_OBS" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERTARMONTOAPERTURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_MONTOOPERACION" Type="number" Mode="In" />
+    <Parameter Name="PE_FECHAAPERTURA" Type="date" Mode="In" />
+    <Parameter Name="PE_OBS" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="SP_LISTARORDENESPORPAGAR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+  <Function Name="SP_LISTARVENTASPORDIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHA" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_MOVBCOEGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_MOVBCOINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_SUMAEGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_SUMAINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_TOTALGANCIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+    <Parameter Name="PE_FECHAINICIO" Type="date" Mode="In" />
+    <Parameter Name="PE_FECHAFIN" Type="date" Mode="In" />
+  </Function>
   <EntityContainer Name="RestaurantModelStoreContainer">
     <EntitySet Name="ALERTASTOCK" EntityType="Self.ALERTASTOCK" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
@@ -928,7 +996,6 @@
     <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="RESTAURANT" store:Type="Tables" />
-    <EntitySet Name="COLACOCINA" EntityType="Self.COLACOCINA" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" Schema="RESTAURANT" store:Type="Tables" />
     <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" Schema="RESTAURANT" store:Type="Tables" />

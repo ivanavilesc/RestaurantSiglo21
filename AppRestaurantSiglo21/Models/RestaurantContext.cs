@@ -8,7 +8,7 @@ namespace AppRestaurantSiglo21.Models
 {
     public class RestaurantContext : DbContext
     {
-        public DbSet<COLACOCINA> colaCocinaContext { get; set; }
+        //public DbSet<COLACOCINA> colaCocinaContext { get; set; }
         
     }
 }

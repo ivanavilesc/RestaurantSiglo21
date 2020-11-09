@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "TarjetaDebito";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Tarjeta de Crédito</h4>
+        </div>
+    </div>
+    <br />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+    <form method="post">
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td> Cliente</td>
+                    <td>@ViewBag.RutCliente</td>
+                </tr>
+
+                <tr>
+                    <td> Propina</td>
+                    <td>@ViewBag.propina</td>
+                </tr>
+
+                <tr>
+                    <td> Número Tarjeta Crédito</td>
+                    <td><input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="NumTD" id="NumTD" size="16" placeholder="Número TC" required></td>
+                </tr>
+
+                <tr>
+                    <td> CVV</td>
+                    <td><input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="CVVID" id="CVVID" size="10" placeholder="Clave CVV" required></td>
+                </tr>
+
+                <tr>
+                    <td> Año/Mes</td>
+                    <td><input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="ANOMESID" id="ANOMESID" size="6" placeholder="Año" required></td>
+                </tr>
+
+                <tr>
+                    <td> Clave</td>
+                    <td><input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="password" name="ClaveTD" id="ClaveTD" size="6" placeholder="Clave" required></td>
+                </tr>
+            </tbody>
+        </table>
+        
+
+        <button type="submit" class="btn btn-primary">Pagar </button>
+       <a> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</a>
+
+        @if (ViewBag.msgTotalApagar != null)
+        {
+            <script type="text/javascript">
+                        window.onload = function () {
+                            alert("@ViewBag.msgTotalApagar");                            
+                            };
+            </script>
+
+        }
+        
+        @if (ViewBag.message != null)
+        {
+            <script type="text/javascript">
+                        window.onload = function () {
+                            alert("@ViewBag.message");
+                            window.location.assign('/PagoOrden/Index')
+                            };
+            </script>
+
+        }
+
+</form>
+    }
+</div>

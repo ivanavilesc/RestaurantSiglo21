@@ -1,89 +1,96 @@
-﻿@model AppRestaurantSiglo21.Models.CLIENTE
-
-@{
-    ViewBag.Title = "Delete";
-    Layout = Session["Layout"].ToString();
-}
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CLIENTE</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FECHAINGRESO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FECHAINGRESO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NOMBRE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.APELLIDOPATERNO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.APELLIDOPATERNO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.APELLIDOMATERNO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.APELLIDOMATERNO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DIRECCION)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DIRECCION)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FONO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FONO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EMAIL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NOMBRE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NOMBRE)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+﻿@model AppRestaurantSiglo21.Models.PERSONA
+    @{
+        ViewBag.Title = "Delete";
+        Layout = Session["Layout"].ToString();
     }
-</div>
+
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4>Eliminar</h4>
+            </div>
+        </div>
+        <br />
+        <div class="alert alert-danger" role="alert">
+            <h5>¿ Estas seguro de eliminar este registro ?</h5>
+        </div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FECHAINGRESO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FECHAINGRESO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NOMBRE)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.APELLIDOPATERNO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.APELLIDOPATERNO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.APELLIDOMATERNO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.APELLIDOMATERNO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DIRECCION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DIRECCION)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FONO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FONO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMAIL)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NOMBRE)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button type="submit" class="btn btn-lg btn-danger btn-block">Eliminar</button>
+            </div>
+            <br />
+            <br />
+            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+        }
+    </div>

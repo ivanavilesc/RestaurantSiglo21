@@ -63,11 +63,12 @@ namespace AppRestaurantSiglo21.Controllers
                     objOrden.IDMESA = idMesaReservada;
                     db.ORDEN.Add(objOrden);
                     db.SaveChanges();
-                    Session["ordenCursada"] = objOrden; 
+                    Session["ordenCursada"] = objOrden;
+                    Session["idorden"] = objOrden.IDORDEN;
                     Session["SuccessMessage"] = "La Mesa ha sido tomada satisfactoriamente !!!";
                     z = 9;
                     return RedirectToAction("Index", new RouteValueDictionary(
-                        new { controller = "CartaDigital", action = "Index", Id = objOrden.IDORDEN }));
+                        new { controller = "CartaDigital", action = "Index", idorden = objOrden.IDORDEN }));
                     //return RedirectToAction("Index", "CartaDigital");
                 }
                 else if

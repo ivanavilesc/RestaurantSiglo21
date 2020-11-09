@@ -4,43 +4,49 @@
         ViewBag.Title = "Index";
         Layout = Session["Layout"].ToString();
     }
-    <div class="container">
+<link href="~/Content/css/Ordenes.css" rel="stylesheet" />
+<div class="container">
 
 
-        <div class="card text-center">
-            <div class="card-body">
-                <h4>Carta Digital</h4>
-            </div>
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Carta Digital</h4>
         </div>
-        <br />
+    </div>
+    <br />
 
-        <p>
-            @Html.ActionLink("Plato de Fondo", "DetailPlato", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Bebestible", "DetailBebestible", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Ensaladas", "DetailEnsaladas", null, new { @class = "btn btn-primary" })
-            
-        </p>
-             
-        <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
-            <tr>
-                <th>
-                    Plato
-                </th>
-                <th>
-                    Contiene
-                </th>
-                <th>
-                    Precio
-                </th>
-                <th>
-                    Acción
-                </th>
-            </tr>
-            @foreach (var item in Model)
-            {
+    <p>
+        @Html.ActionLink("Plato de Fondo", "DetailPlato", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Bebestible", "DetailBebestible", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Ensaladas", "DetailEnsaladas", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Postres", "DetailPostres", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" }) 
+    </p>
+
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Foto
+            </th>
+            <th>
+                Plato
+            </th>
+            <th>
+                Contiene
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Acción
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
-                    <img src="~/Images/PasteldePapas.jpg" alt="" height=100 width=200 />
+                    <img src='@item.FOTO' height=100 width=200 />
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.DESCPRODUCTO)
                 <td>
                     @Html.DisplayFor(modelItem => item.RECETAPRODUCTO.INGREDIENTE)
@@ -50,11 +56,13 @@
                     @String.Format("{0:C}", item.PRECIOPRODUCTO)
                 </td>
                 <td>
-                    @Html.ActionLink("Agregar", "AgregarCarrito", "Carrito", new { id = item.IDPRODUCTO }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Agregar", "AgregarCarrito", "Carrito", new { id = item.IDPRODUCTO, idorden = @Session["idorden"] }, new { @class = "btn btn-info" })
                 </td>
 
             </tr>
-            }
 
-        </table>
-    </div>
+        }
+
+    </table>
+    
+</div>

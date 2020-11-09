@@ -7,11 +7,19 @@
 
 
 <div class="container">
-    <strong>¿Estás segura que decea eliminar?</strong>
-    
-    <div>
-        <h4>Eliminar Insumo</h4>
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Eliminar Insumo</h4>
+        </div>
+    </div>
+    <br />
 
+    <div class="alert alert-danger" role="alert">
+        <h5>¿ Estas seguro de eliminar este registro ?</h5>
+    </div>
+
+    <div>
+        
         <dl class="dl-horizontal">
 
             @*<dt>
@@ -42,12 +50,14 @@
 
         @using (Html.BeginForm())
         {
-
+            @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Regresa a la lista", "Index")
+                <button type="submit" class="btn btn-lg btn-danger btn-block">Eliminar</button>
             </div>
+            <br />
+            <br />
+            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
         }
     </div>
 </div>

@@ -6,7 +6,7 @@
 }
 
 <div class="container">
-
+    <meta http-equiv="refresh" content="5" />
 
     <div class="card text-center">
         <div class="card-body">
@@ -39,15 +39,31 @@
                     <td> @Html.DisplayFor(modelItem => item.HoraOrden)</td>
                     <td> @Html.DisplayFor(modelItem => item.HoraActual)</td>
                     <td> @Html.DisplayFor(modelItem => item.TiempoTrans)</td>
-                    <td> @Html.DisplayFor(modelItem => item.DescEstOrden)</td>
+                    <td><strong> @Html.DisplayFor(modelItem => item.DescEstOrden)</strong></td>
                     <td> @Html.DisplayFor(modelItem => item.DescMesa) </td>
                     <td> @Html.DisplayFor(modelItem => item.DescProducto)</td>
                     <td> @Html.DisplayFor(modelItem => item.TiempoPreparacion)</td>
                     <td> @Html.DisplayFor(modelItem => item.Dificultad)</td>
                     <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
-                    <td> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    @if (item.FactorPrioridad > 20000)
+                    {
+                        <td class="table-danger"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else if (item.FactorPrioridad > 5000 && item.FactorPrioridad < 20001)
+                    {
+                        <td class="table-warning"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else if (item.FactorPrioridad > 0 && item.FactorPrioridad < 5000)
+                    {
+                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else
+                    {
+                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+
                     <td>
-                        @Html.ActionLink("Avanzar Estado", "AvanzaOrden", new { id = item.NroOrden }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Avanzar Estado", "AvanzaOrden", new { id = item.NroOrden, DetEstOrden = item.DetEstOrden }, new { @class = "btn btn-warning" })
                     </td>
                     @*<td> @Html.ActionLink("Modificar Estado", "Edit", new { id = item.NroOrden }) |</td>*@
                 </tr>

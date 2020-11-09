@@ -27,11 +27,18 @@ namespace AppRestaurantSiglo21.Controllers
             if (ModelState.IsValid)
             {
                 var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
-                reservaDB.IDESTADORESERVA = 2;
-                return View(reservaDB); //REDIRIGE A LA VISTA DE LISTADO
+                
+                    reservaDB.IDESTADORESERVA = 2;
+                    return View(reservaDB);
+                
+                
+            }
+            else {
+                ViewBag.Message = "La reserva NO existe";
             }
 
             return View(ViewBag.Message = "La reserva NO existe"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+
         }
 
 
@@ -259,22 +266,43 @@ namespace AppRestaurantSiglo21.Controllers
             return View(ViewBag.Message = "La reserva NO existe"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
         }
 
-        public ActionResult EliminarReserva()
+        public ActionResult EliminarReserva(int? cantclientes, int? nroReserva, int? id, int? rutCliente)
         {
-            return View();
+            var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
+            int y = 9;
+            if (reservaDB != null)
+            {
+                RESERVA objReserva = new RESERVA();
+                objReserva = reservaDB;
+                db.RESERVA.Remove(objReserva);
+                db.SaveChanges();
+            }
+            else
+            {
+                return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            }
+            return RedirectToAction("CancelarReserva");
         }
         [HttpPost] //ESTO SUCEDE CUANDO LA CONTROLLER RECIBE UN POST AL METODO INDEX
         public ActionResult EliminarReserva(int? nroReserva, int? rutCliente) //RECIBE EL OBJETO POR PARAMETROS 
         {
-            if (ModelState.IsValid)
-            {
-                var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
-                reservaDB.IDESTADORESERVA = 3;
-                return RedirectToAction("CancelarReserva"); //REDIRIGE A LA VISTA DE LISTADO
+            
+            var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
+            int y = 9;
+            if (reservaDB != null) {
+                RESERVA objReserva = new RESERVA();
+                objReserva = reservaDB;
+                db.RESERVA.Remove(objReserva);
+                db.SaveChanges();
             }
+            else {
+                return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            }
+            //reservaDB.IDESTADORESERVA = 3;
+            return RedirectToAction("Index"); //REDIRIGE A LA VISTA DE LISTADO
+         }
 
-            return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            
         }
 
     }
-}

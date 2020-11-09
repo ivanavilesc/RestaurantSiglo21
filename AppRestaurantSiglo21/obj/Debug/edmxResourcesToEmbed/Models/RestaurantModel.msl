@@ -60,21 +60,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="COLACOCINA">
-      <EntityTypeMapping TypeName="RestaurantModel.COLACOCINA">
-        <MappingFragment StoreEntitySet="COLACOCINA">
-          <ScalarProperty Name="IDCOLACOCINA" ColumnName="IDCOLACOCINA" />
-          <ScalarProperty Name="HORACREACION" ColumnName="HORACREACION" />
-          <ScalarProperty Name="HORAACTUAL" ColumnName="HORAACTUAL" />
-          <ScalarProperty Name="HORAENTREGA" ColumnName="HORAENTREGA" />
-          <ScalarProperty Name="NROPEDIDO" ColumnName="NROPEDIDO" />
-          <ScalarProperty Name="ESTADOPEDIDO" ColumnName="ESTADOPEDIDO" />
-          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-          <ScalarProperty Name="DIFICULTADPREP" ColumnName="DIFICULTADPREP" />
-          <ScalarProperty Name="TIEMPOPREP" ColumnName="TIEMPOPREP" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DETALLEORDEN">
       <EntityTypeMapping TypeName="RestaurantModel.DETALLEORDEN">
         <MappingFragment StoreEntitySet="DETALLEORDEN">
@@ -464,5 +449,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FN_LISTAEGRESOS" FunctionName="RestaurantModel.Store.FN_LISTAEGRESOS" />
+    <FunctionImportMapping FunctionImportName="FN_LISTAINGRESOS" FunctionName="RestaurantModel.Store.FN_LISTAINGRESOS" />
+    <FunctionImportMapping FunctionImportName="SP_ACTSTOCKMINIMO" FunctionName="RestaurantModel.Store.SP_ACTSTOCKMINIMO" />
+    <FunctionImportMapping FunctionImportName="SP_ACTUALIZAREGRESO" FunctionName="RestaurantModel.Store.SP_ACTUALIZAREGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_ACTUALIZARINGRESO" FunctionName="RestaurantModel.Store.SP_ACTUALIZARINGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_DETALLEGANANCIAS" FunctionName="RestaurantModel.Store.SP_DETALLEGANANCIAS" />
+    <FunctionImportMapping FunctionImportName="SP_ELIMINAREGRESO" FunctionName="RestaurantModel.Store.SP_ELIMINAREGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_ELIMINARINGRESO" FunctionName="RestaurantModel.Store.SP_ELIMINARINGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_GRABARPAGOORDEN" FunctionName="RestaurantModel.Store.SP_GRABARPAGOORDEN" />
+    <FunctionImportMapping FunctionImportName="SP_INSERTAEGRESOBCOMOV" FunctionName="RestaurantModel.Store.SP_INSERTAEGRESOBCOMOV" />
+    <FunctionImportMapping FunctionImportName="SP_INSERTAINGRESOBCOMOV" FunctionName="RestaurantModel.Store.SP_INSERTAINGRESOBCOMOV" />
+    <FunctionImportMapping FunctionImportName="SP_INSERTARARQUEO" FunctionName="RestaurantModel.Store.SP_INSERTARARQUEO" />
+    <FunctionImportMapping FunctionImportName="SP_INSERTARMONTOAPERTURA" FunctionName="RestaurantModel.Store.SP_INSERTARMONTOAPERTURA" />
+    <FunctionImportMapping FunctionImportName="SP_LISTARORDENESPORPAGAR" FunctionName="RestaurantModel.Store.SP_LISTARORDENESPORPAGAR" />
+    <FunctionImportMapping FunctionImportName="SP_LISTARVENTASPORDIA" FunctionName="RestaurantModel.Store.SP_LISTARVENTASPORDIA" />
+    <FunctionImportMapping FunctionImportName="SP_MOVBCOEGRESO" FunctionName="RestaurantModel.Store.SP_MOVBCOEGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_MOVBCOINGRESO" FunctionName="RestaurantModel.Store.SP_MOVBCOINGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_SUMAEGRESO" FunctionName="RestaurantModel.Store.SP_SUMAEGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_SUMAINGRESO" FunctionName="RestaurantModel.Store.SP_SUMAINGRESO" />
+    <FunctionImportMapping FunctionImportName="SP_TOTALGANCIAS" FunctionName="RestaurantModel.Store.SP_TOTALGANCIAS" />
   </EntityContainerMapping>
 </Mapping>

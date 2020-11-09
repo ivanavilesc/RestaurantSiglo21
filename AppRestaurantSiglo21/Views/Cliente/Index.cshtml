@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AppRestaurantSiglo21.Models.CLIENTE>
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PERSONA>
 
 @{
     ViewBag.Title = "Index";
@@ -6,81 +6,78 @@
     // try { Layout = @Session["Layout"].ToString(); } catch{ Layout = "~/Views/Shared/_Principal.cshtml"; }
 
 }
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Clientes</h4>
+        </div>
+    </div>
+    <br />
 
-<h2>Listado de Clientes</h2>
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<table class="table">
-    <tr>
-        @*<th>
-                ID
-            </th>*@
-        <th>
-            FECHA INGRESO
-        </th>
-        <th>
-            NOMBRE
-        </th>
-        <th>
-            APELLIDO PATERNO
-        </th>
-        <th>
-            APELLIDO MATERNO
-        </th>
-        <th>
-            RUT
-        </th>
-        <th>
-            DIRECCION
-        </th>
-        <th>
-            FONO
-        </th>
-        <th>
-            EMAIL
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
         <tr>
-            @*<th>
-                    @Html.DisplayFor(modelItem => item.IDCLIENTE)
-                </th>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.FECHAINGRESO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.APELLIDOPATERNO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.APELLIDOMATERNO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.RUT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.DIRECCION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.FONO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PERSONA.EMAIL)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDPERSONA }) |
-                @Html.ActionLink("Detail", "Detail", new { id = item.IDPERSONA }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDPERSONA })
-            </td>
+            
+            <th>
+                NOMBRE
+            </th>
+            <th>
+                APELLIDO PATERNO
+            </th>
+           
+            <th>
+                RUT
+            </th>
+            <th>
+                DIRECCION
+            </th>
+            <th>
+                FONO
+            </th>
+            <th>
+                EMAIL
+            </th>
+            <th>
+                ACCIONES
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<th>
+                        @Html.DisplayFor(modelItem => item.IDPERSONA)
+                </th>*@
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.APELLIDOPATERNO)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.RUT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIRECCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IDPERSONA }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = item.IDPERSONA }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDPERSONA }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

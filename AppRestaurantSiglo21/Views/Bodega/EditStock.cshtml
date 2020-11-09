@@ -1,0 +1,90 @@
+﻿@model AppRestaurantSiglo21.Models.INSUMOSTOCK
+
+@{
+    ViewBag.Title = "Edit Stock Insumos";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Editar Stock de Insumos</h4>
+        </div>
+    </div>
+    <br />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edita Stock de Productos</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            Insumo
+            <div class="col-md-10">
+                @Html.DisplayFor(modelItem => Model.INSUMO.DESCINSUMO)
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            Stock Actual
+
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.STOCKACTUAL, new
+                    { disabled = "disabled", @readonly = "readonly" })
+            </div>
+
+            @*<div class="col-md-10">
+                @Html.EditorFor(model => model.STOCKACTUAL, new { disabled = "disabled", @readonly = "readonly" = new { @class = "form-control" } })
+            </div>*@
+        </div>
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            Stock Mínimo
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.STOCKMINIMO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.STOCKMINIMO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
+
+                @if (ViewBag.message != null)
+                {
+                    <script type="text/javascript">
+                            window.onload = function () {
+                                alert("@ViewBag.message");
+                            };
+                    </script>
+
+                }
+
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div> @Html.ActionLink("Volver atrás", "ValidarStock", null, new { @class = "btn btn-secondary" })</div>
+
+        @if (ViewBag.message != null)
+        {
+            <script type="text/javascript">
+                            window.onload = function () {
+                                alert("@ViewBag.message");
+                            };
+            </script>
+
+        }
+
+    </div>
+    }
+
+</div>
