@@ -367,6 +367,7 @@
     <Content Include="Content\Images\Esquema_pipiRoom.png" />
     <Content Include="Content\Images\icons\favicon.ico" />
     <Content Include="Content\Images\img-01.png" />
+    <Content Include="Content\Images\pagoOK.png" />
     <Content Include="Content\Images\restaurantReserva.jpg" />
     <Content Include="Content\Images\RestSiglo21Logo.png" />
     <Content Include="Content\Img\login1.png" />

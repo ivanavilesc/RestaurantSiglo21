@@ -87,8 +87,8 @@ namespace AppRestaurantSiglo21.Controllers
                 listaCocina.Add(objCocinaOrden);
             }
             int u = 9;
-            var newList = listaCocina.OrderByDescending(t => t.FactorPrioridad).ToList();
-
+            //var newList = listaCocina.OrderByDescending(t => t.FactorPrioridad).ToList();
+            var newList = listaCocina.OrderByDescending(t => t.DescEstOrden).ThenByDescending(t => t.FactorPrioridad).ToList();
             return View(newList);
 
         }
@@ -117,11 +117,11 @@ namespace AppRestaurantSiglo21.Controllers
             }
             else if (tiempoPreparacion > 15 && tiempoPreparacion < 21)
             {
-                factTiempoPreparacion = 4;
+                factTiempoPreparacion = 5;
             }
             else if (tiempoPreparacion > 20 && tiempoPreparacion < 31)
             {
-                factTiempoPreparacion = 5;
+                factTiempoPreparacion = 8;
             }
 
             //CALCULO Factor TIEMPO ESPERA
@@ -152,7 +152,7 @@ namespace AppRestaurantSiglo21.Controllers
                 factTiempoEspera = calculoFactTiempoEspera * 300;
             }
             //de 151 a 200
-            else if (calculoFactTiempoEspera > 1.51 && calculoFactTiempoEspera < 2.01)
+            else if (calculoFactTiempoEspera > 1.50 && calculoFactTiempoEspera < 2.01)
             {
                 factTiempoEspera = calculoFactTiempoEspera * 500;
             }

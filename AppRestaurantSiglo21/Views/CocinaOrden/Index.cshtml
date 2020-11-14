@@ -45,15 +45,15 @@
                     <td> @Html.DisplayFor(modelItem => item.TiempoPreparacion)</td>
                     <td> @Html.DisplayFor(modelItem => item.Dificultad)</td>
                     <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
-                    @if (item.FactorPrioridad > 20000)
+                    @if (item.FactorPrioridad > 4000)
                     {
                         <td class="table-danger"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
                     }
-                    else if (item.FactorPrioridad > 5000 && item.FactorPrioridad < 20001)
+                    else if (item.FactorPrioridad > 1000 && item.FactorPrioridad < 4001)
                     {
                         <td class="table-warning"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
                     }
-                    else if (item.FactorPrioridad > 0 && item.FactorPrioridad < 5000)
+                    else if (item.FactorPrioridad >= 0 && item.FactorPrioridad < 1001)
                     {
                         <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
                     }

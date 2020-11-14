@@ -94,9 +94,10 @@ namespace AppRestaurantSiglo21.Controllers
 
         }
 
-        public ActionResult Principal()
+        public ActionResult Principal(int? id, int? idorden)
         {
-            
+            System.Web.HttpContext.Current.Session["idorden"] = idorden;
+            System.Web.HttpContext.Current.Session["id"] = id;
             var ordenes = (from o in db.ORDEN
                            join m in db.MESA
                            on o.IDMESA equals m.IDMESA

@@ -89,9 +89,12 @@ namespace AppRestaurantSiglo21.Controllers
                 string rutsindv = rutcondv.Remove(rutcondv.Length - 2);
                 int rutsindv_num = Int32.Parse(rutsindv);
                 string dv = rutcondv.Last().ToString();
+                int x = 1;
+
+
                 // ##### ENCRIPTANDO LA PWD ####################
                 var result = new SecurityController().encrypt(objUsuario.PASSWORD);
-                int x = 0;
+                
                 // ##### BUSCAR A LA PERSONA SI EXISTE EN LA BD ####################
                 var objPersonaDB = db.PERSONA.SingleOrDefault(t => t.RUT.Equals(rutsindv_num));
                 // #### SI NO EXISTE ########

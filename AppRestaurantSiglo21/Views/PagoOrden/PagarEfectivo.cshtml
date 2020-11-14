@@ -23,18 +23,29 @@
 
         <div class="form-horizontal">
 
-
+            <div class="card">
+                <div class="card-header">
+                    Detalle de Pago en Efectivo
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">No olvides revisar el detalle de tu cuenta, antes de solicitar el pago...</h5>
+                    <br />
+                    <h4>@ViewBag.msgTotalApagar</h4>
+                </div>
+            </div>
+            <br />
+            <hr />
             <div class="sm:flex w-full">
 
-                <button type="submit" class="btn btn-primary">Validar Pago</button>
-                <a>@ViewBag.msgTotalApagar</a>
+                <button type="submit" class="btn btn-primary btn-block">VALIDAR PAGO</button>
+
 
                 @if (ViewBag.message != null)
                 {
                     <script type="text/javascript">
                         window.onload = function () {
                             alert("@ViewBag.message");
-                            window.location.assign('/PagoOrden/Index') 
+                            window.location.assign('/PagoOrden/Index')
                             };
                     </script>
 

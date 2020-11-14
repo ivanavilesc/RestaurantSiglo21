@@ -235,7 +235,7 @@ namespace AppRestaurantSiglo21.Controllers
                                  }).Sum(m => m.Total1);
             
 
-            ViewBag.msgTotalApagar = "Por favor Entregar Efectivo  : " + (propina + TotalOrden);
+            ViewBag.msgTotalApagar = "Por favor, Entregar Efectivo al garzón  : $" + (propina + TotalOrden);
             return View();
         }
 
@@ -250,11 +250,11 @@ namespace AppRestaurantSiglo21.Controllers
             }
             if (objOrden.IDESTADO == 3)
             {
-                ViewBag.message = "Orden Cancela ¡Gracias por su preferncia !";                
+                ViewBag.message = "Pago de la orden fue recibido satisfactoriamente... ¡Gracias por su preferncia !";                
             }
             else
             {
-                ViewBag.msgTotalApagar = "Orden Pendiente ¡Esperar confirmacion !";
+                ViewBag.msgTotalApagar = "Orden Pendiente... ¡Esperar confirmacion !";
             }
             return View();
         }
@@ -472,6 +472,8 @@ namespace AppRestaurantSiglo21.Controllers
             {
                 //Ejecuta procedimiento
                 Pago(Id, propina, IdMedioPago, IdTipoPago);
+                ViewBag.message = "Pago realizado satisfactoriamente";
+                
                 return RedirectToAction("PagoOK"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
 
             }
