@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AppRestaurantSiglo21.Models.OrdenViewModel>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Principal.cshtml";
+    Layout = Session["Layout"].ToString();
 }
 
 <div class="container">

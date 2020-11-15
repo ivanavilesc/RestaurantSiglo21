@@ -153,6 +153,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BodegaController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CartaDigitalController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -161,16 +162,19 @@
     <Compile Include="Controllers\DisponibilidadMesaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumoController.cs" />
+    <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenuListaController.cs" />
     <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Controllers\NotificacionOrdenController.cs" />
     <Compile Include="Controllers\OrdenController.cs" />
+    <Compile Include="Controllers\PagoOrdenController.cs" />
     <Compile Include="Controllers\RecetaProductoController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SeleccionaMesaController.cs" />
     <Compile Include="Controllers\TableroPedidosController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,10 +198,8 @@
     <Compile Include="Models\CLIENTE.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\clsTarjeta.cs" />
     <Compile Include="Models\CocinaOrdenViewModel.cs" />
-    <Compile Include="Models\COLACOCINA.cs">
-      <DependentUpon>RestaurantModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DETALLEORDEN.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -210,6 +212,7 @@
     <Compile Include="Models\DOCUMENTOPAGO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DropDownList.cs" />
     <Compile Include="Models\EGRESO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -249,6 +252,7 @@
     <Compile Include="Models\INSUMOSTOCK.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LlenarDropDownList.cs" />
     <Compile Include="Models\MEDIOPAGO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -292,6 +296,7 @@
     <Compile Include="Models\RESTAURANT.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RestaurantContext.cs" />
     <Compile Include="Models\RestaurantModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -310,6 +315,7 @@
     <Compile Include="Models\ROL.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TarjetaCredito.cs" />
     <Compile Include="Models\TIPOCUENTA.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -331,6 +337,8 @@
     <Compile Include="Models\USUARIOROL.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VistaDetOrdenes.cs" />
+    <Compile Include="Models\VistaOrdenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -344,7 +352,10 @@
     <Content Include="Content\css\BuscarReserva.css" />
     <Content Include="Content\css\ButtonTest.css" />
     <Content Include="Content\css\CancelarReserva.css" />
+    <Content Include="Content\css\general.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\newMenu.css" />
+    <Content Include="Content\css\Ordenes.css" />
     <Content Include="Content\css\Reservas.css" />
     <Content Include="Content\css\SeleccionMesa.css" />
     <Content Include="Content\css\util.css" />
@@ -353,8 +364,10 @@
     <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Content\Images\bg-01.jpg" />
+    <Content Include="Content\Images\Esquema_pipiRoom.png" />
     <Content Include="Content\Images\icons\favicon.ico" />
     <Content Include="Content\Images\img-01.png" />
+    <Content Include="Content\Images\pagoOK.png" />
     <Content Include="Content\Images\restaurantReserva.jpg" />
     <Content Include="Content\Images\RestSiglo21Logo.png" />
     <Content Include="Content\Img\login1.png" />
@@ -362,6 +375,37 @@
     <Content Include="Content\js\bootstrap-datepicker.es.min.js" />
     <Content Include="Content\js\bootstrap-datepicker.min.js" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\newMenu.js" />
+    <Content Include="Content\landing\css\bootstrap.css" />
+    <Content Include="Content\landing\css\demo.css" />
+    <Content Include="Content\landing\css\fonts\pe-icon-7-stroke.css" />
+    <Content Include="Content\landing\css\gaia.css" />
+    <Content Include="Content\landing\fonts\Glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.svg" />
+    <Content Include="Content\landing\img\apple-icon.png" />
+    <Content Include="Content\landing\img\arrow-left.cur" />
+    <Content Include="Content\landing\img\arrow-left.png" />
+    <Content Include="Content\landing\img\arrow-right.cur" />
+    <Content Include="Content\landing\img\arrow-right.png" />
+    <Content Include="Content\landing\img\faces\face_1.jpg" />
+    <Content Include="Content\landing\img\faces\face_2.jpg" />
+    <Content Include="Content\landing\img\faces\face_3.jpg" />
+    <Content Include="Content\landing\img\faces\face_4.jpg" />
+    <Content Include="Content\landing\img\faces\face_5.jpg" />
+    <Content Include="Content\landing\img\faces\face_6.jpg" />
+    <Content Include="Content\landing\img\favicon.ico" />
+    <Content Include="Content\landing\img\favicon.png" />
+    <Content Include="Content\landing\img\header-1.jpeg" />
+    <Content Include="Content\landing\img\header-2.jpeg" />
+    <Content Include="Content\landing\img\header-3.jpeg" />
+    <Content Include="Content\landing\img\mask.png" />
+    <Content Include="Content\landing\img\new_logo.png" />
+    <Content Include="Content\landing\img\office-1.jpeg" />
+    <Content Include="Content\landing\img\pattern.png" />
+    <Content Include="Content\landing\js\bootstrap.js" />
+    <Content Include="Content\landing\js\gaia.js" />
+    <Content Include="Content\landing\js\jquery.min.js" />
+    <Content Include="Content\landing\js\modernizr.js" />
     <Content Include="Content\Scripts\Login2.js" />
     <Content Include="Content\Styles\Login2.css" />
     <Content Include="Content\vendor\animate\animate.css" />
@@ -388,10 +432,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\ArrozconLeche.jpg" />
+    <Content Include="Images\Bodega.jpg" />
+    <Content Include="Images\Carbonada.jpg" />
     <Content Include="Images\CartaDigital.jpg" />
+    <Content Include="Images\Charquican.jpg" />
     <Content Include="Images\Cocacola_Lata.jpg" />
+    <Content Include="Images\EnsaladaPepino.jpg" />
+    <Content Include="Images\EnsaldaApioNueces.jpg" />
+    <Content Include="Images\EnsaldaEspinaca.jpg" />
+    <Content Include="Images\EnsaldaLechuga.jpg" />
     <Content Include="Images\ensaldatomate.jpg" />
+    <Content Include="Images\Fanta.jpg" />
+    <Content Include="Images\LecheNevada.jpg" />
+    <Content Include="Images\ManjarateCasero.jpg" />
+    <Content Include="Images\PasteldeChoclo.jpg" />
     <Content Include="Images\PasteldePapas.jpg" />
+    <Content Include="Images\PicaronesChileno.jpg" />
+    <Content Include="Images\PiscoSour.jpg" />
+    <Content Include="Images\Sprite.jpg" />
+    <Content Include="Images\Tomatican.jpg" />
+    <Content Include="Images\TortaCuricana.jpg" />
+    <Content Include="Images\VinoTtintoSantaRita.jpg" />
     <Content Include="Models\RestaurantModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RestaurantModel.edmx</DependentUpon>
@@ -468,6 +530,12 @@
     <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\landing\fonts\Glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\landing\fonts\Glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\landing\fonts\Glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.eot" />
+    <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.ttf" />
+    <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -481,7 +549,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -551,14 +621,44 @@
     <Content Include="Views\TableroPedidos\Index.cshtml" />
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Reservas\EliminarReserva.cshtml" />
-    <Content Include="Views\RecetaProducto\Index.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Detail.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Home\NewMenu.cshtml" />
+    <Content Include="Views\SeleccionaMesa\SeleccionAndMapa.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Landing\Index.cshtml" />
+    <Content Include="Views\Mesa\CambioEstado.cshtml" />
+    <Content Include="Views\Shared\_PrincipalCocina.cshtml" />
+    <Content Include="Views\Shared\_PrincipalCliente.cshtml" />
+    <Content Include="Views\Shared\_PrincipalBodega.cshtml" />
+    <Content Include="Views\Shared\_PrincipalSuperUser.cshtml" />
+    <Content Include="Views\Home\SuperUser.cshtml" />
+    <Content Include="Views\CartaDigital\DetailPostres.cshtml" />
+    <Content Include="Views\CartaDigital\Principal.cshtml" />
+    <Content Include="Views\Bodega\CrearInsumoStock.cshtml" />
+    <Content Include="Views\Bodega\DetailStock.cshtml" />
+    <Content Include="Views\Bodega\EditStock.cshtml" />
+    <Content Include="Views\Bodega\Index.cshtml" />
+    <Content Include="Views\Bodega\ValidarStock.cshtml" />
+    <Content Include="Views\PagoOrden\ConsultaOrden.cshtml" />
+    <Content Include="Views\PagoOrden\Index.cshtml" />
+    <Content Include="Views\PagoOrden\PagarEfectivo.cshtml" />
+    <Content Include="Views\PagoOrden\PagarOrden.cshtml" />
+    <Content Include="Views\PagoOrden\TarjetaCredito.cshtml" />
+    <Content Include="Views\PagoOrden\TarjetaDebito.cshtml" />
+    <Content Include="Views\PagoOrden\ValidarOrden.cshtml" />
     <Content Include="Views\RecetaProducto\Create.cshtml" />
-    <Content Include="Views\RecetaProducto\Edit.cshtml" />
-    <Content Include="Views\RecetaProducto\Detail.cshtml" />
     <Content Include="Views\RecetaProducto\Delete.cshtml" />
+    <Content Include="Views\RecetaProducto\Detail.cshtml" />
+    <Content Include="Views\RecetaProducto\Edit.cshtml" />
+    <Content Include="Views\RecetaProducto\Index.cshtml" />
+    <Content Include="Views\PagoOrden\PagoOK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ColaCocina\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>

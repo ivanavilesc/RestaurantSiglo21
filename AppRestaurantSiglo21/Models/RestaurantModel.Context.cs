@@ -12,6 +12,8 @@ namespace AppRestaurantSiglo21.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RestaurantEntities : DbContext
     {
@@ -31,7 +33,6 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<CAJAESTADO> CAJAESTADO { get; set; }
         public virtual DbSet<CAJAOPERACION> CAJAOPERACION { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
-        public virtual DbSet<COLACOCINA> COLACOCINA { get; set; }
         public virtual DbSet<DETALLEORDEN> DETALLEORDEN { get; set; }
         public virtual DbSet<DETPEDIDOINS> DETPEDIDOINS { get; set; }
         public virtual DbSet<DOCTPAGOTIPO> DOCTPAGOTIPO { get; set; }
@@ -71,5 +72,285 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<TIPOPRODUCTO> TIPOPRODUCTO { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIOROL> USUARIOROL { get; set; }
+    
+        public virtual int FN_LISTAEGRESOS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FN_LISTAEGRESOS");
+        }
+    
+        public virtual int FN_LISTAINGRESOS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FN_LISTAINGRESOS");
+        }
+    
+        public virtual int SP_ACTSTOCKMINIMO(Nullable<decimal> pE_IDINSUMOSTOCK, Nullable<decimal> pE_STOCKMINIMO)
+        {
+            var pE_IDINSUMOSTOCKParameter = pE_IDINSUMOSTOCK.HasValue ?
+                new ObjectParameter("PE_IDINSUMOSTOCK", pE_IDINSUMOSTOCK) :
+                new ObjectParameter("PE_IDINSUMOSTOCK", typeof(decimal));
+    
+            var pE_STOCKMINIMOParameter = pE_STOCKMINIMO.HasValue ?
+                new ObjectParameter("PE_STOCKMINIMO", pE_STOCKMINIMO) :
+                new ObjectParameter("PE_STOCKMINIMO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTSTOCKMINIMO", pE_IDINSUMOSTOCKParameter, pE_STOCKMINIMOParameter);
+        }
+    
+        public virtual int SP_ACTUALIZAREGRESO(Nullable<decimal> pE_IDEGRESO, Nullable<decimal> pE_MONTO, string pE_DESCMOVIMIENTO, Nullable<System.DateTime> pE_FECHAMOVIMIENTO)
+        {
+            var pE_IDEGRESOParameter = pE_IDEGRESO.HasValue ?
+                new ObjectParameter("PE_IDEGRESO", pE_IDEGRESO) :
+                new ObjectParameter("PE_IDEGRESO", typeof(decimal));
+    
+            var pE_MONTOParameter = pE_MONTO.HasValue ?
+                new ObjectParameter("PE_MONTO", pE_MONTO) :
+                new ObjectParameter("PE_MONTO", typeof(decimal));
+    
+            var pE_DESCMOVIMIENTOParameter = pE_DESCMOVIMIENTO != null ?
+                new ObjectParameter("PE_DESCMOVIMIENTO", pE_DESCMOVIMIENTO) :
+                new ObjectParameter("PE_DESCMOVIMIENTO", typeof(string));
+    
+            var pE_FECHAMOVIMIENTOParameter = pE_FECHAMOVIMIENTO.HasValue ?
+                new ObjectParameter("PE_FECHAMOVIMIENTO", pE_FECHAMOVIMIENTO) :
+                new ObjectParameter("PE_FECHAMOVIMIENTO", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZAREGRESO", pE_IDEGRESOParameter, pE_MONTOParameter, pE_DESCMOVIMIENTOParameter, pE_FECHAMOVIMIENTOParameter);
+        }
+    
+        public virtual int SP_ACTUALIZARINGRESO(Nullable<decimal> pE_IDINGRESO, Nullable<decimal> pE_MONTO, string pE_DESCINGRESO, Nullable<System.DateTime> pE_FECHAMOVIMIENTO)
+        {
+            var pE_IDINGRESOParameter = pE_IDINGRESO.HasValue ?
+                new ObjectParameter("PE_IDINGRESO", pE_IDINGRESO) :
+                new ObjectParameter("PE_IDINGRESO", typeof(decimal));
+    
+            var pE_MONTOParameter = pE_MONTO.HasValue ?
+                new ObjectParameter("PE_MONTO", pE_MONTO) :
+                new ObjectParameter("PE_MONTO", typeof(decimal));
+    
+            var pE_DESCINGRESOParameter = pE_DESCINGRESO != null ?
+                new ObjectParameter("PE_DESCINGRESO", pE_DESCINGRESO) :
+                new ObjectParameter("PE_DESCINGRESO", typeof(string));
+    
+            var pE_FECHAMOVIMIENTOParameter = pE_FECHAMOVIMIENTO.HasValue ?
+                new ObjectParameter("PE_FECHAMOVIMIENTO", pE_FECHAMOVIMIENTO) :
+                new ObjectParameter("PE_FECHAMOVIMIENTO", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ACTUALIZARINGRESO", pE_IDINGRESOParameter, pE_MONTOParameter, pE_DESCINGRESOParameter, pE_FECHAMOVIMIENTOParameter);
+        }
+    
+        public virtual int SP_DETALLEGANANCIAS(Nullable<System.DateTime> pE_FECHAINICIO, Nullable<System.DateTime> pE_FECHAFIN)
+        {
+            var pE_FECHAINICIOParameter = pE_FECHAINICIO.HasValue ?
+                new ObjectParameter("PE_FECHAINICIO", pE_FECHAINICIO) :
+                new ObjectParameter("PE_FECHAINICIO", typeof(System.DateTime));
+    
+            var pE_FECHAFINParameter = pE_FECHAFIN.HasValue ?
+                new ObjectParameter("PE_FECHAFIN", pE_FECHAFIN) :
+                new ObjectParameter("PE_FECHAFIN", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DETALLEGANANCIAS", pE_FECHAINICIOParameter, pE_FECHAFINParameter);
+        }
+    
+        public virtual int SP_ELIMINAREGRESO(Nullable<decimal> pE_IDEGRESO)
+        {
+            var pE_IDEGRESOParameter = pE_IDEGRESO.HasValue ?
+                new ObjectParameter("PE_IDEGRESO", pE_IDEGRESO) :
+                new ObjectParameter("PE_IDEGRESO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINAREGRESO", pE_IDEGRESOParameter);
+        }
+    
+        public virtual int SP_ELIMINARINGRESO(Nullable<decimal> pE_IDINGRESO)
+        {
+            var pE_IDINGRESOParameter = pE_IDINGRESO.HasValue ?
+                new ObjectParameter("PE_IDINGRESO", pE_IDINGRESO) :
+                new ObjectParameter("PE_IDINGRESO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ELIMINARINGRESO", pE_IDINGRESOParameter);
+        }
+    
+        public virtual int SP_GRABARPAGOORDEN(Nullable<decimal> pE_IDORDEN, Nullable<decimal> pE_PROPINA, Nullable<decimal> pE_TIPOPAGO, Nullable<decimal> pE_MEDIOPAGO)
+        {
+            var pE_IDORDENParameter = pE_IDORDEN.HasValue ?
+                new ObjectParameter("PE_IDORDEN", pE_IDORDEN) :
+                new ObjectParameter("PE_IDORDEN", typeof(decimal));
+    
+            var pE_PROPINAParameter = pE_PROPINA.HasValue ?
+                new ObjectParameter("PE_PROPINA", pE_PROPINA) :
+                new ObjectParameter("PE_PROPINA", typeof(decimal));
+    
+            var pE_TIPOPAGOParameter = pE_TIPOPAGO.HasValue ?
+                new ObjectParameter("PE_TIPOPAGO", pE_TIPOPAGO) :
+                new ObjectParameter("PE_TIPOPAGO", typeof(decimal));
+    
+            var pE_MEDIOPAGOParameter = pE_MEDIOPAGO.HasValue ?
+                new ObjectParameter("PE_MEDIOPAGO", pE_MEDIOPAGO) :
+                new ObjectParameter("PE_MEDIOPAGO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GRABARPAGOORDEN", pE_IDORDENParameter, pE_PROPINAParameter, pE_TIPOPAGOParameter, pE_MEDIOPAGOParameter);
+        }
+    
+        public virtual int SP_INSERTAEGRESOBCOMOV(Nullable<decimal> pE_MONTOMOV, Nullable<decimal> pE_NUMCUENTA, Nullable<decimal> pE_IDTIPOMOVBCO, Nullable<decimal> pE_IDENTBANCARIA, string pE_DESCMOVIMIENTO)
+        {
+            var pE_MONTOMOVParameter = pE_MONTOMOV.HasValue ?
+                new ObjectParameter("PE_MONTOMOV", pE_MONTOMOV) :
+                new ObjectParameter("PE_MONTOMOV", typeof(decimal));
+    
+            var pE_NUMCUENTAParameter = pE_NUMCUENTA.HasValue ?
+                new ObjectParameter("PE_NUMCUENTA", pE_NUMCUENTA) :
+                new ObjectParameter("PE_NUMCUENTA", typeof(decimal));
+    
+            var pE_IDTIPOMOVBCOParameter = pE_IDTIPOMOVBCO.HasValue ?
+                new ObjectParameter("PE_IDTIPOMOVBCO", pE_IDTIPOMOVBCO) :
+                new ObjectParameter("PE_IDTIPOMOVBCO", typeof(decimal));
+    
+            var pE_IDENTBANCARIAParameter = pE_IDENTBANCARIA.HasValue ?
+                new ObjectParameter("PE_IDENTBANCARIA", pE_IDENTBANCARIA) :
+                new ObjectParameter("PE_IDENTBANCARIA", typeof(decimal));
+    
+            var pE_DESCMOVIMIENTOParameter = pE_DESCMOVIMIENTO != null ?
+                new ObjectParameter("PE_DESCMOVIMIENTO", pE_DESCMOVIMIENTO) :
+                new ObjectParameter("PE_DESCMOVIMIENTO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTAEGRESOBCOMOV", pE_MONTOMOVParameter, pE_NUMCUENTAParameter, pE_IDTIPOMOVBCOParameter, pE_IDENTBANCARIAParameter, pE_DESCMOVIMIENTOParameter);
+        }
+    
+        public virtual int SP_INSERTAINGRESOBCOMOV(Nullable<decimal> pE_MONTOMOV, Nullable<decimal> pE_NUMCUENTA, Nullable<decimal> pE_IDTIPOMOVBCO, Nullable<decimal> pE_IDENTBANCARIA, string pE_DESCMOVIMIENTO)
+        {
+            var pE_MONTOMOVParameter = pE_MONTOMOV.HasValue ?
+                new ObjectParameter("PE_MONTOMOV", pE_MONTOMOV) :
+                new ObjectParameter("PE_MONTOMOV", typeof(decimal));
+    
+            var pE_NUMCUENTAParameter = pE_NUMCUENTA.HasValue ?
+                new ObjectParameter("PE_NUMCUENTA", pE_NUMCUENTA) :
+                new ObjectParameter("PE_NUMCUENTA", typeof(decimal));
+    
+            var pE_IDTIPOMOVBCOParameter = pE_IDTIPOMOVBCO.HasValue ?
+                new ObjectParameter("PE_IDTIPOMOVBCO", pE_IDTIPOMOVBCO) :
+                new ObjectParameter("PE_IDTIPOMOVBCO", typeof(decimal));
+    
+            var pE_IDENTBANCARIAParameter = pE_IDENTBANCARIA.HasValue ?
+                new ObjectParameter("PE_IDENTBANCARIA", pE_IDENTBANCARIA) :
+                new ObjectParameter("PE_IDENTBANCARIA", typeof(decimal));
+    
+            var pE_DESCMOVIMIENTOParameter = pE_DESCMOVIMIENTO != null ?
+                new ObjectParameter("PE_DESCMOVIMIENTO", pE_DESCMOVIMIENTO) :
+                new ObjectParameter("PE_DESCMOVIMIENTO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTAINGRESOBCOMOV", pE_MONTOMOVParameter, pE_NUMCUENTAParameter, pE_IDTIPOMOVBCOParameter, pE_IDENTBANCARIAParameter, pE_DESCMOVIMIENTOParameter);
+        }
+    
+        public virtual int SP_INSERTARARQUEO(Nullable<decimal> pE_MONTOOPERACION, Nullable<System.DateTime> pE_FECHACIERRE, string pE_OBS)
+        {
+            var pE_MONTOOPERACIONParameter = pE_MONTOOPERACION.HasValue ?
+                new ObjectParameter("PE_MONTOOPERACION", pE_MONTOOPERACION) :
+                new ObjectParameter("PE_MONTOOPERACION", typeof(decimal));
+    
+            var pE_FECHACIERREParameter = pE_FECHACIERRE.HasValue ?
+                new ObjectParameter("PE_FECHACIERRE", pE_FECHACIERRE) :
+                new ObjectParameter("PE_FECHACIERRE", typeof(System.DateTime));
+    
+            var pE_OBSParameter = pE_OBS != null ?
+                new ObjectParameter("PE_OBS", pE_OBS) :
+                new ObjectParameter("PE_OBS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTARARQUEO", pE_MONTOOPERACIONParameter, pE_FECHACIERREParameter, pE_OBSParameter);
+        }
+    
+        public virtual int SP_INSERTARMONTOAPERTURA(Nullable<decimal> pE_MONTOOPERACION, Nullable<System.DateTime> pE_FECHAAPERTURA, string pE_OBS)
+        {
+            var pE_MONTOOPERACIONParameter = pE_MONTOOPERACION.HasValue ?
+                new ObjectParameter("PE_MONTOOPERACION", pE_MONTOOPERACION) :
+                new ObjectParameter("PE_MONTOOPERACION", typeof(decimal));
+    
+            var pE_FECHAAPERTURAParameter = pE_FECHAAPERTURA.HasValue ?
+                new ObjectParameter("PE_FECHAAPERTURA", pE_FECHAAPERTURA) :
+                new ObjectParameter("PE_FECHAAPERTURA", typeof(System.DateTime));
+    
+            var pE_OBSParameter = pE_OBS != null ?
+                new ObjectParameter("PE_OBS", pE_OBS) :
+                new ObjectParameter("PE_OBS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTARMONTOAPERTURA", pE_MONTOOPERACIONParameter, pE_FECHAAPERTURAParameter, pE_OBSParameter);
+        }
+    
+        public virtual int SP_LISTARORDENESPORPAGAR()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_LISTARORDENESPORPAGAR");
+        }
+    
+        public virtual int SP_LISTARVENTASPORDIA(Nullable<System.DateTime> pE_FECHA)
+        {
+            var pE_FECHAParameter = pE_FECHA.HasValue ?
+                new ObjectParameter("PE_FECHA", pE_FECHA) :
+                new ObjectParameter("PE_FECHA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_LISTARVENTASPORDIA", pE_FECHAParameter);
+        }
+    
+        public virtual int SP_MOVBCOEGRESO(Nullable<System.DateTime> pE_FECHMOVDESDE, Nullable<System.DateTime> pE_FECHMOVHASTA)
+        {
+            var pE_FECHMOVDESDEParameter = pE_FECHMOVDESDE.HasValue ?
+                new ObjectParameter("PE_FECHMOVDESDE", pE_FECHMOVDESDE) :
+                new ObjectParameter("PE_FECHMOVDESDE", typeof(System.DateTime));
+    
+            var pE_FECHMOVHASTAParameter = pE_FECHMOVHASTA.HasValue ?
+                new ObjectParameter("PE_FECHMOVHASTA", pE_FECHMOVHASTA) :
+                new ObjectParameter("PE_FECHMOVHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_MOVBCOEGRESO", pE_FECHMOVDESDEParameter, pE_FECHMOVHASTAParameter);
+        }
+    
+        public virtual int SP_MOVBCOINGRESO(Nullable<System.DateTime> pE_FECHMOVDESDE, Nullable<System.DateTime> pE_FECHMOVHASTA)
+        {
+            var pE_FECHMOVDESDEParameter = pE_FECHMOVDESDE.HasValue ?
+                new ObjectParameter("PE_FECHMOVDESDE", pE_FECHMOVDESDE) :
+                new ObjectParameter("PE_FECHMOVDESDE", typeof(System.DateTime));
+    
+            var pE_FECHMOVHASTAParameter = pE_FECHMOVHASTA.HasValue ?
+                new ObjectParameter("PE_FECHMOVHASTA", pE_FECHMOVHASTA) :
+                new ObjectParameter("PE_FECHMOVHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_MOVBCOINGRESO", pE_FECHMOVDESDEParameter, pE_FECHMOVHASTAParameter);
+        }
+    
+        public virtual int SP_SUMAEGRESO(Nullable<System.DateTime> pE_FECHMOVDESDE, Nullable<System.DateTime> pE_FECHMOVHASTA)
+        {
+            var pE_FECHMOVDESDEParameter = pE_FECHMOVDESDE.HasValue ?
+                new ObjectParameter("PE_FECHMOVDESDE", pE_FECHMOVDESDE) :
+                new ObjectParameter("PE_FECHMOVDESDE", typeof(System.DateTime));
+    
+            var pE_FECHMOVHASTAParameter = pE_FECHMOVHASTA.HasValue ?
+                new ObjectParameter("PE_FECHMOVHASTA", pE_FECHMOVHASTA) :
+                new ObjectParameter("PE_FECHMOVHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SUMAEGRESO", pE_FECHMOVDESDEParameter, pE_FECHMOVHASTAParameter);
+        }
+    
+        public virtual int SP_SUMAINGRESO(Nullable<System.DateTime> pE_FECHMOVDESDE, Nullable<System.DateTime> pE_FECHMOVHASTA)
+        {
+            var pE_FECHMOVDESDEParameter = pE_FECHMOVDESDE.HasValue ?
+                new ObjectParameter("PE_FECHMOVDESDE", pE_FECHMOVDESDE) :
+                new ObjectParameter("PE_FECHMOVDESDE", typeof(System.DateTime));
+    
+            var pE_FECHMOVHASTAParameter = pE_FECHMOVHASTA.HasValue ?
+                new ObjectParameter("PE_FECHMOVHASTA", pE_FECHMOVHASTA) :
+                new ObjectParameter("PE_FECHMOVHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SUMAINGRESO", pE_FECHMOVDESDEParameter, pE_FECHMOVHASTAParameter);
+        }
+    
+        public virtual int SP_TOTALGANCIAS(Nullable<System.DateTime> pE_FECHAINICIO, Nullable<System.DateTime> pE_FECHAFIN)
+        {
+            var pE_FECHAINICIOParameter = pE_FECHAINICIO.HasValue ?
+                new ObjectParameter("PE_FECHAINICIO", pE_FECHAINICIO) :
+                new ObjectParameter("PE_FECHAINICIO", typeof(System.DateTime));
+    
+            var pE_FECHAFINParameter = pE_FECHAFIN.HasValue ?
+                new ObjectParameter("PE_FECHAFIN", pE_FECHAFIN) :
+                new ObjectParameter("PE_FECHAFIN", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_TOTALGANCIAS", pE_FECHAINICIOParameter, pE_FECHAFINParameter);
+        }
     }
 }

@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">@Session["Rol"].ToString()</a>
+        <a class="navbar-brand" href="#">@Session["Rol"].ToString().ToLowerInvariant()</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,18 +24,35 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Servicio
+                        Mesas disponibles
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/DisponibilidadMesa">Disponibilidad Mesas</a>
+                        <a class="dropdown-item" href="/SeleccionaMesa/SeleccionAndMapa">Disponibilidad Mesas</a>
 
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Notificaciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/NotificacionOrden">Revisar notificaciones</a>
 
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reservas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Reservas">Consultar Reservas</a>
+                        <a class="dropdown-item" href="/Reservas/CancelarReserva">Cancelar Reservas</a>
+                    </div>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="/Home/Logout">
                 <text style="color:black">
-                    Bienvenido @Session["UserName"].ToString() &nbsp;|&nbsp; Tu rol es : @Session["Rol"].ToString() &nbsp;
+                    Bienvenido @Session["UserName"].ToString() &nbsp;|&nbsp; Tu rol es : @Session["Rol"].ToString().ToLowerInvariant() &nbsp;
                 </text>
                 <hr />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir de Sistema</button>

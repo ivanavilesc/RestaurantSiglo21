@@ -2,8 +2,9 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+    Layout = Session["Layout"].ToString();
 }
+<link href="~/Content/css/Ordenes.css" rel="stylesheet" />
 <div class="container">
 
 
@@ -13,12 +14,15 @@
         </div>
     </div>
     <br />
-
+   
     <p>
-        @Html.ActionLink("Plato de Fondo", "DetailPlato", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Bebestible", "DetailBebestible", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Ensaladas", "DetailEnsaladas", null, new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("Validad Detalle", "ValidarOrden", new { id = @ViewBag.IdPasOrden }, new { @class = "btn btn-warning" })*@
+        @Html.ActionLink("Plato de Fondo", "DetailPlato", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Bebestible", "DetailBebestible", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Ensaladas", "DetailEnsaladas", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Postres", "DetailPostres", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" })
     </p>
 
-    <img src="@Url.Content("~/Images/CartaDigital.jpg")" width="1110px" height="600px" alt="imgf" />   
+          <img src="@Url.Content("~/Images/CartaDigital.jpg")" width="1110px" height="450px" alt="imgf" class="img-responsive" />
+    
 </div>

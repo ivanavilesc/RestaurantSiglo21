@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width" />
+    @{
+        <!-- Layout = null; -->
+        ViewBag.Title = "Super Usuario";
+    }
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css/general.css" rel="stylesheet" />
+    <title>Ingreso Garzón</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" href="#">@Session["Rol"].ToString().ToLowerInvariant()</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mantenedores
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Usuarios">Mantenedor cuentas usuario</a>
+                        <a class="dropdown-item" href="/Cliente">Mantenedor clientes</a>
+                        <a class="dropdown-item" href="/Disponibilidad">Mantenedor disponibilidad</a>
+                        
+                        <a class="dropdown-item" href="/Insumo">Mantenedor insumos</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Carta Digital
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/CartaDigital/Principal">Vincular Orden-Carta</a>
+                        <a class="dropdown-item" href="/CartaDigital">Revisar Carta</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bodega
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Bodega">Menu Bodega</a>
+                        <a class="dropdown-item" href="/Bodega/ValidarStock">Validar Stock</a>
+                        <a class="dropdown-item" href="/Bodega/CrearInsumoStock">Crear Insumo</a>
+
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cocina
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/CocinaOrden">Cocina Orden</a>
+                        <a class="dropdown-item" href="/RecetaProducto">Mantenedor Recetas</a>
+
+
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pagar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/PagoOrden">Pago Orden</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sitio Web
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Landing">Sitio Publico</a>
+                        <a class="dropdown-item" href="/Reservas/Reserva">Reservar mesa</a>
+                        <a class="dropdown-item" href="/Reservas/Bienvenida">Vista Totem Bienvenida</a>
+                        <a class="dropdown-item" href="/Reservas">Validar Reserva</a>
+                        <a class="dropdown-item" href="/Reservas/CancelarReserva">Cancelar Reserva</a>
+                        <a class="dropdown-item" href="/SeleccionaMesa/SeleccionAndMapa">Vista Seleccion Mesa</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/Home/Logout">
+                <text style="color:black">
+                    Bienvenido @Session["UserName"].ToString() &nbsp;|&nbsp; Tu rol es : @Session["Rol"].ToString().ToLowerInvariant() &nbsp;
+                </text>
+                <hr />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir de Sistema</button>
+            </form>
+        </div>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

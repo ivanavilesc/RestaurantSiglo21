@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+    Layout = Session["Layout"].ToString();
 }
 
 <h2>Consultar detalles de mesa</h2>

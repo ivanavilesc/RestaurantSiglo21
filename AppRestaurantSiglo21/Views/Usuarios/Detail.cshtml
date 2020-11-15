@@ -1,0 +1,79 @@
+﻿@model AppRestaurantSiglo21.Models.USUARIO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consultar Cuentas de Usuario</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <h4>Detalle de Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                User ID
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.USERID)
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                RUT
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERSONA.RUT)-@Html.DisplayFor(model => model.PERSONA.DV)
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                NOMBRE
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERSONA.NOMBRE)
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                APELLIDO
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERSONA.APELLIDOPATERNO)
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                CORREO ELECTRONICO
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PERSONA.EMAIL)
+            </dd>
+        </dl>
+
+
+
+    </div>
+    <p>
+
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDPERSONA }, new { @class = "btn btn-primary" }) | 
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+        </p>
+</div>
+

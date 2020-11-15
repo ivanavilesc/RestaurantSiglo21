@@ -118,6 +118,10 @@ namespace AppRestaurantSiglo21.Controllers
             return RedirectToAction("Index");  //REDIRIGE A LA VISTA DE LISTADO
         }
 
+        public ActionResult CambioEstado()
+        {
+            return View();
+        }
 
     }
 }

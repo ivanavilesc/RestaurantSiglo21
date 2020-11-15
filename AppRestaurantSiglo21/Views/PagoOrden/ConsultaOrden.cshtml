@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Pagar Cuenta</h4>
+        </div>
+    </div>
+    <br />
+
+    @*<form method="post" action="@Url.Action("ConsultaOrden", "PagoOrden")">*@
+    @if (@ViewBag.MensajeOk != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    <form action="/PagoOrden/ValidarOrden" method="post">
+
+
+        <div class="form-horizontal">
+
+
+            <div class="sm:flex w-full">
+                Número Orden  :  <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="nrorden" id="nrorden" placeholder="Número Orden" required>
+                <button type="submit" class="btn btn-primary">Validar Orden</button>
+            </div>
+        </div>
+
+    </form>
+
+
+
+</div>
+

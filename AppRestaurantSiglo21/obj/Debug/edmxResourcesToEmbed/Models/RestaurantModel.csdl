@@ -63,20 +63,6 @@
     <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
     <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
   </EntityType>
-  <EntityType Name="COLACOCINA">
-    <Key>
-      <PropertyRef Name="IDCOLACOCINA" />
-    </Key>
-    <Property Name="IDCOLACOCINA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HORACREACION" Type="DateTime" />
-    <Property Name="HORAACTUAL" Type="DateTime" />
-    <Property Name="HORAENTREGA" Type="DateTime" />
-    <Property Name="NROPEDIDO" Type="Int32" />
-    <Property Name="ESTADOPEDIDO" Type="Byte" />
-    <Property Name="CANTIDAD" Type="Int32" />
-    <Property Name="DIFICULTADPREP" Type="Int16" />
-    <Property Name="TIEMPOPREP" Type="Int16" />
-  </EntityType>
   <EntityType Name="DETALLEORDEN">
     <Key>
       <PropertyRef Name="IDDETALLEORDEN" />
@@ -1012,7 +998,6 @@
     <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" />
     <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" />
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
-    <EntitySet Name="COLACOCINA" EntityType="Self.COLACOCINA" />
     <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" />
     <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" />
     <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" />
@@ -1220,5 +1205,87 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="USUARIOROL" EntitySet="USUARIOROL" />
     </AssociationSet>
+    <FunctionImport Name="FN_LISTAEGRESOS" />
+    <FunctionImport Name="FN_LISTAINGRESOS" />
+    <FunctionImport Name="SP_ACTSTOCKMINIMO">
+      <Parameter Name="PE_IDINSUMOSTOCK" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_STOCKMINIMO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZAREGRESO">
+      <Parameter Name="PE_IDEGRESO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_MONTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+      <Parameter Name="PE_FECHAMOVIMIENTO" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ACTUALIZARINGRESO">
+      <Parameter Name="PE_IDINGRESO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_MONTO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_DESCINGRESO" Mode="In" Type="String" />
+      <Parameter Name="PE_FECHAMOVIMIENTO" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DETALLEGANANCIAS">
+      <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINAREGRESO">
+      <Parameter Name="PE_IDEGRESO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ELIMINARINGRESO">
+      <Parameter Name="PE_IDINGRESO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GRABARPAGOORDEN">
+      <Parameter Name="PE_IDORDEN" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_PROPINA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_TIPOPAGO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_MEDIOPAGO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTAEGRESOBCOMOV">
+      <Parameter Name="PE_MONTOMOV" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_NUMCUENTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_IDTIPOMOVBCO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_IDENTBANCARIA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTAINGRESOBCOMOV">
+      <Parameter Name="PE_MONTOMOV" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_NUMCUENTA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_IDTIPOMOVBCO" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_IDENTBANCARIA" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTARARQUEO">
+      <Parameter Name="PE_MONTOOPERACION" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_FECHACIERRE" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_OBS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERTARMONTOAPERTURA">
+      <Parameter Name="PE_MONTOOPERACION" Mode="In" Type="Decimal" />
+      <Parameter Name="PE_FECHAAPERTURA" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_OBS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_LISTARORDENESPORPAGAR" />
+    <FunctionImport Name="SP_LISTARVENTASPORDIA">
+      <Parameter Name="PE_FECHA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_MOVBCOEGRESO">
+      <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_MOVBCOINGRESO">
+      <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SUMAEGRESO">
+      <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SUMAINGRESO">
+      <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_TOTALGANCIAS">
+      <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

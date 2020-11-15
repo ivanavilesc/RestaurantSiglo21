@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RestaurantModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RestaurantModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ALERTASTOCK">
           <Key>
             <PropertyRef Name="IDALERTA" />
@@ -57,20 +57,6 @@
             <PropertyRef Name="IDPERSONA" />
           </Key>
           <Property Name="IDPERSONA" Type="number" Precision="10" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="COLACOCINA">
-          <Key>
-            <PropertyRef Name="IDCOLACOCINA" />
-          </Key>
-          <Property Name="IDCOLACOCINA" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HORACREACION" Type="date" />
-          <Property Name="HORAACTUAL" Type="date" />
-          <Property Name="HORAENTREGA" Type="date" />
-          <Property Name="NROPEDIDO" Type="number" Precision="6" Scale="0" />
-          <Property Name="ESTADOPEDIDO" Type="number" Precision="2" Scale="0" />
-          <Property Name="CANTIDAD" Type="number" Precision="6" Scale="0" />
-          <Property Name="DIFICULTADPREP" Type="number" Precision="4" Scale="0" />
-          <Property Name="TIEMPOPREP" Type="number" Precision="4" Scale="0" />
         </EntityType>
         <EntityType Name="DETALLEORDEN">
           <Key>
@@ -926,6 +912,88 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FN_LISTAEGRESOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+        <Function Name="FN_LISTAINGRESOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+        <Function Name="SP_ACTSTOCKMINIMO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDINSUMOSTOCK" Type="number" Mode="In" />
+          <Parameter Name="PE_STOCKMINIMO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_ACTUALIZAREGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDEGRESO" Type="number" Mode="In" />
+          <Parameter Name="PE_MONTO" Type="number" Mode="In" />
+          <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_FECHAMOVIMIENTO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_ACTUALIZARINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDINGRESO" Type="number" Mode="In" />
+          <Parameter Name="PE_MONTO" Type="number" Mode="In" />
+          <Parameter Name="PE_DESCINGRESO" Type="varchar2" Mode="In" />
+          <Parameter Name="PE_FECHAMOVIMIENTO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_DETALLEGANANCIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHAINICIO" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHAFIN" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_ELIMINAREGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDEGRESO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_ELIMINARINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDINGRESO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_GRABARPAGOORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_IDORDEN" Type="number" Mode="In" />
+          <Parameter Name="PE_PROPINA" Type="number" Mode="In" />
+          <Parameter Name="PE_TIPOPAGO" Type="number" Mode="In" />
+          <Parameter Name="PE_MEDIOPAGO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERTAEGRESOBCOMOV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_MONTOMOV" Type="number" Mode="In" />
+          <Parameter Name="PE_NUMCUENTA" Type="number" Mode="In" />
+          <Parameter Name="PE_IDTIPOMOVBCO" Type="number" Mode="In" />
+          <Parameter Name="PE_IDENTBANCARIA" Type="number" Mode="In" />
+          <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERTAINGRESOBCOMOV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_MONTOMOV" Type="number" Mode="In" />
+          <Parameter Name="PE_NUMCUENTA" Type="number" Mode="In" />
+          <Parameter Name="PE_IDTIPOMOVBCO" Type="number" Mode="In" />
+          <Parameter Name="PE_IDENTBANCARIA" Type="number" Mode="In" />
+          <Parameter Name="PE_DESCMOVIMIENTO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERTARARQUEO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_MONTOOPERACION" Type="number" Mode="In" />
+          <Parameter Name="PE_FECHACIERRE" Type="date" Mode="In" />
+          <Parameter Name="PE_OBS" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERTARMONTOAPERTURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_MONTOOPERACION" Type="number" Mode="In" />
+          <Parameter Name="PE_FECHAAPERTURA" Type="date" Mode="In" />
+          <Parameter Name="PE_OBS" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_LISTARORDENESPORPAGAR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT" />
+        <Function Name="SP_LISTARVENTASPORDIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_MOVBCOEGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_MOVBCOINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_SUMAEGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_SUMAINGRESO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHMOVDESDE" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHMOVHASTA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_TOTALGANCIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANT">
+          <Parameter Name="PE_FECHAINICIO" Type="date" Mode="In" />
+          <Parameter Name="PE_FECHAFIN" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="RestaurantModelStoreContainer">
           <EntitySet Name="ALERTASTOCK" EntityType="Self.ALERTASTOCK" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="BANCOMOVIMIENTO" EntityType="Self.BANCOMOVIMIENTO" Schema="RESTAURANT" store:Type="Tables" />
@@ -933,7 +1001,6 @@
           <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="RESTAURANT" store:Type="Tables" />
-          <EntitySet Name="COLACOCINA" EntityType="Self.COLACOCINA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" Schema="RESTAURANT" store:Type="Tables" />
@@ -1142,8 +1209,7 @@
             <End Role="USUARIOROL" EntitySet="USUARIOROL" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1209,20 +1275,6 @@
           <NavigationProperty Name="PERSONA" Relationship="Self.CLIENTE_PERSONA_FK" FromRole="CLIENTE" ToRole="PERSONA" />
           <NavigationProperty Name="DOCUMENTOPAGO" Relationship="Self.DOCUMENTOPAGO_CLIENTE_FK" FromRole="CLIENTE" ToRole="DOCUMENTOPAGO" />
           <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
-        </EntityType>
-        <EntityType Name="COLACOCINA">
-          <Key>
-            <PropertyRef Name="IDCOLACOCINA" />
-          </Key>
-          <Property Name="IDCOLACOCINA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HORACREACION" Type="DateTime" />
-          <Property Name="HORAACTUAL" Type="DateTime" />
-          <Property Name="HORAENTREGA" Type="DateTime" />
-          <Property Name="NROPEDIDO" Type="Int32" />
-          <Property Name="ESTADOPEDIDO" Type="Byte" />
-          <Property Name="CANTIDAD" Type="Int32" />
-          <Property Name="DIFICULTADPREP" Type="Int16" />
-          <Property Name="TIEMPOPREP" Type="Int16" />
         </EntityType>
         <EntityType Name="DETALLEORDEN">
           <Key>
@@ -2159,7 +2211,6 @@
           <EntitySet Name="CAJAESTADO" EntityType="Self.CAJAESTADO" />
           <EntitySet Name="CAJAOPERACION" EntityType="Self.CAJAOPERACION" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
-          <EntitySet Name="COLACOCINA" EntityType="Self.COLACOCINA" />
           <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" />
           <EntitySet Name="DETPEDIDOINS" EntityType="Self.DETPEDIDOINS" />
           <EntitySet Name="DOCTPAGOTIPO" EntityType="Self.DOCTPAGOTIPO" />
@@ -2367,6 +2418,88 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIOROL" EntitySet="USUARIOROL" />
           </AssociationSet>
+          <FunctionImport Name="FN_LISTAEGRESOS" />
+          <FunctionImport Name="FN_LISTAINGRESOS" />
+          <FunctionImport Name="SP_ACTSTOCKMINIMO">
+            <Parameter Name="PE_IDINSUMOSTOCK" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_STOCKMINIMO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ACTUALIZAREGRESO">
+            <Parameter Name="PE_IDEGRESO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_MONTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+            <Parameter Name="PE_FECHAMOVIMIENTO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ACTUALIZARINGRESO">
+            <Parameter Name="PE_IDINGRESO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_MONTO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_DESCINGRESO" Mode="In" Type="String" />
+            <Parameter Name="PE_FECHAMOVIMIENTO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DETALLEGANANCIAS">
+            <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ELIMINAREGRESO">
+          <Parameter Name="PE_IDEGRESO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ELIMINARINGRESO">
+          <Parameter Name="PE_IDINGRESO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GRABARPAGOORDEN">
+            <Parameter Name="PE_IDORDEN" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_PROPINA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_TIPOPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_MEDIOPAGO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERTAEGRESOBCOMOV">
+            <Parameter Name="PE_MONTOMOV" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_NUMCUENTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_IDTIPOMOVBCO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_IDENTBANCARIA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERTAINGRESOBCOMOV">
+            <Parameter Name="PE_MONTOMOV" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_NUMCUENTA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_IDTIPOMOVBCO" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_IDENTBANCARIA" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_DESCMOVIMIENTO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERTARARQUEO">
+            <Parameter Name="PE_MONTOOPERACION" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_FECHACIERRE" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_OBS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERTARMONTOAPERTURA">
+            <Parameter Name="PE_MONTOOPERACION" Mode="In" Type="Decimal" />
+            <Parameter Name="PE_FECHAAPERTURA" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_OBS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_LISTARORDENESPORPAGAR" />
+          <FunctionImport Name="SP_LISTARVENTASPORDIA">
+          <Parameter Name="PE_FECHA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MOVBCOEGRESO">
+            <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MOVBCOINGRESO">
+            <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SUMAEGRESO">
+            <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SUMAINGRESO">
+            <Parameter Name="PE_FECHMOVDESDE" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHMOVHASTA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TOTALGANCIAS">
+            <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -2430,21 +2563,6 @@
             <EntityTypeMapping TypeName="RestaurantModel.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
                 <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="COLACOCINA">
-            <EntityTypeMapping TypeName="RestaurantModel.COLACOCINA">
-              <MappingFragment StoreEntitySet="COLACOCINA">
-                <ScalarProperty Name="IDCOLACOCINA" ColumnName="IDCOLACOCINA" />
-                <ScalarProperty Name="HORACREACION" ColumnName="HORACREACION" />
-                <ScalarProperty Name="HORAACTUAL" ColumnName="HORAACTUAL" />
-                <ScalarProperty Name="HORAENTREGA" ColumnName="HORAENTREGA" />
-                <ScalarProperty Name="NROPEDIDO" ColumnName="NROPEDIDO" />
-                <ScalarProperty Name="ESTADOPEDIDO" ColumnName="ESTADOPEDIDO" />
-                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-                <ScalarProperty Name="DIFICULTADPREP" ColumnName="DIFICULTADPREP" />
-                <ScalarProperty Name="TIEMPOPREP" ColumnName="TIEMPOPREP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2837,6 +2955,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FN_LISTAEGRESOS" FunctionName="RestaurantModel.Store.FN_LISTAEGRESOS" />
+          <FunctionImportMapping FunctionImportName="FN_LISTAINGRESOS" FunctionName="RestaurantModel.Store.FN_LISTAINGRESOS" />
+          <FunctionImportMapping FunctionImportName="SP_ACTSTOCKMINIMO" FunctionName="RestaurantModel.Store.SP_ACTSTOCKMINIMO" />
+          <FunctionImportMapping FunctionImportName="SP_ACTUALIZAREGRESO" FunctionName="RestaurantModel.Store.SP_ACTUALIZAREGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_ACTUALIZARINGRESO" FunctionName="RestaurantModel.Store.SP_ACTUALIZARINGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_DETALLEGANANCIAS" FunctionName="RestaurantModel.Store.SP_DETALLEGANANCIAS" />
+          <FunctionImportMapping FunctionImportName="SP_ELIMINAREGRESO" FunctionName="RestaurantModel.Store.SP_ELIMINAREGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_ELIMINARINGRESO" FunctionName="RestaurantModel.Store.SP_ELIMINARINGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_GRABARPAGOORDEN" FunctionName="RestaurantModel.Store.SP_GRABARPAGOORDEN" />
+          <FunctionImportMapping FunctionImportName="SP_INSERTAEGRESOBCOMOV" FunctionName="RestaurantModel.Store.SP_INSERTAEGRESOBCOMOV" />
+          <FunctionImportMapping FunctionImportName="SP_INSERTAINGRESOBCOMOV" FunctionName="RestaurantModel.Store.SP_INSERTAINGRESOBCOMOV" />
+          <FunctionImportMapping FunctionImportName="SP_INSERTARARQUEO" FunctionName="RestaurantModel.Store.SP_INSERTARARQUEO" />
+          <FunctionImportMapping FunctionImportName="SP_INSERTARMONTOAPERTURA" FunctionName="RestaurantModel.Store.SP_INSERTARMONTOAPERTURA" />
+          <FunctionImportMapping FunctionImportName="SP_LISTARORDENESPORPAGAR" FunctionName="RestaurantModel.Store.SP_LISTARORDENESPORPAGAR" />
+          <FunctionImportMapping FunctionImportName="SP_LISTARVENTASPORDIA" FunctionName="RestaurantModel.Store.SP_LISTARVENTASPORDIA" />
+          <FunctionImportMapping FunctionImportName="SP_MOVBCOEGRESO" FunctionName="RestaurantModel.Store.SP_MOVBCOEGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_MOVBCOINGRESO" FunctionName="RestaurantModel.Store.SP_MOVBCOINGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_SUMAEGRESO" FunctionName="RestaurantModel.Store.SP_SUMAEGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_SUMAINGRESO" FunctionName="RestaurantModel.Store.SP_SUMAINGRESO" />
+          <FunctionImportMapping FunctionImportName="SP_TOTALGANCIAS" FunctionName="RestaurantModel.Store.SP_TOTALGANCIAS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

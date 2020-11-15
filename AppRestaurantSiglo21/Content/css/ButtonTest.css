@@ -58,4 +58,7 @@ button {
     color: #FFFFFF;
 }
 
-
+form {
+    float: left;
+    width: auto;
+}

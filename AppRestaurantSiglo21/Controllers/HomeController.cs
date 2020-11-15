@@ -49,50 +49,71 @@ namespace AppRestaurantSiglo21.Controllers
             return RedirectToAction("Login2");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(USUARIO objUsuario)
-        {
-            if (ModelState.IsValid)
-            {
-                using (RestaurantEntities db = new RestaurantEntities())
-                {
-                    var upperUID = objUsuario.USERID.ToUpper();
-                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
-                    //if (obj != null)
-                    if (obj.Count() > 0)
-                    {
-                        //Session["UserID"] = obj.IDUSUARIO.ToString();
-                        //Session["UserName"] = obj.USUARIO1.ToString();
-                        Session["UserID"] = obj.FirstOrDefault().USERID;
-                        Session["UserName"] = obj.FirstOrDefault().USERID;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Login(USUARIO objUsuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        using (RestaurantEntities db = new RestaurantEntities())
+        //        {
+        //            var upperUID = objUsuario.USERID.ToUpper();
+        //            var resultPwd = new SecurityController().encrypt(objUsuario.PASSWORD);
+        //            var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(resultPwd)).ToList();
+        //            //if (obj != null)
+        //            if (obj.Count() > 0)
+        //            {
+        //                //Session["UserID"] = obj.IDUSUARIO.ToString();
+        //                //Session["UserName"] = obj.USUARIO1.ToString();
+        //                Session["UserID"] = obj.FirstOrDefault().USERID;
+        //                Session["UserName"] = obj.FirstOrDefault().USERID;
 
-                        var idusuario = obj.FirstOrDefault().IDPERSONA;
-                        var usuariorolBD = db.USUARIOROL.Where(b => b.IDPERSONA == idusuario);
+        //                var idusuario = obj.FirstOrDefault().IDPERSONA;
+        //                var usuariorolBD = db.USUARIOROL.Where(b => b.IDPERSONA == idusuario);
 
-                        var idrol = usuariorolBD.FirstOrDefault().IDROL;
-                        var rolBD = db.ROL.Where(c => c.IDROL.Equals(idrol));
-                        var descrol = rolBD.FirstOrDefault().DESCRIPCIONROL;
-                        Session["Rol"] = descrol;
-                        int x = 1;
-                        if (idrol.Equals(1))
-                        {
-                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
-                            return RedirectToAction("Administrador");
-                        }
-                        if (idrol.Equals(2))
-                        {
-                            Session["Layout"] = "~/Views/Home/Garzon.cshtml";
-                            return RedirectToAction("Garzon");
-                        }
-
-                        //return RedirectToAction("UserDashBoard");
-                    }
-                }
-            }
-            TempData["Message"] = "Usuario o contraseña incorrectos, intente nuevamente";
-            return View(objUsuario);
-        }
+        //                var idrol = usuariorolBD.FirstOrDefault().IDROL;
+        //                var rolBD = db.ROL.Where(c => c.IDROL.Equals(idrol));
+        //                var descrol = rolBD.FirstOrDefault().DESCRIPCIONROL;
+        //                Session["Rol"] = descrol;
+        //                int x = 1;
+        //                if (idrol.Equals(1))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+        //                    return RedirectToAction("Administrador");
+        //                }
+        //                if (idrol.Equals(2))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Garzon.cshtml";
+        //                    return RedirectToAction("Garzon");
+        //                }
+        //                if (idrol.Equals(3))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+        //                    return RedirectToAction("Administrador");
+        //                }
+        //                if (idrol.Equals(4))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+        //                    return RedirectToAction("Administrador");
+        //                }
+        //                if (idrol.Equals(5))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+        //                    return RedirectToAction("Administrador");
+        //                }
+        //                if (idrol.Equals(6))
+        //                {
+        //                    Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+        //                    return RedirectToAction("Administrador");
+        //                }
+                        
+        //                //return RedirectToAction("UserDashBoard");
+        //            }
+        //        }
+        //    }
+        //    TempData["Message"] = "Usuario o contraseña incorrectos, intente nuevamente";
+        //    return View(objUsuario);
+        //}
 
         // #################### LOGIN 2 INICIO ####################
 
@@ -111,14 +132,17 @@ namespace AppRestaurantSiglo21.Controllers
                 using (RestaurantEntities db = new RestaurantEntities())
                 {
                     var upperUID = objUsuario.USERID.ToUpper();
-                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
+                    var resultPwd = new SecurityController().encrypt(objUsuario.PASSWORD);
+                    var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(resultPwd)).ToList();
+                    //var obj = db.USUARIO.Where(a => a.USERID.Equals(upperUID) && a.PASSWORD.Equals(objUsuario.PASSWORD)).ToList();
                     //if (obj != null)
+                    int y = 1;
                     if (obj.Count() > 0)
                     {
                         //Session["UserID"] = obj.IDUSUARIO.ToString();
                         //Session["UserName"] = obj.USUARIO1.ToString();
-                        Session["UserID"] = obj.FirstOrDefault().USERID;
-                        Session["UserName"] = obj.FirstOrDefault().USERID;
+                        System.Web.HttpContext.Current.Session["UserID"] = obj.FirstOrDefault().USERID;
+                        System.Web.HttpContext.Current.Session["UserName"] = obj.FirstOrDefault().USERID;
 
                         var idusuario = obj.FirstOrDefault().IDPERSONA;
                         var usuariorolBD = db.USUARIOROL.Where(b => b.IDPERSONA == idusuario);
@@ -126,17 +150,38 @@ namespace AppRestaurantSiglo21.Controllers
                         var idrol = usuariorolBD.FirstOrDefault().IDROL;
                         var rolBD = db.ROL.Where(c => c.IDROL.Equals(idrol));
                         var descrol = rolBD.FirstOrDefault().DESCRIPCIONROL;
-                        Session["Rol"] = descrol;
+                        System.Web.HttpContext.Current.Session["Rol"] = descrol;
                         int x = 1;
                         if (idrol.Equals(1))
                         {
-                            Session["Layout"] = "~/Views/Home/Administrador.cshtml";
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalAdmin.cshtml";
                             return RedirectToAction("Administrador");
                         }
                         if (idrol.Equals(2))
                         {
-                            Session["Layout"] = "~/Views/Home/Garzon.cshtml";
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalSuperUser.cshtml"; 
+                            return RedirectToAction("SuperUser");
+                        }
+                        
+                        if (idrol.Equals(3))
+                        {
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalCocina.cshtml";
+                            return RedirectToAction("Cocina");
+                        }
+                        if (idrol.Equals(4))
+                        {
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalGarzon.cshtml";
                             return RedirectToAction("Garzon");
+                        }
+                        if (idrol.Equals(5))
+                        {
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalCliente.cshtml";
+                            return RedirectToAction("Cliente");
+                        }
+                        if (idrol.Equals(6))
+                        {
+                            System.Web.HttpContext.Current.Session["Layout"] = "~/Views/Shared/_PrincipalBodega.cshtml";
+                            return RedirectToAction("Bodega");
                         }
 
                         //return RedirectToAction("UserDashBoard");
@@ -173,7 +218,55 @@ namespace AppRestaurantSiglo21.Controllers
             }
         }
 
+        public ActionResult Bodega()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Cliente()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Cocina()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
         public ActionResult Garzon()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult SuperUser()
         {
             if (Session["UserID"] != null)
             {
@@ -189,6 +282,11 @@ namespace AppRestaurantSiglo21.Controllers
         {
             Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public ActionResult NewMenu()
+        {
+            return View();
         }
 
 

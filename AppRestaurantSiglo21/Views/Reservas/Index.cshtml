@@ -1,6 +1,7 @@
 ﻿@model AppRestaurantSiglo21.Models.RESERVA
 @{
     ViewBag.Title = "Home Page";
+    Layout = Session["Layout"].ToString();
 }
 <link href="~/Content/css/BuscarReserva.css" rel="stylesheet" />
 <div class="container">
@@ -66,7 +67,7 @@
         <br />
         <p>
 
-            @Html.ActionLink("Escoger mesa", "Index", "SeleccionaMesa", new { id = Model.IDRESERVA, cantclientes = Model.CANTIDADCLIENTE }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Escoger mesa", "SeleccionAndMapa", "SeleccionaMesa", new { id = Model.IDRESERVA, cantclientes = Model.CANTIDADCLIENTE }, new { @class = "btn btn-primary" })
             @*@Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })*@
         </p>
     </div>

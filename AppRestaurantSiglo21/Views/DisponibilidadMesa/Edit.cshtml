@@ -2,7 +2,7 @@
 <!--//AQUI ARRIBA SE LE INDICA A LA VISTA QUE USE DEL MODELO LA TABLA MESA SI RECIBE DATOS-->
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_PrincipalGarzon.cshtml";
+    Layout = Session["Layout"].ToString();
 }
 <h2></h2>
 @using (Html.BeginForm())

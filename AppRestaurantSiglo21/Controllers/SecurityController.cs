@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace appPush.Controllers
+namespace AppRestaurantSiglo21.Controllers
 {
     public class SecurityController : Controller
     {

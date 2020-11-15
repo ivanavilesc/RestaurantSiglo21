@@ -1,0 +1,40 @@
+try
+
+{
+//'-----------------------------------------------------'
+
+using (var conn = new OracleConnection(ConfigurationManager.ConnectionStrings["oracleDB"].ToString()))
+{
+if (conn.State == ConnectionState.Closed)
+{
+conn.Open();
+}
+
+OracleCommand com = new OracleCommand("SP_GRABARPAGOORDEN", conn); //IDENTIFICA EL SP Y LA CONEXIÓN
+com.CommandType = System.Data.CommandType.StoredProcedure; //INDICA QUE SERÁ UN PROCEDIMIENTO ALMACENADO EL QUE SE VA A EJECUTAR
+
+//SETEANDO LOS DATOS DE ENTRADA AL SP
+
+com.Parameters.Add("PE_idOrden", OracleDbType.Int32, 10).Value = 1; //ID DE LA ORDEN
+
+//com.Parameters.Add("PE_propina", OracleDbType.Int32, 10).Value = null;
+com.Parameters.Add("PE_propina", OracleDbType.Int32, 10).Value = Convert.ToInt32(form["propina"]);
+
+
+com.Parameters.Add("PE_tipopago", OracleDbType.Int32, 2).Value = Convert.ToByte(form["DOCTPAGOTIPO"]); // 2 ES EL TIPO DE PAGO QUE PARA ESTE DESARROLLO SOLO ES CASH COMO ESTÁ DESCRITO EN LA BD
+com.Parameters.Add("PE_mediopago", OracleDbType.Int32, 2).Value = Convert.ToByte(form["MEDIOPAGO"]); //1 ES EL MEDIO DE PAGO QUE SIEMPRE SERÁ EFECTIVO
+
+com.ExecuteNonQuery();
+
+conn.Close();
+}
+
+
+}
+catch (FormatException e)
+{
+ViewBag.MensajeOk = "Error de converción de datos ";
+}
+
+return View();
+

@@ -8,20 +8,21 @@
     <h2>Bienvenido a Restaurant Siglo XXI</h2>
 </div>
 <div>
-    <ul>
+    <ul>        
         <li id="left-container" onclick=""><a href="/Reservas/Index">Tengo una reserva</a></li>
-        <li id="right-container"><a href="/SeleccionaMesa/ButtonTest">No tengo reserva</a></li>
+        <li id="right-container" onclick="noReserva()"><a href="/SeleccionaMesa/SeleccionAndMapa">No tengo reserva</a></li>
     </ul>
-
+    <form id="noReserva" action="/SeleccionaMesa/SeleccionAndMapa" method="post">
+        <input type="hidden" id="rutCliente" name="rutCliente" value="1" />
+        <input type="hidden" id="dvCliente" name="dvCliente" value="9" />
+    </form>
 </div>
 <script type="text/javascript">
-    function atencionDirecta(id) {
-        $.ajax({
-            url: '/SeleccionaMesa/ButtonTest',
-            data: { id: id }
-        }).done(function () {
-            alert('A seleccionar Mesa !');
-        });
+    function noReserva() {       
+        let form = document.getElementById('noReserva');
+        //window.alert("Ahora si !");
+        form.submit()
+        
     }
 
     function confirmaReserva(id) {

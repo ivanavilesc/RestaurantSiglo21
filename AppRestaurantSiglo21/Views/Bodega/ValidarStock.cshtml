@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.INSUMOSTOCK>
+
+@{
+    ViewBag.Title = "Validar Stock";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Stock Disponible</h4>
+        </div>
+    </div>
+    <br />
+
+
+
+    <p>
+        @Html.ActionLink("Crear Registro", "CrearInsumoStock", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Stock Actual
+            </th>
+            <th>
+                Stock Minimo
+            </th>
+            <th>
+                Insumo
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STOCKACTUAL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STOCKMINIMO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.INSUMO.DESCINSUMO)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditStock", new { id = item.IDINSUMOSTOCK }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "DetailStock", new { id = item.IDINSUMOSTOCK }, new { @class = "btn btn-info" }) |
+                    @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IDINSUMOSTOCK }, new { @class = "btn btn-danger" })*@
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+</div>

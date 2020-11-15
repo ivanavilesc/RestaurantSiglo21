@@ -1,0 +1,2 @@
+<add name="oracleDB" connectionString="DATA SOURCE=localhost:1521/XEPDB1;PERSIST SECURITY INFO=True;USER ID=RESTAURANT; PASSWORD=duoc;"
+providerName="Oracle.ManagedDataAccess.Client"/>

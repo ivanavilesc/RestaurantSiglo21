@@ -1,0 +1,53 @@
+﻿@model AppRestaurantSiglo21.Models.USUARIO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Eliminar Usuario</h4>
+        </div>
+    </div>
+    <br />
+
+    <div class="alert alert-danger" role="alert">
+        <h5>¿ Estas seguro de eliminar este registro ?</h5>
+</div>
+    
+    <br />
+    <div>
+        <h4>Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Identificación de Usuario
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IDPERSONA)
+            </dd>
+
+            <dt>
+                USERID
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.USERID)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button type="submit" class="btn btn-lg btn-danger btn-block">Eliminar</button>
+            </div>
+            <br />
+            <br />
+            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+        }
+    </div>

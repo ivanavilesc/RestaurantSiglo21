@@ -27,11 +27,18 @@ namespace AppRestaurantSiglo21.Controllers
             if (ModelState.IsValid)
             {
                 var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
-                reservaDB.IDESTADORESERVA = 2;
-                return View(reservaDB); //REDIRIGE A LA VISTA DE LISTADO
+                
+                    reservaDB.IDESTADORESERVA = 2;
+                    return View(reservaDB);
+                
+                
+            }
+            else {
+                ViewBag.Message = "La reserva NO existe";
             }
 
             return View(ViewBag.Message = "La reserva NO existe"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+
         }
 
 
@@ -45,37 +52,120 @@ namespace AppRestaurantSiglo21.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SendEmail(string receiver, string nombrecliente, string subject, string message, string fonocliente, string fechareserva, string cantidadpx, string rutcliente, string dvcliente)
+        public ActionResult SendEmail(string receiver, string nombrecliente, string apellidocliente, string subject, string message, string fonocliente, string fechareserva, string cantidadpx, string rutcliente, string dvcliente, string horaReserva, string minutosReserva)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //VALIDAR EXISTENCIA DE LA PERSONA
+                    //Crea un objeto PERSONA
                     PERSONA objPersona = new PERSONA();
-                    int rutcli = int.Parse(rutcliente); //llega por parámetros
-                    var personaDB = db.PERSONA.SingleOrDefault(t => t.RUT == rutcli);
+                    CLIENTE objClienteNuevo = new CLIENTE();
+                    int rutcli = int.Parse(rutcliente); //llega por parámetros                    
 
                     RESERVA objReserva = new RESERVA();
                     //DATOS DE LA RESERVA
-                    short cpax = short.Parse(cantidadpx);
+                    
                     DateTime fecReserva = DateTime.Parse(fechareserva);
+                    objReserva.FECHARESERVA = fecReserva;
 
+                    short cpax = short.Parse(cantidadpx);
                     objReserva.CANTIDADCLIENTE = cpax;
-                    objReserva.IDESTADORESERVA = 1;
 
-                    //llena persona con los datos externos o con lo existente en BD
+                    string estadoRes = "1";
+                    objReserva.IDESTADORESERVA = byte.Parse(estadoRes);
+
+                    //Valida si existe PERSONA con el rut ingresado en la reserva
+                    var personaDB = db.PERSONA.SingleOrDefault(t => t.RUT == rutcli);
+                    
+                    //Si encuentra un registro de persona existente en BD
                     if (personaDB != null)
                     {
-                        objReserva.IDPERSONA = personaDB.IDPERSONA;
-                    }
+                        CLIENTE objCliente = new CLIENTE();
+                        
+                        //Buscará si el RUT encontrado, pertenece a los registros de clientes
+                        var clienteDB = db.CLIENTE.SingleOrDefault(t => t.IDPERSONA == personaDB.IDPERSONA);
+
+                        //Si CLIENTE existe
+                        if (clienteDB != null)
+                        {
+                            //llenará la reserva con el ID de la BD
+                            
+                            objReserva.IDPERSONA = personaDB.CLIENTE.IDPERSONA;
+                            objReserva.CLIENTE = personaDB.CLIENTE;
+                            int t = 0;
+                        }
+                        // Si el cliente no existe, pero la PERSONA SI, llenará un objeto PERSONA primero y luego le pasará el ID a Cliente
+                        else
+                        {
+                            //objPersona.NOMBRE = nombrecliente;
+                            //objPersona.APELLIDOPATERNO = apellidocliente;
+                            //objPersona.DV = dvcliente;
+                            //objPersona.RUT = rutcli;
+                            //objPersona.EMAIL = receiver;
+                            //objPersona.FECHAINGRESO = DateTime.Today;
+                            //objPersona.FONO = fonocliente;
+                            //int y = 7;
+                            //db.PERSONA.Add(objPersona);
+                            //db.SaveChanges();
+                            
+                            ////Aqui se obtiene el ID de la nueva PERSONA
+                            //db.Entry(objPersona).GetDatabaseValues();
+
+                            ////Aqui se pasa el ID a una variable
+                            //int idNuevaPersona = objPersona.IDPERSONA;
+
+                            //Creamos un cliente
+                            
+                            //objClienteNuevo.PERSONA = personaDB;
+                            objClienteNuevo.IDPERSONA = personaDB.IDPERSONA;
+                            objClienteNuevo.PERSONA = personaDB;
+
+                            int p = 0;
+
+                            db.SaveChanges();
+                            objReserva.IDPERSONA = personaDB.IDPERSONA;
+                            
+                            int y = 8;
+                        }//fin if cliente no existe
+                    }//fin IF persona existe
                     else
+
+                    ////Si NO encuentra un registro de PERSONA existente en BD
                     {
-                        objReserva.IDPERSONA = 1;
+                        //Llenamos todos los atributos de la PERSONA
+                        objPersona.NOMBRE = nombrecliente;
+                        objPersona.APELLIDOPATERNO = apellidocliente;
+                        objPersona.DV = dvcliente;
+                        objPersona.RUT = rutcli;
+                        objPersona.EMAIL = receiver;
+                        objPersona.FECHAINGRESO = DateTime.Today;
+                        objPersona.FONO = fonocliente;
+                        int y = 7;
+                        db.PERSONA.Add(objPersona);                                                
+                        db.SaveChanges();
+                        //Aqui se obtiene el ID
+                        db.Entry(objPersona).GetDatabaseValues();
+                        //Aqui se pasa el ID a una variable
+                        int idNuevaPersona = objPersona.IDPERSONA;
+                        y = 8;
+                        //Creamos un nuevo CLIENTE y le pasamos el ID de la nueva PERSONA
+                        //CLIENTE objClienteNuevo = new CLIENTE();
+                        objClienteNuevo.IDPERSONA = idNuevaPersona;
+                        objClienteNuevo.PERSONA = objPersona;
+                        db.SaveChanges();
+                        y = 9;
+                        //Asociamos la reserva a la nueva persona
+                        objReserva.IDPERSONA = idNuevaPersona;
+                        db.SaveChanges();
+                        y = 10;
+
                     }
 
                     //objReserva..IDMESA = 1;
-                    objReserva.FECHARESERVA = fecReserva;
+                    objReserva.CLIENTE = objClienteNuevo;
+                    objReserva.MSGRESERVA = message;
+                    objReserva.HORARESERVA = horaReserva + ":" + minutosReserva;
                     int x = 1;
                     db.RESERVA.Add(objReserva); //SE INSTANCIA EL MAPEO DEL ENTITYFRAMEWORK PARA LA TABLA TIPOPRODUCTO, Y CON EL METODO ADD, SE LE PASA EL OBJETO
                     db.SaveChanges();
@@ -83,6 +173,8 @@ namespace AppRestaurantSiglo21.Controllers
                     db.Entry(objReserva).GetDatabaseValues();
                     int nroReserva = objReserva.IDRESERVA;
                     x = 2;
+
+                    //########### PROCESO ENVIO DE CORREO #################
                     var senderEmail = new MailAddress("reservarestaurantsigloXXI@gmail.com", "Reservas Restaurant Siglo XXI");
                     var receiverEmail = new MailAddress(receiver, nombrecliente);
                     var password = "CorreoDelRestaurantS21";
@@ -97,6 +189,7 @@ namespace AppRestaurantSiglo21.Controllers
                     cuerpoMensaje.AppendLine("");
                     cuerpoMensaje.AppendLine("Rut: " + rutcliente.ToString() + "-" + dvcliente.ToString());
                     cuerpoMensaje.AppendLine("Nombre: " + nombrecliente);
+                    cuerpoMensaje.AppendLine("Apellido: " + apellidocliente);
                     cuerpoMensaje.AppendLine("Correo: " + receiver);
                     cuerpoMensaje.AppendLine("Telefono contacto: " + fonocliente);
                     cuerpoMensaje.AppendLine("Fecha de la reserva: " + fechareserva);
@@ -173,22 +266,43 @@ namespace AppRestaurantSiglo21.Controllers
             return View(ViewBag.Message = "La reserva NO existe"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
         }
 
-        public ActionResult EliminarReserva()
+        public ActionResult EliminarReserva(int? cantclientes, int? nroReserva, int? id, int? rutCliente)
         {
-            return View();
+            var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
+            int y = 9;
+            if (reservaDB != null)
+            {
+                RESERVA objReserva = new RESERVA();
+                objReserva = reservaDB;
+                db.RESERVA.Remove(objReserva);
+                db.SaveChanges();
+            }
+            else
+            {
+                return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            }
+            return RedirectToAction("CancelarReserva");
         }
         [HttpPost] //ESTO SUCEDE CUANDO LA CONTROLLER RECIBE UN POST AL METODO INDEX
         public ActionResult EliminarReserva(int? nroReserva, int? rutCliente) //RECIBE EL OBJETO POR PARAMETROS 
         {
-            if (ModelState.IsValid)
-            {
-                var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
-                reservaDB.IDESTADORESERVA = 3;
-                return RedirectToAction("CancelarReserva"); //REDIRIGE A LA VISTA DE LISTADO
+            
+            var reservaDB = db.RESERVA.SingleOrDefault(t => t.IDRESERVA == nroReserva);
+            int y = 9;
+            if (reservaDB != null) {
+                RESERVA objReserva = new RESERVA();
+                objReserva = reservaDB;
+                db.RESERVA.Remove(objReserva);
+                db.SaveChanges();
             }
+            else {
+                return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            }
+            //reservaDB.IDESTADORESERVA = 3;
+            return RedirectToAction("Index"); //REDIRIGE A LA VISTA DE LISTADO
+         }
 
-            return RedirectToAction("CancelarReserva"); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            
         }
 
     }
-}

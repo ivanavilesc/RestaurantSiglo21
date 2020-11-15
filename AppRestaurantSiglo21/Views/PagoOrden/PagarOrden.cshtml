@@ -1,0 +1,65 @@
+﻿@model AppRestaurantSiglo21.Models.VistaDetOrdenes
+
+@{
+    ViewBag.Title = "Create";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Modulo de Pago</h4>
+        </div>
+    </div>
+    
+    <form method="post">
+        <table class="table table-striped">
+
+            <tbody>
+                <tr>
+                    <td> Número Orden</td>
+                    <td>@ViewBag.IdPasOrden</td>
+                </tr>
+                <tr>
+                    <td> Total a Pagar</td>
+                    <td><strong>$ @ViewBag.TotalPrice</strong></td>
+                </tr>
+                <tr>
+                    <td> Propina</td>
+                    <td><input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="propina" id="propina" placeholder="Propina"></td>
+                </tr>
+
+                <tr>
+                    <td> Tipo Pago</td>
+                    <td>@Html.DropDownList("DOCTPAGOTIPO", ViewData["DOCTPAGOTIPO"] as SelectList, "Tipo Pago", new { @class = "form-control", Id = "IdTipoPago" })</td>
+
+                </tr>
+
+                <tr>
+                    <td> Medio Pago</td>
+                    <td>@Html.DropDownList("MEDIOPAGO", ViewData["MEDIOPAGO"] as SelectList, "Medio Pago", new { @class = "form-control", Id = "IdMedioPago" })</td>
+
+                </tr>
+            </tbody>
+        </table>
+        
+       <div class="form-group">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Pagar</button>
+                    </div>
+
+                    @if (@ViewBag.MensajeOk != null)
+                    {
+                        <div style="border: 1px solid red">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+                </div>
+            </div>
+            <br />
+            <br />
+
+            @Html.ActionLink("Volver Atras", "ValidarOrden", new { id = @ViewBag.IdPasOrden }, new { @class = "btn btn-warning" })
+    </form>
+</div>
+
