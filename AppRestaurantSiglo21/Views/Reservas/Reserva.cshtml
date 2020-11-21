@@ -32,7 +32,7 @@
 
     <div class="container-contact3">
         <div class="wrap-contact3">
-            <form class="contact3-form validate-form" method="post" action="SendEmail">
+            <form class="contact3-form validate-form" id="sendMailReserva" method="post" action="SendEmail">
                 <span class="contact3-form-title">
                     Reserva una mesa
                 </span>
@@ -40,31 +40,31 @@
                 <div class="row">
 
                     <div class="form-group wrap-input3 col-lg-9">
-                        <input type="text" class="form-control" id="rutcliente" name="rutcliente" placeholder="solo digitos">
+                        <input type="text" class="form-control" id="rutcliente" name="rutcliente" required placeholder="solo digitos">
                     </div>
                     <div class="form-group wrap-input3 col-lg-3 ">
-                        <input type="text" class="form-control" id="dvcliente" name="dvcliente" placeholder="dv">
+                        <input type="text" class="form-control" id="dvcliente" name="dvcliente" required placeholder="dv">
                     </div>
                 </div>
 
                 <div class="form-group wrap-input3">
                     <label for="nombrecliente">Nombre</label>
-                    <input type="text" class="form-control" id="nombrecliente" name="nombrecliente" placeholder="ingresa tu nombre">
+                    <input type="text" class="form-control" id="nombrecliente" name="nombrecliente" required placeholder="ingresa tu nombre">
                 </div>
 
                 <div class="form-group wrap-input3">
                     <label for="apellidocliente">Apellido</label>
-                    <input type="text" class="form-control" id="apellidocliente" name="apellidocliente" placeholder="ingresa tu apellido">
+                    <input type="text" class="form-control" id="apellidocliente" name="apellidocliente" required placeholder="ingresa tu apellido">
                 </div>
 
                 <div class="form-group wrap-input3">
                     <label for="receiver">Correo electrónico</label>
-                    <input type="email" class="form-control" id="receiver" name="receiver" placeholder="tucuenta@correo.com">
+                    <input type="email" class="form-control" id="receiver" name="receiver" required placeholder="tucuenta@correo.com">
                 </div>
 
                 <div class="form-group wrap-input3">
                     <label for="fonocliente">Tel. Móvil</label>
-                    <input type="text" class="form-control" id="fonocliente" name="fonocliente" placeholder="ingresa tu número de celular">
+                    <input type="text" class="form-control" id="fonocliente" name="fonocliente" required placeholder="ingresa tu número de celular">
                 </div>
 
                 @*<div class="wrap-input3 validate-input" data-validate="Tu nombre es requerido">
@@ -78,7 +78,7 @@
         </div>*@
 
                 <div class="form wrap-input3">
-                    Fecha de la reserva: <input type="text" id="fechareserva" name="fechareserva" class="form-control" style="width: 300px;" data-provide="datepicker" placeholder="para cuando quieres tu reserva ? ">
+                    Fecha de la reserva: <input type="text" id="fechareserva" name="fechareserva" class="form-control" required style="width: 300px;" data-provide="datepicker" placeholder="para cuando quieres tu reserva ? ">
                 </div>
 
                 @*<div class="wrap-input3 input3-select">
@@ -109,7 +109,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <select class="wrap-input3 custom-select col-lg-4" id="horaReserva" name="horaReserva">
-                        <option selected>Hora</option>
+                        <option value="null" selected>Hora</option>
                         <option value="09">9 am</option>
                         <option value="10">10 am</option>
                         <option value="11">11 am</option>
@@ -127,7 +127,7 @@
                         <option value="23">11 pm</option>
                     </select>
                     <select class="wrap-input3 custom-select col-lg-4" id="minutosReserva" name="minutosReserva">
-                        <option selected>Minutos</option>
+                        <option value="null" selected>Minutos</option>
                         <option value="00">en punto</option>
                         <option value="15">15 minutos</option>
                         <option value="30">30 minutos</option>
@@ -137,7 +137,7 @@
 
                 <label for="cantidadpx">Cantidad de Personas</label>
                 <select class="wrap-input3 custom-select" id="cantidadpx" name="cantidadpx">
-                    <option selected>Cantidad de Personas</option>
+                    <option value="0" selected>Cantidad de Personas</option>
                     <option value="1">1 persona</option>
                     <option value="2">2 personas</option>
                     <option value="4">4 personas</option>
@@ -151,7 +151,7 @@
                 <div class="form-group wrap-input3">
                     <input class="form-control" type="text" id="subject" name="subject" value="Restaurant Siglo XXI - Confirmación de Reserva" hidden readonly />
                     <div class="container-contact3-form-btn">
-                        <button class="contact3-form-btn">
+                        <button class="contact3-form-btn" onclick="ansValidation(event)">
                             Solicitar reserva
                         </button>
                     </div>
@@ -190,20 +190,39 @@
     });
 </script>
 
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-<!--===============================================================================================-->
-@*<script src="~/Content/vendor/select2/select2.min.js"></script>
-    <script>
-        $(".selection-2").select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $('#dropDownSelect1')
-        });
-    </script>*@
-<!--===============================================================================================-->
-@*<script src="~/Content/js/main.js"></script>*@
 
+<script>
+    function ansValidation(ev) {
+        ev.preventDefault
+        // there is no input named name
+        var nombreValue = document.getElementById("nombrecliente").value
+        var apellidoValue = document.getElementById("apellidocliente").value
+        var fechaValue = document.getElementById("fechareserva").value
+        var horaValue = document.getElementById("horaReserva").value
+        var minsValue = document.getElementById("minutosReserva").value
+        var cantpaxValue = document.getElementById("cantidadpx").value
+        
+        // the typeof operator returns a string.
+        if (typeof nombreValue !== "string") {
+            window.alert("Tu nombre tiene un formato inválido")
+            // we use strict validation ( !== ) because it's a good practice.
+        } else if (fechaValue === "") {
+            event.preventDefault();
+            window.alert("No ingresaste una Fecha de Reserva, este campo es obligatorio !!!!")
+            focus()
+        } else if (horaValue === "null") {
+            event.preventDefault();
+            window.alert("No ingresaste todos los datos para la Hora de Reserva, este campo es obligatorio !!!!")
+        } else if (minsValue === "null") {
+            event.preventDefault();
+            window.alert("No ingresaste todos los datos para la Hora de Reserva, este campo es obligatorio !!!!")
+        } else if (cantpaxValue === "0") {
+            event.preventDefault();
+            window.alert("No ingresaste para cuantas personas requieres una mesa, esto es obligatorio !!!!")
+        } else {
+            let form = document.getElementById('sendMailReserva');
+            form.submit()
 
-
-
-
+        }
+    }
+</script>

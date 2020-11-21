@@ -131,7 +131,7 @@
         var nameValue = document.getElementById("NOMBRE").value
         var rutValue = document.getElementById("rutUsuario").value
         var passValue = document.getElementById("PASSWORD").value
-        var nameValue = document.getElementById("NOMBRE").value
+        var confpassValue = document.getElementById("CONFPASSWORD").value   
         var listaValue = document.getElementById("ListaRoles").value
         // the typeof operator returns a string.
         if (typeof nameValue !== "string") {
@@ -143,9 +143,9 @@
         } else if (passValue !== confpassValue) {
             event.preventDefault();
             window.alert("Las contraseñas ingresadas no coinciden, intenta nuevamente !")
-        //} else if (listaValue === "0") {
-        //    event.preventDefault();
-        //    window.alert("No has seleccionado ningún ROL, este campo es obligatorio !!!")
+        } else if (listaValue === "") {
+            event.preventDefault();
+            window.alert("No has seleccionado ningún ROL, este campo es obligatorio !!!")
         } else {
             let form = document.getElementById('createForm');
             form.submit()
