@@ -170,6 +170,7 @@
     <Compile Include="Controllers\OrdenController.cs" />
     <Compile Include="Controllers\PagoOrdenController.cs" />
     <Compile Include="Controllers\RecetaProductoController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SeleccionaMesaController.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Models\USUARIOROL.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VentaDiaViewModel.cs" />
     <Compile Include="Models\VistaDetOrdenes.cs" />
     <Compile Include="Models\VistaOrdenes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -352,12 +354,14 @@
     <Content Include="Content\css\BuscarReserva.css" />
     <Content Include="Content\css\ButtonTest.css" />
     <Content Include="Content\css\CancelarReserva.css" />
+    <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\general.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\newMenu.css" />
     <Content Include="Content\css\Ordenes.css" />
     <Content Include="Content\css\Reservas.css" />
     <Content Include="Content\css\SeleccionMesa.css" />
+    <Content Include="Content\css\simple-sidebar.css" />
     <Content Include="Content\css\util.css" />
     <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
@@ -374,6 +378,7 @@
     <Content Include="Content\Img\login2.png" />
     <Content Include="Content\js\bootstrap-datepicker.es.min.js" />
     <Content Include="Content\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\newMenu.js" />
     <Content Include="Content\landing\css\bootstrap.css" />
@@ -655,6 +660,8 @@
     <Content Include="Views\RecetaProducto\Edit.cshtml" />
     <Content Include="Views\RecetaProducto\Index.cshtml" />
     <Content Include="Views\PagoOrden\PagoOK.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Reportes\_PartialSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

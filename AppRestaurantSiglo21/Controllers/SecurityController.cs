@@ -17,13 +17,13 @@ namespace AppRestaurantSiglo21.Controllers
             return View();
         }
 
-        public ActionResult Login(string userid, string password)
-        {
-            string hashedpwd = encrypt("HolaAmiguito2020");
-            string plaintextpwd = Decrypt(hashedpwd);
-            int x = 1;
-            return View();
-        }
+        //public ActionResult Login(string userid, string password)
+        //{
+        //    string hashedpwd = encrypt("Hola");
+        //    string plaintextpwd = Decrypt(hashedpwd);
+        //    int x = 1;
+        //    return View();
+        //}
 
         public string encrypt(string clearText)
         {

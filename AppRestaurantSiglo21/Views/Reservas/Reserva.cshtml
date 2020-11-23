@@ -36,15 +36,10 @@
                 <span class="contact3-form-title">
                     Reserva una mesa
                 </span>
-                <label for="nombrecliente">Rut</label>
-                <div class="row">
-
-                    <div class="form-group wrap-input3 col-lg-9">
-                        <input type="text" class="form-control" id="rutcliente" name="rutcliente" required placeholder="solo digitos">
-                    </div>
-                    <div class="form-group wrap-input3 col-lg-3 ">
-                        <input type="text" class="form-control" id="dvcliente" name="dvcliente" required placeholder="dv">
-                    </div>
+                
+                <div class="form-group wrap-input3">
+                    <label for="rutcliente">Rut</label>
+                    <input type="text" oninput="checkRut(this)" class="form-control" id="rutcliente" name="rutcliente" required placeholder="ingresa rut formato 9999999-9">
                 </div>
 
                 <div class="form-group wrap-input3">
@@ -67,43 +62,10 @@
                     <input type="text" class="form-control" id="fonocliente" name="fonocliente" required placeholder="ingresa tu número de celular">
                 </div>
 
-                @*<div class="wrap-input3 validate-input" data-validate="Tu nombre es requerido">
-            <input class="input3" type="text" name="name" placeholder="Nombre">
-            <span class="focus-input3"></span>
-        </div>
-
-        <div class="wrap-input3 validate-input" data-validate="El formato de tu email no es valido: ex@abc.com">
-            <input class="input3" type="text" name="receiver" placeholder="Correo electrónico">
-            <span class="focus-input3"></span>
-        </div>*@
-
                 <div class="form wrap-input3">
                     Fecha de la reserva: <input type="text" id="fechareserva" name="fechareserva" class="form-control" required style="width: 300px;" data-provide="datepicker" placeholder="para cuando quieres tu reserva ? ">
                 </div>
 
-                @*<div class="wrap-input3 input3-select">
-            <div>
-                <select class="selection-2" name="service">
-                    <option>Needed Services</option>
-                    <option>eCommerce Bussiness</option>
-                    <option>UI/UX Design</option>
-                    <option>Online Services</option>
-                </select>
-            </div>
-            <span class="focus-input3"></span>
-        </div>
-
-        <div class="wrap-input3 input3-select">
-            <div>
-                <select class="selection-2" name="budget">
-                    <option>Budget</option>
-                    <option>1500 $</option>
-                    <option>2000 $</option>
-                    <option>3000 $</option>
-                </select>
-            </div>
-            <span class="focus-input3"></span>
-        </div>*@
                 <label for="horaReserva">Hora de la reserva</label>
                 <div class="row">
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -166,8 +128,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js" integrity="sha512-5pjEAV8mgR98bRTcqwZ3An0MYSOleV04mwwYj2yw+7PBhFVf/0KcE+NEox0XrFiU5+x5t5qidmo5MgBkDD9hEw==" crossorigin="anonymous" charset="UTF-8"></script>
 
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>*@
-
 <script type="text/javascript">
     $.fn.datepicker.dates['en'] = {
         days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
@@ -224,5 +184,54 @@
             form.submit()
 
         }
+    }
+</script>
+<script>
+    function checkRut(rutcliente) {
+        // Despejar Puntos
+        var valor = rutcliente.value.replace('.', '');
+        // Despejar Guión
+        valor = valor.replace('-', '');
+
+        // Aislar Cuerpo y Dígito Verificador
+        cuerpo = valor.slice(0, -1);
+        dv = valor.slice(-1).toUpperCase();
+
+        // Formatear RUN
+        rutcliente.value = cuerpo + '-' + dv
+
+        // Si no cumple con el mínimo ej. (n.nnn.nnn)
+        if (cuerpo.length < 7) { rutcliente.setCustomValidity("RUT Incompleto"); return false; }
+
+        // Calcular Dígito Verificador
+        suma = 0;
+        multiplo = 2;
+
+        // Para cada dígito del Cuerpo
+        for (i = 1; i <= cuerpo.length; i++) {
+
+            // Obtener su Producto con el Múltiplo Correspondiente
+            index = multiplo * valor.charAt(cuerpo.length - i);
+
+            // Sumar al Contador General
+            suma = suma + index;
+
+            // Consolidar Múltiplo dentro del rango [2,7]
+            if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+
+        }
+
+        // Calcular Dígito Verificador en base al Módulo 11
+        dvEsperado = 11 - (suma % 11);
+
+        // Casos Especiales (0 y K)
+        dv = (dv == 'K') ? 10 : dv;
+        dv = (dv == 0) ? 11 : dv;
+
+        // Validar que el Cuerpo coincide con su Dígito Verificador
+        if (dvEsperado != dv) { rutcliente.setCustomValidity("RUT Inválido"); return false; }
+
+        // Si todo sale bien, eliminar errores (decretar que es válido)
+        rutcliente.setCustomValidity('');
     }
 </script>
