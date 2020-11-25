@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+
+<h2>Crear un PDF</h2>
+<br />
+<button type="submit" class="success">Generar PDF</button>
+<br />
+@using (Html.BeginForm("Index", "GeneraPDF"))
+{
+    <button id="submitButton" type="submit">Create Pdf</button>
+}

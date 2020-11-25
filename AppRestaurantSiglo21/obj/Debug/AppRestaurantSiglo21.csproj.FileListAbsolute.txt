@@ -202,3 +202,5 @@ C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSigl
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.csproj.CopyComplete
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.dll
 C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\obj\Debug\AppRestaurantSiglo21.pdb
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\itextsharp.dll
+C:\githubrepo\restaurantsiglo21\AppRestaurantSiglo21\bin\itextsharp.xml

@@ -38,7 +38,7 @@ namespace AppRestaurantSiglo21.Controllers
                 //                        FechaVenta = d.FECHAORDEN 
                 //                    });
 
-                //En la lista de tipo <viewmodel> se guardará el resultado de la siguiente Query de Linq
+                //EN LA LISTA DE TIPO <VIEWMODEL> SE GUARDARÁ EL RESULTADO DE LA SIGUIENTE QUERY DE LINQ
                 // Agrupa los datos de la tabla ORDEN en base a la FECHAORDEN con la hora truncada, vale decir, solo muestra fecha
                 list = context.ORDEN.GroupBy(a => DbFunctions.TruncateTime(a.FECHAORDEN))                    
                     // Luego, hace un SELECT que inserta en el objeto de ViewModel la CantidadVentas, y la FechaVenta truncada
