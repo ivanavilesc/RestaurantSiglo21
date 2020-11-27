@@ -298,9 +298,13 @@
           <Property Name="IDTIPOPREP" Type="number" Precision="2" Scale="0" Nullable="false" />
           <Property Name="DIFICULTAD" Type="number" Precision="4" Scale="0" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PRODUCTO">
           <Key>
             <PropertyRef Name="IDPRODUCTO" />
+            
+            
           </Key>
           <Property Name="IDPRODUCTO" Type="number" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCPRODUCTO" Type="varchar2" MaxLength="100" />
@@ -513,18 +517,6 @@
             </Principal>
             <Dependent Role="DETALLEORDEN">
               <PropertyRef Name="IDORDEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DETALLEORDEN_PRODUCTO_FK">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
-          <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="IDPRODUCTO" />
-            </Principal>
-            <Dependent Role="DETALLEORDEN">
-              <PropertyRef Name="IDPRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -780,18 +772,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRODPREP_PRODUCTO_FK">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
-          <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="IDPRODUCTO" />
-            </Principal>
-            <Dependent Role="PRODPREPARACION">
-              <PropertyRef Name="IDPRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PRODPREP_TIPOPREPARACION_FK">
           <End Role="TIPOPREPARACION" Type="Self.TIPOPREPARACION" Multiplicity="1" />
           <End Role="PRODPREPARACION" Type="Self.PRODPREPARACION" Multiplicity="*" />
@@ -801,42 +781,6 @@
             </Principal>
             <Dependent Role="PRODPREPARACION">
               <PropertyRef Name="IDTIPOPREP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PRODUCTO_ESTADOPRODUCTO_FK">
-          <End Role="ESTADOPRODUCTO" Type="Self.ESTADOPRODUCTO" Multiplicity="1" />
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ESTADOPRODUCTO">
-              <PropertyRef Name="IDESTPRODUCTO" />
-            </Principal>
-            <Dependent Role="PRODUCTO">
-              <PropertyRef Name="IDESTPRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PRODUCTO_RECETAPRODUCTO_FK">
-          <End Role="RECETAPRODUCTO" Type="Self.RECETAPRODUCTO" Multiplicity="0..1" />
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RECETAPRODUCTO">
-              <PropertyRef Name="IDRECPRODUCTO" />
-            </Principal>
-            <Dependent Role="PRODUCTO">
-              <PropertyRef Name="IDRECPRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PRODUCTO_TIPOPRODUCTO_FK">
-          <End Role="TIPOPRODUCTO" Type="Self.TIPOPRODUCTO" Multiplicity="1" />
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPOPRODUCTO">
-              <PropertyRef Name="IDTIPOPRODUCTO" />
-            </Principal>
-            <Dependent Role="PRODUCTO">
-              <PropertyRef Name="IDTIPOPRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1027,7 +971,6 @@
           <EntitySet Name="PERMISOS" EntityType="Self.PERMISOS" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="PRODPREPARACION" EntityType="Self.PRODPREPARACION" Schema="RESTAURANT" store:Type="Tables" />
-          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="RECETAPRODUCTO" EntityType="Self.RECETAPRODUCTO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="RESTAURANT" store:Type="Tables" />
@@ -1040,6 +983,17 @@
           <EntitySet Name="TIPOPRODUCTO" EntityType="Self.TIPOPRODUCTO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="RESTAURANT" store:Type="Tables" />
           <EntitySet Name="USUARIOROL" EntityType="Self.USUARIOROL" Schema="RESTAURANT" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" store:Type="Tables" store:Schema="RESTAURANT">
+            <DefiningQuery>SELECT 
+"PRODUCTO"."IDPRODUCTO" AS "IDPRODUCTO", 
+"PRODUCTO"."DESCPRODUCTO" AS "DESCPRODUCTO", 
+"PRODUCTO"."PRECIOPRODUCTO" AS "PRECIOPRODUCTO", 
+"PRODUCTO"."IDESTPRODUCTO" AS "IDESTPRODUCTO", 
+"PRODUCTO"."IDTIPOPRODUCTO" AS "IDTIPOPRODUCTO", 
+"PRODUCTO"."IDRECPRODUCTO" AS "IDRECPRODUCTO", 
+"PRODUCTO"."FOTO" AS "FOTO"
+FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="BCOMOV_ENTIDADBANCARIA_FK" Association="Self.BCOMOV_ENTIDADBANCARIA_FK">
             <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
             <End Role="BANCOMOVIMIENTO" EntitySet="BANCOMOVIMIENTO" />
@@ -1074,10 +1028,6 @@
           </AssociationSet>
           <AssociationSet Name="DETALLEORDEN_ORDEN_FK" Association="Self.DETALLEORDEN_ORDEN_FK">
             <End Role="ORDEN" EntitySet="ORDEN" />
-            <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
-          </AssociationSet>
-          <AssociationSet Name="DETALLEORDEN_PRODUCTO_FK" Association="Self.DETALLEORDEN_PRODUCTO_FK">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
           </AssociationSet>
           <AssociationSet Name="DETPEDIDOINS_INSUMO_FK" Association="Self.DETPEDIDOINS_INSUMO_FK">
@@ -1164,25 +1114,9 @@
             <End Role="ROL" EntitySet="ROL" />
             <End Role="PERMISOS" EntitySet="PERMISOS" />
           </AssociationSet>
-          <AssociationSet Name="PRODPREP_PRODUCTO_FK" Association="Self.PRODPREP_PRODUCTO_FK">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
-          </AssociationSet>
           <AssociationSet Name="PRODPREP_TIPOPREPARACION_FK" Association="Self.PRODPREP_TIPOPREPARACION_FK">
             <End Role="TIPOPREPARACION" EntitySet="TIPOPREPARACION" />
             <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
-          </AssociationSet>
-          <AssociationSet Name="PRODUCTO_ESTADOPRODUCTO_FK" Association="Self.PRODUCTO_ESTADOPRODUCTO_FK">
-            <End Role="ESTADOPRODUCTO" EntitySet="ESTADOPRODUCTO" />
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-          </AssociationSet>
-          <AssociationSet Name="PRODUCTO_RECETAPRODUCTO_FK" Association="Self.PRODUCTO_RECETAPRODUCTO_FK">
-            <End Role="RECETAPRODUCTO" EntitySet="RECETAPRODUCTO" />
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-          </AssociationSet>
-          <AssociationSet Name="PRODUCTO_TIPOPRODUCTO_FK" Association="Self.PRODUCTO_TIPOPRODUCTO_FK">
-            <End Role="TIPOPRODUCTO" EntitySet="TIPOPRODUCTO" />
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
           <AssociationSet Name="PROVEEDOR_ESTADOPROVEEDOR_FK" Association="Self.PROVEEDOR_ESTADOPROVEEDOR_FK">
             <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />

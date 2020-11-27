@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.TopProductosViewModel>
 @{
     ViewBag.Title = "TopProductos";
     Layout = Session["Layout"].ToString();
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/Reportes">
                             <span data-feather="shopping-cart"></span>
                             Atenciones
                         </a>
@@ -68,144 +68,161 @@
         </div>
 
     </div>
+    <div class="col-md-12 text-center">
+
+        @using (Html.BeginForm("TopProductos", "GeneraPDF"))
+        {
+
+            <button type="submit" class="btn btn-primary btn-lg">Exportar Informe</button>
+        }
 
 
+    </div>
 </div>
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.load('current', { 'packages': ['table'] });
 
-    //Call function after Google Chart is loaded, it is required, otherwise you may get error
-    google.charts.setOnLoadCallback(DrawonLoad);
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.load('current', { 'packages': ['table'] });
 
-    google.charts.setOnLoadCallback(drawTable);
+            //Call function after Google Chart is loaded, it is required, otherwise you may get error
+            google.charts.setOnLoadCallback(DrawonLoad);
 
-    function DrawonLoad() {
-        $(function () {
-            $.ajax({
-                type: 'GET',
-                url: '/Reportes/GetTopProductosJSON',
-                success: function (chartsdata) {
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
+            google.charts.setOnLoadCallback(drawTable);
 
-                    //get JSONList from Object
-                    var Data = chartsdata.JSONList;
-                    var data = new google.visualization.DataTable();
-                    //Aqui se agregan las columnas que se usarán para construir la vista del grafico
-                    data.addColumn('number', 'CantidadProductos');
-                    data.addColumn('string', 'DescripcionProducto');
+            function DrawonLoad() {
+                $(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Reportes/GetTopProductosJSON',
+                        success: function (chartsdata) {
+                            // Callback that creates and populates a data table,
+                            // instantiates the pie chart, passes in the data and
+                            // draws it.
 
-                    //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
-                    String.prototype.toDateCustom = function () {
-                        var date = this;
-                        if (!date)
-                            return "";
-                        var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
-                            dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
-                        return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
-                    }
-
-                    //Loop through each list data
-                    for (var i = 0; i < Data.length; i++) {
-
-                        //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
-                        data.addRow(
-                            [
-                                Data[i].CantidadProductos,
-                                Data[i].DescripcionProducto
-                            ]
-                        );
-                    }
-
-                    // Instantiate and draw our chart, passing in some options
-
-                    var chart = new google.visualization.ColumnChart(document.getElementById('chartdiv'));
-                    //Draw pie chart command with data and chart options
-                    chart.draw(data,
-                        {
-                            title: "Reporte - Ventas $ por día",
-                            position: "top",
-                            fontsize: "16px",
-                        });
-
-                },
-                error: function () {
-                    alert("Error loading data! Please try again.");
-                }
-            });
-        })
-
-    }
-
-    function drawTable() {
-        //#####################
-
-        $(function () {
-            $.ajax({
-                type: 'GET',
-                url: '/Reportes/GetTopProductosJSON',
-                success: function (chartsdata) {
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
-
-                    //get JSONList from Object
-                    var Data = chartsdata.JSONList;
-                    var data = new google.visualization.DataTable();
-                    //Aqui se agregan las columnas que se usarán para construir la vista del grafico
-                    data.addColumn('number', 'CantidadProductos');
-                    data.addColumn('string', 'DescripcionProducto');
-
-                    //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
-                    String.prototype.toDateCustom = function () {
-                        var date = this;
-                        if (!date)
-                            return "";
-                        var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
-                            dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
-                        return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
-                    }
-
-                    //Loop through each list data
-                    var mediopago;
-                    for (var i = 0; i < Data.length; i++) {
-
-                        //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
-                       
-                        data.addRow(
-                            [
-                                Data[i].CantidadProductos,
-                                Data[i].DescripcionProducto
-                            ]
-                        );
-                    }
-
-                    // Instantiate and draw our chart, passing in some options
-
-                    var chart2 = new google.visualization.Table(document.getElementById('chartdiv2'));
-
-                    //Draw pie chart command with data and chart options
-                    chart2.draw(data,
-                        {
-                            title: "Tabla - Cantidad de Ventas por día",
-                            position: "top",
-                            fontsize: "16px",
-                        });
-                    chart2.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
+                            //get JSONList from Object
+                            var Data = chartsdata.JSONList;
+                            var data = new google.visualization.DataTable();
+                            //Aqui se agregan las columnas que se usarán para construir la vista del grafico
+                            data.addColumn('string', 'DescripcionProducto');
+                            data.addColumn('number', 'CantidadProductos');
 
 
-                },
-                error: function () {
-                    alert("Error loading data! Please try again.");
-                }
-            });
-        })
+                            //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
+                            String.prototype.toDateCustom = function () {
+                                var date = this;
+                                if (!date)
+                                    return "";
+                                var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
+                                    dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
+                                return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
+                            }
+
+                            //Loop through each list data
+                            for (var i = 0; i < Data.length; i++) {
+
+                                //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
+                                data.addRow(
+                                    [
+                                        Data[i].DescripcionProducto,
+                                        Data[i].CantidadProductos
+
+                                    ]
+                                );
+                            }
+
+                            // Instantiate and draw our chart, passing in some options
+
+                            var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
+                            //Draw pie chart command with data and chart options
+                            chart.draw(data,
+                                {
+                                    title: "Reporte - Top 10 Productos mas vendidos",
+                                    position: "top",
+                                    fontsize: "16px",
+                                });
+
+                        },
+                        error: function () {
+                            alert("Error loading data! Please try again.");
+                        }
+                    });
+                })
+
+            }
+
+            function drawTable() {
+                //#####################
+
+                $(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Reportes/GetTopProductosJSON',
+                        success: function (chartsdata) {
+                            // Callback that creates and populates a data table,
+                            // instantiates the pie chart, passes in the data and
+                            // draws it.
+
+                            //get JSONList from Object
+                            var Data = chartsdata.JSONList;
+                            var data = new google.visualization.DataTable();
+                            //Aqui se agregan las columnas que se usarán para construir la vista del grafico
+                            data.addColumn('number', 'CantidadProductos');
+                            data.addColumn('string', 'DescripcionProducto');
+
+                            //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
+                            String.prototype.toDateCustom = function () {
+                                var date = this;
+                                if (!date)
+                                    return "";
+                                var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
+                                    dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
+                                return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
+                            }
+
+                            //Loop through each list data
+                            var mediopago;
+                            for (var i = 0; i < Data.length; i++) {
+
+                                //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
+
+                                data.addRow(
+                                    [
+                                        Data[i].CantidadProductos,
+                                        Data[i].DescripcionProducto
+                                    ]
+                                );
+                            }
+
+                            // Instantiate and draw our chart, passing in some options
+
+                            var chart2 = new google.visualization.Table(document.getElementById('chartdiv2'));
 
 
 
-    }
+                            //google.visualization.events.addListener(chart, 'ready', function () {
+                            //    document.getElementById('image_div').innerHTML = '<img alt="Chart" src="' + chart.getImageURI() + '">';
+                            //});
 
-</script>
+                            //Draw pie chart command with data and chart options
+                            chart2.draw(data,
+                                {
+                                    title: "Tabla - Cantidad de Ventas por día",
+                                    position: "top",
+                                    fontsize: "16px",
+                                });
+                            chart2.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
+
+
+                        },
+                        error: function () {
+                            alert("Error loading data! Please try again.");
+                        }
+                    });
+                })
+
+
+
+            }
+
+        </script>
 

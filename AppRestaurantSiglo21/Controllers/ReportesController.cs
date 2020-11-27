@@ -59,10 +59,10 @@ namespace AppRestaurantSiglo21.Controllers
             return View();
         }
 
-        public ActionResult TopProductos()
-        {
-            return View();
-        }
+        //public ActionResult TopProductos()
+        //{
+        //    return View();
+        //}
 
         public JsonResult GetIngresoDiarioJSON()
         {
@@ -132,7 +132,7 @@ namespace AppRestaurantSiglo21.Controllers
                 //el resultSet lo convierte a una Lista
                 //.ToList();
                 DateTime? fecha;
-                list2 = from d in db.DETALLEORDEN
+                list2 = (from d in db.DETALLEORDEN
                         join p in db.PRODUCTO
                         on d.IDPRODUCTO equals p.IDPRODUCTO
                         
@@ -141,13 +141,41 @@ namespace AppRestaurantSiglo21.Controllers
                         {
                             CantidadProductos = (int)d.CANTIDAD,
                             DescripcionProducto = p.DESCPRODUCTO,                           
-                        };
+                        }).Take(10);
 
                 //list = context.ORDEN.Select(a => new VentaDiaViewModel { CantidadVentas = a.IDORDEN, FechaVenta = a.FECHAORDEN }).ToList();
                 int z = 3;
             }
 
             return Json(new { JSONList = list2 }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult TopProductos()
+        {
+            //Creamos una lista del tipo de dato de la ViewModel
+            List<TopProductosViewModel> list = new List<TopProductosViewModel>();
+            IQueryable list2 = null;
+            //creamos un using que utiliza una variable de contexto con la conexión al EF
+            using (var context = new RestaurantEntities())
+            {
+                               
+                DateTime? fecha;
+                list = (from d in db.DETALLEORDEN
+                         join p in db.PRODUCTO
+                         on d.IDPRODUCTO equals p.IDPRODUCTO
+
+                         orderby d.CANTIDAD descending
+                         select new TopProductosViewModel
+                         {
+                             CantidadProductos = (int)d.CANTIDAD,
+                             DescripcionProducto = p.DESCPRODUCTO,
+                         }).Take(10).ToList();
+
+                //list = context.ORDEN.Select(a => new VentaDiaViewModel { CantidadVentas = a.IDORDEN, FechaVenta = a.FECHAORDEN }).ToList();
+                int z = 3;
+            }
+            Session["topProductos"] = list;
+            return View(list);
         }
 
     }
