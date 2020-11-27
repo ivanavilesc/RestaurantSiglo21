@@ -1,0 +1,74 @@
+﻿
+@model IEnumerable<AppRestaurantSiglo21.Models.CocinaOrdenViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+
+<div class="container">
+    <meta http-equiv="refresh" content="5" />
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Ordenes en la cocina</h4>
+        </div>
+    </div>
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nro de Orden</th>
+                <th>Hora Orden</th>
+                <th>Hora Actual</th>
+                <th>Tiempo Transc.</th>
+                <th>Estado Orden</th>
+                <th>Mesa</th>
+                <th>Platillo</th>
+                <th>Tiempo Prep</th>
+                <th>Dificultad</th>
+                <th>Cantidad</th>
+                <th>Factor Priorización</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => item.NroOrden)</td>
+                    <td> @Html.DisplayFor(modelItem => item.HoraOrden)</td>
+                    <td> @Html.DisplayFor(modelItem => item.HoraActual)</td>
+                    <td> @Html.DisplayFor(modelItem => item.TiempoTrans)</td>
+                    <td><strong> @Html.DisplayFor(modelItem => item.DescEstOrden)</strong></td>
+                    <td> @Html.DisplayFor(modelItem => item.DescMesa) </td>
+                    <td> @Html.DisplayFor(modelItem => item.DescProducto)</td>
+                    <td> @Html.DisplayFor(modelItem => item.TiempoPreparacion)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Dificultad)</td>
+                    <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
+                    @if (item.FactorPrioridad > 4000)
+                    {
+                        <td class="table-danger"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else if (item.FactorPrioridad > 1000 && item.FactorPrioridad < 4001)
+                    {
+                        <td class="table-warning"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else if (item.FactorPrioridad >= 0 && item.FactorPrioridad < 1001)
+                    {
+                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+                    else
+                    {
+                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                    }
+
+                    <td>
+                        @Html.ActionLink("Avanzar Estado", "AvanzaOrden", new { id = item.NroOrden, DetEstOrden = item.DetEstOrden }, new { @class = "btn btn-warning" })
+                    </td>
+                    @*<td> @Html.ActionLink("Modificar Estado", "Edit", new { id = item.NroOrden }) |</td>*@
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+

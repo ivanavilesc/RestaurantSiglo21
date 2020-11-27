@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<AppRestaurantSiglo21.Models.MESA>
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+<h3></h3>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            Disponibilidad de Mesas
+        </div>
+    </div>
+    <hr />
+    @foreach (var mesa in Model)
+    {
+
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+                Mesa : @Html.DisplayFor(x => mesa.IDMESA)
+            </div>
+            <div class="card-body">
+
+                <p>CAPACIDAD: @Html.DisplayFor(x => mesa.CAPACIDAD)</p>
+                <p>DESCRIPCION: @Html.DisplayFor(x => mesa.DESCMESA)</p>
+                <p>DISPONIBILIDAD @Html.DisplayFor(x => mesa.IDESTADOMESA)</p>               
+                <p>@Html.ActionLink("Editar", "Edit", new { id = mesa.IDMESA }, new { @class = "btn btn-warning btn-sm" })</p>                
+
+            </div>
+        </div>
+    }
+</div>
+
+
+

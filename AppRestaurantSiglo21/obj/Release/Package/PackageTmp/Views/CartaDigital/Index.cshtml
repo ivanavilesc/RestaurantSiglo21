@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PRODUCTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+<link href="~/Content/css/Ordenes.css" rel="stylesheet" />
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Carta Digital</h4>
+        </div>
+    </div>
+    <br />
+   
+    <p>
+        @*@Html.ActionLink("Validad Detalle", "ValidarOrden", new { id = @ViewBag.IdPasOrden }, new { @class = "btn btn-warning" })*@
+        @Html.ActionLink("Plato de Fondo", "DetailPlato", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Bebestible", "DetailBebestible", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Ensaladas", "DetailEnsaladas", new { idorden = @Session["idorden"], id = @ViewBag.Id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Postres", "DetailPostres", new { idorden = @Session["idorden"] }, new { @class = "btn btn-primary" })
+    </p>
+
+          <img src="@Url.Content("~/Images/CartaDigital.jpg")" width="1110px" height="450px" alt="imgf" class="img-responsive" />
+    
+</div>

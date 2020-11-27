@@ -1,0 +1,53 @@
+﻿@model AppRestaurantSiglo21.Models.INSUMOSTOCK
+
+@{
+    ViewBag.Title = "DetailStock";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consultar Disponibilidad de Stock</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <h4>Detalle de Stock</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Insumo
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.INSUMO.DESCINSUMO)
+            </dd>
+            <dt>
+                Stock Actual
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.STOCKACTUAL)
+            </dd>
+            <dt>
+                Stock Mínimo
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.STOCKMINIMO)
+            </dd>
+
+
+
+        </dl>
+    </div>
+    <p>
+
+        @Html.ActionLink("Editar Valores", "EditStock", new { id = Model.IDINSUMOSTOCK }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "ValidarStock", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>
+

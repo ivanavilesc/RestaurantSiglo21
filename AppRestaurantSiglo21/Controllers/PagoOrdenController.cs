@@ -87,8 +87,10 @@ namespace AppRestaurantSiglo21.Controllers
             }
             else
             {
+                
                 ViewBag.TotalPrice = detalleorden.Sum(m => m.Total1);
-                               
+                System.Web.HttpContext.Current.Session["resumenCompra"] = detalleorden.ToList();
+                System.Web.HttpContext.Current.Session["totalBoleta"] = detalleorden.Sum(m => m.Total1); 
             }
 
             return View(detalleorden.ToList()); //RETORNA Detalle de orden 
@@ -321,6 +323,7 @@ namespace AppRestaurantSiglo21.Controllers
                 td.CVV1 = contCVV;
                 td.Clave1 = Clave1;
                 td.MesAno1 = contMesAno;
+                int u = 9;
                 TDebito.Add(td);                
             }
 

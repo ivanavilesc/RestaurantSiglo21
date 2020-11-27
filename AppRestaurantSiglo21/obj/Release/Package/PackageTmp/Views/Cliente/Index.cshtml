@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PERSONA>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+    // try { Layout = @Session["Layout"].ToString(); } catch{ Layout = "~/Views/Shared/_Principal.cshtml"; }
+
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Clientes</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-hover" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            
+            <th>
+                NOMBRE
+            </th>
+            <th>
+                APELLIDO PATERNO
+            </th>
+           
+            <th>
+                RUT
+            </th>
+            <th>
+                DIRECCION
+            </th>
+            <th>
+                FONO
+            </th>
+            <th>
+                EMAIL
+            </th>
+            <th>
+                ACCIONES
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<th>
+                        @Html.DisplayFor(modelItem => item.IDPERSONA)
+                </th>*@
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.APELLIDOPATERNO)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.RUT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIRECCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IDPERSONA }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = item.IDPERSONA }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDPERSONA }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

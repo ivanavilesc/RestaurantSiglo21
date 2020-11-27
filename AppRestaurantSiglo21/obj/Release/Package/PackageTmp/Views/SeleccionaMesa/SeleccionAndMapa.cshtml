@@ -1,0 +1,174 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.MESA>
+@using System.Text;
+@{
+    ViewBag.Title = "SeleccionAndMapa";
+    //Layout = "~/Views/Shared/_Principal.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Selecciona una mesa</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/editor.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="product.css" rel="stylesheet">
+    <script src="moz-extension://9b14cf85-01b5-4db4-8080-3df2e1552d5c/assets/prompt.js"></script>
+    <link href="~/Content/css/ButtonTest.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="my-3 py-3" id="titulo" style="text-align: center; color: white">
+        <h2 class="display-5">Ahora selecciona la mesa donde te quieres ubicar</h2>
+        <p class="lead">A la derecha tienes el mapa de nuestro Restaurant !</p>
+    </div>
+    @if (@Session["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Session["ErrorMessage"]
+        </div>
+        Session.Remove("ErrorMessage");
+    }
+    @if (@Session["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @Session["SuccessMessage"]
+        </div>
+        Session.Remove("SuccessMessage");
+    }
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden" id="izquierda" style="width: 60%; max-width: 60%;">
+
+            @*<button type="button" id="button01" class="btn btn-success btn-lg"><div id="mesa01"><p>Mesa: 1</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 12 personas</p></div></button>
+                <button type="button" id="button02" class="btn btn-success btn-lg"><div id="mesa02"><p>Mesa: 2</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button03" class="btn btn-success btn-lg"><div id="mesa03"><p>Mesa: 3</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button04" class="btn btn-success btn-lg"><div id="mesa04"><p>Mesa: 4</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button05" class="btn btn-success btn-lg"><div id="mesa05"><p>Mesa: 5</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button06" class="btn btn-success btn-lg"><div id="mesa06"><p>Mesa: 6</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button07" class="btn btn-success btn-lg"><div id="mesa07"><p>Mesa: 7</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button08" class="btn btn-success btn-lg"><div id="mesa08"><p>Mesa: 8</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button09" class="btn btn-success btn-lg"><div id="mesa09"><p>Mesa: 9</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button10" class="btn btn-success btn-lg"><div id="mesa10"><p>Mesa: 10</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button11" class="btn btn-success btn-lg"><div id="mesa11"><p>Mesa: 11</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+                <button type="button" id="button12" class="btn btn-success btn-lg"><div id="mesa12"><p>Mesa: 12</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>*@
+            @foreach (var item in Model)
+            {
+            <form method="post" action="/SeleccionaMesa/EscogeMesa" id="escogeMesa">
+                @if (@item.IDESTADOMESA.ToString().Equals("1"))
+                {
+                    <button type="submit" id="button.@item.IDMESA" onclick="clicValidation(@item.IDMESA)" class="btn btn-success btn-lg"><div id="mesa.@item.IDMESA"><p>Mesa: @item.IDMESA</p></div><div id="estado"><p>Estado: @item.ESTADOMESA.DESCESTADOMESA</p></div><div id="capacidad"><p>Capacidad: @item.CAPACIDAD personas</p></div></button>
+                }
+                else
+                {
+                    <button type="submit" id="button.@item.IDMESA" onclick="clicValidation(@item.IDMESA)" class="btn btn-danger btn-lg"><div id="mesa.@item.IDMESA"><p>Mesa: @item.IDMESA</p></div><div id="estado"><p>Estado: @item.ESTADOMESA.DESCESTADOMESA</p></div><div id="capacidad"><p>Capacidad: @item.CAPACIDAD personas</p></div></button>
+                }
+                <input type="hidden" id="idMesa" name="idMesa" value="@item.IDMESA" />
+                <input type="hidden" id="estadoMesa" name="estadoMesa" value="@item.IDESTADOMESA" />
+            </form>
+               
+            }
+        </div>
+        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" id="derecha" style="width: 40%; max-width: 40%;">
+            <img src="~/Content/Images/Esquema_pipiRoom.png" class="img-fluid" alt="Responsive image">
+            <div class="my-3 p-3">
+                <h2 class="display-5">Mapa de nuestro restaurant</h2>
+                <p class="lead">Aquí podras ver un mapa que te ayudará a seleccionar la mejor ubicación.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clicValidation(idMesa) {
+            var identMesa = idMesa;
+            //window.alert(idMesa);
+            
+            form.submit()            
+        }
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="../../js/vendor/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/holderjs@2.9.4/holder.js"></script>
+    <script>
+        Holder.addTheme('thumb', {
+            bg: '#55595c',
+            fg: '#eceeef',
+            text: 'Thumbnail'
+        });
+    </script>
+
+    @*<script type="text/javascript">
+        $("#button01").click(function () {
+            if ($(".clicked")[0]) {
+                document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+                $(this).removeClass('btn-danger');
+                $(this).removeClass('clicked');
+                $(this).addClass('btn-success');
+
+            } else {
+                document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+                $(this).removeClass('btn-success');
+                $(this).toggleClass('btn-danger');
+                $(this).addClass('clicked');
+            }
+
+        });
+
+        $("#button02").click(function () {
+            if ($(".clicked")[1]) {
+                document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+                $(this).removeClass('btn-danger');
+                $(this).removeClass('clicked');
+                $(this).addClass('btn-success');
+
+            } else {
+                document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+                $(this).removeClass('btn-success');
+                $(this).toggleClass('btn-danger');
+                $(this).addClass('clicked');
+            }
+
+        });
+
+        $("#button03").click(function () {
+            if ($(".clicked")[2]) {
+                document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+                $(this).removeClass('btn-danger');
+                $(this).removeClass('clicked');
+                $(this).addClass('btn-success');
+
+            } else {
+                document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+                $(this).removeClass('btn-success');
+                $(this).toggleClass('btn-danger');
+                $(this).addClass('clicked');
+            }
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        var amount = 5;
+
+        for (var i = 0; i < amount; i++) {
+            let elem = document.getElementById("button1").cloneNode(true);
+            elem.id = "hello_" + i;
+            document.body.appendChild(elem);
+        }
+    </script>*@
+
+
+</body>
+
+</html>

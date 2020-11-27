@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "ButtonTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/ButtonTest.css" rel="stylesheet" />
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+<div class="container">
+    <div id="titulo" style="text-align: center">
+        <h2 style="color: white">Ahora selecciona la mesa donde te quieres ubicar</h2>
+    </div>
+    <br />
+    @*@for (int i = 0; i < 23; i++)
+        {*@
+    @*<a href="#" id="boton1" class="myButton"><p>Mesa:@(i)</p><p>Estado: disponible</p><p>Capacidad: 2 personas</p></a>*@
+    <button type="button" id="button01" class="btn btn-success btn-lg"><div id="mesa01"><p>Mesa: 1</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 12 personas</p></div></button>
+    <button type="button" id="button02" class="btn btn-success btn-lg"><div id="mesa02"><p>Mesa: 2</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button03" class="btn btn-success btn-lg"><div id="mesa03"><p>Mesa: 3</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button04" class="btn btn-success btn-lg"><div id="mesa04"><p>Mesa: 4</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button05" class="btn btn-success btn-lg"><div id="mesa05"><p>Mesa: 5</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button06" class="btn btn-success btn-lg"><div id="mesa06"><p>Mesa: 6</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button07" class="btn btn-success btn-lg"><div id="mesa07"><p>Mesa: 7</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button08" class="btn btn-success btn-lg"><div id="mesa08"><p>Mesa: 8</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button09" class="btn btn-success btn-lg"><div id="mesa09"><p>Mesa: 9</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button10" class="btn btn-success btn-lg"><div id="mesa10"><p>Mesa: 10</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button11" class="btn btn-success btn-lg"><div id="mesa11"><p>Mesa: 11</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    <button type="button" id="button12" class="btn btn-success btn-lg"><div id="mesa12"><p>Mesa: 12</p></div><div id="estado"><p>Estado: disponible</p></div><div id="capacidad"><p>Capacidad: 6 personas</p></div></button>
+    @*}*@
+
+
+    @*<script type="text/javascript">
+            $("button").click(function () {
+                $(this).toggleClass('foo');
+            });
+        </script>*@
+</div>
+
+<script type="text/javascript">
+    $("#button01").click(function () {
+        if ($(".clicked")[0]) {
+            document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+            $(this).removeClass('btn-danger');
+            $(this).removeClass('clicked');
+            $(this).addClass('btn-success');
+
+        } else {
+            document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+            $(this).removeClass('btn-success');
+            $(this).toggleClass('btn-danger');
+            $(this).addClass('clicked');
+        }
+
+    });
+
+    $("#button02").click(function () {
+        if ($(".clicked")[0]) {
+            document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+            $(this).removeClass('btn-danger');
+            $(this).removeClass('clicked');
+            $(this).addClass('btn-success');
+
+        } else {
+            document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+            $(this).removeClass('btn-success');
+            $(this).toggleClass('btn-danger');
+            $(this).addClass('clicked');
+        }
+
+    });
+
+    $("#button03").click(function () {
+        if ($(".clicked")[0]) {
+            document.getElementById("estado").innerHTML = "<p>Estado : disponible</p>";
+            $(this).removeClass('btn-danger');
+            $(this).removeClass('clicked');
+            $(this).addClass('btn-success');
+
+        } else {
+            document.getElementById("estado").innerHTML = "<p>Estado : ocupada</p>";
+            $(this).removeClass('btn-success');
+            $(this).toggleClass('btn-danger');
+            $(this).addClass('clicked');
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    var amount = 5;
+
+    for (var i = 0; i < amount; i++) {
+        let elem = document.getElementById("button1").cloneNode(true);
+        elem.id = "hello_" + i;
+        document.body.appendChild(elem);
+    }
+</script>

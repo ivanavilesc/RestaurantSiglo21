@@ -1,0 +1,51 @@
+﻿@model AppRestaurantSiglo21.Models.INSUMO
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = Session["Layout"].ToString();
+}
+
+<div class="container">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle Insumos</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        
+        <dl class="dl-horizontal">
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.IDINSUMO)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IDINSUMO)
+                </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DESCINSUMO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DESCINSUMO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PRECIOINSUMO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRECIOINSUMO)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDINSUMO }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>

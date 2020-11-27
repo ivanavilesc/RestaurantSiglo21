@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.MENULISTA>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.M_P_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.M_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTROLLER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACTION_NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.M_P_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.M_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTROLLER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACTION_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.M_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.M_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.M_ID })
+        </td>
+    </tr>
+}
+
+</table>

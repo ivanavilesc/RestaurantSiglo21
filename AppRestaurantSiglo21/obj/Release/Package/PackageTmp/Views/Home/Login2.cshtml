@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+@model AppRestaurantSiglo21.Models.USUARIO
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script src="~/Content/Scripts/Login2.js"></script>
+    <link href="~/Content/Styles/Login2.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="container">
+            
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="title-modern" style="text-align:center; font-family:Arial, Helvetica, sans-serif">Sistema de Gestión - Restaurant Siglo XXI</h1>
+                </div>
+            </div>
+            
+            @using (Html.BeginForm("Login2", "Home", FormMethod.Post))
+            {
+                <div class="card card-container">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (@ViewBag.Message != null)
+                    {
+                        <div style="border: 1px solid red">
+                            @ViewBag.Message
+                        </div>
+                    }
+
+                    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+                    @*<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />*@
+                    <img id="profile-img" class="profile-img-card" src="~/Content/Img/login2.png" />
+                    <p id="profile-name" class="profile-name-card">Iniciar Sesión</p>
+                    <form class="form-signin">
+                        <span id="reauth-email" class="reauth-email"></span>
+                        <p>@Html.TextBoxFor(a => a.USERID, new { @class = "form-control", @required = "required", placeholder = "Nombre de usuario" })</p>
+                        <br />
+                        @Html.PasswordFor(a => a.PASSWORD, new { @class = "form-control", @required = "required", placeholder = "Contraseña" })
+                        @*<input type="text" id="userid" class="form-control" placeholder="Nombre de usuario" required autofocus>
+                    <input type="password" id="password" class="form-control" placeholder="Contraseña" required>*@
+                        <div id="remember" class="checkbox">
+                            <hr />
+                            @*<label>
+                            <input type="checkbox" value="remember-me"> Guardar credenciales
+                        </label>*@
+                        </div>
+                        <button class="btn btn-info btn-lg btn-block btn-signin" type="submit">Ingresar</button>
+                    </form><!-- /form -->
+                    @*<a href="#" class="forgot-password">
+                    Forgot the password?
+                </a>*@
+                </div><!-- /card-container -->
+
+            }
+            @if (TempData["Message"] != null)
+            {
+                <div class="row justify-content-center">
+                    <div class="col-lg">
+                    </div>
+
+                    <div class="col-lg-6 align-self-center">
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    </div>
+
+                    <div class="col-lg">
+                    </div>
+                </div>
+
+            }
+        </div><!-- /container -->
+    </div>
+</body>
+</html>

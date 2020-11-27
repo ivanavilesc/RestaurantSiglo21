@@ -251,6 +251,7 @@
     <Compile Include="Models\INGRESO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IngresoDiarioViewModel.cs" />
     <Compile Include="Models\INSUMO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -336,6 +337,7 @@
     <Compile Include="Models\TIPOPRODUCTO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TopProductosViewModel.cs" />
     <Compile Include="Models\USUARIO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -545,6 +547,7 @@
     <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.eot" />
     <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\landing\fonts\Pe-Icon-Stroke\Pe-icon-7-stroke.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -667,6 +670,8 @@
     <Content Include="Views\Reportes\Index.cshtml" />
     <Content Include="Views\Reportes\_PartialSideBar.cshtml" />
     <Content Include="Views\GeneraPDF\Index.cshtml" />
+    <Content Include="Views\Reportes\IngresoDiario.cshtml" />
+    <Content Include="Views\Reportes\TopProductos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

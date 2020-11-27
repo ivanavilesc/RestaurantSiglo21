@@ -1,0 +1,60 @@
+﻿@model AppRestaurantSiglo21.Models.RECETAPRODUCTO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consultar detalles de Receta</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <h4>Detalle de la receta</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IDRECPRODUCTO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IDRECPRODUCTO)
+            </dd>
+
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ELABORACION)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ELABORACION)
+            </dd>
+
+        </dl>
+
+    </div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.INGREDIENTE)
+        </dt>
+        <dd>
+
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.INGREDIENTE)
+        </dd>
+    </dl>
+    <p>
+
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDRECPRODUCTO }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>

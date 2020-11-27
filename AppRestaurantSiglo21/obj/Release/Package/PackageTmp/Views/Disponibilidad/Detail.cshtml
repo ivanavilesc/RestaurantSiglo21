@@ -1,0 +1,37 @@
+﻿@model AppRestaurantSiglo21.Models.ESTADOMESA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consultar Disponibilidad de Mesa</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <h4>Disponibilidad Mesa</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DESCESTADOMESA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DESCESTADOMESA)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDESTADOMESA }, new { @class = "btn btn-primary" }) | 
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+        </p>
+</div>
+

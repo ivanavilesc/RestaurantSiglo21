@@ -40,6 +40,7 @@ namespace AppRestaurantSiglo21.Controllers
         {
             System.Web.HttpContext.Current.Session["idorden"] = idorden;
             List<CarritoItem> compra = (List<CarritoItem>)Session["carrito"];
+            
             int y = 9;
 
             if (compra.Count == 0)
@@ -64,7 +65,11 @@ namespace AppRestaurantSiglo21.Controllers
                     db.SaveChanges();
                 }
                 y = 7;
+                
+                
+                System.Web.HttpContext.Current.Session["resumenOrden"] = detorden;
                 compra.Clear();
+                y = 5;
                 ViewBag.Message = "Se ha confirmado su Orden";
                 //TempData["Message"] = "Se ha confirmado su Orden";
             }

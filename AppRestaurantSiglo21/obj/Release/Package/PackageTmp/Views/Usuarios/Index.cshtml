@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //if (Session["Rol"].ToString().Equals("ADMINISTRADOR"))
+    //{
+    //    Layout = "~/Views/Shared/_PrincipalAdmin.cshtml";
+    //}
+    //else if (Session["Rol"].ToString().Equals("SUPER USUARIO")) { Layout = "~/Views/Shared/_PrincipalSuperUser"; }
+    Layout = Session["Layout"].ToString();
+    int x = 9;
+}
+@model IEnumerable<AppRestaurantSiglo21.Models.USUARIO>
+
+
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Usuarios</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Crear Nuevo Usuario", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <hr />
+    @if (@Session["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @Session["SuccessMessage"]
+        </div>
+        Session.Remove("SuccessMessage");
+    }
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Nro de ID
+            </th>
+            <th>
+                RUT
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                User ID
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDPERSONA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERSONA.RUT)-@Html.DisplayFor(modelItem => item.PERSONA.DV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERSONA.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERSONA.APELLIDOPATERNO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERID)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IDPERSONA }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = item.IDPERSONA }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDPERSONA }, new { @class = "btn btn-danger" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

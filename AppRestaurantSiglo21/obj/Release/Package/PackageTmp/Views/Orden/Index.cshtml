@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.OrdenViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle de Orden</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                Nro de Orden
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Plato
+            </th>
+            <th>
+                Precio
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroOrden)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CantProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescProducto)
+            </td>
+            <td>
+                @*@String.Format("{0:C}", item.PrecioProducto)*@
+                @Html.DisplayFor(modelItem => item.PrecioProducto)
+            </td>
+           
+
+        </tr>
+        }
+
+    </table>
+</div>
+

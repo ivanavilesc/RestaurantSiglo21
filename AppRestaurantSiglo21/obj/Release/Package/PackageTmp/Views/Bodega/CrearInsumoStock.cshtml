@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "CrearInsumoStock";
+    Layout = Session["Layout"].ToString();
+}
+
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Crear un insumo</h4>
+        </div>
+    </div>
+    <br />
+
+
+    @if (@ViewBag.MensajeOk != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+        <form method="post">
+
+            <div class="form-horizontal">
+                <div class="sm:flex w-full">
+
+                    <div class="form-group">
+                        Insumos
+                        <div class="col-md-10">
+                            @Html.DropDownList("Insumo", (IEnumerable<SelectListItem>)ViewData["ListInsumos"], "Seleccionar Insumo", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        Stock Inicial
+                        <div class="col-md-10">
+                           <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="StockInicial" id="StockInicial" placeholder="Stock Inicial" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        Stock Minimo
+                        <div class="col-md-10">
+                            <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="StockMinimo" id="StockMinimo" placeholder="Stock Mínimo" required>
+                        </div>
+                    </div>
+
+                    
+
+                    <button type="submit" class="btn btn-primary btn-block">Crear insumo</button>
+                    <br />
+                    <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+
+                    @if (ViewBag.message != null)
+                    {
+                        <script type="text/javascript">
+                            window.onload = function () {
+                                alert("@ViewBag.message");
+                            };
+                        </script>
+
+                    }
+
+                </div>
+            </div>                     
+        </form>
+</div>

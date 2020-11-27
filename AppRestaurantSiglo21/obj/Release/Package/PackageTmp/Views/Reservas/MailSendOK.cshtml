@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "MailSendOK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <div class="breadcrumb"><h2>CONFIRMACIÓN DE RESERVA EXITOSA</h2></div>
+    <br />
+    <div class="alert alert-success" role="alert">
+        <h3 class="alert-heading">Excelente !</h3>
+        <p>Tu reserva se realizó correctamente.</p>
+        <hr>
+        <p class="mb-0">No olvides anotar esta cita en tus recordatorios !!!.</p>
+    </div>
+    <br />
+    <p>Te esperamos... ;)</p>
+    <br />
+    
+    <form action="/Landing">
+        <input class="btn btn-primary" type="submit" value="Finalizar" />
+    </form>
+    <br />
+    <br />
+    <hr>
+    <p>RESTAURANT SIGLO XXI - 50 años junto a ti...</p>
+</div>

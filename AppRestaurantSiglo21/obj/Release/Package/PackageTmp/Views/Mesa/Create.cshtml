@@ -1,0 +1,73 @@
+﻿@model AppRestaurantSiglo21.Models.MESA
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = Session["Layout"].ToString();
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <h4>Mesa</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(x => x.DESCMESA, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.DESCMESA, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.DESCMESA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDESTADOMESA, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @{
+                var listado = new List<SelectListItem>(){
+                        new SelectListItem(){
+                            Text = "Disponible",
+                            Value = "1"
+                        },
+                        new SelectListItem(){
+                            Text = "No Disponible",
+                            Value = "0"
+                        }
+                     };
+            }
+            @Html.DropDownListFor(model => model.IDESTADOMESA, listado)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDLOCAL, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @{
+                var listLocal = new List<SelectListItem>(){
+                        new SelectListItem(){
+                            Text = "Casa Central",
+                            Value = "1"
+                        }
+                     };
+            }
+            @Html.DropDownListFor(model => model.IDLOCAL, listLocal)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.CAPACIDAD, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(x => x.CAPACIDAD, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.CAPACIDAD, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}

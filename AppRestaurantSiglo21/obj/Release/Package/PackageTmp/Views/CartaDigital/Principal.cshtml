@@ -1,0 +1,79 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.VistaOrdenes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+<link href="~/Content/css/Ordenes.css" rel="stylesheet" />
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado de Ordenes</h4>
+        </div>
+    </div>
+    <br />
+    <div class="alert alert-info" role="alert">
+        @Html.ActionLink("Consultar Orden", "Principal", null, new { @class = "btn btn-primary" })
+        <strong>Bienvenido !</strong> Consulta aquí tu Orden.
+    </div>
+
+
+    @if (@ViewBag.Mensaje != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Mensaje
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Mesa
+                </th>
+
+                <th>
+                    Estado Orden
+                </th>
+
+                <th>
+                    Fecha Orden
+                </th>
+                <th>
+                    Acción a Realizar
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelOrden => item.IdOrden1)
+                        </td>*@
+
+                    <td>
+                        @Html.DisplayFor(modelOrden => item.DescMesa1)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelOrden => item.DescEstadoOrden1)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelOrden => item.FechaOrden1)
+                    </td>
+
+
+
+                    <td>
+                        @Html.ActionLink("Ir a Carta Digial", "Index", new { idorden = item.IdOrden1 }, new { @class = "btn btn-warning" }) |
+                        @Html.ActionLink("Pedir Extra", "Index", new { idorden = item.IdOrden1 }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
