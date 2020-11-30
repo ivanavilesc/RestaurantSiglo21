@@ -25,6 +25,7 @@ namespace AppRestaurantSiglo21.Models
         public int IDINSUMO { get; set; }
         public string DESCINSUMO { get; set; }
         public int PRECIOINSUMO { get; set; }
+        public Nullable<byte> IDTIPOINSUMO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BODEGAMOVIMIENTO> BODEGAMOVIMIENTO { get; set; }

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.RecetarioViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle de Recetas</h4>
+        </div>
+    </div>
+    <br />
+
+    <p>
+        @Html.ActionLink("Crear Registro", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.NombreProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Ingredientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Elaboracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Comensales)
+            </th>
+
+        </tr>
+        @foreach (var recetario in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => recetario.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => recetario.Ingredientes)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => recetario.Elaboracion)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => recetario.Comensales)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = recetario.Ridrecproducto }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Detail", new { id = recetario.Ridrecproducto }, new { @class = "btn btn-info" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+

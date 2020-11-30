@@ -6,6 +6,8 @@
     </Key>
     <Property Name="IDALERTA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCALERTA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAAVISO" Type="DateTime" />
+    <Property Name="DESCTIPOPROVEEDOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="BANCOMOVIMIENTO">
     <Key>
@@ -226,6 +228,7 @@
     <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.BODEGAMOV_INSUMO_FK" FromRole="INSUMO" ToRole="BODEGAMOVIMIENTO" />
     <NavigationProperty Name="DETPEDIDOINS" Relationship="Self.DETPEDIDOINS_INSUMO_FK" FromRole="INSUMO" ToRole="DETPEDIDOINS" />
     <NavigationProperty Name="INSUMOSTOCK" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMO" ToRole="INSUMOSTOCK" />
+    <Property Name="IDTIPOINSUMO" Type="Byte" />
   </EntityType>
   <EntityType Name="INSUMOSTOCK">
     <Key>
@@ -388,6 +391,8 @@
     <Property Name="INGREDIENTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="ELABORACION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_RECETAPRODUCTO_FK" FromRole="RECETAPRODUCTO" ToRole="PRODUCTO" />
+    <Property Name="COMENSALES" Type="Byte" />
+    <Property Name="NOMBRERECETA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="RESERVA">
     <Key>
@@ -1287,5 +1292,20 @@
       <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
       <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <EntitySet Name="COLACOCINA" EntityType="RestaurantModel.COLACOCINA" />
   </EntityContainer>
+  <EntityType Name="COLACOCINA">
+    <Key>
+      <PropertyRef Name="IDCOLACOCINA" />
+    </Key>
+    <Property Name="IDCOLACOCINA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HORACREACION" Type="DateTime" />
+    <Property Name="HORAACTUAL" Type="DateTime" />
+    <Property Name="HORAENTREGA" Type="DateTime" />
+    <Property Name="NROPEDIDO" Type="Int32" />
+    <Property Name="ESTADOPEDIDO" Type="Byte" />
+    <Property Name="CANTIDAD" Type="Int32" />
+    <Property Name="DIFICULTADPREP" Type="Int16" />
+    <Property Name="TIEMPOPREP" Type="Int16" />
+  </EntityType>
 </Schema>

@@ -28,6 +28,18 @@
             </dd>
 
         </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NOMBRERECETA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NOMBRERECETA)
+            </dd>
+
+        </dl>
+
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.ELABORACION)
@@ -36,22 +48,19 @@
             <dd>
                 @Html.DisplayFor(model => model.ELABORACION)
             </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.COMENSALES)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.COMENSALES)
+            </dd>
         </dl>
 
     </div>
 
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.INGREDIENTE)
-        </dt>
-        <dd>
-
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.INGREDIENTE)
-        </dd>
-    </dl>
     <p>
 
         @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDRECPRODUCTO }, new { @class = "btn btn-primary" }) |

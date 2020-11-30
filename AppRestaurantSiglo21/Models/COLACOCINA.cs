@@ -12,11 +12,16 @@ namespace AppRestaurantSiglo21.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ALERTASTOCK
+    public partial class COLACOCINA
     {
-        public short IDALERTA { get; set; }
-        public string DESCALERTA { get; set; }
-        public Nullable<System.DateTime> FECHAAVISO { get; set; }
-        public string DESCTIPOPROVEEDOR { get; set; }
+        public int IDCOLACOCINA { get; set; }
+        public Nullable<System.DateTime> HORACREACION { get; set; }
+        public Nullable<System.DateTime> HORAACTUAL { get; set; }
+        public Nullable<System.DateTime> HORAENTREGA { get; set; }
+        public Nullable<int> NROPEDIDO { get; set; }
+        public Nullable<byte> ESTADOPEDIDO { get; set; }
+        public Nullable<int> CANTIDAD { get; set; }
+        public Nullable<short> DIFICULTADPREP { get; set; }
+        public Nullable<short> TIEMPOPREP { get; set; }
     }
 }

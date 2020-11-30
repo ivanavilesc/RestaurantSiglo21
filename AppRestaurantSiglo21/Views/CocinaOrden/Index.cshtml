@@ -24,10 +24,11 @@
                 <th>Estado Orden</th>
                 <th>Mesa</th>
                 <th>Platillo</th>
-                <th>Tiempo Prep</th>
+                *<th>Tiempo Prep</th>
                 <th>Dificultad</th>
                 <th>Cantidad</th>
-                <th>Factor Priorización</th>
+                <th>Prioridad</th>
+                @*<th>Factor Priorización</th>*@
                 <th>Acción</th>
             </tr>
         </thead>
@@ -47,19 +48,19 @@
                     <td> @Html.DisplayFor(modelItem => item.CantProducto)</td>
                     @if (item.FactorPrioridad > 4000)
                     {
-                        <td class="table-danger"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                        <td class="table-danger"> @*@Html.DisplayFor(modelItem => item.FactorPrioridad)*@</td>
                     }
                     else if (item.FactorPrioridad > 1000 && item.FactorPrioridad < 4001)
                     {
-                        <td class="table-warning"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                        <td class="table-warning"> @*@Html.DisplayFor(modelItem => item.FactorPrioridad)*@</td>
                     }
                     else if (item.FactorPrioridad >= 0 && item.FactorPrioridad < 1001)
                     {
-                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                        <td class="table-success"> @*@Html.DisplayFor(modelItem => item.FactorPrioridad)*@</td>
                     }
                     else
                     {
-                        <td class="table-success"> @Html.DisplayFor(modelItem => item.FactorPrioridad)</td>
+                        <td class="table-success"> @*@Html.DisplayFor(modelItem => item.FactorPrioridad)*@</td>
                     }
 
                     <td>

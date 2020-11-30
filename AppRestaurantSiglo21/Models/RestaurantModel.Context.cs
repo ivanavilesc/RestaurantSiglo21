@@ -72,6 +72,7 @@ namespace AppRestaurantSiglo21.Models
         public virtual DbSet<TIPOPRODUCTO> TIPOPRODUCTO { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIOROL> USUARIOROL { get; set; }
+        public virtual DbSet<COLACOCINA> COLACOCINA { get; set; }
     
         public virtual int FN_LISTAEGRESOS()
         {

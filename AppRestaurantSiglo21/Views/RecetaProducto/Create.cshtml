@@ -17,40 +17,56 @@
 
     @using (Html.BeginForm())
     {
-        <div class="form-horizontal">
-            <h4>Ingresa los ingredientes aquí...</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(x => x.INGREDIENTE, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => x.INGREDIENTE, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.INGREDIENTE, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.ELABORACION, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => x.ELABORACION, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.ELABORACION, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="form-horizontal">
+        <h4>Ingresa los ingredientes aquí...</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
-
-                    </div>
-                </div>
-                <div>
-
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.NOMBRERECETA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.NOMBRERECETA, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.NOMBRERECETA, "", new { @class = "text-danger" })
             </div>
-            <br />
-            <br />
-            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.INGREDIENTE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.INGREDIENTE, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.INGREDIENTE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ELABORACION, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.ELABORACION, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.ELABORACION, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.COMENSALES, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.COMENSALES, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.COMENSALES, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
+
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <br />
+        <br />
+        <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+    </div>
     }
 
 

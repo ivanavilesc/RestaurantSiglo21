@@ -35,7 +35,7 @@ namespace AppRestaurantSiglo21.Controllers
 
                                 select new CocinaOrdenViewModel
                                 {
-                                    NroOrden = d.IDDETALLEORDEN,
+                                    NroOrden = o.IDORDEN,
                                     HoraOrden = d.HORADETORD,
                                     HoraActual = DateTime.Now,
                                     TiempoTrans = 0,
@@ -46,7 +46,6 @@ namespace AppRestaurantSiglo21.Controllers
                                     DetEstOrden = d.IDESTADO,
                                     TiempoPreparacion = f.TIEMPOPREPARACION,
                                     Dificultad = f.DIFICULTAD
-
                                 });
 
 
