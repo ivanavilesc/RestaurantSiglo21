@@ -28,46 +28,20 @@
     {        
         <table class="table table-striped">
             <tr>
-                <th>
-                    Mesa
-                </th>
-
-                <th>
-                    Estado Orden
-                </th>
-
-                <th>
-                    Fecha Orden
-                </th>
-                <th>
-                    Acciones
-                </th>
+                <th>Número Orden</th>
+                <th>Mesa</th>
+                <th>Estado Orden</th>
+                <th>Fecha Orden</th>
+                <th>Acciones</th>
             </tr>
-
             @foreach (var item in Model)
             {
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelOrden => item.IdOrden1)
-                        </td>*@
-
-                    <td>
-                        @Html.DisplayFor(modelOrden => item.DescMesa1)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelOrden => item.DescEstadoOrden1)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelOrden => item.FechaOrden1)
-                    </td>
-
-
-
-                    <td>
-                        @Html.ActionLink("Validar Detalle", "ValidarOrden", new { id = item.IdOrden1 }, new { @class = "btn btn-warning" })
-                    </td>
+                    <td>@Html.DisplayFor(modelOrden => item.IdOrden1)</td>
+                    <td>@Html.DisplayFor(modelOrden => item.DescMesa1)</td>
+                    <td>@Html.DisplayFor(modelOrden => item.DescEstadoOrden1)</td>
+                    <td>@Html.DisplayFor(modelOrden => item.FechaOrden1)</td>
+                    <td>@Html.ActionLink("Validar Detalle", "ValidarOrden", new { id = item.IdOrden1 }, new { @class = "btn btn-warning" })</td>
                 </tr>
             }
         </table>

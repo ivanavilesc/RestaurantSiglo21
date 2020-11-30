@@ -48,7 +48,12 @@
                 </tr>
                 <tr>
                     <td> Fecha de la reserva</td>
-                    <td>@Html.DisplayFor(model => model.FECHARESERVA)</td>
+                    <td>
+                        @{
+                            DateTime date = (DateTime)Model.FECHARESERVA;
+                            string fecha = date.Day.ToString() + "/" + date.Month.ToString() + "/" + date.Year.ToString();
+                                        }@fecha
+                                    </td>
                 </tr>
                 <tr>
                     <td> Cantidad Personas</td>

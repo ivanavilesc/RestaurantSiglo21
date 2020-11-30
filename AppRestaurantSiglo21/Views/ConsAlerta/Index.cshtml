@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.ALERTASTOCK>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle Alertas</h4>
+        </div>
+    </div>
+    <br />
+
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+           
+            <th>
+                Alerta                
+            </th>
+            <th>
+                Fecha Alerta                
+            </th>
+        </tr>
+        @foreach (var ins in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => ins.DESCALERTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => ins.FECHAAVISO)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new { id = ins.IDALERTA }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

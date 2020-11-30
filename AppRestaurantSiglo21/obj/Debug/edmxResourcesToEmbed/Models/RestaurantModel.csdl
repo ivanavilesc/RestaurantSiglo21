@@ -6,6 +6,8 @@
     </Key>
     <Property Name="IDALERTA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCALERTA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAAVISO" Type="DateTime" />
+    <Property Name="DESCTIPOPROVEEDOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="BANCOMOVIMIENTO">
     <Key>
@@ -176,6 +178,7 @@
     <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCESTPRO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="ESTADOPROVEEDOR" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="INSUMO" Relationship="RestaurantModel.ESTADOINSUMO_FK" FromRole="ESTADOPROVEEDOR" ToRole="INSUMO" />
   </EntityType>
   <EntityType Name="ESTADORESERVA">
     <Key>
@@ -226,6 +229,10 @@
     <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.BODEGAMOV_INSUMO_FK" FromRole="INSUMO" ToRole="BODEGAMOVIMIENTO" />
     <NavigationProperty Name="DETPEDIDOINS" Relationship="Self.DETPEDIDOINS_INSUMO_FK" FromRole="INSUMO" ToRole="DETPEDIDOINS" />
     <NavigationProperty Name="INSUMOSTOCK" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMO" ToRole="INSUMOSTOCK" />
+    <Property Name="IDESTADOINSUMO" Type="Byte" />
+    <Property Name="IDTIPOINSUMO" Type="Byte" />
+    <Property Name="PESO" Type="Int32" />
+    <NavigationProperty Name="ESTADOPROVEEDOR" Relationship="RestaurantModel.ESTADOINSUMO_FK" FromRole="INSUMO" ToRole="ESTADOPROVEEDOR" />
   </EntityType>
   <EntityType Name="INSUMOSTOCK">
     <Key>
@@ -235,7 +242,6 @@
     <Property Name="STOCKACTUAL" Type="Int16" />
     <Property Name="STOCKMINIMO" Type="Int16" />
     <Property Name="IDINSUMO" Type="Int32" Nullable="false" />
-    <Property Name="PESO" Type="Int32" />
     <NavigationProperty Name="INSUMO" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMOSTOCK" ToRole="INSUMO" />
   </EntityType>
   <EntityType Name="MEDIOPAGO">
@@ -379,6 +385,7 @@
     <Property Name="FONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" />
     <NavigationProperty Name="ESTADOPROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="PROVEEDOR" ToRole="ESTADOPROVEEDOR" />
+    <Property Name="DESCTIPOPROVEEDOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="RECETAPRODUCTO">
     <Key>
@@ -388,6 +395,7 @@
     <Property Name="INGREDIENTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="ELABORACION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_RECETAPRODUCTO_FK" FromRole="RECETAPRODUCTO" ToRole="PRODUCTO" />
+    <Property Name="COMENSALES" Type="Byte" />
   </EntityType>
   <EntityType Name="RESERVA">
     <Key>
@@ -1287,5 +1295,21 @@
       <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
       <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <AssociationSet Name="ESTADOINSUMO_FK" Association="RestaurantModel.ESTADOINSUMO_FK">
+      <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />
+      <End Role="INSUMO" EntitySet="INSUMO" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="ESTADOINSUMO_FK">
+    <End Type="RestaurantModel.ESTADOPROVEEDOR" Role="ESTADOPROVEEDOR" Multiplicity="0..1" />
+    <End Type="RestaurantModel.INSUMO" Role="INSUMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOPROVEEDOR">
+        <PropertyRef Name="IDESTPROVEEDOR" />
+      </Principal>
+      <Dependent Role="INSUMO">
+        <PropertyRef Name="IDESTADOINSUMO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

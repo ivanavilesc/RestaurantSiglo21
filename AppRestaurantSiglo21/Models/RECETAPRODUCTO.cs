@@ -23,6 +23,7 @@ namespace AppRestaurantSiglo21.Models
         public short IDRECPRODUCTO { get; set; }
         public string INGREDIENTE { get; set; }
         public string ELABORACION { get; set; }
+        public Nullable<byte> COMENSALES { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }

@@ -48,7 +48,7 @@
         <div class="form-group">
             Stock Mínimo
             <div class="col-md-10">
-                @Html.EditorFor(model => model.STOCKMINIMO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.STOCKMINIMO, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1", @value = "0" } })
                 @Html.ValidationMessageFor(model => model.STOCKMINIMO, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,3 +88,12 @@
     }
 
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#submit").click(function () {
+            alert("@ViewBag.message");            
+        });
+    });
+</script>

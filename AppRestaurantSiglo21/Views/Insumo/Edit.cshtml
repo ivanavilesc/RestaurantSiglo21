@@ -19,36 +19,51 @@
         @Html.AntiForgeryToken()
         <div class="container">
             <div class="form-horizontal">
-                
+
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.IDINSUMO)
 
                 @*<div class="form-group">
-                        @Html.LabelFor(model => model.IDINSUMO, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IDINSUMO, htmlAttributes: new { @class = "control-label col-md-2" })
 
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.IDINSUMO, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.IDINSUMO, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDINSUMO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IDINSUMO, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DESCINSUMO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    Insumo
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.DESCINSUMO, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.DESCINSUMO, new { htmlAttributes = new { @class = "form-control" , @min = "0", @step = "1", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.DESCINSUMO, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PRECIOINSUMO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    Precio Insumo
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PRECIOINSUMO, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.PRECIOINSUMO, new { htmlAttributes = new { @class = "form-control", @min = "0", @step = "1", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.PRECIOINSUMO, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
+                <div class="form-group">
+                    Estado Insumo
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.IDESTADOINSUMO, new SelectList(ViewBag.EstadoInsumos, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "idEstPropuesta", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.IDESTADOINSUMO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    Kilos/Litros
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.PESO, new { htmlAttributes = new { @class = "form-control", @min = "0", @step = "1", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.PESO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         @*<input type="submit" value="Save" class="btn btn-default" />*@
@@ -59,7 +74,7 @@
 
 
             <div>
-                <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+                <div> @Html.ActionLink("Volver atrás", "Index", null, new { idTipoInsumo = @Session["idTipoInsumo"] , idInsumo = @Session["idInsumo"] }, new { @class = "btn btn-secondary" })</div>
             </div>
         </div>
 

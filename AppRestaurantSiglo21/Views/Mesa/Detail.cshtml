@@ -4,37 +4,51 @@
     ViewBag.Title = "Details";
     Layout = Session["Layout"].ToString();
 }
+<div class="container">
 
-<h2>Consultar detalles de mesa</h2>
 
-<div>
-    <h4>Mesa</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DESCMESA)
-        </dt>
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle Mesa</h4>
+        </div>
+    </div>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.DESCMESA)
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.ESTADOMESA)
-        </dd>
+    <div>        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mesa
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CAPACIDAD)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CAPACIDAD)
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.ESTADOMESA)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.DESCMESA)
+            </dd>
+            <dt>
+                Capacidad
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CAPACIDAD)
+            </dd>
 
-    </dl>
+            <dt>
+                Estado Mesa
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ESTADOMESA.DESCESTADOMESA)
+            </dd>
+            <dt>
+                Local
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RESTAURANT.DIRECCIONLOCAL)
+            </dd>
+        </dl>
+    </div>
+
+    <p>
+
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDMESA }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDMESA }) |
-    @Html.ActionLink("Volver a la Lista", "Index")
-</p>

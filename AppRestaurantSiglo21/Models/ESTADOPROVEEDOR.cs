@@ -18,6 +18,7 @@ namespace AppRestaurantSiglo21.Models
         public ESTADOPROVEEDOR()
         {
             this.PROVEEDOR = new HashSet<PROVEEDOR>();
+            this.INSUMO = new HashSet<INSUMO>();
         }
     
         public byte IDESTPROVEEDOR { get; set; }
@@ -25,5 +26,7 @@ namespace AppRestaurantSiglo21.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INSUMO> INSUMO { get; set; }
     }
 }

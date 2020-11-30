@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.INSUMOSTOCK>
+@{
+    ViewBag.Title = "Principal";
+    Layout = Session["Layout"].ToString();
+}
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Egreso Insumos A Bodega</h4>
+        </div>
+    </div>
+    <br />
+
+    @if (@ViewBag.MensajeOk != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.MensajeOk
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "EgresoInsumos", FormMethod.Post, new { id = "createForm" }))
+    {
+        <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+            <tr>
+                <th>Insumo</th>
+                <th>Stock Actual</th>
+                <th>Peso</th>
+            </tr>
+            @foreach (var ins in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => ins.INSUMO.DESCINSUMO)</td>
+                    <td>@Html.DisplayFor(x => ins.STOCKACTUAL)</td>
+                    <td>@Html.DisplayFor(x => ins.INSUMO.PESO)</td>
+
+                    <td>
+                        @Html.ActionLink("Egreso Stock", "SaveAction", null, new { idTipoInsumo = @Session["idTipoInsumo"], IdStockInsumo = ins.IDINSUMOSTOCK }, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+            @Html.ActionLink("Volver atrás", "Principal", null, new { @class = "btn btn-secondary" })
+        </div>
+
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#submit").click(function () {
+            document.forms[0].submit();
+            return false;
+        });
+    });
+</script>

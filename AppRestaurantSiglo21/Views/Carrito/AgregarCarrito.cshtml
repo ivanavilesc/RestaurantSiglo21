@@ -56,7 +56,7 @@
                             @String.Format("{0:C}", item.Producto.PRECIOPRODUCTO)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => item.Cantidad)
+                            @Html.EditorFor(model => item.Cantidad)
                         </td>
                         <td>
                             @String.Format("{0:C}", (item.Cantidad * item.Producto.PRECIOPRODUCTO))

@@ -18,7 +18,6 @@ namespace AppRestaurantSiglo21.Models
         public Nullable<short> STOCKACTUAL { get; set; }
         public Nullable<short> STOCKMINIMO { get; set; }
         public int IDINSUMO { get; set; }
-        public Nullable<int> PESO { get; set; }
     
         public virtual INSUMO INSUMO { get; set; }
     }

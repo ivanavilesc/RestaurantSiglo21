@@ -16,5 +16,7 @@ namespace AppRestaurantSiglo21.Models
     {
         public short IDALERTA { get; set; }
         public string DESCALERTA { get; set; }
+        public Nullable<System.DateTime> FECHAAVISO { get; set; }
+        public string DESCTIPOPROVEEDOR { get; set; }
     }
 }

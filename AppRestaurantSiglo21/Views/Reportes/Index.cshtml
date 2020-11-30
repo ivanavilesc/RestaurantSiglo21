@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Reportes">
+                        <a class="nav-link" href="/Reportes/AtencionesPorDia">
                             <span data-feather="shopping-cart"></span>
                             Atenciones
                         </a>
@@ -55,153 +55,12 @@
                 </ul>
             </div>
         </nav>
-
         <div id="chartdiv" class="col-md-6 col-lg-5 d-md-block" style="width: 500px; height: 350px; " collapse>
-
+            <img src="~/Content/Images/reporting.jpg" class="img-responsive" alt="Responsive image">
         </div>
+        
 
-        &nbsp;
-
-        <div id="chartdiv2" class="col-md-3 col-lg-auto d-md-block" style="width: 500px; height: 350px; " collapse>
-
-        </div>
 
     </div>
 
-
 </div>
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.load('current', { 'packages': ['table'] });
-
-    //Call function after Google Chart is loaded, it is required, otherwise you may get error
-    google.charts.setOnLoadCallback(DrawonLoad);
-
-    google.charts.setOnLoadCallback(drawTable);
-
-    function DrawonLoad() {
-        $(function () {
-            $.ajax({
-                type: 'GET',
-                url: '/Reportes/GetPiechartJSON',
-                success: function (chartsdata) {
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
-
-                    //get JSONList from Object
-                    var Data = chartsdata.JSONList;
-                    var data = new google.visualization.DataTable();
-                    //Aqui se agregan las columnas que se usarán para construir la vista del grafico
-                    data.addColumn('string', 'FechaVenta');
-                    data.addColumn('number', 'CantidadVentas');
-
-                    //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
-                    String.prototype.toDateCustom = function () {
-                        var date = this;
-                        if (!date)
-                            return "";
-                        var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
-                            dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
-                        return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
-                    }
-
-                    //Loop through each list data
-                    for (var i = 0; i < Data.length; i++) {
-
-                        //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
-                        data.addRow(
-                            [
-                                Data[i].FechaVenta.toDateCustom(),
-                                Data[i].CantidadVentas
-                            ]
-                        );
-                    }
-
-                    // Instantiate and draw our chart, passing in some options
-                    
-                    var chart = new google.visualization.ColumnChart(document.getElementById('chartdiv'));
-                    //Draw pie chart command with data and chart options
-                    chart.draw(data,
-                        {
-                            title: "Reporte - Cantidad de Ventas por día",
-                            position: "top",
-                            fontsize: "16px",
-                        });
-                    
-                },
-                error: function () {
-                    alert("Error loading data! Please try again.");
-                }
-            });
-        })
-
-    }
-
-    function drawTable() {
-        //#####################
-
-        $(function () {
-            $.ajax({
-                type: 'GET',
-                url: '/Reportes/GetPiechartJSON',
-                success: function (chartsdata) {
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
-
-                    //get JSONList from Object
-                    var Data = chartsdata.JSONList;
-                    var data = new google.visualization.DataTable();
-                    //Aqui se agregan las columnas que se usarán para construir la vista del grafico
-                    data.addColumn('string', 'Fecha de Venta');
-                    data.addColumn('number', 'Cantidad de Ventas del día');
-
-                    //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
-                    String.prototype.toDateCustom = function () {
-                        var date = this;
-                        if (!date)
-                            return "";
-                        var f = new Date(parseInt(date.replace("/Date(", "").replace(")/", ""), 10)),
-                            dia = f.getDate(), mes = (parseInt(f.getMonth()) + 1), anio = f.getFullYear();
-                        return ((dia < 10 ? "0" + dia : dia) + "/" + (mes < 10 ? "0" + mes : mes) + "/" + anio);
-                    }
-
-                    //Loop through each list data
-                    for (var i = 0; i < Data.length; i++) {
-
-                        //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
-                        data.addRow(
-                            [
-                                Data[i].FechaVenta.toDateCustom(),
-                                Data[i].CantidadVentas
-                            ]
-                        );
-                    }
-
-                    // Instantiate and draw our chart, passing in some options
-
-                    var chart2 = new google.visualization.Table(document.getElementById('chartdiv2'));
-
-                    //Draw pie chart command with data and chart options
-                    chart2.draw(data,
-                        {
-                            title: "Tabla - Cantidad de Ventas por día",
-                            position: "top",
-                            fontsize: "16px",
-                        });
-                    chart2.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
-
-
-                },
-                error: function () {
-                    alert("Error loading data! Please try again.");
-                }
-            });
-        })
-
-
-
-    }
-
-</script>

@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Reportes">
+                        <a class="nav-link" href="/Reportes/AtencionesPorDia">
                             <span data-feather="shopping-cart"></span>
                             Atenciones
                         </a>
@@ -67,7 +67,16 @@
         </div>
 
     </div>
+    <div class="col-md-12 text-center">
 
+        @using (Html.BeginForm("IngresoDiario", "GeneraPDF"))
+        {
+
+            <button type="submit" class="btn btn-primary btn-lg">Exportar Informe</button>
+        }
+
+
+    </div>
 
 </div>
 <script type="text/javascript">
@@ -95,7 +104,7 @@
                     //Aqui se agregan las columnas que se usarán para construir la vista del grafico
                     data.addColumn('string', 'FechaIngreso');
                     data.addColumn('number', 'TotalIngreso');
-                    
+
                     //Esta funcion sobrecarga la clase String agregando un metodo toDateCustom que formatea la fecha de salida
                     String.prototype.toDateCustom = function () {
                         var date = this;
@@ -113,7 +122,7 @@
                         data.addRow(
                             [
                                 Data[i].FechaIngreso.toDateCustom(),
-                                Data[i].TotalIngreso                                
+                                Data[i].TotalIngreso
                             ]
                         );
                     }
@@ -171,7 +180,7 @@
                     //Loop through each list data
                     var mediopago;
                     for (var i = 0; i < Data.length; i++) {
-                        
+
                         //Aqui se agregan las filas al DataSet, en el caso de la Fecha se formatea con el metodo sobrecargado toDateCustom()
                         if (Data[i].MedioPago === 1) {
                             mediopago = "Efectivo"

@@ -21,17 +21,19 @@ namespace AppRestaurantSiglo21.Controllers
             return View();
         }
 
+
         public ActionResult IngresarProducto()
         {
             return View();
         }
 
+        
         public ActionResult CrearInsumoStock()
         {
             List<SelectListItem> ListInsumos = new List<SelectListItem>();
 
             var Insumos = (from d in db.INSUMO
-                               
+                               where d.IDESTADOINSUMO == 1
 
                                select new DropDownList
                                {
@@ -69,7 +71,7 @@ namespace AppRestaurantSiglo21.Controllers
                 List<SelectListItem> ListInsumos = new List<SelectListItem>();
 
                 var Insumos = (from d in db.INSUMO
-
+                               where d.IDESTADOINSUMO == 1
 
                                select new DropDownList
                                {
@@ -86,59 +88,79 @@ namespace AppRestaurantSiglo21.Controllers
 
                 if (ListInsumos == null)
                 {
+                    ListInsumos.Add(new SelectListItem { Text = "Sin Datos", Value = "0" });
                     ViewBag.message = "No existen insumos";
                     return View();
                 }
-                else
-                {
-                    ViewData["ListInsumos"] = ListInsumos;
-                    return View();
-                }
-                
+
+                ViewData["ListInsumos"] = ListInsumos;
+                return View();
             }
 
             int IdInsumo = int.Parse(Insumo);
 
             var objInsumoStock = db.INSUMOSTOCK.Where(t => t.IDINSUMO == IdInsumo); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
-                if (objInsumoStock.Count() > 0) 
+            if (objInsumoStock.Count() > 0)
+            {
+                ViewBag.message = "Stock de insumos ya fue creado";
+
+                List<SelectListItem> ListInsumos = new List<SelectListItem>();
+
+                var Insumos = (from d in db.INSUMO
+                               where d.IDESTADOINSUMO == 1
+
+                               select new DropDownList
+                               {
+                                   Id = d.IDINSUMO,
+                                   Descripcion = d.DESCINSUMO
+                               });
+
+                int contador = 0;
+                foreach (var Doc in Insumos)
                 {
-                    ViewBag.message  = "Stock de insumos ya fue creado";
-
-                    List<SelectListItem> ListInsumos = new List<SelectListItem>();
-
-                    var Insumos = (from d in db.INSUMO
-
-
-                                   select new DropDownList
-                                   {
-                                       Id = d.IDINSUMO,
-                                       Descripcion = d.DESCINSUMO
-                                   });
-
-                    int contador = 0;
-                    foreach (var Doc in Insumos)
-                    {
-                        contador = contador + 1;
-                        ListInsumos.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
-                    }
-
-                    if (ListInsumos == null)
-                    {
-                        ViewBag.message = "No existen insumos";                    }
-                else
-                {
-
+                    contador = contador + 1;
+                    ListInsumos.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
                 }
-                    {
-                        ViewData["ListInsumos"] = ListInsumos;                        
-                    }
 
+                if (ListInsumos == null)
+                {
+                    ListInsumos.Add(new SelectListItem { Text = "Sin Datos", Value = "0" });
+                    ViewBag.message = "No existen insumos";
+                }
+
+                ViewData["ListInsumos"] = ListInsumos;
                 return View();
-            }
+            }       
 
             if (StockMinimo > StockInicial)
             {
+
                 ViewBag.message = "Stock minimo no puede ser mayor a stock inicial";
+                List<SelectListItem> ListInsumos = new List<SelectListItem>();
+
+                var Insumos = (from d in db.INSUMO
+                               where d.IDESTADOINSUMO == 1
+
+                               select new DropDownList
+                               {
+                                   Id = d.IDINSUMO,
+                                   Descripcion = d.DESCINSUMO
+                               });
+
+                int contador = 0;
+                foreach (var Doc in Insumos)
+                {
+                    contador = contador + 1;
+                    ListInsumos.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
+                }
+
+                if (ListInsumos == null)
+                {
+                    ListInsumos.Add(new SelectListItem { Text = "Sin Datos", Value = "0" });
+                    ViewBag.message = "No existen insumos";
+                }
+
+                ViewData["ListInsumos"] = ListInsumos;
                 return View();
             }
             else
@@ -146,16 +168,13 @@ namespace AppRestaurantSiglo21.Controllers
                 INSUMOSTOCK InsStock = new INSUMOSTOCK();
                 InsStock.IDINSUMO = IdInsumo;
                 InsStock.STOCKACTUAL = (short)StockInicial;
-                InsStock.STOCKMINIMO = (short)StockMinimo;
-                InsStock.PESO = 0;
+                InsStock.STOCKMINIMO = (short)StockMinimo;                
                 db.INSUMOSTOCK.Add(InsStock);
                 db.SaveChanges();
 
                 ViewBag.message = "Nuevo stock grabado";
-
-                
             }
-            return View();
+            return RedirectToAction("ValidarStock");
         }
 
 
@@ -207,15 +226,9 @@ namespace AppRestaurantSiglo21.Controllers
                 return RedirectToAction("ValidarStock"); //REDIRIGE A LA VISTA DE LISTADO
             }
 
-            return View(objInsumoStock); //NO ENCONTRÓ COINCIDENCIAS NO RETORNA NADA
+            return RedirectToAction("ValidarStock");
         }
 
-
-
-        public ActionResult ProvverRecetas()
-        {
-            return View();
-        }
 
         private void ActualizarStockMinimo(int? IdInsumoStock, int? StockMinimo)
         {

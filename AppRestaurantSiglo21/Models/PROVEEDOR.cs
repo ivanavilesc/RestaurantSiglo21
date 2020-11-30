@@ -20,6 +20,7 @@ namespace AppRestaurantSiglo21.Models
         public string NOMPROV { get; set; }
         public string FONO { get; set; }
         public byte IDESTPROVEEDOR { get; set; }
+        public string DESCTIPOPROVEEDOR { get; set; }
     
         public virtual ESTADOPROVEEDOR ESTADOPROVEEDOR { get; set; }
     }

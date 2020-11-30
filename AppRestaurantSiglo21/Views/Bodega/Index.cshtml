@@ -14,9 +14,10 @@
     <br />
 
     <p>
-        @Html.ActionLink("Ingresa Productos", "CrearInsumoStock", null, new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("Ingresa Productos", "CrearInsumoStock", null, new { @class = "btn btn-primary" })*@
         @Html.ActionLink("Validar Stock", "ValidarStock", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Solicitar Recetas", "ProvverRecetas", null, new { @class = "btn btn-primary" })        
+        @Html.ActionLink("Solicitud De Insumos", "../EgresoInsumos/Principal", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ingreso Insumos", "../IngresoInsumos/Principal", null, new { @class = "btn btn-primary" })
     </p>
 
     <img src="@Url.Content("~/Images/Bodega.jpg")" width="1110px" height="600px" alt="" />

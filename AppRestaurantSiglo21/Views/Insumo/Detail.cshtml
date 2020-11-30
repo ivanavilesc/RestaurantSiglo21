@@ -18,16 +18,8 @@
         
         <dl class="dl-horizontal">
 
-            @*<dt>
-                    @Html.DisplayNameFor(model => model.IDINSUMO)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.IDINSUMO)
-                </dd>*@
-
             <dt>
-                @Html.DisplayNameFor(model => model.DESCINSUMO)
+                INSUMO
             </dt>
 
             <dd>
@@ -35,17 +27,30 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PRECIOINSUMO)
+                PRECIO INSUMO
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PRECIOINSUMO)
+                @Html.DisplayNameFor(model => model.PRECIOINSUMO)
+            </dd>
+
+            <dt>
+                Estado Insumo
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ESTADOPROVEEDOR.DESCESTPRO)
+            </dd>
+            <dt>
+                Kilos/Litros
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PESO)
             </dd>
 
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDINSUMO }, new { @class = "btn btn-primary" }) |
-        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+    <p>        
+        @Html.ActionLink("Editar Valores", "Edit", new { idTipoInsumo = @Session["idTipoInsumo"], idInsumo = @Session["idInsumo"] },  new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "Index", null, new { idTipoInsumo = @Session["idTipoInsumo"], idInsumo = @Session["idInsumo"] }, new { @class = "btn btn-secondary" })
     </p>
 </div>

@@ -161,10 +161,14 @@
     <Compile Include="Controllers\CartaDigitalController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\CocinaOrdenController.cs" />
+    <Compile Include="Controllers\ConsAlertaController.cs" />
+    <Compile Include="Controllers\ConsStockFaltanteController.cs" />
     <Compile Include="Controllers\DisponibilidadController.cs" />
     <Compile Include="Controllers\DisponibilidadMesaController.cs" />
+    <Compile Include="Controllers\EgresoInsumosController.cs" />
     <Compile Include="Controllers\GeneraPDFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngresoInsumosController.cs" />
     <Compile Include="Controllers\InsumoController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -173,6 +177,8 @@
     <Compile Include="Controllers\NotificacionOrdenController.cs" />
     <Compile Include="Controllers\OrdenController.cs" />
     <Compile Include="Controllers\PagoOrdenController.cs" />
+    <Compile Include="Controllers\PedidosProveedoresController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RecetaProductoController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
@@ -258,6 +264,7 @@
     <Compile Include="Models\INSUMOSTOCK.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListaReservaViewModel.cs" />
     <Compile Include="Models\LlenarDropDownList.cs" />
     <Compile Include="Models\MEDIOPAGO.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
@@ -345,8 +352,11 @@
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VentaDiaViewModel.cs" />
+    <Compile Include="Models\VistaAlertaStock.cs" />
+    <Compile Include="Models\VistaDetalleInsumo.cs" />
     <Compile Include="Models\VistaDetOrdenes.cs" />
     <Compile Include="Models\VistaOrdenes.cs" />
+    <Compile Include="Models\VistaPedidoInsumos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -378,6 +388,7 @@
     <Content Include="Content\Images\icons\favicon.ico" />
     <Content Include="Content\Images\img-01.png" />
     <Content Include="Content\Images\pagoOK.png" />
+    <Content Include="Content\Images\reporting.jpg" />
     <Content Include="Content\Images\restaurantReserva.jpg" />
     <Content Include="Content\Images\RestSiglo21Logo.png" />
     <Content Include="Content\Img\login1.png" />
@@ -672,6 +683,27 @@
     <Content Include="Views\GeneraPDF\Index.cshtml" />
     <Content Include="Views\Reportes\IngresoDiario.cshtml" />
     <Content Include="Views\Reportes\TopProductos.cshtml" />
+    <Content Include="Views\Reportes\AtencionesPorDia.cshtml" />
+    <Content Include="Views\Reservas\ListaReservas.cshtml" />
+    <Content Include="Views\ConsAlerta\Delete.cshtml" />
+    <Content Include="Views\ConsAlerta\Index.cshtml" />
+    <Content Include="Views\ConsStockFaltante\Index.cshtml" />
+    <Content Include="Views\EgresoInsumos\Index.cshtml" />
+    <Content Include="Views\EgresoInsumos\Principal.cshtml" />
+    <Content Include="Views\EgresoInsumos\SaveAction.cshtml" />
+    <Content Include="Views\IngresoInsumos\Index.cshtml" />
+    <Content Include="Views\IngresoInsumos\Principal.cshtml" />
+    <Content Include="Views\IngresoInsumos\SaveAction.cshtml" />
+    <Content Include="Views\PedidosProveedores\AgregarPedido.cshtml" />
+    <Content Include="Views\PedidosProveedores\Index.cshtml" />
+    <Content Include="Views\PedidosProveedores\ListadoInsumos.cshtml" />
+    <Content Include="Views\PedidosProveedores\SolicitarInsumo.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
+    <Content Include="Views\Proveedor\Delete.cshtml" />
+    <Content Include="Views\Proveedor\Detail.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Insumo\Principal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

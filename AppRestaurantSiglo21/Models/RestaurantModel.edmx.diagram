@@ -92,6 +92,7 @@
         <AssociationConnector Association="RestaurantModel.PRODUCTO_TIPOPRODUCTO_FK" ManuallyRouted="false" />
         <AssociationConnector Association="RestaurantModel.USUARIOROL_ROL_FK" ManuallyRouted="false" />
         <AssociationConnector Association="RestaurantModel.USUARIOROL_USUARIO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantModel.ESTADOINSUMO_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

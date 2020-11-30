@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.PROVEEDOR>
+
+
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Listado Proveedores</h4>
+        </div>
+    </div>
+    <br />
+        
+    <hr />
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>Rut Proveedor</th>
+            <th>Nombre Proveedor</th>
+            <th>Fono Contacto</th>
+            <th>Tipo Proveedor</th>            
+        </tr>
+        @foreach (var prov in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => prov.RUTPROVEEDOR) - @Html.DisplayFor(model => prov.DVPROVEEDOR)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => prov.NOMPROV)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => prov.FONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => prov.DESCTIPOPROVEEDOR)    
+                </td>                
+                <td>
+                    @Html.ActionLink("Generara Pedido", "ListadoInsumos", new { IdProveedor = prov.IDPROVEEDOR }, new { @class = "btn btn-warning" }) 
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+

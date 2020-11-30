@@ -1,0 +1,153 @@
+﻿@model AppRestaurantSiglo21.Models.INSUMO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Compra Insumos</h4>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+
+
+            <div class="form-horizontal">
+                <h4>Ingresar Cantidad de Insumos a Solicitar</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    Insumo
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => Model.DESCINSUMO)
+                        @Html.ValidationMessageFor(model => Model.DESCINSUMO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    Kilos/Litros
+                    <div class="col-md-10">
+                        @Html.DisplayFor(modelItem => Model.PESO)
+                        @Html.ValidationMessageFor(model => Model.PESO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <input type="hidden" id="IdProveedor" name="IdProveedor" value=@Session["IdProveedor"] />
+                <input type="hidden" id="IdTipoInsumo" name="idTipoInsumo" value=@Session["IdTipoInsumo"] />
+                <input type="hidden" id="IdInsumo" name="IdInsumo" value=@Session["IdInsumo"] />
+
+                <div class="form-group ">
+                    <div class="col-10">
+                        <label for="RUTDV">Ingrese rut Solicitante</label>
+                        <input type="text" required oninput="checkRut(this)" class="form-control" id="RUTDV" name="RUTDV" placeholder="8 dígitos mas guión, ej: 99999999-9">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    Cantidad
+                    <div class="col-md-10">
+                        <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="Cantidad" id="Cantidad" placeholder="Nueva Cantidad" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="ansValidation(event)" type="button" class="btn btn-lg btn-primary btn-block">Agregar Compra</button>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                @Html.ActionLink("Volver atrás", "ListadoInsumos", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+
+</div>
+
+<script>
+    function ansValidation(ev) {
+        ev.preventDefault
+        var cantidad = document.getElementById("Cantidad").value        
+        var rutValue = document.getElementById("RUTDV").value
+        //var listaValue = document.getElementById("ListaRoles").value
+        // the typeof operator returns a string.
+        if (rutValue === "") {
+            event.preventDefault();
+            window.alert("No ingresaste el RUT, este campo es obligatorio !")
+        
+        if (cantidad === "") {
+            event.preventDefault();
+            window.alert("No igreso cantidad, este campo es obligatorio !")
+        } else {
+            let form = document.getElementById('createForm');
+            form.submit()
+        }
+    }
+</script>
+
+<script>
+    function checkRut(RUTDV) {
+        // Despejar Puntos
+        var valor = RUTDV.value.replace('.', '');
+        // Despejar Guión
+        valor = valor.replace('-', '');
+
+        // Aislar Cuerpo y Dígito Verificador
+        cuerpo = valor.slice(0, -1);
+        dv = valor.slice(-1).toUpperCase();
+
+        // Formatear RUN
+        RUTDV.value = cuerpo + '-' + dv
+
+        // Si no cumple con el mínimo ej. (n.nnn.nnn)
+        if (cuerpo.length < 7) { RUTDV.setCustomValidity("RUT Incompleto"); return false; }
+
+        // Calcular Dígito Verificador
+        suma = 0;
+        multiplo = 2;
+
+        // Para cada dígito del Cuerpo
+        for (i = 1; i <= cuerpo.length; i++) {
+
+            // Obtener su Producto con el Múltiplo Correspondiente
+            index = multiplo * valor.charAt(cuerpo.length - i);
+
+            // Sumar al Contador General
+            suma = suma + index;
+
+            // Consolidar Múltiplo dentro del rango [2,7]
+            if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+
+        }
+
+        // Calcular Dígito Verificador en base al Módulo 11
+        dvEsperado = 11 - (suma % 11);
+
+        // Casos Especiales (0 y K)
+        dv = (dv == 'K') ? 10 : dv;
+        dv = (dv == 0) ? 11 : dv;
+
+        // Validar que el Cuerpo coincide con su Dígito Verificador
+        if (dvEsperado != dv) { RUTDV.setCustomValidity("RUT Inválido"); return false; }
+
+        // Si todo sale bien, eliminar errores (decretar que es válido)
+        RUTDV.setCustomValidity('');
+    }
+</script>

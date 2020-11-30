@@ -4,6 +4,8 @@
     <EntitySetMapping Name="ALERTASTOCK">
       <EntityTypeMapping TypeName="RestaurantModel.ALERTASTOCK">
         <MappingFragment StoreEntitySet="ALERTASTOCK">
+          <ScalarProperty Name="DESCTIPOPROVEEDOR" ColumnName="DESCTIPOPROVEEDOR" />
+          <ScalarProperty Name="FECHAAVISO" ColumnName="FECHAAVISO" />
           <ScalarProperty Name="IDALERTA" ColumnName="IDALERTA" />
           <ScalarProperty Name="DESCALERTA" ColumnName="DESCALERTA" />
         </MappingFragment>
@@ -210,6 +212,9 @@
     <EntitySetMapping Name="INSUMO">
       <EntityTypeMapping TypeName="RestaurantModel.INSUMO">
         <MappingFragment StoreEntitySet="INSUMO">
+          <ScalarProperty Name="PESO" ColumnName="PESO" />
+          <ScalarProperty Name="IDTIPOINSUMO" ColumnName="IDTIPOINSUMO" />
+          <ScalarProperty Name="IDESTADOINSUMO" ColumnName="IDESTADOINSUMO" />
           <ScalarProperty Name="IDINSUMO" ColumnName="IDINSUMO" />
           <ScalarProperty Name="DESCINSUMO" ColumnName="DESCINSUMO" />
           <ScalarProperty Name="PRECIOINSUMO" ColumnName="PRECIOINSUMO" />
@@ -223,7 +228,6 @@
           <ScalarProperty Name="STOCKACTUAL" ColumnName="STOCKACTUAL" />
           <ScalarProperty Name="STOCKMINIMO" ColumnName="STOCKMINIMO" />
           <ScalarProperty Name="IDINSUMO" ColumnName="IDINSUMO" />
-          <ScalarProperty Name="PESO" ColumnName="PESO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -342,6 +346,7 @@
     <EntitySetMapping Name="PROVEEDOR">
       <EntityTypeMapping TypeName="RestaurantModel.PROVEEDOR">
         <MappingFragment StoreEntitySet="PROVEEDOR">
+          <ScalarProperty Name="DESCTIPOPROVEEDOR" ColumnName="DESCTIPOPROVEEDOR" />
           <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
           <ScalarProperty Name="RUTPROVEEDOR" ColumnName="RUTPROVEEDOR" />
           <ScalarProperty Name="DVPROVEEDOR" ColumnName="DVPROVEEDOR" />
@@ -354,6 +359,7 @@
     <EntitySetMapping Name="RECETAPRODUCTO">
       <EntityTypeMapping TypeName="RestaurantModel.RECETAPRODUCTO">
         <MappingFragment StoreEntitySet="RECETAPRODUCTO">
+          <ScalarProperty Name="COMENSALES" ColumnName="COMENSALES" />
           <ScalarProperty Name="IDRECPRODUCTO" ColumnName="IDRECPRODUCTO" />
           <ScalarProperty Name="INGREDIENTE" ColumnName="INGREDIENTE" />
           <ScalarProperty Name="ELABORACION" ColumnName="ELABORACION" />

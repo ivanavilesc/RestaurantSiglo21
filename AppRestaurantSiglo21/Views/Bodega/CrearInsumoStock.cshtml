@@ -28,29 +28,28 @@
                     <div class="form-group">
                         Insumos
                         <div class="col-md-10">
-                            @Html.DropDownList("Insumo", (IEnumerable<SelectListItem>)ViewData["ListInsumos"], "Seleccionar Insumo", new { @class = "form-control" })
+                            @Html.DropDownList("Insumo", (IEnumerable<SelectListItem>)ViewData["ListInsumos"], "Seleccionar Insumo", new { @class = "form-control", @required = "required" } )
                         </div>
                     </div>
                     
                     <div class="form-group">
                         Stock Inicial
                         <div class="col-md-10">
-                           <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="StockInicial" id="StockInicial" placeholder="Stock Inicial" required>
+                           <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" data-val="true"  min="1" type="number" name="StockInicial" id="StockInicial" placeholder="Stock Inicial" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         Stock Minimo
                         <div class="col-md-10">
-                            <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" type="number" name="StockMinimo" id="StockMinimo" placeholder="Stock Mínimo" required>
+                            <input class="border border-grey flex-1 p-2 mb-6 sm:mb-0 outline-none rounded sm:rounded-none sm:rounded-l text-lg w-full sm:w-auto" data-val="true"  min="1" type="number" name="StockMinimo" id="StockMinimo" placeholder="Stock Mínimo" required>
                         </div>
                     </div>
 
                     
 
-                    <button type="submit" class="btn btn-primary btn-block">Crear insumo</button>
-                    <br />
-                    <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+                    <button type="submit" class="btn btn-primary">Crear </button>
+                    @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
 
                     @if (ViewBag.message != null)
                     {
@@ -66,3 +65,12 @@
             </div>                     
         </form>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#submit").click(function () {
+            document.forms[0].submit();
+            return false;
+        });
+    });
+</script>

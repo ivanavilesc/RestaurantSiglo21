@@ -11,6 +11,8 @@
           </Key>
           <Property Name="IDALERTA" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCALERTA" Type="varchar2" MaxLength="150" />
+          <Property Name="FECHAAVISO" Type="date" />
+          <Property Name="DESCTIPOPROVEEDOR" Type="varchar2" MaxLength="100" />
         </EntityType>
         <EntityType Name="BANCOMOVIMIENTO">
           <Key>
@@ -197,6 +199,9 @@
           <Property Name="IDINSUMO" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCINSUMO" Type="varchar2" MaxLength="100" />
           <Property Name="PRECIOINSUMO" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="IDESTADOINSUMO" Type="number" Precision="2" Scale="0" />
+          <Property Name="IDTIPOINSUMO" Type="number" Precision="2" Scale="0" />
+          <Property Name="PESO" Type="number" Precision="6" Scale="0" />
         </EntityType>
         <EntityType Name="INSUMOSTOCK">
           <Key>
@@ -206,7 +211,6 @@
           <Property Name="STOCKACTUAL" Type="number" Precision="4" Scale="0" />
           <Property Name="STOCKMINIMO" Type="number" Precision="4" Scale="0" />
           <Property Name="IDINSUMO" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="PESO" Type="number" Precision="6" Scale="0" />
         </EntityType>
         <EntityType Name="MEDIOPAGO">
           <Key>
@@ -324,6 +328,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
           <Property Name="NOMPROV" Type="varchar2" MaxLength="200" />
           <Property Name="FONO" Type="varchar2" MaxLength="10" />
           <Property Name="IDESTPROVEEDOR" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="DESCTIPOPROVEEDOR" Type="varchar2" MaxLength="100" />
         </EntityType>
         <EntityType Name="RECETAPRODUCTO">
           <Key>
@@ -332,6 +337,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
           <Property Name="IDRECPRODUCTO" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="INGREDIENTE" Type="varchar2" MaxLength="1000" />
           <Property Name="ELABORACION" Type="varchar2" MaxLength="1000" />
+          <Property Name="COMENSALES" Type="number" Precision="2" Scale="0" />
         </EntityType>
         <EntityType Name="RESERVA">
           <Key>
@@ -601,6 +607,18 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
             </Principal>
             <Dependent Role="ENTIDADBANCARIA">
               <PropertyRef Name="IDTIPOCUENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ESTADOINSUMO_FK">
+          <End Role="ESTADOPROVEEDOR" Type="Self.ESTADOPROVEEDOR" Multiplicity="0..1" />
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOPROVEEDOR">
+              <PropertyRef Name="IDESTPROVEEDOR" />
+            </Principal>
+            <Dependent Role="INSUMO">
+              <PropertyRef Name="IDESTADOINSUMO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1058,6 +1076,10 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
             <End Role="TIPOCUENTA" EntitySet="TIPOCUENTA" />
             <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
           </AssociationSet>
+          <AssociationSet Name="ESTADOINSUMO_FK" Association="Self.ESTADOINSUMO_FK">
+            <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />
+            <End Role="INSUMO" EntitySet="INSUMO" />
+          </AssociationSet>
           <AssociationSet Name="INGREDIENTE_PRODPREPARACION_FK" Association="Self.INGREDIENTE_PRODPREPARACION_FK">
             <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />
             <End Role="INGREDIENTE" EntitySet="INGREDIENTE" />
@@ -1153,6 +1175,8 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           </Key>
           <Property Name="IDALERTA" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCALERTA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FECHAAVISO" Type="DateTime" />
+          <Property Name="DESCTIPOPROVEEDOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="BANCOMOVIMIENTO">
           <Key>
@@ -1323,6 +1347,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCESTPRO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="ESTADOPROVEEDOR" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="INSUMO" Relationship="RestaurantModel.ESTADOINSUMO_FK" FromRole="ESTADOPROVEEDOR" ToRole="INSUMO" />
         </EntityType>
         <EntityType Name="ESTADORESERVA">
           <Key>
@@ -1373,6 +1398,10 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <NavigationProperty Name="BODEGAMOVIMIENTO" Relationship="Self.BODEGAMOV_INSUMO_FK" FromRole="INSUMO" ToRole="BODEGAMOVIMIENTO" />
           <NavigationProperty Name="DETPEDIDOINS" Relationship="Self.DETPEDIDOINS_INSUMO_FK" FromRole="INSUMO" ToRole="DETPEDIDOINS" />
           <NavigationProperty Name="INSUMOSTOCK" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMO" ToRole="INSUMOSTOCK" />
+          <Property Name="IDESTADOINSUMO" Type="Byte" />
+          <Property Name="IDTIPOINSUMO" Type="Byte" />
+          <Property Name="PESO" Type="Int32" />
+          <NavigationProperty Name="ESTADOPROVEEDOR" Relationship="RestaurantModel.ESTADOINSUMO_FK" FromRole="INSUMO" ToRole="ESTADOPROVEEDOR" />
         </EntityType>
         <EntityType Name="INSUMOSTOCK">
           <Key>
@@ -1381,8 +1410,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <Property Name="IDINSUMOSTOCK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="STOCKACTUAL" Type="Int16" />
           <Property Name="STOCKMINIMO" Type="Int16" />
-          <Property Name="IDINSUMO" Type="Int32" Nullable="false" />
-          <Property Name="PESO" Type="Int32" />
+          <Property Name="IDINSUMO" Type="Int32" Nullable="false" />         
           <NavigationProperty Name="INSUMO" Relationship="Self.INSUMOSTOCK_INSUMO_FK" FromRole="INSUMOSTOCK" ToRole="INSUMO" />
         </EntityType>
         <EntityType Name="MEDIOPAGO">
@@ -1526,6 +1554,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <Property Name="FONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IDESTPROVEEDOR" Type="Byte" Nullable="false" />
           <NavigationProperty Name="ESTADOPROVEEDOR" Relationship="Self.PROVEEDOR_ESTADOPROVEEDOR_FK" FromRole="PROVEEDOR" ToRole="ESTADOPROVEEDOR" />
+          <Property Name="DESCTIPOPROVEEDOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RECETAPRODUCTO">
           <Key>
@@ -1535,6 +1564,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <Property Name="INGREDIENTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="ELABORACION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRODUCTO" Relationship="Self.PRODUCTO_RECETAPRODUCTO_FK" FromRole="RECETAPRODUCTO" ToRole="PRODUCTO" />
+          <Property Name="COMENSALES" Type="Byte" />
         </EntityType>
         <EntityType Name="RESERVA">
           <Key>
@@ -2434,7 +2464,23 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
             <Parameter Name="PE_FECHAINICIO" Mode="In" Type="DateTime" />
             <Parameter Name="PE_FECHAFIN" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="ESTADOINSUMO_FK" Association="RestaurantModel.ESTADOINSUMO_FK">
+            <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />
+            <End Role="INSUMO" EntitySet="INSUMO" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="ESTADOINSUMO_FK">
+          <End Type="RestaurantModel.ESTADOPROVEEDOR" Role="ESTADOPROVEEDOR" Multiplicity="0..1" />
+          <End Type="RestaurantModel.INSUMO" Role="INSUMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOPROVEEDOR">
+              <PropertyRef Name="IDESTPROVEEDOR" />
+            </Principal>
+            <Dependent Role="INSUMO">
+              <PropertyRef Name="IDESTADOINSUMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2444,6 +2490,8 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <EntitySetMapping Name="ALERTASTOCK">
             <EntityTypeMapping TypeName="RestaurantModel.ALERTASTOCK">
               <MappingFragment StoreEntitySet="ALERTASTOCK">
+                <ScalarProperty Name="DESCTIPOPROVEEDOR" ColumnName="DESCTIPOPROVEEDOR" />
+                <ScalarProperty Name="FECHAAVISO" ColumnName="FECHAAVISO" />
                 <ScalarProperty Name="IDALERTA" ColumnName="IDALERTA" />
                 <ScalarProperty Name="DESCALERTA" ColumnName="DESCALERTA" />
               </MappingFragment>
@@ -2650,6 +2698,9 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <EntitySetMapping Name="INSUMO">
             <EntityTypeMapping TypeName="RestaurantModel.INSUMO">
               <MappingFragment StoreEntitySet="INSUMO">
+                <ScalarProperty Name="PESO" ColumnName="PESO" />
+                <ScalarProperty Name="IDTIPOINSUMO" ColumnName="IDTIPOINSUMO" />
+                <ScalarProperty Name="IDESTADOINSUMO" ColumnName="IDESTADOINSUMO" />
                 <ScalarProperty Name="IDINSUMO" ColumnName="IDINSUMO" />
                 <ScalarProperty Name="DESCINSUMO" ColumnName="DESCINSUMO" />
                 <ScalarProperty Name="PRECIOINSUMO" ColumnName="PRECIOINSUMO" />
@@ -2663,7 +2714,6 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
                 <ScalarProperty Name="STOCKACTUAL" ColumnName="STOCKACTUAL" />
                 <ScalarProperty Name="STOCKMINIMO" ColumnName="STOCKMINIMO" />
                 <ScalarProperty Name="IDINSUMO" ColumnName="IDINSUMO" />
-                <ScalarProperty Name="PESO" ColumnName="PESO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2782,6 +2832,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <EntitySetMapping Name="PROVEEDOR">
             <EntityTypeMapping TypeName="RestaurantModel.PROVEEDOR">
               <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="DESCTIPOPROVEEDOR" ColumnName="DESCTIPOPROVEEDOR" />
                 <ScalarProperty Name="IDPROVEEDOR" ColumnName="IDPROVEEDOR" />
                 <ScalarProperty Name="RUTPROVEEDOR" ColumnName="RUTPROVEEDOR" />
                 <ScalarProperty Name="DVPROVEEDOR" ColumnName="DVPROVEEDOR" />
@@ -2794,6 +2845,7 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
           <EntitySetMapping Name="RECETAPRODUCTO">
             <EntityTypeMapping TypeName="RestaurantModel.RECETAPRODUCTO">
               <MappingFragment StoreEntitySet="RECETAPRODUCTO">
+                <ScalarProperty Name="COMENSALES" ColumnName="COMENSALES" />
                 <ScalarProperty Name="IDRECPRODUCTO" ColumnName="IDRECPRODUCTO" />
                 <ScalarProperty Name="INGREDIENTE" ColumnName="INGREDIENTE" />
                 <ScalarProperty Name="ELABORACION" ColumnName="ELABORACION" />

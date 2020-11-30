@@ -21,15 +21,7 @@
     <div>
         
         <dl class="dl-horizontal">
-
-            @*<dt>
-                    @Html.DisplayNameFor(model => model.IDINSUMO)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.IDINSUMO)
-                </dd>*@
-
+                        
             <dt>
                 @Html.DisplayNameFor(model => model.DESCINSUMO)
             </dt>
@@ -43,7 +35,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PRECIOINSUMO)
+                @Html.DisplayFor(model => model.PESO)
             </dd>
 
         </dl>
@@ -57,7 +49,7 @@
             </div>
             <br />
             <br />
-            <div> @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })</div>
+            <div> @Html.ActionLink("Volver atrás", "Index", null, new { idTipoInsumo = @Session["idTipoInsumo"], idInsumo = @Session["idInsumo"] }, new { @class = "btn btn-secondary" })</div>
         }
     </div>
 </div>

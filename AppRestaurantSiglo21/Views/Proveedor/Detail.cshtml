@@ -1,0 +1,72 @@
+﻿@model AppRestaurantSiglo21.Models.PROVEEDOR
+
+@{
+    ViewBag.Title = "Details";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consultar Proveedor</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <h4>Detalle Proveedor</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                RUT Proveedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RUTPROVEEDOR)-@Html.DisplayFor(model => model.DVPROVEEDOR)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Nombre proveedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NOMPROV)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Fono proveedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FONO)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Tipo proveedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DESCTIPOPROVEEDOR)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Estado Proveedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ESTADOPROVEEDOR.DESCESTPRO)
+            </dd>
+        </dl>
+    </div>
+    <p>
+
+        @Html.ActionLink("Editar Valores", "Edit", new { id = Model.IDPROVEEDOR }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver atrás", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.INSUMO>
+
+@{
+    ViewBag.Title = "Principal";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Detalle De Insumos</h4>
+        </div>
+    </div>
+    <br />
+
+    <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+        <tr>
+            <th>Insumo</th>
+            <th>Precio Insumo</th>            
+            <th>Kilos/Litros</th>
+        </tr>
+        @foreach (var ins in Model)
+        {
+            <tr>                
+                <td>
+                    @Html.DisplayFor(x => ins.DESCINSUMO)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => ins.PRECIOINSUMO)
+                </td>                
+                <td>
+                    @Html.DisplayFor(x => ins.PESO)
+                </td>
+                <td>
+                    @Html.ActionLink("Agregar Pedido", "AgregarPedido", new { IdProveedor = @Session["IdProveedor"], IdTipoInsumo = @Session["IdTipoInsumo"], IdInsumo = ins.IDINSUMO }, new { @class = "btn btn-warning" }) 
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @Html.ActionLink("Volver atrás", "ListadoInsumos", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

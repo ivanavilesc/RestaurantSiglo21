@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AppRestaurantSiglo21.Models.VistaAlertaStock>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Session["Layout"].ToString();
+}
+<div class="container">
+
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h4>Consulta Stock Disponible</h4>
+        </div>
+    </div>
+    <br />
+
+    <br />
+    <p>
+        @Html.ActionLink("Consultar Stock", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+    <form method="post">
+
+        <table class="table" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">
+            <thead>
+                <tr>
+                    <th>Código Insumo </th>
+                    <th>Insumo  </th>
+                    <th>StockActual</th>
+                    <th>StockMinimo</th>
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ins in Model)
+                {
+                    string FontColor = string.Empty;
+                    int Valor = 0;
+                    Valor = (int)(ins.StockMinimo1 * 1.50) + ins.StockMinimo1;
+
+                    if (ins.StockActual1 == Valor)
+                    {
+                        FontColor = string.Empty;
+                        ins.DescAlerta1 = "Estas propenso, alcanzar stock minimo";
+                    }
+
+                    else if (ins.StockActual1 == ins.StockMinimo1)
+                    {
+                        FontColor = "background-color:yellow";
+                        ins.DescAlerta1 = "Estas quedando solo reserva";
+                    }
+                    else if (ins.StockActual1 == 0)
+                    {
+                        FontColor = "background-color:Red";
+                        ins.DescAlerta1 = "Estas sin stock";
+                    }
+                    else if (ins.StockActual1 < ins.StockMinimo1)
+                    {
+                        FontColor = "background-color:Orange";
+                        ins.DescAlerta1 = "Estas bajo la resrva minima";
+                    }
+
+                    <tr style="@FontColor">
+                        <td>
+                            @Html.DisplayFor(x => ins.IdInsumo1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => ins.DescInsumo1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => ins.StockActual1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => ins.StockMinimo1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => ins.DescAlerta1)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Generar Alerta", "EnviarAlerta", new { id = ins.IdInsumoStock1 }, new { @class = "btn btn-warning" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

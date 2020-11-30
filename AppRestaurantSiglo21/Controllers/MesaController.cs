@@ -15,6 +15,7 @@ namespace AppRestaurantSiglo21.Controllers
         private RestaurantEntities db = new RestaurantEntities(); //SE INSTANCIA UNA CLASE QUE TIENE EL MODELO COMPLETO MAPEADO
                                                                   // GET: TipoProducto
 
+        
         // #################### LISTADO DE REGISTROS ################
         public ActionResult Index()
         {
@@ -28,6 +29,44 @@ namespace AppRestaurantSiglo21.Controllers
         //ES NORMAL QUE ESTE METODO ESTE VACIO, PORQUE RECIBE LA ACCION A TRAVES DE HTTPPOST QUE ESTÁ MAS ABAJO
         public ActionResult Create()
         {
+            List<SelectListItem> ListEstaMesas = new List<SelectListItem>();
+            LlenarDropDownListEstMesas Estadomesa = new LlenarDropDownListEstMesas();
+
+            var EstMesa = Estadomesa.ReadAllEstadoMesas();
+
+            foreach (var Doc in EstMesa)
+            {
+                ListEstaMesas.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
+            }
+
+            if (ListEstaMesas == null)
+            {
+                ViewBag.message = "Error al recuperar estado mesa";
+            }
+            else
+            {
+                ViewBag.EstadoMesas = ListEstaMesas;
+            }
+
+            List<SelectListItem> ListaLocal = new List<SelectListItem>();
+            LlenarDropDownListaLocal Local = new LlenarDropDownListaLocal();
+
+            var _Local = Local.ReadAllLocal();
+
+            foreach (var Doc in _Local)
+            {
+                ListaLocal.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
+            }
+
+            if (ListaLocal == null)
+            {
+                ViewBag.message = "Error al recuperar local";
+            }
+            else
+            {
+                ViewBag.Local = ListaLocal;
+            }
+
             return View();
         }
         [HttpPost]
@@ -52,9 +91,48 @@ namespace AppRestaurantSiglo21.Controllers
 
         public ActionResult Edit(int? id) //SE TRAE ID DEL REGISTRO POR PARAMETRO
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<SelectListItem> ListEstaMesas = new List<SelectListItem>();
+            LlenarDropDownListEstMesas Estadomesa = new LlenarDropDownListEstMesas();
+
+            var EstMesa = Estadomesa.ReadAllEstadoMesas();
+
+            foreach (var Doc in EstMesa)
+            {
+                ListEstaMesas.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
+            }
+
+            if (ListEstaMesas == null)
+            {
+                ViewBag.message = "Error al recuperar estado mesa";
+            }
+            else
+            {
+                ViewBag.EstadoMesas = ListEstaMesas;
+            }
+
+            List<SelectListItem> ListaLocal = new List<SelectListItem>();
+            LlenarDropDownListaLocal Local = new LlenarDropDownListaLocal();
+
+            var _Local = Local.ReadAllLocal();
+
+            foreach (var Doc in _Local)
+            {
+                ListaLocal.Add(new SelectListItem { Text = Doc.Descripcion, Value = Doc.Id.ToString() });
+            }
+
+            if (ListaLocal == null)
+            {
+                ViewBag.message = "Error al recuperar local";
+            }
+            else
+            {
+                ViewBag.Local = ListaLocal;
             }
 
             var objMesa = db.MESA.SingleOrDefault(t => t.IDMESA == id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO

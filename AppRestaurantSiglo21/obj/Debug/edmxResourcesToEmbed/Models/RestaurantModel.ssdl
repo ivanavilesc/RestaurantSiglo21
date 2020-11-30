@@ -6,6 +6,8 @@
     </Key>
     <Property Name="IDALERTA" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DESCALERTA" Type="varchar2" MaxLength="150" />
+    <Property Name="FECHAAVISO" Type="date" />
+    <Property Name="DESCTIPOPROVEEDOR" Type="varchar2" MaxLength="100" />
   </EntityType>
   <EntityType Name="BANCOMOVIMIENTO">
     <Key>
@@ -192,6 +194,9 @@
     <Property Name="IDINSUMO" Type="number" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DESCINSUMO" Type="varchar2" MaxLength="100" />
     <Property Name="PRECIOINSUMO" Type="number" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="IDESTADOINSUMO" Type="number" Precision="2" Scale="0" />
+    <Property Name="IDTIPOINSUMO" Type="number" Precision="2" Scale="0" />
+    <Property Name="PESO" Type="number" Precision="6" Scale="0" />
   </EntityType>
   <EntityType Name="INSUMOSTOCK">
     <Key>
@@ -201,7 +206,6 @@
     <Property Name="STOCKACTUAL" Type="number" Precision="4" Scale="0" />
     <Property Name="STOCKMINIMO" Type="number" Precision="4" Scale="0" />
     <Property Name="IDINSUMO" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="PESO" Type="number" Precision="6" Scale="0" />
   </EntityType>
   <EntityType Name="MEDIOPAGO">
     <Key>
@@ -317,6 +321,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
     <Property Name="NOMPROV" Type="varchar2" MaxLength="200" />
     <Property Name="FONO" Type="varchar2" MaxLength="10" />
     <Property Name="IDESTPROVEEDOR" Type="number" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="DESCTIPOPROVEEDOR" Type="varchar2" MaxLength="100" />
   </EntityType>
   <EntityType Name="RECETAPRODUCTO">
     <Key>
@@ -325,6 +330,7 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
     <Property Name="IDRECPRODUCTO" Type="number" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="INGREDIENTE" Type="varchar2" MaxLength="1000" />
     <Property Name="ELABORACION" Type="varchar2" MaxLength="1000" />
+    <Property Name="COMENSALES" Type="number" Precision="2" Scale="0" />
   </EntityType>
   <EntityType Name="RESERVA">
     <Key>
@@ -594,6 +600,18 @@ advertencia 6002: La tabla o vista 'RESTAURANT.PRODUCTO' no tiene definida ningu
       </Principal>
       <Dependent Role="ENTIDADBANCARIA">
         <PropertyRef Name="IDTIPOCUENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ESTADOINSUMO_FK">
+    <End Role="ESTADOPROVEEDOR" Type="Self.ESTADOPROVEEDOR" Multiplicity="0..1" />
+    <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOPROVEEDOR">
+        <PropertyRef Name="IDESTPROVEEDOR" />
+      </Principal>
+      <Dependent Role="INSUMO">
+        <PropertyRef Name="IDESTADOINSUMO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1050,6 +1068,10 @@ FROM "RESTAURANT"."PRODUCTO" "PRODUCTO"</DefiningQuery>
     <AssociationSet Name="ENTIDADBANCARIA_TIPOCUENTA_FK" Association="Self.ENTIDADBANCARIA_TIPOCUENTA_FK">
       <End Role="TIPOCUENTA" EntitySet="TIPOCUENTA" />
       <End Role="ENTIDADBANCARIA" EntitySet="ENTIDADBANCARIA" />
+    </AssociationSet>
+    <AssociationSet Name="ESTADOINSUMO_FK" Association="Self.ESTADOINSUMO_FK">
+      <End Role="ESTADOPROVEEDOR" EntitySet="ESTADOPROVEEDOR" />
+      <End Role="INSUMO" EntitySet="INSUMO" />
     </AssociationSet>
     <AssociationSet Name="INGREDIENTE_PRODPREPARACION_FK" Association="Self.INGREDIENTE_PRODPREPARACION_FK">
       <End Role="PRODPREPARACION" EntitySet="PRODPREPARACION" />

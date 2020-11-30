@@ -20,7 +20,7 @@ namespace AppRestaurantSiglo21.Controllers
         public ActionResult Index()
         {
 
-            
+
             //int orden = 1;
             var ordenes = (from o in db.ORDEN
                            join m in db.MESA
@@ -87,10 +87,8 @@ namespace AppRestaurantSiglo21.Controllers
             }
             else
             {
-                
                 ViewBag.TotalPrice = detalleorden.Sum(m => m.Total1);
-                System.Web.HttpContext.Current.Session["resumenCompra"] = detalleorden.ToList();
-                System.Web.HttpContext.Current.Session["totalBoleta"] = detalleorden.Sum(m => m.Total1); 
+
             }
 
             return View(detalleorden.ToList()); //RETORNA Detalle de orden 
@@ -151,7 +149,7 @@ namespace AppRestaurantSiglo21.Controllers
 
                 var MedioPago = (from d in db.MEDIOPAGO
 
-                                 //where d.IDMEDIOPAGO != 1
+                                     //where d.IDMEDIOPAGO != 1
 
                                  select new DropDownList
                                  {
@@ -188,15 +186,15 @@ namespace AppRestaurantSiglo21.Controllers
             int IdMedioPago = Convert.ToByte(MEDIOPAGO);
             int IdTipoPago = Convert.ToByte(DOCTPAGOTIPO);
 
-            if (propina==null)
+            if (propina == null)
             {
                 propina = 0;
             }
-            if (IdTipoPago == 0)
-            {
-                ViewBag.message = "Debe seleccionar Tipo Pago";
-                return View();
-            }
+            //if (IdTipoPago == 0)
+            //{
+            //    ViewBag.message = "Debe seleccionar Tipo Pago";
+            //    return View();
+            //}
             if (IdMedioPago == 0)
             {
                 ViewBag.message = "Debe seleccionar medio Pago";
@@ -211,13 +209,13 @@ namespace AppRestaurantSiglo21.Controllers
             if (IdMedioPago == 2) //Tarjeta dDebito
             {
 
-                return RedirectToAction("TarjetaDebito" , new { Id, propina, IdMedioPago, IdTipoPago }); //REDIRIGE LA ACCION AL METODO TarjetaDebito
+                return RedirectToAction("TarjetaDebito", new { Id, propina, IdMedioPago, IdTipoPago }); //REDIRIGE LA ACCION AL METODO TarjetaDebito
             }
 
             if (IdMedioPago == 3)
             {
 
-                
+
                 return RedirectToAction("TarjetaCredito", new { Id, propina, IdMedioPago, IdTipoPago }); //REDIRIGE LA ACCION AL METODO TarjetaCredito 
             }
 
@@ -229,13 +227,13 @@ namespace AppRestaurantSiglo21.Controllers
         {
 
             int TotalOrden = (from d in db.DETALLEORDEN
-                                 where d.IDORDEN == Id
+                              where d.IDORDEN == Id
 
-                                 select new VistaDetOrdenes
-                                 {
-                                     Total1 = (int)(d.CANTIDAD * d.PRECIOPROD)
-                                 }).Sum(m => m.Total1);
-            
+                              select new VistaDetOrdenes
+                              {
+                                  Total1 = (int)(d.CANTIDAD * d.PRECIOPROD)
+                              }).Sum(m => m.Total1);
+
 
             ViewBag.msgTotalApagar = "Por favor, Entregar Efectivo al garzón  : $" + (propina + TotalOrden);
             return View();
@@ -252,7 +250,7 @@ namespace AppRestaurantSiglo21.Controllers
             }
             if (objOrden.IDESTADO == 3)
             {
-                ViewBag.message = "Pago de la orden fue recibido satisfactoriamente... ¡Gracias por su preferncia !";                
+                ViewBag.message = "Pago de la orden fue recibido satisfactoriamente... ¡Gracias por su preferncia !";
             }
             else
             {
@@ -266,34 +264,9 @@ namespace AppRestaurantSiglo21.Controllers
             var objOrden = db.ORDEN.SingleOrDefault(t => t.IDORDEN == Id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
             if (objOrden == null)
             {
-                ViewBag.msgTotalApagar = "No existe información";                
-                return View();
-            }
-            if (objOrden.IDRESERVA != null)
-            {
-                ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
-            }
-            else {
-                ViewBag.RutCliente = "1-9";
-            }            
-            ViewBag.propina = propina;           
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult TarjetaDebito(int Id, int propina, int IdMedioPago, int IdTipoPago, long NumTD, int ClaveTD) //REBICIÓ UN OBJETO BASADO EN EL MODELO DE TIPO TIPOPRODUCTO, DESDE LA VISTA
-        {
-            
-            List<clsTarjeta> TDebito = new List<clsTarjeta>();
-
-            var objOrden = db.ORDEN.SingleOrDefault(t => t.IDORDEN == Id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
-            if (objOrden == null)
-            {
                 ViewBag.msgTotalApagar = "No existe información";
                 return View();
             }
-
             if (objOrden.IDRESERVA != null)
             {
                 ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
@@ -304,59 +277,51 @@ namespace AppRestaurantSiglo21.Controllers
             }
             ViewBag.propina = propina;
 
-            int contTarjeta = 5;
-            long contNumTarjeta = 4567267898765437;
-            int contCVV = 100;
-            int contMesAno = 102020;
-            int Clave1 = 123456;
+            return View();
+        }
 
-            for (int i = 0; i < contTarjeta; i++)
+        [HttpPost]
+        public ActionResult TarjetaDebito(int Id, int propina, int IdMedioPago, long NumTD, int ClaveTD) //REBICIÓ UN OBJETO BASADO EN EL MODELO DE TIPO TIPOPRODUCTO, DESDE LA VISTA
+        {
+
+            clsTarjeta TD = new clsTarjeta();
+
+
+            var objOrden = db.ORDEN.SingleOrDefault(t => t.IDORDEN == Id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
+            if (objOrden == null)
             {
-                clsTarjeta td = new clsTarjeta();
-
-                contNumTarjeta = contNumTarjeta - i;
-                contCVV = contCVV + 48;
-                contMesAno = contMesAno + i;
-                Clave1 = Clave1 - i;
-
-                td.NumTarjeta1 = contNumTarjeta;
-                td.CVV1 = contCVV;
-                td.Clave1 = Clave1;
-                td.MesAno1 = contMesAno;
-                int u = 9;
-                TDebito.Add(td);                
-            }
-
-            int TDValida = 0;
-            int ClaveInv = 0;
-
-            foreach (clsTarjeta TD in TDebito)
-            {
-                if (TD.NumTarjeta1 == NumTD) { TDValida =1;} //Valido si existe  
-
-                if (TD.Clave1 == ClaveTD) {ClaveInv = 1;}
-            }
-
-            if (TDValida == 0)
-            {
-                ViewBag.msgTotalApagar = "Numero Tarjeta Invalida";
+                ViewBag.msgTotalApagar = "No existe información";
                 return View();
             }
 
-            if (ClaveInv ==0)
+            // if (objOrden.RESERVA != (null))
+            // {
+            // ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
+            // }
+
+            if (objOrden.IDRESERVA != null)
             {
-                ViewBag.msgTotalApagar = "Clave Invalida";
-                return View();
+                ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
+            }
+            else
+            {
+                ViewBag.RutCliente = "1-9";
+            }
+            ViewBag.propina = propina;
+            ViewBag.msgTotalApagar = TD.ValidarTarjeta(1, NumTD, ClaveTD, 0, 0);
+
+            if (ViewBag.msgTotalApagar == "Tarjeta Valida")
+            {
+                if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
+                {
+                    //Ejecuta procedimiento
+                    Pago(Id, propina, IdMedioPago, 2);
+                    ViewBag.message = "Pago realizado satisfactoriamente";
+                    return RedirectToAction("PagoOK"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
+
+                }
             }
 
-            if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
-            {
-                //Ejecuta procedimiento
-                Pago(Id, propina, IdMedioPago, IdTipoPago);
-                ViewBag.message = "Pago realizado satisfactoriamente";
-                return RedirectToAction("PagoOK"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
-
-            }
             return View();
         }
 
@@ -380,108 +345,52 @@ namespace AppRestaurantSiglo21.Controllers
             }
             ViewBag.propina = propina;
 
-            
+
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult TarjetaCredito(int Id, int propina, int IdMedioPago, int IdTipoPago, long NumTD, int ClaveTD, int CVVID, int ANOMESID) //REBICIÓ UN OBJETO BASADO EN EL MODELO DE TIPO TIPOPRODUCTO, DESDE LA VISTA
+        public ActionResult TarjetaCredito(int Id, int propina, int IdMedioPago, long NumTD, int ClaveTD, int CVVID, int ANOMESID) //REBICIÓ UN OBJETO BASADO EN EL MODELO DE TIPO TIPOPRODUCTO, DESDE LA VISTA
         {
 
-            List<clsTarjeta> Tcredito = new List<clsTarjeta>();
+            clsTarjeta TC = new clsTarjeta();
 
             var objOrden = db.ORDEN.SingleOrDefault(t => t.IDORDEN == Id); //EN UNA VARIABLE SE ALMACENA EL RESULTADO DE LA QUERY ASOCIADA A LA TABLA TIPO DE PRODUCTO ES IGUAL AL ID QUE INGRESÓ POR PARAMETRO
             if (objOrden == null)
             {
                 ViewBag.msgTotalApagar = "No existe información";
+
                 return View();
             }
 
-            if (objOrden.IDRESERVA != null)
-            {
-                ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
-            }
-            else
+            if (objOrden.IDRESERVA == null)
             {
                 ViewBag.RutCliente = "1-9";
             }
+            else
+            {
+                ViewBag.RutCliente = objOrden.RESERVA.CLIENTE.PERSONA.RUT.ToString() + "-" + objOrden.RESERVA.CLIENTE.PERSONA.DV;
+            }
+
             ViewBag.propina = propina;
 
-            int contTarjeta = 5;
-            long contNumTarjeta = 4567267898765437;
-            int contCVV = 100;
-            int contMesAno = 102020;
-            int Clave1 = 123456;
-            
+            ViewBag.msgTotalApagar = TC.ValidarTarjeta(2, NumTD, ClaveTD, CVVID, ANOMESID);
 
-            for (int i = 0; i < contTarjeta; i++)
+            if (ViewBag.msgTotalApagar == "Tarjeta Valida")
             {
-                clsTarjeta tc = new clsTarjeta();
+                if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
+                {
+                    //Ejecuta procedimiento
+                    int u = 9;
+                    Pago(Id, propina, IdMedioPago, 2);
+                    ViewBag.message = "Pago realizado satisfactoriamente";
 
-                contNumTarjeta = contNumTarjeta - i;
-                contCVV = contCVV + 48;
-                contMesAno = contMesAno + i;
-                Clave1 = Clave1 - i;
+                    return RedirectToAction("PagoOK"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
 
-                tc.NumTarjeta1 = contNumTarjeta;
-                tc.CVV1 = contCVV + i;
-                tc.Clave1 = Clave1;
-                tc.MesAno1 = contMesAno + i;
-                Tcredito.Add(tc);
-            }
-
-            int TDValida = 0;
-            int ClaveInv = 0;
-            int CVVInv = 0;
-            int ANOMESInv = 0;
-
-            foreach (clsTarjeta TC in Tcredito)
-            {
-                if (TC.NumTarjeta1 == NumTD) { TDValida = 1; } //Valido si existe  
-
-                if (TC.Clave1 == ClaveTD) { ClaveInv = 1; }
-
-                if (TC.CVV1 == CVVID) { CVVInv = 1; }
-
-                if (TC.MesAno1 == ANOMESID) { ANOMESInv = 1; }
-            }
-
-            if (TDValida == 0)
-            {
-                ViewBag.msgTotalApagar = "Numero Tarjeta Invalida";
-                return View();
-            }
-
-            if (ClaveInv == 0)
-            {
-                ViewBag.msgTotalApagar = "Clave Invalida";
-                return View();
-            }
-
-            if (CVVInv == 0)
-            {
-                ViewBag.msgTotalApagar = "CVV Invalida";
-                return View();
-            }
-
-            if (ANOMESInv == 0)
-            {
-                ViewBag.msgTotalApagar = "Año Mes Invalida";
-                return View();
-            }
-
-            if (ModelState.IsValid) //SI EL ESTADO DEL OBJETO ES VALIDO
-            {
-                //Ejecuta procedimiento
-                Pago(Id, propina, IdMedioPago, IdTipoPago);
-                ViewBag.message = "Pago realizado satisfactoriamente";
-                
-                return RedirectToAction("PagoOK"); //REDIRIGE LA ACCION AL METODO INDEX QUE LLEVA A LA VISTA POR DEFECTO DE LISTADO
-
+                }
             }
             return View();
-
         }
 
         private void Pago(int? Id, int? Propina, int? IdMedioPago, int? DOCTPAGOTIPO)
@@ -490,7 +399,7 @@ namespace AppRestaurantSiglo21.Controllers
 
             {
                 //'-----------------------------------------------------'
-
+                int y = 9;
                 using (var conn = new OracleConnection(ConfigurationManager.ConnectionStrings["oracleDB"].ToString()))
                 {
                     if (conn.State == ConnectionState.Closed)
@@ -523,7 +432,7 @@ namespace AppRestaurantSiglo21.Controllers
             {
                 ViewBag.msgTotalApagar = "Error de converción de datos ";
 
-            }            
+            }
         }
 
         private void EnviarDoctPagoTipo()
